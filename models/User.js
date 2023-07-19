@@ -1,6 +1,7 @@
 //user model 만들기 
 const mongoose = require("mongoose");
-
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 //user 정보 설정하기
 const userSchma = mongoose.Schema({
@@ -36,6 +37,25 @@ const userSchma = mongoose.Schema({
     //토큰 유효 기간
     tokenExp: {
         type: Number
+    }
+});
+
+
+//스키마에 pre 라는 mongoose 메소드로 save 되기 전에 암호화 시켜서 보내는 함수를 만든다.
+//그러면 save 되기전에 암호화된다
+userSchma.pre("save" , function (next){
+    var user = this;
+    if(user.isModified("password")) {
+        bcrypt.genSalt(saltRounds , (error , salt) => {
+            //에러가 나면 save에 error를 보내준다.
+            if(error) return next(error);
+            //암호화된 비밀 번호를 보내준다
+            bcrypt.hash(user.password , salt , (error , hash) => {
+                if(error) return next(error);
+                user.password = hash;
+                next();
+            });
+        });
     }
 });
 

@@ -9,9 +9,9 @@ const { User } = require("../models/User.js");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-const db = "mongodb+srv://jyeop920:toddlf0826@cluster0.mvqy3yr.mongodb.net/?retryWrites=true&w=majority";
+const mongoURI = "mongodb+srv://jyeop920:toddlf0826@cluster0.mvqy3yr.mongodb.net/?retryWrites=true&w=majority";
 const mongoose = require("mongoose");
-mongoose.connect(db , {
+mongoose.connect(mongoURI , {
     //useNewUrlParser:true,
     //useUnifiedTopology:true,
     //useCreateIndex:true,
