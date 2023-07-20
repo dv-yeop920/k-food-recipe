@@ -2,9 +2,11 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const jwt = require("jsonwebtoken");
+
 
 //user 정보 설정하기
-const userSchma = mongoose.Schema({
+const userSchema = mongoose.Schema({
     //사용자 이름
     name: {
         type: String,
@@ -20,7 +22,7 @@ const userSchma = mongoose.Schema({
     //비번
     password: {
         type: String,
-        maxlength: 15,
+        maxlength: 1000,
         minlength: 8//최소 글자수
     },
     //role의 숫자여부에 따라 관리자인지 일반 회원인지 판별 할 수 있게 설정
@@ -41,10 +43,38 @@ const userSchma = mongoose.Schema({
 });
 
 
+
+
+//index에서 login에 쓸 함수 스키마 제작?
+userSchema.methods.comparePassword = function(plainPassword , callBack) {
+    //유저가 입력한 plainpassword 와 db의 password가 일치한지 palin을 암호화해서 비교
+    bcrypt.compare(plainPassword , this.password , (error , isMatch) => {
+        if(error) return callBack(error);
+        callBack(null , isMatch);
+    });
+}
+//토큰 생성 함수
+userSchema.methods.generateToken = function(callBack) {
+    const user = this;
+    //jwt로 토큰 생성하는 함수
+    const token = jwt.sign(user._id.toJSON() , "userToken");
+    user.token = token;
+
+    user.save()
+    .then((result)=>{
+        callBack(null , result);
+    })
+    .catch((error)=>{
+        callBack(error);
+    });
+}
+
+
 //스키마에 pre 라는 mongoose 메소드로 save 되기 전에 암호화 시켜서 보내는 함수를 만든다.
 //그러면 save 되기전에 암호화된다
-userSchma.pre("save" , function (next){
-    var user = this;
+userSchema.pre("save" , function (next){
+    //이 this 는 schma를 가르킴
+    const user = this;
     if(user.isModified("password")) {
         bcrypt.genSalt(saltRounds , (error , salt) => {
             //에러가 나면 save에 error를 보내준다.
@@ -57,10 +87,13 @@ userSchma.pre("save" , function (next){
             });
         });
     }
+    else {
+        return next();
+    }
 });
 
 //스키마 작성 끝나면 모델안에 스키마 넣어주기
-const User = mongoose.model("User",userSchma);
+const User = mongoose.model("User",userSchema);
 
 //다른 곳에서도 쓸 수 있게 모듈화 해줌
 module.exports = { User };

@@ -2,12 +2,14 @@ const express = require("express");
 const app = express();
 const PORT = 7070;
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 //유저 모델을 가져옴
 const { User } = require("../models/User.js");
 
 //클라이언트의 req 를 json 형태로 해석 하도록 도와줌
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 const mongoURI = "mongodb+srv://jyeop920:toddlf0826@cluster0.mvqy3yr.mongodb.net/?retryWrites=true&w=majority";
 const mongoose = require("mongoose");
@@ -46,3 +48,46 @@ app.post("/register" , (req , res) => {
     res.json({ success: false, error });
     });
 });
+
+
+
+
+app.post("/login",(req , res) =>{
+    // 요청된 이메일을 데이터베이스 찾기
+    User.findOne({email: req.body.email})
+    .then((docs) =>{
+        if(!docs){
+            return res.json({
+                loginSuccess: false,
+                messsage: "해당 이메일로 가입된 회원이 없습니다."
+            });
+        }
+        //비번 비교
+        docs.comparePassword(req.body.password, (error, isMatch) => {
+            // Password가 일치하다면 토큰 생성
+            if(isMatch) {
+                docs.generateToken((err, user)=>{
+                    if(error) {
+                        res.status(400).send(error);
+                    }
+                    // 토큰을 저장
+                        res.cookie("x_auth", user.token)
+                        .status(200)
+                        .json({
+                            loginSuccess: true, 
+                            userId: user._id,
+                        });
+                })
+            }
+            else {
+                return res.json({
+                    loginSuccess: false, 
+                    messsage: "비밀번호가 틀렸습니다."
+                });
+            }
+        })
+    })
+    .catch((error)=>{
+        return res.status(400).send(error);
+    })
+})
