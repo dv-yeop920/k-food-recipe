@@ -122,6 +122,5 @@ app.get("/api/users/logout" , auth , (req , res) => {
             .send({
                 success: true
             });
-
     });
 });
