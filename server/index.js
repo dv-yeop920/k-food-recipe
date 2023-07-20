@@ -110,3 +110,18 @@ app.get("/api/users/auth" , auth , (req , res) => {
         image: req.user.image
     });
 });
+
+app.get("/api/users/logout" , auth , (req , res) => {
+    //db에서 정보를 찾아서 업데이트 시켜서 토큰을 삭제 한다
+    User.findOneAndUpdate(
+        { _id: req.user._id } ,
+        { token: "" }, 
+        (error , user) => {
+            if(error) return res.json({ success: false , error});
+            return res.status(200)
+            .send({
+                success: true
+            });
+
+    });
+});
