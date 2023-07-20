@@ -8,7 +8,7 @@ const auth = (req , res , next) => {
 //클라이언트 쿠키에서 토큰을 가져온다
 const token = req.cookies.x_auth;
 //토큰을 복호화 한 후에 유저를 찾는다
-User.findByToken(token , (error , user) => {
+User.findByToken(token , function(error , user) {
     if(error) throw error;
 
     if(user) {

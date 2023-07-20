@@ -72,13 +72,18 @@ userSchema.methods.generateToken = function(callBack) {
 userSchema.statics.findByToken = function(token , callBack) {
     const user = this;
     //token 을 decode (복호화) 한다
-    jwt.verify(token , "userToken" , (error , decode) => {
+    jwt.verify(token , "userToken" , function(error , decode) {
         //decode = user._id 
         //decode를 이용해서 유저를 찾은 다음 클라이언트에서 가져온 토큰과 db의 토큰이 일치하는지 비교
-        user.findOne({"_id": decode , "token": token } , (error , user) => {
-            if(error) return callBack(error);
-            callBack(null , user);
+        user.findOne({
+            "_id": decode ,
+            "token": token })
+        .then((docs) => {
+            callBack(null , docs);
         })
+        .catch((error) => {
+            return callBack(error);
+        });
     })
 }
 

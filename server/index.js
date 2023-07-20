@@ -115,12 +115,32 @@ app.get("/api/users/logout" , auth , (req , res) => {
     //db에서 정보를 찾아서 업데이트 시켜서 토큰을 삭제 한다
     User.findOneAndUpdate(
         { _id: req.user._id } ,
-        { token: "" }, 
-        (error , user) => {
-            if(error) return res.json({ success: false , error});
-            return res.status(200)
-            .send({
-                success: true
-            });
-    });
+        { token: "" })
+        .then((docs) => {
+            if(docs){
+                res.status(200)
+                .send({
+                    logoutSuccess: true,
+                })
+            }
+            else {
+                return res.json({
+                    logoutSuccess: false,
+                    messsage: "로그아웃 실패"
+                });
+            }
+        })
+        .catch((error)=>{
+            return res.status(400).send(error);
+        })
 });
+
+
+
+/*(error , user) => {
+    if(error) return res.json({ success: false , error});
+    return res.status(200)
+    .send({
+        success: true
+    });
+}*/
