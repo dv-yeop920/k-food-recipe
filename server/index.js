@@ -4,8 +4,8 @@ const PORT = 7070;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 //유저 모델을 가져옴
-const { User } = require("../models/User.js");
-const { auth } = require("../middleware/auth.js");
+const { User } = require("./models/User.js");
+const { auth } = require("./middleware/auth.js");
 
 //클라이언트의 req 를 json 형태로 해석 하도록 도와줌
 app.use(bodyParser.urlencoded({extended: true}));
