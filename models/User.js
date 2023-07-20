@@ -68,6 +68,19 @@ userSchema.methods.generateToken = function(callBack) {
         callBack(error);
     });
 }
+//토큰을 복호화하고 유저를 찾는 함수
+userSchema.statics.findByToken = function(token , callBack) {
+    const user = this;
+    //token 을 decode (복호화) 한다
+    jwt.verify(token , "userToken" , (error , decode) => {
+        //decode = user._id 
+        //decode를 이용해서 유저를 찾은 다음 클라이언트에서 가져온 토큰과 db의 토큰이 일치하는지 비교
+        user.findOne({"_id": decode , "token": token } , (error , user) => {
+            if(error) return callBack(error);
+            callBack(null , user);
+        })
+    })
+}
 
 
 //스키마에 pre 라는 mongoose 메소드로 save 되기 전에 암호화 시켜서 보내는 함수를 만든다.

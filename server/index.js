@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 //유저 모델을 가져옴
 const { User } = require("../models/User.js");
+const { auth } = require("../middleware/auth.js");
 
 //클라이언트의 req 를 json 형태로 해석 하도록 도와줌
 app.use(bodyParser.urlencoded({extended: true}));
@@ -32,7 +33,7 @@ app.get("/" , (req , res) => {
     res.send("하이하잉");
 });
 
-app.post("/register" , (req , res) => {
+app.post("/api/users/register" , (req , res) => {
     //인스턴스 객체 생성 후 클라이언트 요청을 담는다
     const user = new User(req.body);
     //정보를 db에 보내준다. 이때 , 성공하거나 에러가 나면 메세지를 json 형식으로 보내준다.
@@ -52,7 +53,7 @@ app.post("/register" , (req , res) => {
 
 
 
-app.post("/login",(req , res) =>{
+app.post("/api/users/login",(req , res) =>{
     // 요청된 이메일을 데이터베이스 찾기
     User.findOne({email: req.body.email})
     .then((docs) =>{
@@ -90,4 +91,22 @@ app.post("/login",(req , res) =>{
     .catch((error)=>{
         return res.status(400).send(error);
     })
-})
+});
+
+//어느 페이지 접속할때 마다 유저 정보를 보내주어 회원 인증 하는 함수
+app.get("/api/users/auth" , auth , (req , res) => {
+    //이코드가 실행 되는것은 미들웨어인 auth가 성공적으로 실행 됐다는뜻
+    //성공적으로 됐다면 유저 정보를 클라이언트로 보내줌 
+    res.status(200)
+    .json({
+        _id: req.user._id,
+        //어드민 유저 설정
+        isAdmin: req.user.role === 0 ? false : true,
+        isAuth: true,
+        email: req.user.email,
+        name: req.user.name,
+        lastName: req.user.lastName,
+        role: req.user.role,
+        image: req.user.image
+    });
+});
