@@ -1,5 +1,6 @@
 import React from 'react';
 import * as styled from "../../styles/styledComponents";
+import ScrollToTopButton from '../ScrollToTopButton';
 
 
 const NoticeBoardList = () => {
@@ -24,6 +25,7 @@ const NoticeBoardList = () => {
                 </div>
             </styled.Li>
         </styled.Board>
+        <ScrollToTopButton/>
         </>
     );
 };
