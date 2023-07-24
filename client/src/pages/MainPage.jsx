@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const MainPage = () => {
     return (
         <>
-            
+            메인 페이지
         </>
     );
 };
