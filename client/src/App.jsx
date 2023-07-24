@@ -4,6 +4,7 @@ import Navbar from "./layout/Navbar";
 import MainPage from "./pages/MainPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import NoticeBoard from "./pages/NoticeBoard";
 
 function App() {
   return (
@@ -11,9 +12,10 @@ function App() {
     <Navbar/>
 
     <Routes>
-      <Route path="/" element ={ <MainPage /> }/>
-      <Route path="/signUp" element ={ <SignUpPage /> }/>
-      <Route path="/Login" element={ <LoginPage /> }/>
+      <Route exact path="/" element ={ <MainPage /> }/>
+      <Route exact path="/noticeBoard" element ={ <NoticeBoard/>}/>
+      <Route exact path="/signUp" element ={ <SignUpPage /> }/>
+      <Route exact path="/Login" element={ <LoginPage /> }/>
     </Routes>
     </>
   );

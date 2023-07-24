@@ -10,7 +10,7 @@ const Navbar = () => {
             <styled.MenuList>
                 <styled.NavTitle 
                 onClick={() => navigate("/")}>
-                    K레시피\
+                    K레시피
                 </styled.NavTitle>
 
                 <styled.MenuItem 
