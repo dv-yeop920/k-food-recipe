@@ -9,27 +9,28 @@ const NoticeBoard = () => {
     
     return (
         <>
+        <styled.SearchContainer>
         <form
-        className='input-form'
+        className="user-search-form"
         onSubmit={(e) => {
             e.preventDefault();
         }}>
-            <styled.InputBox>
                 <styled.Input 
                 type="text"
                 onChange={(e) => {
                 }} />
-                <styled.DefaultButton
-                type='submit'
-                className='default-btn'>
+                <styled.SubmitButton
+                className="default-btn"
+                type="submit">
                     검색
-                </styled.DefaultButton>
+                </styled.SubmitButton>
                 <FontAwesomeIcon
-                    className ='writing'
+                    className ="writing-icon"
                     icon={faPenToSquare}
-                    size = '2x'/>
-            </styled.InputBox>
+                    size = "2x"/>
         </form>
+        </styled.SearchContainer>
+        
         <NoticeBoardList/>
         </>
     );

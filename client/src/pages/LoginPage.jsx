@@ -4,44 +4,35 @@ import * as styled from "../styles/styledComponents";
 const LoginPage = () => {
     return (
         <>
-        <styled.formContainer>
-            <h1 id="login-sign-up__title">로그인</h1>
-            <form className="login-form">
-                <div className="field">
-                    <styled.UserInput 
-                    className ="user-id" 
-                    type="text"
-                    placeholder="아이디"/>
+        <main className="user-form__container">
+            <styled.LoginSignUpform 
+                className="user-form">
+                <h1 id="user-form__title">로그인</h1>
+                <input 
+                className="user-form__id"
+                type="text"
+                placeholder="아이디" />
+
+                <input 
+                className ="user-form__pw" 
+                type="password"
+                placeholder="비밀 번호" />
+
+                <div className="user-form__button-box">
+                    <styled.LoginSignUpButton
+                        className="default-btn" 
+                        type="submit">
+                            로그인
+                    </styled.LoginSignUpButton>
+
+                    <styled.LoginSignUpButton
+                        className="default-btn" 
+                        type="submit">
+                            카카오 로그인
+                    </styled.LoginSignUpButton>
                 </div>
-
-                <div className="field">
-                    <styled.UserInput 
-                    className ="user-pw" 
-                    type="password"
-                    placeholder="비밀 번호"/>
-                </div>
-
-                <div className="button-box">
-                    <styled.DefaultButton
-                    className="login-sign-up__button" 
-                    type="submit">
-                        로그인
-                    </styled.DefaultButton>
-
-                    <styled.DefaultButton
-                    className="login-sign-up__button" 
-                    type="submit">
-                        구글 로그인
-                    </styled.DefaultButton>
-
-                    <styled.DefaultButton
-                    className="login-sign-up__button" 
-                    type="submit">
-                        카카오 로그인
-                    </styled.DefaultButton>
-                </div>
-            </form>
-        </styled.formContainer>
+            </styled.LoginSignUpform>
+        </main>
         </>
     );
 };

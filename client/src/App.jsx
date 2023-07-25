@@ -5,6 +5,7 @@ import MainPage from "./pages/MainPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import NoticeBoard from "./pages/NoticeBoard";
+import MyPage from './pages/MyPage';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
     <Routes>
       <Route path="/" element ={ <MainPage /> }/>
       <Route path="/noticeBoard" element ={ <NoticeBoard/>}/>
-      <Route path="/signUp" element ={ <SignUpPage /> }/>
+      <Route path="/myPage" element ={<MyPage/>}/>
       <Route path="/Login" element={ <LoginPage /> }/>
+      <Route path="/signUp" element ={ <SignUpPage /> }/>
     </Routes>
     </>
   );
