@@ -12,10 +12,10 @@ function App() {
     <Navbar/>
 
     <Routes>
-      <Route exact path="/" element ={ <MainPage /> }/>
-      <Route exact path="/noticeBoard" element ={ <NoticeBoard/>}/>
-      <Route exact path="/signUp" element ={ <SignUpPage /> }/>
-      <Route exact path="/Login" element={ <LoginPage /> }/>
+      <Route path="/" element ={ <MainPage /> }/>
+      <Route path="/noticeBoard" element ={ <NoticeBoard/>}/>
+      <Route path="/signUp" element ={ <SignUpPage /> }/>
+      <Route path="/Login" element={ <LoginPage /> }/>
     </Routes>
     </>
   );

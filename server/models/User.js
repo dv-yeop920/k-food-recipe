@@ -13,6 +13,12 @@ const userSchema = mongoose.Schema({
         maxlength: 50, //최대 글자수
         minlength: 5
     },
+    //id
+    userId: {
+        type: String,
+        maxlength:15,
+        minlength:6
+    },
     //이메일
     email: {
         type: String,
@@ -24,6 +30,10 @@ const userSchema = mongoose.Schema({
         type: String,
         maxlength: 1000,
         minlength: 8//최소 글자수
+    },
+    birthDate: {
+        type: String,
+        maxlength: 8,
     },
     //role의 숫자여부에 따라 관리자인지 일반 회원인지 판별 할 수 있게 설정
     role: {
