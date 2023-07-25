@@ -8,18 +8,18 @@ const ScrollToTopButton = () => {
     const handleClickScroll = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth',
+            behavior: "smooth",
         });
     };
 
     return (
         <>
             <styled.ScrollToTopButton 
-            className='sroll-to-top'
+            className="sroll-to-top"
             onClick={handleClickScroll} >
                 <FontAwesomeIcon
                     icon={faUpLong}
-                    size = '2x'/>
+                    size = "2x"/>
             </styled.ScrollToTopButton>
         </>
     );

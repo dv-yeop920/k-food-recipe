@@ -109,7 +109,7 @@ import { styled } from "styled-components";
                 position: absolute;
                 top: 28%;
                 left:10%;
-                width:100%;
+                width:80%;
             `;
 
             export const Li = styled.li`
@@ -121,8 +121,7 @@ import { styled } from "styled-components";
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                width: 80%;
-                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -12px;
+                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -5px;
             `;
             export const Title = styled.h3`
                 margin-bottom: 20px;

@@ -8,3 +8,23 @@
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
 }
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.writing-icon:hover {
+    animation: bounce 0.4s ease-in-out;
+}
+
+.sroll-to-top:hover {
+    animation: bounce 0.3s ease-in-out;
+}
