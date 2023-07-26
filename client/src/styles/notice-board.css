@@ -1,4 +1,4 @@
-.user-search-form {
+.user-search__form {
     display: flex;
     align-items: center;
 }
@@ -6,7 +6,7 @@
 .writing-icon {
     margin-left: 10px;
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
+    box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
 }
 
 @keyframes bounce {
@@ -27,4 +27,12 @@
 
 .sroll-to-top:hover {
     animation: bounce 0.3s ease-in-out;
+}
+
+.user-search__input:hover {
+    border-bottom: 2px solid rgba(0, 0, 0 ,0.6);
+}
+
+.user-search__input:focus {
+    border-bottom: 2px solid black;
 }

@@ -50,7 +50,7 @@ import { styled } from "styled-components";
                 background-color: #27ae60;
                 border-radius: 5px;
                 cursor: pointer;
-                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
+                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
                 transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
             `;
 
@@ -65,17 +65,16 @@ import { styled } from "styled-components";
                 text-align: center;
                 width:80%;
                 margin-right: 7px;
-                background-color: #eee;
-                padding: 10px;
-                font-size: 16px;
                 border: none;
-                border-radius: 5px;
+                border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+                padding: 11px;
+                font-size: 16px;
+                transition: all 0.3s ease-in-out;
                 cursor: pointer;
-                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
             `;
 
             export const SubmitButton = styled.button`
-                padding: 10px 22px;
+                padding: 10px 18px;
                 border: none;
                 color: white;
                 font-size: 17px;
@@ -84,7 +83,7 @@ import { styled } from "styled-components";
                 background-color: #27ae60;
                 border-radius: 5px;
                 cursor: pointer;
-                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
+                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
                 transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
             `;
 

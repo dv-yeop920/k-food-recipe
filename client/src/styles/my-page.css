@@ -1,0 +1,72 @@
+.my-page {
+    position: absolute;
+    top: 18%;
+    left: 25%;
+    width: 50%;
+    box-shadow: #00000059 0px 5px 15px;
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user-component {
+    padding-left: 30px;
+    width: 30%;
+}
+
+.icon-row {
+    width: 70%;
+}
+
+.user-component__btn {
+    background-color: rgb(214, 159, 214);
+    padding: 10px 15px;
+    margin-left: 20px;
+    border: none;
+    color: white;
+    font-size: 17px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.user-component__btn:hover {
+    background-color: rgb(198, 150, 198);
+}
+
+
+.icon-row__icon {
+    padding: 15px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.icon-row__icon:hover {
+    color: rgb(214, 159, 214);
+    border-bottom: 2px solid rgb(214, 159, 214);
+}
+
+.user-icon {
+    margin-right: 10px;
+}
+
+.icon-row__icon span {
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.heart {
+    color: rgb(212, 2, 2);
+}
+
+.smile {
+    color: rgb(225, 225, 4);
+}
