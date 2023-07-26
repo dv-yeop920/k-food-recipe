@@ -120,6 +120,7 @@ import { styled } from "styled-components";
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                border-radius: 30px;
                 box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -5px;
             `;
             export const Title = styled.h3`
