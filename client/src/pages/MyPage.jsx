@@ -6,11 +6,11 @@ import { faFaceSmileBeam ,faHeart , faUser } from "@fortawesome/free-solid-svg-i
 const MyPage = () => {
     return (
         <>
-        <main class="my-page">
-        <div class="user-component">
-            <div class="user-component__column">
-                <div class="user-component__text">
-                    <h1 class="user-component__title">userName</h1>
+        <main className="my-page">
+        <div className="user-component">
+            <div className="user-component__column">
+                <div className="user-component__text">
+                    <h1 className="user-component__title">userName</h1>
                     <button
                     className="user-component__btn">
                         <FontAwesomeIcon

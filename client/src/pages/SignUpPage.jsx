@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
 
 const SignUpPage = () => {
+    const [] = useState();
+    const [] = useState();
+    const [] = useState();
+    const [] = useState();
+    const [] = useState();
+    const [] = useState();
     return (
         <>
         <main className="user-form__container">

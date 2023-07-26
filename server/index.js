@@ -55,12 +55,12 @@ app.post("/api/users/register" , (req , res) => {
 
 app.post("/api/users/login",(req , res) =>{
     // 요청된 이메일을 데이터베이스 찾기
-    User.findOne({email: req.body.email})
+    User.findOne({userId: req.body.userId})
     .then((docs) =>{
         if(!docs){
             return res.json({
                 loginSuccess: false,
-                messsage: "해당 이메일로 가입된 회원이 없습니다."
+                messsage: "해당 아이디로 가입된 회원이 없습니다."
             });
         }
         //비번 비교
