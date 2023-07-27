@@ -12,6 +12,7 @@ const SignUpPage = () => {
     const [userEmail , setUserEmail] = useState("");
     const [message , setMessage] = useState("");
 
+    //값을 입력 하면 state에 담는 함수
     const handleChangeValue = (e) => {
         switch(e.target.className) {
             case "user-form__name":
@@ -33,16 +34,31 @@ const SignUpPage = () => {
         }
     }
 
+
+//서버에 입력한 데이터 보내고 응답 받는 함수
     const handleClickSignUp = () => {
+        //정규표현식
+        const nameRegex = /[ㄱ-ㅎ가-힣ㅏ-ㅣ]/;
+        const idRegex = /^[A-Za-z0-9]+$/;
+        const emailRegex = /^[a-zA-Z0-9]+@[a-z0-9-]+\.[a-z]+$/
+    
+        //유효성 검사
+        if(userName.length < 2) return setMessage("이름은 2글자 이상부터 입니다");
+        if(!nameRegex.test(userName)) return setMessage("이름은 한글로 작성해 주세요");
+        if(!idRegex.test(userId)) return setMessage("아이디는 영어,숫자로만 작성해 주세요");
+        if(userPassword.length < 8) return setMessage("비밀번호 길이는 최소 8자 이상입니다");
+        if(!emailRegex.test(userEmail)) return setMessage("올바른 이메일 형식이 아닙니다");
+
         const userInfo = {
-            userName: userName,
-            userId: userId,
-            userPassword: userPassword,
-            userEmail: userEmail
+            name: userName,
+            id: userId,
+            password: userPassword,
+            email: userEmail
         }
         axios.post("/api/users/register" , userInfo)
         .then((response) => {
             if(response.data.success === false) {
+                console.log(response.data)
                 return setMessage(response.data.messsage);
             }
             if(response.data.success === true) {
@@ -53,7 +69,7 @@ const SignUpPage = () => {
         })
         .catch((error) => {
             return console.log(error);
-        })
+        });
     }
 
     return (
@@ -72,30 +88,30 @@ const SignUpPage = () => {
                 className ="user-form__name" 
                 type="text"
                 placeholder="이름" 
-                onChange={handleChangeValue}/>
+                onChange={(handleChangeValue)}/>
 
                 <input 
                 className="user-form__id"
                 type="text"
-                placeholder="아이디 8~12자리 특수 문자는 제외"
+                placeholder="아이디 5~15자리 특수 문자는 제외"
                 onChange={handleChangeValue}/>
 
                 <input 
                 className ="user-form__pw" 
                 type="password"
-                placeholder="비밀 번호" 
+                placeholder="비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함" 
                 onChange={handleChangeValue}/>
 
                 <input 
                 className ="user-form__pw-check" 
                 type="password"
-                placeholder="비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함"
+                placeholder="비밀 번호 확인"
                 onChange={handleChangeValue}/>
 
                 <input 
                 className ="user-form__email" 
                 type="email"
-                placeholder="[선택] 비밀 번호 분실시 이메일" 
+                placeholder="이메일" 
                 onChange={handleChangeValue}/>
 
                 <span className="error-message">

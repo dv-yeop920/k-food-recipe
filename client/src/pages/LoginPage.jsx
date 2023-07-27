@@ -13,6 +13,7 @@ const LoginPage = () => {
     const [userPassword , setUserPassword] = useState("");
     const [message , setMessage] = useState("");
 
+    //값을 입력 하면 state에 담는 함수
     const handleChangeValue = (e) => {
         if(e.target.type === "text") 
             return setUserId(e.target.value);
@@ -21,15 +22,15 @@ const LoginPage = () => {
             return setUserPassword(e.target.value);
     }
 
-
+//로그인 버튼 누르면 입력한 정보를 서버로 보내고 응답 받는 함수
     const handleClickLogin = (e) => {
         e.preventDefault();
         //유효성 검사
         if(userId === "") return setMessage("아이디를 입력하세요");
         if(userPassword === "") return setMessage("비밀번호를 입력하세요");
-
+        
         const userInfo = {
-            userId: userId,
+            id: userId,
             password: userPassword,
         };
 

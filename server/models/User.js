@@ -8,17 +8,17 @@ const jwt = require("jsonwebtoken");
 //user 정보 설정하기
 const userSchema = mongoose.Schema({
     //사용자 이름
-    userName: {
+    name: {
         type: String,
         maxlength: 50, //최대 글자수
-        minlength: 5
+        minlength: 1
     },
     //id
-    userId: {
+    id: {
         type: String,
-        maxlength:15,
-        minlength:6,
-        unique: 1
+        maxlength: 15,
+        minlength: 5,
+        unique: true
     },
     //비번
     password: {
@@ -27,10 +27,10 @@ const userSchema = mongoose.Schema({
         minlength: 8//최소 글자수
     },
     //이메일
-    userEmail: {
+    email: {
         type: String,
         trim: true, //이메일을 입력할 때 띄어쓰기가 있으면 띄어쓴 부분 없애줌
-        unique: 1 //이메일 중복 안되게 설정
+        unique: true //이메일 중복 안되게 설정
     },
     //role의 숫자여부에 따라 관리자인지 일반 회원인지 판별 할 수 있게 설정
     role: {

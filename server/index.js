@@ -40,12 +40,13 @@ app.post("/api/users/register" , (req , res) => {
     //mongoDB 메서드, user모델에 저장
     //mongoose 6버전 부터는 save 에 콜백함수를 지원하지 않아 아래와 같이 코드 작성
     user.save()
-    .then(()=>{
+    .then(()=> {
     res.status(200).json({
-        success: true
+        success: true,
+        messsage: "회원가입을 성공적으로 하셨습니다. 로그인 하여 서비스를 이용해 보세요!"
     });
     })
-    .catch((error)=>{
+    .catch((error)=> {
     res.json({ 
         success: false,
         messsage: "회원 가입에 실패 했습니다. 입력한 값을 확인해 주세요", 
@@ -58,7 +59,7 @@ app.post("/api/users/register" , (req , res) => {
 
 app.post("/api/users/login",(req , res) =>{
     // 요청된 이메일을 데이터베이스 찾기
-    User.findOne({userId: req.body.userId})
+    User.findOne({id: req.body.id})
     .then((docs) =>{
         if(!docs){
             return res.json({
@@ -79,8 +80,8 @@ app.post("/api/users/login",(req , res) =>{
                         .status(200)
                         .json({
                             loginSuccess: true, 
-                            userName: user.userName,
-                            userId: user.userId,
+                            name: user.name,
+                            id: user.id,
                         });
                 })
             }
