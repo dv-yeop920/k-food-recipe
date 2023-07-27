@@ -1,12 +1,35 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSmileBeam ,faHeart , faUser } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from '../store/userSlice';
+import axios from 'axios';
 
 
 
 const MyPage = () => {
     const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleClickLogout = () => {
+        if(window.confirm("로그아웃 하시겠습니까?")) {
+            axios.get("/api/users/logout")
+            .then((response) => {
+                if(response.status === 200) {
+                    dispatch(logoutUser());
+                    console.log(response.data , response.status);
+                    return navigate("/login");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                return alert("로그아웃 하는데 실패 했습니다");
+            });
+        }
+    }
+
     return (
         <>
         <main className="my-page">
@@ -17,17 +40,26 @@ const MyPage = () => {
                         안녕하세요
                     </h1>
                     <h2> {`${user.name} 님!`}</h2>
-                    <button
-                    className="user-component__btn">
-                        <FontAwesomeIcon
-                        className ="user-icon"
-                        icon={faUser}
-                        size = "1x"/>
-                        <span>내정보</span>
-                    </button>
                 </div>
             </div>
-            </div>
+            <form 
+            className="user-component__btn-form"
+            onSubmit={(e) => e.preventDefault()}>
+                <button
+                className="user-component__btn">
+                    <FontAwesomeIcon
+                    className ="user-icon"
+                    icon={faUser}
+                    size = "1x"/>
+                    <span>내정보</span>
+                </button>
+                <button
+                className="user-component__btn"
+                onClick={handleClickLogout}>
+                    로그 아웃
+                </button>
+            </form>
+        </div>
 
             <div className="icon-row">
                 <div className="icon-row__icon">
@@ -67,6 +99,7 @@ const MyPage = () => {
                 </div>
             </div>
             <div></div>
+            
             </main>
         </>
     );

@@ -2,13 +2,13 @@ import React from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate  } from "react-router";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import logoutUser from "../store/userSlice";
-import axios from "axios";
+//import { useDispatch } from "react-redux";
+//import logoutUser from "../store/userSlice";
+//import axios from "axios";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const user = useSelector(state => state.user);
 
     
@@ -39,7 +39,8 @@ const Navbar = () => {
                 </styled.MenuItem>
                 <styled.MenuItem
                 onClick={() => {
-                    if(user.loginSuccess === true) {
+                    return navigate("/login");
+                    /*if(user.loginSuccess === true) {
                         axios.get("/api/users/logout")
                         .then((res) => {
                             if(res.data) {
@@ -51,13 +52,13 @@ const Navbar = () => {
                     }
                     else {
                         navigate("/login");
-                    }
+                    }*/
                     }}>
-                    {user.loginSuccess === true ? "로그 아웃":"로그인"}
+                    {user.loginSuccess === true ? "":"로그인"}
                 </styled.MenuItem>
                 <styled.MenuItem
                 onClick={() => navigate("/signUp")}>
-                    회원가입
+                    {user.loginSuccess === true ? "":"회원 가입"}
                 </styled.MenuItem>
             </styled.MenuList>
         </styled.Navbar>
