@@ -46,7 +46,10 @@ app.post("/api/users/register" , (req , res) => {
     });
     })
     .catch((error)=>{
-    res.json({ success: false, error });
+    res.json({ 
+        success: false,
+        messsage: "회원 가입에 실패 했습니다. 입력한 값을 확인해 주세요", 
+        error });
     });
 });
 

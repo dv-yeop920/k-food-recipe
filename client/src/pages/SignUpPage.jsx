@@ -1,8 +1,11 @@
+import axios from "axios";
 import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
-    const [name , setName] = useState("");
+    const navigate = useNavigate();
+    const [userName , setName] = useState("");
     const [userId , setUserId] = useState("");
     const [userPassword , setUserPassword] = useState("");
     const [checkPassword , setCheckPassword] = useState("");
@@ -30,6 +33,29 @@ const SignUpPage = () => {
         }
     }
 
+    const handleClickSignUp = () => {
+        const userInfo = {
+            userName: userName,
+            userId: userId,
+            userPassword: userPassword,
+            userEmail: userEmail
+        }
+        axios.post("/api/users/register" , userInfo)
+        .then((response) => {
+            if(response.data.success === false) {
+                return setMessage(response.data.messsage);
+            }
+            if(response.data.success === true) {
+                navigate("/login");
+                setMessage("");
+                console.log(response.data , response.status);
+            }
+        })
+        .catch((error) => {
+            return console.log(error);
+        })
+    }
+
     return (
         <>
         <main className="user-form__container">
@@ -37,7 +63,8 @@ const SignUpPage = () => {
             className="user-form"
             onSubmit={(e) => {
                 e.preventDefault();
-                console.log(name , userId , userPassword , checkPassword , userEmail);
+                handleClickSignUp();
+                console.log(userName , userId , userPassword , checkPassword , userEmail);
             }}>
                 <h1 id="user-form__title">회원 가입</h1>
 
@@ -71,6 +98,9 @@ const SignUpPage = () => {
                 placeholder="[선택] 비밀 번호 분실시 이메일" 
                 onChange={handleChangeValue}/>
 
+                <span className="error-message">
+                    {message}
+                </span>
                 <styled.LoginSignUpButton
                     className="default-btn" 
                     type="submit">

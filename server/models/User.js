@@ -17,7 +17,8 @@ const userSchema = mongoose.Schema({
     userId: {
         type: String,
         maxlength:15,
-        minlength:6
+        minlength:6,
+        unique: 1
     },
     //비번
     password: {
@@ -26,7 +27,7 @@ const userSchema = mongoose.Schema({
         minlength: 8//최소 글자수
     },
     //이메일
-    email: {
+    userEmail: {
         type: String,
         trim: true, //이메일을 입력할 때 띄어쓰기가 있으면 띄어쓴 부분 없애줌
         unique: 1 //이메일 중복 안되게 설정
