@@ -2,7 +2,6 @@ import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSmileBeam ,faHeart , faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import axios from 'axios';
 
 
 
@@ -17,7 +16,7 @@ const MyPage = () => {
                     <h1 className="user-component__title">
                         안녕하세요
                     </h1>
-                    <h2>userName님!</h2>
+                    <h2> {`${user.name} 님!`}</h2>
                     <button
                     className="user-component__btn">
                         <FontAwesomeIcon

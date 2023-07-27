@@ -2,11 +2,16 @@ import React from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate  } from "react-router";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import logoutUser from "../store/userSlice";
+import axios from "axios";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const user = useSelector(state => state.user);
 
+    
     return (
         <>
         <styled.Navbar>
@@ -33,8 +38,22 @@ const Navbar = () => {
                     마이페이지
                 </styled.MenuItem>
                 <styled.MenuItem
-                onClick={() => navigate("/login")}>
-                    로그인
+                onClick={() => {
+                    if(user.loginSuccess === true) {
+                        axios.get("/api/users/logout")
+                        .then((res) => {
+                            if(res.data) {
+                                navigate("/login");
+                                dispatch(logoutUser());
+                            }
+                        })
+                        .catch(error => console.log(error))
+                    }
+                    else {
+                        navigate("/login");
+                    }
+                    }}>
+                    {user.loginSuccess === true ? "로그 아웃":"로그인"}
                 </styled.MenuItem>
                 <styled.MenuItem
                 onClick={() => navigate("/signUp")}>
