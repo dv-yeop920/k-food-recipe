@@ -13,6 +13,8 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const [userId , setUserId] = useState("");
     const [userPassword , setUserPassword] = useState("");
+    const [message , setMessage] = useState("");
+    const [isLogin , setIsLogin] = useState(false);
 
     const handleChangeValue = (e) => {
         if(e.target.type === "text") 
@@ -22,26 +24,36 @@ const LoginPage = () => {
             return setUserPassword(e.target.value);
     }
 
-    const handleClickLogin = () => {
+
+    const handleClickLogin = (e) => {
+        e.preventDefault();
+        //유효성 검사
+        if(userId === "") return setMessage("아이디를 입력하세요");
+        if(userPassword === "") return setMessage("비밀번호를 입력하세요");
 
         const userInfo = {
             userId: userId,
             password: userPassword
         };
 
-        dispatch(loginUser(userInfo));
+        axios.post("/api/users/login" , userInfo)
+            .then((response) => {
+                if(response.data.loginSuccess === isLogin) {
+                    return setMessage(response.data.messsage);
+                }
+                if(response.data.loginSuccess === true) {
+                    navigate("/myPage");
+                    dispatch(loginUser(userInfo));
+                    setMessage("");
+                    setIsLogin(true);
+                    console.log(response);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
-        /*axios.post("/api/users/login" , userInfo)
-        .then((response) => {
-            if(response) {
-                console.log(response)
-                navigate("/myPage");
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })*/
-        console.log(user)
+        console.log(user);
     }
 
     return (
@@ -49,15 +61,14 @@ const LoginPage = () => {
         <main className="user-form__container">
             <styled.LoginSignUpform 
             className="user-form"
-            onSubmit={(e) => {
-                e.preventDefault();
-            }}>
+            onSubmit={handleClickLogin}>
                 <h1 id="user-form__title">로그인</h1>
 
                 <input 
                 className="user-form__id"
                 type="text"
-                placeholder="아이디" 
+                placeholder="아이디"
+                maxLength="12"
                 onChange={
                     (e) => {
                     handleChangeValue(e);
@@ -69,7 +80,8 @@ const LoginPage = () => {
                 <input 
                 className ="user-form__pw" 
                 type="password"
-                placeholder="비밀 번호" 
+                placeholder="비밀 번호"
+                maxLength="15"
                 onChange={
                     (e) => {
                         handleChangeValue(e);
@@ -78,11 +90,14 @@ const LoginPage = () => {
                     }
                 }/>
 
+                <span className="error-message">
+                    {message}
+                </span>
+
                 <div className="user-form__button-box">
                     <styled.LoginSignUpButton
                     className="default-btn" 
-                    type="submit"
-                    onClick={handleClickLogin}>
+                    type="submit">
                         로그인
                     </styled.LoginSignUpButton>
 

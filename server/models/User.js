@@ -13,17 +13,16 @@ const userSchema = mongoose.Schema({
         maxlength: 50, //최대 글자수
         minlength: 5
     },
+    //생일
+    birthDate: {
+        type: String,
+        maxlength: 8,
+    },
     //id
     userId: {
         type: String,
         maxlength:15,
         minlength:6
-    },
-    //이메일
-    email: {
-        type: String,
-        trim: true, //이메일을 입력할 때 띄어쓰기가 있으면 띄어쓴 부분 없애줌
-        unique: 1 //이메일 중복 안되게 설정
     },
     //비번
     password: {
@@ -31,9 +30,11 @@ const userSchema = mongoose.Schema({
         maxlength: 1000,
         minlength: 8//최소 글자수
     },
-    birthDate: {
+    //이메일
+    email: {
         type: String,
-        maxlength: 8,
+        trim: true, //이메일을 입력할 때 띄어쓰기가 있으면 띄어쓴 부분 없애줌
+        unique: 1 //이메일 중복 안되게 설정
     },
     //role의 숫자여부에 따라 관리자인지 일반 회원인지 판별 할 수 있게 설정
     role: {

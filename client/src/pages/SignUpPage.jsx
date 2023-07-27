@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
 
 const SignUpPage = () => {
-    const [] = useState();
-    const [] = useState();
-    const [] = useState();
-    const [] = useState();
-    const [] = useState();
-    const [] = useState();
+    const [name , setName] = useState("");
+    const [birthDate , setBirthDate] = useState("");
+    const [userId , setUserId] = useState("");
+    const [password , setPassword] = useState("");
+    const [checkPassword , setCheckPassword] = useState("");
+    const [email , setEmail] = useState("");
     return (
         <>
         <main className="user-form__container">
@@ -37,7 +37,7 @@ const SignUpPage = () => {
                 <input 
                 className ="user-form__pw-check" 
                 type="password"
-                placeholder="비밀 번호  8자리~10자리 영어,숫자,특수 문자 포함"/>
+                placeholder="비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함"/>
 
                 <input 
                 className ="user-form__email" 

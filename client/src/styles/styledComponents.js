@@ -63,7 +63,7 @@ import { styled } from "styled-components";
 
             export const Input = styled.input`
                 text-align: center;
-                width:70%;
+                width:75%;
                 margin-right: 7px;
                 border: none;
                 border-bottom: 2px solid rgba(0, 0, 0, 0.2);
