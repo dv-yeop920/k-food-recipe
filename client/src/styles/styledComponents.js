@@ -56,7 +56,7 @@ import { styled } from "styled-components";
 
             export const SearchContainer = styled.div`
                 position: absolute;
-                top: 15%;
+                top: 21%;
                 left: 25%;
                 width: 50%;
             `;
@@ -106,7 +106,7 @@ import { styled } from "styled-components";
 
             export const BoardContainer = styled.div`
                 position: absolute;
-                top: 28%;
+                top: 38%;
                 left:10%;
                 width:80%;
             `;

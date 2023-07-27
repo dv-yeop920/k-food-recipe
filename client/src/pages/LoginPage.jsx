@@ -64,26 +64,14 @@ const LoginPage = () => {
                 type="text"
                 placeholder="아이디"
                 maxLength="12"
-                onChange={
-                    (e) => {
-                    handleChangeValue(e);
-                    console.log(userId);
-                    console.log(userPassword);
-                    }
-                }/>
+                onChange={handleChangeValue}/>
 
                 <input 
                 className ="user-form__pw" 
                 type="password"
                 placeholder="비밀 번호"
                 maxLength="15"
-                onChange={
-                    (e) => {
-                        handleChangeValue(e);
-                        console.log(userId);
-                        console.log(userPassword);
-                    }
-                }/>
+                onChange={handleChangeValue}/>
 
                 <span className="error-message">
                     {message}
