@@ -8,15 +8,10 @@ const jwt = require("jsonwebtoken");
 //user 정보 설정하기
 const userSchema = mongoose.Schema({
     //사용자 이름
-    name: {
+    userName: {
         type: String,
         maxlength: 50, //최대 글자수
         minlength: 5
-    },
-    //생일
-    birthDate: {
-        type: String,
-        maxlength: 8,
     },
     //id
     userId: {

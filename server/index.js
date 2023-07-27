@@ -77,7 +77,6 @@ app.post("/api/users/login",(req , res) =>{
                         .json({
                             loginSuccess: true, 
                             userName: user.userName,
-                            userBirthDate: user.birthDate,
                             userId: user.userId,
                         });
                 })

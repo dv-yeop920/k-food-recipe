@@ -42,6 +42,7 @@ const LoginPage = () => {
                     navigate("/myPage");
                     setMessage("");
                     dispatch(loginUser(response.data));
+                    console.log(response.data , response.status);
                 }
             })
             .catch((error) => {

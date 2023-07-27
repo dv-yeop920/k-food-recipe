@@ -2,12 +2,12 @@ import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSmileBeam ,faHeart , faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
+import axios from 'axios';
 
 
 
 const MyPage = () => {
     const user = useSelector(state => state.user);
-    
     return (
         <>
         <main className="my-page">
