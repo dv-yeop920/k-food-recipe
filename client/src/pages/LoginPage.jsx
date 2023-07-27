@@ -1,20 +1,17 @@
-import React, { useState , useEffect} from "react";
+import React, { useState } from "react";
 import { useNavigate  } from "react-router";
 import * as styled from "../styles/styledComponents";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../store/userSlice";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 
 const LoginPage = () => {
-    const user = useSelector(state => state);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [userId , setUserId] = useState("");
     const [userPassword , setUserPassword] = useState("");
     const [message , setMessage] = useState("");
-    const [isLogin , setIsLogin] = useState(false);
 
     const handleChangeValue = (e) => {
         if(e.target.type === "text") 
@@ -33,27 +30,23 @@ const LoginPage = () => {
 
         const userInfo = {
             userId: userId,
-            password: userPassword
+            password: userPassword,
         };
 
         axios.post("/api/users/login" , userInfo)
             .then((response) => {
-                if(response.data.loginSuccess === isLogin) {
+                if(response.data.loginSuccess === false) {
                     return setMessage(response.data.messsage);
                 }
                 if(response.data.loginSuccess === true) {
                     navigate("/myPage");
-                    dispatch(loginUser(userInfo));
                     setMessage("");
-                    setIsLogin(true);
-                    console.log(response);
+                    dispatch(loginUser(response.data));
                 }
             })
             .catch((error) => {
                 console.log(error);
             });
-
-        console.log(user);
     }
 
     return (

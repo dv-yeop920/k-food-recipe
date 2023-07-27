@@ -1,9 +1,12 @@
 import React from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate  } from "react-router";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const user = useSelector(state => state.user);
+
     return (
         <>
         <styled.Navbar>

@@ -76,7 +76,9 @@ app.post("/api/users/login",(req , res) =>{
                         .status(200)
                         .json({
                             loginSuccess: true, 
-                            userId: user._id,
+                            userName: user.userName,
+                            userBirthDate: user.birthDate,
+                            userId: user.userId,
                         });
                 })
             }
