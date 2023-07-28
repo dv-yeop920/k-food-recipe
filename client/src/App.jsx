@@ -5,7 +5,7 @@ import MainPage from "./pages/MainPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import NoticeBoard from "./pages/NoticeBoard";
-import MyPage from './pages/MyPage';
+import MyPage from "./pages/myPage/MyPage";
 import RecipePage from './pages/Recipe';
 
 function App() {

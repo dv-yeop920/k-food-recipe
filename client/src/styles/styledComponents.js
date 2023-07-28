@@ -122,6 +122,7 @@ import { styled } from "styled-components";
                 align-items: center;
                 border-radius: 30px;
                 box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -5px;
+                transition: all 0.1s ease-in-out;
             `;
             export const Title = styled.h3`
                 margin-bottom: 20px;

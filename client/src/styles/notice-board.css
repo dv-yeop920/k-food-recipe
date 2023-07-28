@@ -36,3 +36,7 @@
 .user-search__input:focus {
     border-bottom: 2px solid black;
 }
+
+.board-list:hover {
+    transform: perspective(500px) translateZ(5px);
+}

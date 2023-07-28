@@ -7,8 +7,9 @@ const NoticeBoardList = () => {
     return (
         <>
         <styled.BoardContainer>
-            <ul className="board-list">
+            <ul className="board">
                 <styled.Li 
+                className="board-list"
                 style={{
                     color:"rgb(200, 50, 100)"
                 }}>
