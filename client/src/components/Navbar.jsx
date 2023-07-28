@@ -22,14 +22,16 @@ const Navbar = () => {
                         K레시피
                 </styled.NavTitle>
                 <styled.MenuItem
-                style={{"marginRight":"30px","marginLeft":"0px"}}
+                style={{"marginRight":"30px","marginLeft":"50px"}}
                     onClick={() => navigate("/recipe")}>
                         레시피
                 </styled.MenuItem>
                 <styled.MenuItem
                 onClick={() => {
-                    if(user.loginSuccess === false) 
-                        return alert("회원만 이용할 수 있습니다");
+                    if(user.loginSuccess === false) {
+                        alert("회원만 이용할 수 있습니다");
+                        return navigate("/signUp")
+                    }
                     return navigate("/noticeBoard")
                 }}>
                     자유게시판
@@ -39,8 +41,10 @@ const Navbar = () => {
             <styled.MenuList>
                 <styled.MenuItem
                 onClick={() => {
-                    if(user.loginSuccess === false) 
-                        return alert("회원만 이용할 수 있습니다");
+                    if(user.loginSuccess === false) {
+                        alert("회원만 이용할 수 있습니다");
+                        return navigate("/signUp")
+                    }
                     return navigate("/myPage");
                 }}>
                     마이페이지

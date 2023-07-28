@@ -10,17 +10,15 @@ const NoticeBoard = () => {
     return (
         <>
         <styled.SearchContainer>
-        <form
-        className="user-search__form"
-        onSubmit={(e) => {
-            e.preventDefault();
-        }}>
+            <form
+            className="user-search__form"
+            onSubmit={(e) => {
+                e.preventDefault();
+            }}>
                 <styled.Input
                 className="user-search__input"
                 type="text"
-                placeholder="검색어 입력..."
-                onChange={(e) => {
-                }} />
+                placeholder="검색어 입력..."/>
                 <styled.SubmitButton
                 className="default-btn"
                 type="submit">
