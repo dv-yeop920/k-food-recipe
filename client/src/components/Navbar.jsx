@@ -27,14 +27,22 @@ const Navbar = () => {
                         레시피
                 </styled.MenuItem>
                 <styled.MenuItem
-                onClick={() => navigate("/noticeBoard")}>
+                onClick={() => {
+                    if(user.loginSuccess === false) 
+                        return alert("회원만 이용할 수 있습니다");
+                    return navigate("/noticeBoard")
+                }}>
                     자유게시판
                 </styled.MenuItem>
             </styled.MenuList>
 
             <styled.MenuList>
                 <styled.MenuItem
-                onClick={() => navigate("/myPage")}>
+                onClick={() => {
+                    if(user.loginSuccess === false) 
+                        return alert("회원만 이용할 수 있습니다");
+                    return navigate("/myPage");
+                }}>
                     마이페이지
                 </styled.MenuItem>
                 <styled.MenuItem
