@@ -6,7 +6,7 @@ import ScrollToTopButton from "../components/ScrollToTopButton";
 
 
 const RecipePage = () => {
-    const URL = "http://openapi.foodsafetykorea.go.kr/api/99086c49e0dd4e7e8f6b/COOKRCP01/json/1/100";
+    /*const URL = "http://openapi.foodsafetykorea.go.kr/api/99086c49e0dd4e7e8f6b/COOKRCP01/json/1/100";
     const [recipe , setRecipe] = useState();
 
         useEffect(() => {
@@ -17,19 +17,21 @@ const RecipePage = () => {
             })
         } , []);
 
+        {
+            recipe.map(item => {
+                return(
+                    <h1>
+                        {item.RCP_PARTS_DTLS}
+                    </h1>
+                )
+            })
+        }*/
+
     return (
         <>
         <div className='my-page'>
-                            {
-                                recipe.map(item => {
-                                    return(
-                                        <h1>
-                                            {item.RCP_PARTS_DTLS}
-                                        </h1>
-                                    )
-                                })
-                            }
-                    </div>
+                            
+        </div>
         <ScrollToTopButton/>
         </>
     );
