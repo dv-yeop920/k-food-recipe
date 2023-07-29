@@ -69,6 +69,10 @@ app.post("/api/users/login",(req , res) =>{
         }
         //비번 비교
         docs.comparePassword(req.body.password, (error, isMatch) => {
+            const currentTime = new Date();
+            const oneHourInMilliseconds = 60 * 60 * 1000;
+            const expirationTime = new Date(currentTime.getTime() + oneHourInMilliseconds);
+
             // Password가 일치하다면 토큰 생성
             if(isMatch) {
                 docs.generateToken((err, user)=>{
@@ -76,7 +80,10 @@ app.post("/api/users/login",(req , res) =>{
                         res.status(400).send(error);
                     }
                     // 토큰을 저장
-                        res.cookie("x_auth", user.token)
+                        res.cookie("x_auth", user.token, {
+                            expires: expirationTime,
+                            httpOnly: true
+                        })
                         .status(200)
                         .json({
                             loginSuccess: true, 
@@ -116,7 +123,7 @@ app.get("/api/users/auth" , auth , (req , res) => {
     });
 });
 
-app.get("/api/users/logout" , auth , (req , res) => {
+app.post("/api/users/logout" , auth , (req , res) => {
     //db에서 정보를 찾아서 업데이트 시켜서 토큰을 삭제 한다
     User.findOneAndUpdate(
         { _id: req.user._id } ,

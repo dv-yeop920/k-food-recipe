@@ -30,7 +30,7 @@
 
 .user-form {
     padding-top: 15px;
-    padding-bottom: 35px;
+    padding-bottom: 20px;
     box-sizing: content-box;
 }
 
@@ -73,6 +73,26 @@
 .error-message {
     color: rgb(224, 4, 4);
     font-weight: 500;
+}
+
+.question-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.question {
+    opacity: 0.5;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.signup-login__navigate {
+    opacity: 1;
+    font-size: 15px;
+    font-weight: 650;
+    cursor: pointer;
 }
 
 

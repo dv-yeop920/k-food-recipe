@@ -135,6 +135,16 @@ const SignUpPage = () => {
                     type="submit">
                         가입 하기
                 </styled.LoginSignUpButton>
+                <div className="question-container">
+                    <span className="question">
+                        이미 계정이 있으신가요?&nbsp;
+                    </span>
+                    <span 
+                    className="signup-login__navigate"
+                    onClick={() => navigate("/login")}>
+                            로그인
+                    </span>
+                </div>
             </styled.LoginSignUpform>
         </main>
         </>

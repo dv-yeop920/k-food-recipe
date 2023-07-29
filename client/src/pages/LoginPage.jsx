@@ -90,6 +90,16 @@ const LoginPage = () => {
                         카카오 로그인
                     </styled.LoginSignUpButton>
                 </div>
+                <div className="question-container">
+                    <span className="question">
+                        계정이 없으신가요?&nbsp;
+                    </span>
+                    <span 
+                    className="signup-login__navigate"
+                    onClick={() => navigate("/signUp")}>
+                            회원가입
+                    </span>
+                </div>
             </styled.LoginSignUpform>
         </main>
         </>

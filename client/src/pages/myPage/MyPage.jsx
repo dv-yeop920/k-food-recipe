@@ -16,7 +16,7 @@ const MyPage = () => {
 
     const handleClickLogout = () => {
         if(window.confirm("로그아웃 하시겠습니까?")) {
-            axios.get("/api/users/logout")
+            axios.post("/api/users/logout")
             .then((response) => {
                 if(response.status === 200) {
                     dispatch(logoutUser());

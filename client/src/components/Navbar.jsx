@@ -50,22 +50,7 @@ const Navbar = () => {
                     마이페이지
                 </styled.MenuItem>
                 <styled.MenuItem
-                onClick={() => {
-                    return navigate("/login");
-                    /*if(user.loginSuccess === true) {
-                        axios.get("/api/users/logout")
-                        .then((res) => {
-                            if(res.data) {
-                                navigate("/login");
-                                dispatch(logoutUser());
-                            }
-                        })
-                        .catch(error => console.log(error))
-                    }
-                    else {
-                        navigate("/login");
-                    }*/
-                    }}>
+                onClick={() => navigate("/login")}>
                     {user.loginSuccess === true ? "":"로그인"}
                 </styled.MenuItem>
                 <styled.MenuItem
