@@ -129,9 +129,11 @@ app.post("/api/users/logout" , auth , (req , res) => {
         { _id: req.user._id } ,
         { token: "" })
         .then((docs) => {
+            res.clearCookie("x_auth");
             if(docs){
                 res.status(200)
                 .send({
+                    
                     logoutSuccess: true,
                 })
             }

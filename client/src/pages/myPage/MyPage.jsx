@@ -5,7 +5,6 @@ import { useSelector , useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from '../../store/userSlice';
 import axios from 'axios';
-import cookie from "react-cookies";
 
 
 
@@ -21,8 +20,6 @@ const MyPage = () => {
                 if(response.status === 200) {
                     dispatch(logoutUser());
                     console.log(response.data , response.status);
-                    //로그아웃 하면 개발자도구창에 쿠키 지워지도록 
-                    cookie.remove("x_auth", {path : '/'});
                     return navigate("/login");
                 }
             })
