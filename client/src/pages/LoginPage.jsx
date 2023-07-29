@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate  } from "react-router";
 import * as styled from "../styles/styledComponents";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../store/userSlice";
+import { loginUser } from "../store/slice/userSlice";
 import axios from "axios";
 
 

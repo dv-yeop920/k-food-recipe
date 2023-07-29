@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSmileBeam ,faHeart , faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector , useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logoutUser } from '../../store/userSlice';
+import { logoutUser } from "../../store/slice/userSlice";
 import axios from 'axios';
 
 
 
 const MyPage = () => {
-    const user = useSelector(state => state.user);
+    //const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const MyPage = () => {
                     <h1 className="user-component__title">
                         안녕하세요
                     </h1>
-                    <h2> {`${user.name} 님!`}</h2>
+                    <h2> {/*`${user.name} 님!`*/}</h2>
                 </div>
             </div>
             <form 
