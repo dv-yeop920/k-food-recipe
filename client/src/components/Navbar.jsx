@@ -2,13 +2,10 @@ import React from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate  } from "react-router";
 import { useSelector } from "react-redux";
-//import { useDispatch } from "react-redux";
-//import logoutUser from "../store/userSlice";
-//import axios from "axios";
+
 
 const Navbar = () => {
     const navigate = useNavigate();
-    //const dispatch = useDispatch();
     const user = useSelector(state => state.user);
 
     
