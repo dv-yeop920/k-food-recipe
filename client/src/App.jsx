@@ -1,12 +1,12 @@
-import './App.css';
-import { Route, Routes } from 'react-router';
+import "./App.css";
+import { Route, Routes } from "react-router";
 import Navbar from "./components/Navbar";
 import MainPage from "./pages/MainPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import NoticeBoard from "./pages/NoticeBoard";
 import MyPage from "./pages/myPage/MyPage";
-import RecipePage from './pages/RecipePage';
+import RecipePage from "./pages/RecipePage";
 
 function App() {
   return (
