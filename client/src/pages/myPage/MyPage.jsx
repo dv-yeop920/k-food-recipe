@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 const MyPage = () => {
-    //const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -39,14 +39,15 @@ const MyPage = () => {
                     <h1 className="user-component__title">
                         안녕하세요
                     </h1>
-                    <h2> {/*`${user.name} 님!`*/}</h2>
+                    <h2> {`${user.name} 님!`}</h2>
                 </div>
             </div>
             <form 
             className="user-component__btn-form"
             onSubmit={(e) => e.preventDefault()}>
                 <button
-                className="user-component__btn">
+                className="user-component__btn"
+                onClick={() => navigate("/myInfo")}>
                     <FontAwesomeIcon
                     className ="user-icon"
                     icon={faUser}

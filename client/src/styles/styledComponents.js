@@ -1,18 +1,16 @@
 import { styled } from "styled-components";
 
 
-            export const Navbar = styled.nav`
-                position: fixed;
-                top: 0;
-                box-sizing: border-box;
-                width: 100%;
-                background-color: white;
-                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -20px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                z-index:1;
-            `;
+            export const Header = styled.header`
+                        position: fixed;
+                        top: 0;
+                        width: 100%;
+                        padding: 5px;
+                        background-color: #fff;
+                        border-bottom: 1px solid #ddd;
+                        height: 4.7em;
+                        z-index:5;
+                    `;
 
             export const NavTitle = styled.h1`
                 margin-left: 50px;
