@@ -67,21 +67,24 @@ const Navbar = () => {
                     </button>
                     { toggleMenu === true && 
                         <NavItem 
-                        showModal={showLoginModal} 
-                        setShowModal={setShowLoginModal}/> 
+                        showLoginModal ={showLoginModal} 
+                        setShowLoginModal ={setShowLoginModal}
+                        showSignUpModal ={showSignUpModal} 
+                        setShowSignUpModal = {setShowSignUpModal}/>
                     }
                 </div>
             </div>
         </styled.Header>
         { showLoginModal === true && 
             <LoginPage 
-            showLoginModal={showLoginModal} 
-            setShowLoginModal={setShowLoginModal}/> 
+            showLoginModal ={showLoginModal} 
+            setShowLoginModal ={setShowLoginModal}/> 
         }
+        
         { showSignUpModal === true && 
             <SignUpPage 
-            showSignUpModal={showSignUpModal} 
-            setShowSignUpModal={setShowSignUpModal}/> 
+            showSignUpModal ={showSignUpModal} 
+            setShowSignUpModal ={setShowSignUpModal}/> 
         }
         </>
     );
