@@ -1,11 +1,32 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { logoutUser } from "../../store/slice/userSlice";
+import { useSelector ,  useDispatch} from "react-redux";
+import axios from 'axios';
+
+
 
 
 const NavItem = ({ showLoginModal , setShowLoginModal , showSignUpModal , setShowSignUpModal}) => {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const handleClickLogout = () => {
+        if(window.confirm("로그아웃 하시겠습니까?")) {
+            axios.post("/api/users/logout")
+            .then((response) => {
+                if(response.status === 200) {
+                    dispatch(logoutUser());
+                    console.log(response.data , response.status);
+                    return navigate("/");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                return alert("로그아웃 하는데 실패 했습니다");
+            });
+        }
+    }
     return (
         <>
         <div className="navbar-container">
@@ -38,7 +59,12 @@ const NavItem = ({ showLoginModal , setShowLoginModal , showSignUpModal , setSho
                     </li>
                     <li 
                     className="navbar-link"
-                    onClick={() => setShowLoginModal(!showLoginModal)}>
+                    onClick={(e) => {
+                        setShowLoginModal(!showLoginModal);
+                        if(e.target.value === "로그아웃")
+                            return handleClickLogout();
+                    }
+                    }>
                         {user.loginSuccess === true ? "로그아웃":"로그인"}
                     </li>
                 </ul>

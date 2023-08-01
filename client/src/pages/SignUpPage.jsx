@@ -102,9 +102,9 @@ const SignUpPage = ({ showLoginModal ,setShowLoginModal , showSignUpModal , setS
                         icon={faX}
                         size = "lg"
                         onClick={()=> setShowSignUpModal(!showSignUpModal)}/>
-                    <sapn className="user-form__title">
+                    <h2 className="user-form__title">
                         회원 가입
-                    </sapn>
+                    </h2>
                     <div></div>
                 </div>
 

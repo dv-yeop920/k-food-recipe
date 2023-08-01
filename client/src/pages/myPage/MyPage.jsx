@@ -4,6 +4,7 @@ import { faFaceSmileBeam ,faHeart , faUser } from "@fortawesome/free-solid-svg-i
 import { useSelector , useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../store/slice/userSlice";
+import Navbar from "../../components/navbar/Navbar";
 import axios from 'axios';
 
 
@@ -13,25 +14,10 @@ const MyPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleClickLogout = () => {
-        if(window.confirm("로그아웃 하시겠습니까?")) {
-            axios.post("/api/users/logout")
-            .then((response) => {
-                if(response.status === 200) {
-                    dispatch(logoutUser());
-                    console.log(response.data , response.status);
-                    return navigate("/login");
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-                return alert("로그아웃 하는데 실패 했습니다");
-            });
-        }
-    }
 
     return (
         <>
+        <Navbar/>
         <main className="my-page">
         <div className="user-component">
             <div className="user-component__column">
@@ -53,11 +39,6 @@ const MyPage = () => {
                     icon={faUser}
                     size = "1x"/>
                     <span>내정보</span>
-                </button>
-                <button
-                className="user-component__btn"
-                onClick={handleClickLogout}>
-                    로그 아웃
                 </button>
             </form>
         </div>

@@ -66,9 +66,9 @@ const LoginPage = ({ showLoginModal , setShowLoginModal , showSignUpModal , setS
                         icon={faX}
                         size = "lg"
                         onClick={()=> setShowLoginModal(!showLoginModal)}/>
-                    <sapn className="user-form__title">
+                    <h2 className="user-form__title">
                         로그인
-                    </sapn>
+                    </h2>
                     <div></div>
                 </div>
 
