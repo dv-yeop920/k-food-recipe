@@ -1,9 +1,11 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faX} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate } from "react-router-dom";
 
-const SignUpPage = () => {
+const SignUpPage = ({ showSignUpModal , setShowSignUpModal }) => {
     const navigate = useNavigate();
     const [userName , setName] = useState("");
     const [userId , setUserId] = useState("");
@@ -89,11 +91,22 @@ const SignUpPage = () => {
 
     return (
         <>
+        <div className="sign-modal">
         <main className="user-form__container">
             <styled.LoginSignUpform 
             className="user-form"
             onSubmit={handleClickSignUp}>
-                <h1 id="user-form__title">회원 가입</h1>
+                <div className="sign-header">
+                    <FontAwesomeIcon
+                        className="user-form__cancel"
+                        icon={faX}
+                        size = "lg"
+                        onClick={()=> setShowSignUpModal(!showSignUpModal)}/>
+                    <sapn className="user-form__title">
+                        회원 가입
+                    </sapn>
+                    <div></div>
+                </div>
 
                 <input 
                 className ="user-form__name" 
@@ -147,6 +160,7 @@ const SignUpPage = () => {
                 </div>
             </styled.LoginSignUpform>
         </main>
+        </div>
         </>
     );
 };

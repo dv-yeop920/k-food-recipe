@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
 
-const NavItem = () => {
+const NavItem = ({ showLoginModal , setShowLoginModal , showSignUpModal , setShowSignUpModal}) => {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     return (
@@ -33,12 +33,12 @@ const NavItem = () => {
                     }}>마이페이지</li>
                     <li 
                     className="navbar-link"
-                    onClick={() => navigate("/signUp")}>
+                    onClick={() => setShowSignUpModal(!showSignUpModal)}>
                         {user.loginSuccess === true ? "":"회원 가입"}
                     </li>
                     <li 
                     className="navbar-link"
-                    onClick={() => navigate("/login")}>
+                    onClick={() => setShowLoginModal(!showLoginModal)}>
                         {user.loginSuccess === true ? "로그아웃":"로그인"}
                     </li>
                 </ul>

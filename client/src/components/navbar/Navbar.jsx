@@ -5,21 +5,27 @@ import { faUser , faBars , faGlobe , faSearch} from "@fortawesome/free-solid-svg
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import NavItem from "./NavItem";
+import LoginPage from "../../pages/LoginPage";
+import SignUpPage from "../../pages/SignUpPage";
 
 
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const [openMenu , setOpenMenu] = useState(false);
+    const [toggleMenu , setToggleMenu] = useState(false);
+    const [showLoginModal , setShowLoginModal] = useState(false);
+    const [showSignUpModal , setShowSignUpModal] = useState(false);
     
     return (
         <>
         <styled.Header>
             <div className="header-container">
                 <div 
-                className="header-title__column"
-                onClick={() => navigate("/")}>
-                    <h2>k-레시피</h2>
+                className="header-title__column">
+                    <h2
+                    onClick={() => navigate("/")}>
+                        k-레시피
+                    </h2>
                 </div>
 
                 <div 
@@ -48,7 +54,7 @@ const Navbar = () => {
                     </button>
                     
                     <button 
-                    onClick={() => setOpenMenu(!openMenu)}
+                    onClick={() => setToggleMenu(!toggleMenu)}
                     className="user-sign__button">
                         <FontAwesomeIcon
                             className="header-icon"
@@ -59,10 +65,24 @@ const Navbar = () => {
                             icon={faUser}
                             size = "1x"/>
                     </button>
-                    { openMenu === true && <NavItem/> }
+                    { toggleMenu === true && 
+                        <NavItem 
+                        showModal={showLoginModal} 
+                        setShowModal={setShowLoginModal}/> 
+                    }
                 </div>
             </div>
         </styled.Header>
+        { showLoginModal === true && 
+            <LoginPage 
+            showLoginModal={showLoginModal} 
+            setShowLoginModal={setShowLoginModal}/> 
+        }
+        { showSignUpModal === true && 
+            <SignUpPage 
+            showSignUpModal={showSignUpModal} 
+            setShowSignUpModal={setShowSignUpModal}/> 
+        }
         </>
     );
 };

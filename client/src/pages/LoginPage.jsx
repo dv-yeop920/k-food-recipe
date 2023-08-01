@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faX} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 import * as styled from "../styles/styledComponents";
 import { useDispatch } from "react-redux";
@@ -6,7 +8,7 @@ import { loginUser } from "../store/slice/userSlice";
 import axios from "axios";
 
 
-const LoginPage = () => {
+const LoginPage = ({ showLoginModal , setShowLoginModal }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [userId , setUserId] = useState("");
@@ -53,11 +55,22 @@ const LoginPage = () => {
 
     return (
         <>
+        <div className="sign-modal">
         <main className="user-form__container">
             <styled.LoginSignUpform 
             className="user-form"
             onSubmit={handleClickLogin}>
-                <h1 id="user-form__title">로그인</h1>
+                <div className="sign-header">
+                    <FontAwesomeIcon
+                        className="user-form__cancel"
+                        icon={faX}
+                        size = "lg"
+                        onClick={()=> setShowLoginModal(!showLoginModal)}/>
+                    <sapn className="user-form__title">
+                        로그인
+                    </sapn>
+                    <div></div>
+                </div>
 
                 <input 
                 className="user-form__id"
@@ -102,6 +115,7 @@ const LoginPage = () => {
                 </div>
             </styled.LoginSignUpform>
         </main>
+        </div>
         </>
     );
 };

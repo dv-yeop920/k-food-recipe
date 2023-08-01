@@ -12,7 +12,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path="/" element ={ <MainPage /> }/>
+      <Route path="/" element ={ <MainPage/> }/>
       <Route path="/recipe" element ={<RecipePage/>} />
       <Route path="/noticeBoard" element ={ <NoticeBoard/>}/>
       <Route path="/myPage" element ={<MyPage/>}/>

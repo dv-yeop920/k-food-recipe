@@ -12,9 +12,11 @@ const RecipeNavbar = () => {
         <styled.Header>
             <div className="header-container">
                 <div 
-                className="header-title__column"
-                onClick ={() => navigate("/")}>
-                    <h2>k-레시피</h2>
+                className="header-title__column">
+                    <h2
+                    onClick ={() => navigate("/")}>
+                        k-레시피
+                    </h2>
                 </div>
 
                 <div className="header-recipe-search__column"></div>
