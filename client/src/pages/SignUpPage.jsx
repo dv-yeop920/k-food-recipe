@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate } from "react-router-dom";
 
-const SignUpPage = ({ showSignUpModal , setShowSignUpModal }) => {
+const SignUpPage = ({ showLoginModal ,setShowLoginModal , showSignUpModal , setShowSignUpModal }) => {
     const navigate = useNavigate();
     const [userName , setName] = useState("");
     const [userId , setUserId] = useState("");
@@ -154,7 +154,10 @@ const SignUpPage = ({ showSignUpModal , setShowSignUpModal }) => {
                     </span>
                     <span 
                     className="signup-login__navigate"
-                    onClick={() => navigate("/login")}>
+                    onClick={() => {
+                        setShowLoginModal(!showLoginModal);
+                        return setShowSignUpModal(!showSignUpModal);
+                    }}>
                             로그인
                     </span>
                 </div>

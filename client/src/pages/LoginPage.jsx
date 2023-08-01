@@ -8,7 +8,7 @@ import { loginUser } from "../store/slice/userSlice";
 import axios from "axios";
 
 
-const LoginPage = ({ showLoginModal , setShowLoginModal }) => {
+const LoginPage = ({ showLoginModal , setShowLoginModal , showSignUpModal , setShowSignUpModal}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [userId , setUserId] = useState("");
@@ -109,7 +109,10 @@ const LoginPage = ({ showLoginModal , setShowLoginModal }) => {
                     </span>
                     <span 
                     className="signup-login__navigate"
-                    onClick={() => navigate("/signUp")}>
+                    onClick={() => {
+                        setShowLoginModal(!showLoginModal);
+                        return setShowSignUpModal(!showSignUpModal);
+                    }}>
                             회원가입
                     </span>
                 </div>

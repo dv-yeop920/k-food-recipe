@@ -78,11 +78,15 @@ const Navbar = () => {
         { showLoginModal === true && 
             <LoginPage 
             showLoginModal ={showLoginModal} 
-            setShowLoginModal ={setShowLoginModal}/> 
+            setShowLoginModal ={setShowLoginModal}
+            showSignUpModal ={showSignUpModal} 
+            setShowSignUpModal = {setShowSignUpModal}/> 
         }
         
         { showSignUpModal === true && 
             <SignUpPage 
+            showLoginModal ={showLoginModal} 
+            setShowLoginModal ={setShowLoginModal}
             showSignUpModal ={showSignUpModal} 
             setShowSignUpModal ={setShowSignUpModal}/> 
         }
