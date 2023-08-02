@@ -2,8 +2,7 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import MainPage from "./pages/MainPage";
 import NoticeBoard from "./pages/NoticeBoard";
-import MyPage from "./pages/myPage/MyPage";
-import MyInfomation from "./pages/myPage/MyInfomation";
+import MyPage from "./pages/MyPage";
 import RecipePage from "./pages/RecipePage";
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
       <Route path="/recipe" element ={<RecipePage/>} />
       <Route path="/noticeBoard" element ={ <NoticeBoard/>}/>
       <Route path="/myPage" element ={<MyPage/>}/>
-      <Route path="/myInfo" element ={<MyInfomation/>} />
     </Routes>
     </>
   );

@@ -58,7 +58,7 @@
 }
 
 .user-form input:focus {
-    border-bottom: 2px solid #02bc50f6;
+    border-bottom: 2px solid #1abc9c;
 }
 
 .user-form__button-box {
@@ -68,7 +68,7 @@
 }
 
 .default-btn:hover {
-    background-color: #016a2df6;
+    background-color: #16a085;
 }
 
 .delete-btn:hover {

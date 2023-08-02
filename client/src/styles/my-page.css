@@ -1,57 +1,35 @@
 .my-page {
     position: absolute;
+    background-color: #fff;
     top: 20%;
-    left: 25%;
-    width: 50%;
-    box-shadow: #00000059 0px 5px 15px;
+    left: 1%;
+    width: 20%;
+    position: fixed;
+    border: 1px solid #ddd;
+    box-shadow: #ddd 0px 0px 10px;
     border-radius: 8px;
-    padding: 30px;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    padding: 25px 0px;
 }
 
-.user-component {
-    padding-left: 30px;
-    width: 30%;
-}
-
-.icon-row {
-    width: 60%;
-}
-
-.user-component__btn {
-    background-color: rgb(214, 159, 214);
-    padding: 10px 15px;
-    margin-left: 20px;
-    margin-top: 30px;
-    border: none;
-    color: white;
-    font-size: 17px;
+.user-component__name {
     text-align: center;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
-    transition: all 0.2s ease-in-out;
+    margin-bottom: 60px;
 }
-
-.user-component__btn:hover {
-    background-color: rgb(198, 150, 198);
-}
-
 
 .icon-row__icon {
-    padding: 15px;
-    margin-bottom: 25px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-    transition: all 0.2s ease-in-out;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    transition: all 0.1s ease-in-out;
     cursor: pointer;
 }
 
 .icon-row__icon:hover {
-    color: rgb(214, 159, 214);
-    border-bottom: 2px solid rgb(214, 159, 214);
+    color: #1abc9c;
+    border-bottom: 1px solid #1abc9c;
 }
 
 .user-icon {
