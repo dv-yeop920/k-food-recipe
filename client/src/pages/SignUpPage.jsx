@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate } from "react-router-dom";
 
-const SignUpPage = ({ showLoginModal ,setShowLoginModal , showSignUpModal , setShowSignUpModal }) => {
+const SignUpPage = ({ openCloseSignUpModal , changeModal }/*{ showLoginModal ,setShowLoginModal , showSignUpModal , setShowSignUpModal }*/) => {
     const navigate = useNavigate();
     const [userName , setName] = useState("");
     const [userId , setUserId] = useState("");
@@ -101,7 +101,7 @@ const SignUpPage = ({ showLoginModal ,setShowLoginModal , showSignUpModal , setS
                         className="user-form__cancel"
                         icon={faX}
                         size = "lg"
-                        onClick={()=> setShowSignUpModal(!showSignUpModal)}/>
+                        onClick={()=> openCloseSignUpModal()/*setShowSignUpModal(!showSignUpModal)*/}/>
                     <h2 className="user-form__title">
                         회원 가입
                     </h2>
@@ -155,8 +155,9 @@ const SignUpPage = ({ showLoginModal ,setShowLoginModal , showSignUpModal , setS
                     <span 
                     className="signup-login__navigate"
                     onClick={() => {
-                        setShowLoginModal(!showLoginModal);
-                        return setShowSignUpModal(!showSignUpModal);
+                        changeModal();
+                        /*setShowLoginModal(!showLoginModal);
+                        return setShowSignUpModal(!showSignUpModal);*/
                     }}>
                             로그인
                     </span>

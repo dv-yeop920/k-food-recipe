@@ -8,7 +8,7 @@ import { loginUser } from "../store/slice/userSlice";
 import axios from "axios";
 
 
-const LoginPage = ({ showLoginModal , setShowLoginModal , showSignUpModal , setShowSignUpModal}) => {
+const LoginPage = ({ openCloseLoginModal , changeModal }/*{ showLoginModal , setShowLoginModal , showSignUpModal , setShowSignUpModal}*/) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [userId , setUserId] = useState("");
@@ -65,7 +65,7 @@ const LoginPage = ({ showLoginModal , setShowLoginModal , showSignUpModal , setS
                         className="user-form__cancel"
                         icon={faX}
                         size = "lg"
-                        onClick={()=> setShowLoginModal(!showLoginModal)}/>
+                        onClick={()=> {openCloseLoginModal();} /*setShowLoginModal(!showLoginModal)*/}/>
                     <h2 className="user-form__title">
                         로그인
                     </h2>
@@ -110,8 +110,9 @@ const LoginPage = ({ showLoginModal , setShowLoginModal , showSignUpModal , setS
                     <span 
                     className="signup-login__navigate"
                     onClick={() => {
-                        setShowLoginModal(!showLoginModal);
-                        return setShowSignUpModal(!showSignUpModal);
+                        changeModal();
+                        /*setShowLoginModal(!showLoginModal);
+                        return setShowSignUpModal(!showSignUpModal);*/
                     }}>
                             회원가입
                     </span>
