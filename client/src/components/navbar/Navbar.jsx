@@ -7,16 +7,20 @@ import { useState } from "react";
 import NavItem from "./NavItem";
 import LoginPage from "../../pages/LoginPage";
 import SignUpPage from "../../pages/SignUpPage";
-import useModal from "../../hooks/useModal";
+import useSignModal from "../../hooks/useSignModal";
 
 
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [toggleMenu , setToggleMenu] = useState(false);
-    //const [showLoginModal , setShowLoginModal] = useState(false);
-    //const [showSignUpModal , setShowSignUpModal] = useState(false);
-    const [loginModal , signUpModal , openCloseLoginModal , openCloseSignUpModal , changeModal] = useModal(false);
+    const [
+            loginModal, 
+            signUpModal, 
+            openCloseLoginModal, 
+            openCloseSignUpModal, 
+            changeModal
+        ] = useSignModal(false);
     
     return (
         <>
@@ -70,14 +74,7 @@ const Navbar = () => {
                     { toggleMenu === true && 
                         <NavItem
                         openCloseLoginModal ={openCloseLoginModal}
-                        openCloseSignUpModal={openCloseSignUpModal}
-
-                        />
-                        /*
-                        showLoginModal ={showLoginModal} 
-                        setShowLoginModal ={setShowLoginModal}
-                        showSignUpModal ={showSignUpModal} 
-                        setShowSignUpModal = {setShowSignUpModal}/>*/
+                        openCloseSignUpModal={openCloseSignUpModal}/>
                     }
                 </div>
             </div>
@@ -87,11 +84,6 @@ const Navbar = () => {
             <LoginPage
             openCloseLoginModal ={openCloseLoginModal}
             changeModal={changeModal}/>
-            /*
-            showLoginModal ={showLoginModal} 
-            setShowLoginModal ={setShowLoginModal}
-            showSignUpModal ={showSignUpModal} 
-            setShowSignUpModal = {setShowSignUpModal}/> */
         }
         
         { signUpModal === true && 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const useModal = (initialState) => {
+const useSignModal = (initialState) => {
     const [loginModal , setLoginModal] = useState(initialState);
     const [signUpModal , setSignUpModal] = useState(initialState);
 
@@ -9,17 +9,23 @@ const useModal = (initialState) => {
         return setLoginModal(!loginModal);
     }
 
+    const openCloseSignUpModal = () => {
+        return setSignUpModal(!signUpModal);
+    }
+    
     const changeModal = () => {
         setLoginModal(!loginModal);
         return setSignUpModal(!signUpModal);
     }
 
-    const openCloseSignUpModal = () => {
-        return setSignUpModal(!signUpModal);
-    }
-
-    return [ loginModal , signUpModal , openCloseLoginModal , openCloseSignUpModal , changeModal ]
+    return [ 
+            loginModal,
+            signUpModal,
+            openCloseLoginModal, 
+            openCloseSignUpModal, 
+            changeModal 
+        ];
 }
 
 
-export default useModal;
+export default useSignModal;

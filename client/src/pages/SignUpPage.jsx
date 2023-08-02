@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate } from "react-router-dom";
 
-const SignUpPage = ({ openCloseSignUpModal , changeModal }/*{ showLoginModal ,setShowLoginModal , showSignUpModal , setShowSignUpModal }*/) => {
+const SignUpPage = ({ openCloseSignUpModal , changeModal }) => {
     const navigate = useNavigate();
     const [userName , setName] = useState("");
     const [userId , setUserId] = useState("");
@@ -95,13 +95,13 @@ const SignUpPage = ({ openCloseSignUpModal , changeModal }/*{ showLoginModal ,se
         <main className="user-form__container">
             <styled.LoginSignUpform 
             className="user-form"
-            onSubmit={handleClickSignUp}>
+            onSubmit={ handleClickSignUp }>
                 <div className="sign-header">
                     <FontAwesomeIcon
                         className="user-form__cancel"
                         icon={faX}
                         size = "lg"
-                        onClick={()=> openCloseSignUpModal()/*setShowSignUpModal(!showSignUpModal)*/}/>
+                        onClick={ openCloseSignUpModal }/>
                     <h2 className="user-form__title">
                         회원 가입
                     </h2>
@@ -112,36 +112,36 @@ const SignUpPage = ({ openCloseSignUpModal , changeModal }/*{ showLoginModal ,se
                 className ="user-form__name" 
                 type="text"
                 placeholder="이름" 
-                onChange={handleChangeValue}/>
+                onChange={ handleChangeValue }/>
 
                 <input 
                 className="user-form__id"
                 type="text"
                 placeholder="아이디 5~15자리 특수 문자는 제외"
                 maxLength="15"
-                onChange={handleChangeValue}/>
+                onChange={ handleChangeValue }/>
 
                 <input 
                 className ="user-form__pw" 
                 type="password"
                 maxLength="15"
                 placeholder="비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함" 
-                onChange={handleChangeValue}/>
+                onChange={ handleChangeValue }/>
 
                 <input 
                 className ="user-form__pw-check" 
                 type="password"
                 placeholder="비밀 번호 확인"
-                onChange={handleChangeValue}/>
+                onChange={ handleChangeValue }/>
 
                 <input 
                 className ="user-form__email" 
                 type="email"
                 placeholder="이메일" 
-                onChange={handleChangeValue}/>
+                onChange={ handleChangeValue }/>
 
                 <span className="error-message">
-                    {message}
+                    { message }
                 </span>
                 <styled.LoginSignUpButton
                     className="default-btn" 
@@ -154,11 +154,7 @@ const SignUpPage = ({ openCloseSignUpModal , changeModal }/*{ showLoginModal ,se
                     </span>
                     <span 
                     className="signup-login__navigate"
-                    onClick={() => {
-                        changeModal();
-                        /*setShowLoginModal(!showLoginModal);
-                        return setShowSignUpModal(!showSignUpModal);*/
-                    }}>
+                    onClick={ changeModal }>
                             로그인
                     </span>
                 </div>

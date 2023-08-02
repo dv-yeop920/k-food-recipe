@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 
-const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }/*{ showLoginModal , setShowLoginModal , showSignUpModal , setShowSignUpModal}*/) => {
+const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }) => {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }/*{ showLoginModa
                     onClick={() => {
                         if(user.loginSuccess === false) {
                             alert("회원만 이용할 수 있습니다");
-                            return openCloseSignUpModal();/*setShowSignUpModal(!showSignUpModal);*/
+                            return openCloseSignUpModal();
                         }
                         return navigate("/noticeBoard")
                     }}
@@ -50,24 +50,26 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }/*{ showLoginModa
                     onClick={() => {
                         if(user.loginSuccess === false) {
                             alert("회원만 이용할 수 있습니다");
-                            return openCloseSignUpModal();/*setShowSignUpModal(!showSignUpModal);*/
+                            return openCloseSignUpModal();
                         }
                         return navigate("/myPage");
-                    }}>마이페이지</li>
+                    }}>
+                        마이페이지
+                    </li>
                     
                     { 
                         user.loginSuccess === true ? null :
                         <li 
                         className="navbar-link"
-                        onClick={() => openCloseSignUpModal()/*setShowSignUpModal(!showSignUpModal)*/}>
+                        onClick={ openCloseSignUpModal }>
                             회원 가입
                         </li>
                     }
                     <li 
                     className="navbar-link"
                     onClick={() => {
-                        user.loginSuccess === false && openCloseLoginModal();/*setShowLoginModal(!showLoginModal);*/
-                        user.loginSuccess === true && handleClickLogout();
+                        user.loginSuccess === false && openCloseLoginModal();
+                        return user.loginSuccess === true && handleClickLogout();
                     }
                     }>
                         { user.loginSuccess === true ? "로그아웃" : "로그인" }
@@ -80,3 +82,7 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }/*{ showLoginModa
 };
 
 export default NavItem;
+
+
+
+

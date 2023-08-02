@@ -8,7 +8,7 @@ import { loginUser } from "../store/slice/userSlice";
 import axios from "axios";
 
 
-const LoginPage = ({ openCloseLoginModal , changeModal }/*{ showLoginModal , setShowLoginModal , showSignUpModal , setShowSignUpModal}*/) => {
+const LoginPage = ({ openCloseLoginModal , changeModal }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [userId , setUserId] = useState("");
@@ -59,13 +59,13 @@ const LoginPage = ({ openCloseLoginModal , changeModal }/*{ showLoginModal , set
         <main className="user-form__container">
             <styled.LoginSignUpform 
             className="user-form"
-            onSubmit={handleClickLogin}>
+            onSubmit={ handleClickLogin }>
                 <div className="sign-header">
                     <FontAwesomeIcon
                         className="user-form__cancel"
                         icon={faX}
                         size = "lg"
-                        onClick={()=> {openCloseLoginModal();} /*setShowLoginModal(!showLoginModal)*/}/>
+                        onClick={ openCloseLoginModal }/>
                     <h2 className="user-form__title">
                         로그인
                     </h2>
@@ -77,14 +77,14 @@ const LoginPage = ({ openCloseLoginModal , changeModal }/*{ showLoginModal , set
                 type="text"
                 placeholder="아이디"
                 maxLength="12"
-                onChange={handleChangeValue}/>
+                onChange={ handleChangeValue }/>
 
                 <input 
                 className ="user-form__pw" 
                 type="password"
                 placeholder="비밀 번호"
                 maxLength="15"
-                onChange={handleChangeValue}/>
+                onChange={ handleChangeValue }/>
 
                 <span className="error-message">
                     {message}
@@ -109,11 +109,7 @@ const LoginPage = ({ openCloseLoginModal , changeModal }/*{ showLoginModal , set
                     </span>
                     <span 
                     className="signup-login__navigate"
-                    onClick={() => {
-                        changeModal();
-                        /*setShowLoginModal(!showLoginModal);
-                        return setShowSignUpModal(!showSignUpModal);*/
-                    }}>
+                    onClick={ changeModal }>
                             회원가입
                     </span>
                 </div>
