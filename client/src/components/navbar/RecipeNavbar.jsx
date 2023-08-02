@@ -23,7 +23,7 @@ const RecipeNavbar = () => {
 
                 <div className="header-button__column">
                     <button className="light-dark-mode__button header-icon-button">
-                        <span class="moon">🌙</span>
+                        <span className="moon">🌙</span>
                     </button>
 
                     <button className="global-language__button header-icon-button">

@@ -1,17 +1,15 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSmileBeam ,faHeart , faUser } from "@fortawesome/free-solid-svg-icons";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logoutUser } from "../../store/slice/userSlice";
 import Navbar from "../../components/navbar/Navbar";
-import axios from 'axios';
+
 
 
 
 const MyPage = () => {
     const user = useSelector(state => state.user);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
 

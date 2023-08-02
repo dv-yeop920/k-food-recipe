@@ -3,12 +3,14 @@ import * as styled from "../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import NoticeBoardList from "../components/noticeBoard/NoticeBoardList";
+import Navbar from "../components/navbar/Navbar";
 
 
 const NoticeBoard = () => {
     
     return (
         <>
+        <Navbar/>
         <styled.SearchContainer>
             <form
             className="user-search__form"

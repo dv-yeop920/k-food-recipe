@@ -11,6 +11,7 @@ const NavItem = ({ showLoginModal , setShowLoginModal , showSignUpModal , setSho
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+
     const handleClickLogout = () => {
         if(window.confirm("로그아웃 하시겠습니까?")) {
             axios.post("/api/users/logout")
@@ -37,7 +38,7 @@ const NavItem = ({ showLoginModal , setShowLoginModal , showSignUpModal , setSho
                     onClick={() => {
                         if(user.loginSuccess === false) {
                             alert("회원만 이용할 수 있습니다");
-                            return navigate("/signUp")
+                            return setShowSignUpModal(!showSignUpModal);
                         }
                         return navigate("/noticeBoard")
                     }}
@@ -48,24 +49,27 @@ const NavItem = ({ showLoginModal , setShowLoginModal , showSignUpModal , setSho
                     onClick={() => {
                         if(user.loginSuccess === false) {
                             alert("회원만 이용할 수 있습니다");
-                            return navigate("/signUp");
+                            return setShowSignUpModal(!showSignUpModal);
                         }
                         return navigate("/myPage");
                     }}>마이페이지</li>
+                    
+                    {
+                        user.loginSuccess === true ? null :
+                            <li 
+                            className="navbar-link"
+                            onClick={() => setShowSignUpModal(!showSignUpModal)}>
+                                회원 가입
+                            </li>
+                    }
                     <li 
                     className="navbar-link"
-                    onClick={() => setShowSignUpModal(!showSignUpModal)}>
-                        {user.loginSuccess === true ? "":"회원 가입"}
-                    </li>
-                    <li 
-                    className="navbar-link"
-                    onClick={(e) => {
-                        setShowLoginModal(!showLoginModal);
-                        if(e.target.value === "로그아웃")
-                            return handleClickLogout();
+                    onClick={() => {
+                        user.loginSuccess === false && setShowLoginModal(!showLoginModal);
+                        user.loginSuccess === true && handleClickLogout();
                     }
                     }>
-                        {user.loginSuccess === true ? "로그아웃":"로그인"}
+                        {user.loginSuccess === true ? "로그아웃" : "로그인"}
                     </li>
                 </ul>
             </nav>
