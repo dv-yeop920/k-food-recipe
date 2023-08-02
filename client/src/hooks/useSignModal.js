@@ -2,8 +2,13 @@ import { useState } from "react";
 
 
 const useSignModal = (initialState) => {
+    const [modal , setModal] = useState(initialState);
     const [loginModal , setLoginModal] = useState(initialState);
     const [signUpModal , setSignUpModal] = useState(initialState);
+
+    const openModal = () => {
+        return setModal(!modal);
+    }
 
     const openCloseLoginModal = () => {
         return setLoginModal(!loginModal);
@@ -19,6 +24,8 @@ const useSignModal = (initialState) => {
     }
 
     return [ 
+            modal,
+            openModal,
             loginModal,
             signUpModal,
             openCloseLoginModal, 

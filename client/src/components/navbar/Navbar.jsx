@@ -3,7 +3,6 @@ import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser , faBars , faGlobe , faSearch} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
-import { useState } from "react";
 import NavItem from "./NavItem";
 import LoginPage from "../../pages/LoginPage";
 import SignUpPage from "../../pages/SignUpPage";
@@ -13,15 +12,19 @@ import useSignModal from "../../hooks/useSignModal";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const [toggleMenu , setToggleMenu] = useState(false);
+    
     const [
+            modal,
+            openModal,
             loginModal, 
             signUpModal, 
             openCloseLoginModal, 
             openCloseSignUpModal, 
             changeModal
         ] = useSignModal(false);
-    
+
+
+
     return (
         <>
         <styled.Header>
@@ -60,7 +63,7 @@ const Navbar = () => {
                     </button>
                     
                     <button 
-                    onClick={() => setToggleMenu(!toggleMenu)}
+                    onClick={ openModal }
                     className="user-sign__button">
                         <FontAwesomeIcon
                             className="header-icon"
@@ -71,7 +74,7 @@ const Navbar = () => {
                             icon={faUser}
                             size = "1x"/>
                     </button>
-                    { toggleMenu === true && 
+                    { modal === true && 
                         <NavItem
                         openCloseLoginModal ={openCloseLoginModal}
                         openCloseSignUpModal={openCloseSignUpModal}/>
@@ -90,11 +93,6 @@ const Navbar = () => {
             <SignUpPage 
             openCloseSignUpModal={openCloseSignUpModal}
             changeModal={changeModal}/>
-            /*
-            showLoginModal ={showLoginModal} 
-            setShowLoginModal ={setShowLoginModal}
-            showSignUpModal ={showSignUpModal} 
-            setShowSignUpModal ={setShowSignUpModal}/> */
         }
         </>
     );
