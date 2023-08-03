@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const useSignModal = (initialState) => {
+const useModal = (initialState) => {
     const [modal , setModal] = useState(initialState);
     const [loginModal , setLoginModal] = useState(initialState);
     const [signUpModal , setSignUpModal] = useState(initialState);
@@ -35,4 +35,4 @@ const useSignModal = (initialState) => {
 }
 
 
-export default useSignModal;
+export default useModal;

@@ -22,7 +22,9 @@ const MyPage = () => {
                     <h1 className="user-component__title">
                         안녕하세요
                     </h1>
-                    <h2 className="user-component__name"> {`${user.name} 님!`}</h2>
+                    <h2 className="user-component__name"> 
+                        {`${user.name} 님!`}
+                    </h2>
                 </div>
             </div>
         </div>
@@ -76,7 +78,7 @@ const MyPage = () => {
                     <span>내 게시글</span>
                 </div>
             </div>
-            
+
             </main>
         </>
     );

@@ -2,12 +2,12 @@
     position: absolute;
     background-color: #fff;
     top: 20%;
-    left: 1%;
+    left: 0%;
     width: 20%;
     position: fixed;
     border: 1px solid #ddd;
-    box-shadow: #ddd 0px 0px 10px;
-    border-radius: 8px;
+    box-shadow: #ddd 0px 0px 6px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,19 +17,21 @@
 
 .user-component__name {
     text-align: center;
-    margin-bottom: 60px;
+}
+
+.icon-row {
+    border-top: 1px solid rgb(201, 201, 201);
+    padding-top: 30px;
 }
 
 .icon-row__icon {
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     transition: all 0.1s ease-in-out;
     cursor: pointer;
 }
 
 .icon-row__icon:hover {
     color: #1abc9c;
-    border-bottom: 1px solid #1abc9c;
 }
 
 .user-icon {

@@ -20,6 +20,7 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }) => {
                 if(response.status === 200) {
                     dispatch(logoutUser());
                     console.log(response.data , response.status);
+                    alert("로그아웃 되었습니다")
                     return navigate("/");
                 }
             })

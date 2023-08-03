@@ -5,38 +5,22 @@ import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate } from "react-router-dom";
 
-const SignUpPage = ({ openCloseSignUpModal , changeModal }) => {
-    const navigate = useNavigate();
-    const [userName , setName] = useState("");
-    const [userId , setUserId] = useState("");
-    const [userPassword , setUserPassword] = useState("");
-    const [checkPassword , setCheckPassword] = useState("");
-    const [userEmail , setUserEmail] = useState("");
-    const [message , setMessage] = useState("");
 
-
-    //값을 입력 하면 state에 담는 함수
-    const handleChangeValue = (e) => {
-        switch(e.target.className) {
-            case "user-form__name":
-                setName(e.target.value);
-                break;
-            case "user-form__id":
-                setUserId(e.target.value);
-                break;
-            case "user-form__pw":
-                setUserPassword(e.target.value);
-                break;
-            case "user-form__pw-check":
-                setCheckPassword(e.target.value);
-                break;
-            case "user-form__email":
-                setUserEmail(e.target.value);
-                break;
-            default:
-        }
+const SignUpPage = (
+    { 
+        openCloseSignUpModal, 
+        changeModal,
+        userName,
+        userId,
+        userPassword,
+        checkPassword,
+        userEmail,
+        handleChangeValue
     }
-    
+    ) => {
+
+    const navigate = useNavigate();
+    const [message , setMessage] = useState("");
 
 //서버에 입력한 데이터 보내고 응답 받고 유효성 검사 하는 함수
     const handleClickSignUp = (e) => {
@@ -79,7 +63,8 @@ const SignUpPage = ({ openCloseSignUpModal , changeModal }) => {
                 return setMessage(response.data.messsage);
             }
             if(response.data.success === true) {
-                navigate("/login");
+                navigate("/mainPage");
+                alert("회원가입에 성공하셨습니다!");
                 setMessage("");
                 console.log(response.data , response.status);
             }
@@ -91,75 +76,88 @@ const SignUpPage = ({ openCloseSignUpModal , changeModal }) => {
 
     return (
         <>
-        <div className="sign-modal">
-        <main className="user-form__container">
-            <styled.LoginSignUpform 
-            className="user-form"
-            onSubmit={ handleClickSignUp }>
-                <div className="sign-header">
-                    <FontAwesomeIcon
-                        className="user-form__cancel"
-                        icon={faX}
+        <div className = "sign-modal">
+            <main className = "user-form__container">
+
+                <styled.LoginSignUpform 
+                className = "user-form"
+                onSubmit ={ handleClickSignUp }
+                >
+
+                    <div className = "sign-header">
+                        <FontAwesomeIcon
+                        className = "user-form__cancel"
+                        icon ={ faX }
                         size = "lg"
-                        onClick={ openCloseSignUpModal }/>
-                    <h2 className="user-form__title">
-                        회원 가입
-                    </h2>
-                    <div></div>
-                </div>
+                        onClick ={ openCloseSignUpModal }
+                        />
+                        <h2 className = "user-form__title">
+                            회원 가입
+                        </h2>
+                        <div></div>
+                    </div>
 
-                <input 
-                className ="user-form__name" 
-                type="text"
-                placeholder="이름" 
-                onChange={ handleChangeValue }/>
+                    <input 
+                    className = "user-form__name" 
+                    type = "text"
+                    placeholder = "이름" 
+                    onChange ={ handleChangeValue }
+                    />
 
-                <input 
-                className="user-form__id"
-                type="text"
-                placeholder="아이디 5~15자리 특수 문자는 제외"
-                maxLength="15"
-                onChange={ handleChangeValue }/>
+                    <input 
+                    className = "user-form__id"
+                    type = "text"
+                    placeholder = "아이디 5~15자리 특수 문자는 제외"
+                    maxLength = "15"
+                    onChange ={ handleChangeValue }
+                    />
 
-                <input 
-                className ="user-form__pw" 
-                type="password"
-                maxLength="15"
-                placeholder="비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함" 
-                onChange={ handleChangeValue }/>
+                    <input 
+                    className = "user-form__pw" 
+                    type = "password"
+                    maxLength = "15"
+                    placeholder = "비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함" 
+                    onChange ={ handleChangeValue }
+                    />
 
-                <input 
-                className ="user-form__pw-check" 
-                type="password"
-                placeholder="비밀 번호 확인"
-                onChange={ handleChangeValue }/>
+                    <input 
+                    className = "user-form__pw-check" 
+                    type = "password"
+                    placeholder = "비밀 번호 확인"
+                    onChange ={ handleChangeValue }
+                    />
 
-                <input 
-                className ="user-form__email" 
-                type="email"
-                placeholder="이메일" 
-                onChange={ handleChangeValue }/>
+                    <input 
+                    className = "user-form__email" 
+                    type = "email"
+                    placeholder = "이메일" 
+                    onChange ={ handleChangeValue }
+                    />
 
-                <span className="error-message">
-                    { message }
-                </span>
-                <styled.LoginSignUpButton
-                    className="default-btn" 
-                    type="submit">
-                        가입 하기
-                </styled.LoginSignUpButton>
-                <div className="question-container">
-                    <span className="question">
-                        이미 계정이 있으신가요?&nbsp;
+                    <span className = "error-message">
+                        { message }
                     </span>
-                    <span 
-                    className="signup-login__navigate"
-                    onClick={ changeModal }>
-                            로그인
-                    </span>
-                </div>
-            </styled.LoginSignUpform>
-        </main>
+
+                    <styled.LoginSignUpButton
+                        className = "default-btn" 
+                        type = "submit"
+                    >
+                            가입 하기
+                    </styled.LoginSignUpButton>
+
+                    <div className = "question-container">
+                        <span className = "question">
+                            이미 계정이 있으신가요?&nbsp;
+                        </span>
+                        <span 
+                        className = "signup-login__navigate"
+                        onClick ={ changeModal }>
+                                로그인
+                        </span>
+                    </div>
+
+                </styled.LoginSignUpform>
+            </main>
         </div>
         </>
     );
