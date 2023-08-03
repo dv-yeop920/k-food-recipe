@@ -7,7 +7,8 @@ const noticeBoardsSchema = mongoose.Schema({
         required: true,
         maxlength: 15,
         minlength: 5,
-        unique: true
+        unique: true,
+        ref: "User"
     },
     title: {
         type: String,
@@ -22,6 +23,11 @@ const noticeBoardsSchema = mongoose.Schema({
     },
     createdAt: {
         type: Date,
+        required: true,
         default: Date.now
     }
-})
+});
+
+const Boards = mongoose.model("NoticeBoardsSchema" , noticeBoardsSchema);
+
+module.exports = { Boards };

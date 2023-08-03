@@ -30,14 +30,14 @@ app.get("/" , (req , res) => {
     res.send("하이하잉");
 });
 
-app.post("/api/users/register" , (req , res) => {
+app.post("/api/users/register" , async (req , res) => {
     //인스턴스 객체 생성 후 클라이언트 요청을 담는다
     const user = new User(req.body);
     //정보를 db에 보내준다. 이때 , 성공하거나 에러가 나면 메세지를 json 형식으로 보내준다.
     //mongoDB 메서드, user모델에 저장
     //mongoose 6버전 부터는 save 에 콜백함수를 지원하지 않아 아래와 같이 코드 작성
 
-    User.find({$or:[{id: user.id} , {email: user.email}]})
+    await User.find({$or:[{id: user.id} , {email: user.email}]})
     .then((docs) =>{
         if(docs[0].email === user.email) {
             return res.json({
@@ -69,21 +69,7 @@ app.post("/api/users/register" , (req , res) => {
                 });
             }
         );
-    })
-        /*
-        if(docs[0].id === req.body.id){
-            return res.json({
-                success: false,
-                messsage: "해당 아이디는 이미 사용중 입니다"
-            });
-        }
-        if(docs[0].email === req.body.email) {
-            return res.json({
-                success: false,
-                messsage: "해당 이메일은 이미 가입 되어 있습니다"
-            });
-        }*/
-        
+    });
 });
 
 
@@ -180,3 +166,90 @@ app.post("/api/users/logout" , auth , (req , res) => {
             return res.status(400).send(error);
         })
 });
+
+
+//------------------------게시판------------------------------------------
+const { Boards } = require("./models/NoticeBoards.js");
+const { status } = require("express/lib/response");
+
+app.delete("api/posts/delete" , (req , res) => {
+    try {
+        Boards.findOneAndDelete({
+            id: req.body.id
+        }).status(200);
+        res.json({
+            messsage: "삭제 되었습니다"
+        })
+    } 
+    catch (error) {
+        console.log(error);
+        status(400)
+        res.json({
+            messsage: "삭제 실패했습니다"
+        });
+    }
+});
+
+app.put("api/posts/update" , (req , res) => {
+    try {
+        Boards.findOneAndUpdate(
+            { id: req.body.id },
+            {
+                $set: {
+                    id: req.body.id,
+                    title: req.body.title,
+                    content: req.body.content
+                }
+            }).status(200);
+        console.log("업데이트 완료")
+        res.json({
+            messsage: "업데이트 되었습니다"
+        });
+    }
+    catch (error) {
+        console.log(error);
+        status(400)
+        res.json({
+            messsage: "업데이트 실패했습니다"
+        });
+    }
+});
+
+app.post("api/posts/register" , (req , res) => {
+    try {
+        const post = {
+            id: req.body.id,
+            title: req.body.title,
+            content: req.body.content
+        }
+        console.log(post);
+        const boards = new Boards(post);
+        boards.save().status(200)
+        res.json({
+            messsage: "게시물이 등록 되었습니다"
+        });
+    }
+    catch (error) {
+        status(400)
+        res.json({
+            messsage: "게시물 등록 실패했습니다"
+        })
+    }
+});
+
+app.get("api/posts/getBoardList" , (req , res) => {
+    try {
+        const id = req.body.id
+        const boards = Boards.find({id: id} , null , {sort: {createdAt: -1}});
+        res.json({
+            list: boards
+        })
+    }
+    catch (error) {
+        console.log(error);
+        status(400);
+        res.json({
+            messsage: "게시판 조회 실패했습니다"
+        })
+    }
+})
