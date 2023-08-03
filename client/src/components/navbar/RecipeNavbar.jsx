@@ -1,8 +1,8 @@
 import React from "react";
 import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faGlobe} from "@fortawesome/free-solid-svg-icons";
-import { useNavigate  } from "react-router";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
 
 const RecipeNavbar = () => {
     const navigate = useNavigate();
@@ -19,7 +19,8 @@ const RecipeNavbar = () => {
                     </h2>
                 </div>
 
-                <div className="header-recipe-search__column"></div>
+                <div className = "header-recipe-search__column" >
+                </div>
 
                 <div className="header-button__column">
                     <button className="light-dark-mode__button header-icon-button">

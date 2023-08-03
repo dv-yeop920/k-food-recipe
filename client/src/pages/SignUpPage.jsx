@@ -3,7 +3,7 @@ import {faX} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import React, { useState } from "react";
 import * as styled from "../styles/styledComponents";
-import { useNavigate } from "react-router-dom";
+
 
 
 const SignUpPage = (
@@ -19,15 +19,42 @@ const SignUpPage = (
     }
     ) => {
 
-    const navigate = useNavigate();
     const [message , setMessage] = useState("");
 
-//서버에 입력한 데이터 보내고 응답 받고 유효성 검사 하는 함수
+    //서버에 입력한 데이터 보내고 응답 받고 유효성 검사 하는 함수
+    const handleSignUpRequest = async () => {
+        const userInfo = {
+            name: userName,
+            id: userId,
+            password: userPassword,
+            email: userEmail
+        }
+
+        await axios.post("/api/users/register" , userInfo)
+        .then((response) => {
+            if(response.data.success === false) {
+                console.log(response.data)
+                return setMessage(response.data.messsage);
+            }
+            if(response.data.success === true) {
+                changeModal();
+                alert(response.data.messsage);
+                setMessage("");
+                return console.log(response.data , response.status);
+            }
+        })
+        .catch((error) => {
+            return console.log(error);
+        });
+    }
+
+//회원가입 서버 요청
     const handleClickSignUp = (e) => {
         e.preventDefault();
         //정규표현식
         const nameRegex = /[ㄱ-ㅎ가-힣ㅏ-ㅣ]/;
         const idRegex = /^[A-Za-z0-9]+$/;
+        //이메일 유효성 검사 수정 해야함
         const emailRegex = /^[a-zA-Z0-9]+@[a-z0-9-]+\.[a-z]+$/
 
         //유효성 검사
@@ -48,30 +75,8 @@ const SignUpPage = (
         
         if(!emailRegex.test(userEmail)) 
             return setMessage("올바른 이메일 형식이 아닙니다");
-
-        const userInfo = {
-            name: userName,
-            id: userId,
-            password: userPassword,
-            email: userEmail
-        }
-
-        axios.post("/api/users/register" , userInfo)
-        .then((response) => {
-            if(response.data.success === false) {
-                console.log(response.data)
-                return setMessage(response.data.messsage);
-            }
-            if(response.data.success === true) {
-                navigate("/mainPage");
-                alert("회원가입에 성공하셨습니다!");
-                setMessage("");
-                console.log(response.data , response.status);
-            }
-        })
-        .catch((error) => {
-            return console.log(error);
-        });
+            
+        return handleSignUpRequest();
     }
 
     return (

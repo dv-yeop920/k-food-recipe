@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faX} from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router";
 import * as styled from "../styles/styledComponents";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../store/slice/userSlice";
@@ -18,7 +17,6 @@ const LoginPage = (
     }
     ) => {
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [message , setMessage] = useState("");
 
@@ -40,8 +38,9 @@ const LoginPage = (
                     return setMessage(response.data.messsage);
                 }
                 if(response.data.loginSuccess === true) {
-                    navigate("/myPage");
+                    openCloseLoginModal();
                     setMessage("");
+                    alert(response.data.messsage);
                     dispatch(loginUser(response.data));
                     console.log(response.data , response.status);
                 }

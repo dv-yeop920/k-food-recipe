@@ -1,8 +1,9 @@
 .my-page {
     position: absolute;
     background-color: #fff;
-    top: 20%;
+    top: 12.5%;
     left: 0%;
+    height: 87%;
     width: 20%;
     position: fixed;
     border: 1px solid #ddd;
@@ -12,7 +13,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 25px 0px;
 }
 
 .user-component__name {

@@ -12,23 +12,6 @@ import { styled } from "styled-components";
                         z-index:5;
                     `;
 
-            export const NavTitle = styled.h1`
-                margin-left: 50px;
-                cursor: pointer;
-            `;
-
-            export const MenuList = styled.ul`
-                list-style: none;
-                display: flex;
-                align-items: center;
-            `;
-
-            export const MenuItem = styled.li`
-                font-size: 17px;
-                font-weight: 600;
-                margin-right: 30px;
-                cursor: pointer;
-            `;
 
             export const LoginSignUpform = styled.form`
                 display: flex;

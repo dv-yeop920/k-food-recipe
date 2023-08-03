@@ -10,12 +10,14 @@ const userSchema = mongoose.Schema({
     //사용자 이름
     name: {
         type: String,
+        required: true,
         maxlength: 50, //최대 글자수
         minlength: 1
     },
     //id
     id: {
         type: String,
+        required: true,
         maxlength: 15,
         minlength: 5,
         unique: true
@@ -23,12 +25,14 @@ const userSchema = mongoose.Schema({
     //비번
     password: {
         type: String,
+        required: true,
         maxlength: 1000,
         minlength: 8//최소 글자수
     },
     //이메일
     email: {
         type: String,
+        required: true,
         trim: true, //이메일을 입력할 때 띄어쓰기가 있으면 띄어쓴 부분 없애줌
         unique: true //이메일 중복 안되게 설정
     },
@@ -37,8 +41,6 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    //사용자 이미지
-    image: String,
     //유효성 검사 하기 위한 토큰 
     token: {
         type: String

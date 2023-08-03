@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 //유저 모델을 가져옴
 const { User } = require("./models/User.js");
+//로그인 인증 미들웨어
 const { auth } = require("./middleware/auth.js");
 
 //클라이언트의 req 를 json 형태로 해석 하도록 도와줌
@@ -15,10 +16,6 @@ app.use(cookieParser());
 const mongoURI = "mongodb+srv://jyeop920:toddlf0826@cluster0.mvqy3yr.mongodb.net/?retryWrites=true&w=majority";
 const mongoose = require("mongoose");
 mongoose.connect(mongoURI , {
-    //useNewUrlParser:true,
-    //useUnifiedTopology:true,
-    //useCreateIndex:true,
-    //useFindAndModify:false
 }).then((req , res) => {
     console.log("MongoDB Connected!");
 }).catch((error) => {
@@ -39,19 +36,54 @@ app.post("/api/users/register" , (req , res) => {
     //정보를 db에 보내준다. 이때 , 성공하거나 에러가 나면 메세지를 json 형식으로 보내준다.
     //mongoDB 메서드, user모델에 저장
     //mongoose 6버전 부터는 save 에 콜백함수를 지원하지 않아 아래와 같이 코드 작성
-    user.save()
-    .then(()=> {
-    res.status(200).json({
-        success: true,
-        messsage: "회원가입을 성공적으로 하셨습니다. 로그인 하여 서비스를 이용해 보세요!"
-    });
+
+    User.find({$or:[{id: user.id} , {email: user.email}]})
+    .then((docs) =>{
+        if(docs[0].email === user.email) {
+            return res.json({
+                success: false,
+                messsage: "해당 이메일은 이미 사용중 입니다"
+            });
+        }
+        if(docs[0].id === user.id) {
+            return res.json({
+                success: false,
+                messsage: "해당 아이디는 이미 사용중 입니다"
+            })
+        }
     })
-    .catch((error)=> {
-    res.json({ 
-        success: false,
-        messsage: "회원 가입에 실패 했습니다. 입력한 값을 확인해 주세요", 
-        error });
-    });
+    .catch(() => {
+        user.save()
+        .then(()=> {
+        res.status(200).json({
+            success: true,
+            messsage: "회원가입을 성공적으로 하셨습니다. 로그인 하여 서비스를 이용해 보세요!"
+        });
+        })
+        .catch((error)=> {
+            console.log(docs)
+            return res.json({ 
+                    success: false,
+                    messsage: "입력한 값이 틀리지 않았는지 다시 확인해 주세요", 
+                    error 
+                });
+            }
+        );
+    })
+        /*
+        if(docs[0].id === req.body.id){
+            return res.json({
+                success: false,
+                messsage: "해당 아이디는 이미 사용중 입니다"
+            });
+        }
+        if(docs[0].email === req.body.email) {
+            return res.json({
+                success: false,
+                messsage: "해당 이메일은 이미 가입 되어 있습니다"
+            });
+        }*/
+        
 });
 
 
@@ -86,6 +118,7 @@ app.post("/api/users/login",(req , res) =>{
                         })
                         .status(200)
                         .json({
+                            messsage: "안녕하세요!",
                             loginSuccess: true, 
                             name: user.name,
                             id: user.id,
@@ -119,7 +152,6 @@ app.get("/api/users/auth" , auth , (req , res) => {
         name: req.user.name,
         lastName: req.user.lastName,
         role: req.user.role,
-        image: req.user.image
     });
 });
 
@@ -148,13 +180,3 @@ app.post("/api/users/logout" , auth , (req , res) => {
             return res.status(400).send(error);
         })
 });
-
-
-
-/*(error , user) => {
-    if(error) return res.json({ success: false , error});
-    return res.status(200)
-    .send({
-        success: true
-    });
-}*/
