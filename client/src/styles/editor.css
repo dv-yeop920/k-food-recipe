@@ -1,0 +1,32 @@
+.editor-container {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+}
+
+.editor-title {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 98.1%;
+    padding: 12px 0px 12px 20px
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+    padding: 30px;
+    min-height: 420px;
+    height: 700px;
+    background-color: #fff;
+}
+
+.writing-button__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+}
+
+.writing-button {
+    box-sizing: border-box;
+    width: 100%;
+}

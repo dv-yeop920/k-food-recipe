@@ -2,7 +2,7 @@ import React from "react";
 import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser , faBars , faGlobe , faSearch} from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import NavItem from "./NavItem";
 import LoginPage from "../../pages/LoginPage";
 import SignUpPage from "../../pages/SignUpPage";

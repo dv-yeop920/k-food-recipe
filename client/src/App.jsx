@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import NoticeBoards from "./pages/NoticeBoards";
 import MyPage from "./pages/MyPage";
 import RecipePage from "./pages/RecipePage";
+import WritingPage from "./pages/WritingPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/recipe" element ={<RecipePage/>} />
       <Route path="/noticeBoards" element ={ <NoticeBoards/>}/>
       <Route path="/myPage" element ={<MyPage/>}/>
+      <Route path="/writing" element ={<WritingPage/>} />
     </Routes>
     </>
   );

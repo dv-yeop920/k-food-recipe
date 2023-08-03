@@ -172,25 +172,24 @@ app.post("/api/users/logout" , auth , (req , res) => {
 const { Boards } = require("./models/NoticeBoards.js");
 const { status } = require("express/lib/response");
 
-app.delete("api/posts/delete" , (req , res) => {
+app.delete("/api/posts/delete" , (req , res) => {
     try {
         Boards.findOneAndDelete({
             id: req.body.id
-        }).status(200);
+        })
         res.json({
             messsage: "삭제 되었습니다"
-        })
+        });
     } 
     catch (error) {
         console.log(error);
-        status(400)
         res.json({
             messsage: "삭제 실패했습니다"
         });
     }
 });
 
-app.put("api/posts/update" , (req , res) => {
+app.put("/api/posts/update" , (req , res) => {
     try {
         Boards.findOneAndUpdate(
             { id: req.body.id },
@@ -200,7 +199,7 @@ app.put("api/posts/update" , (req , res) => {
                     title: req.body.title,
                     content: req.body.content
                 }
-            }).status(200);
+            })
         console.log("업데이트 완료")
         res.json({
             messsage: "업데이트 되었습니다"
@@ -208,14 +207,13 @@ app.put("api/posts/update" , (req , res) => {
     }
     catch (error) {
         console.log(error);
-        status(400)
         res.json({
             messsage: "업데이트 실패했습니다"
         });
     }
 });
 
-app.post("api/posts/register" , (req , res) => {
+app.post("/api/posts/register" , (req , res) => {
     try {
         const post = {
             id: req.body.id,
@@ -224,32 +222,30 @@ app.post("api/posts/register" , (req , res) => {
         }
         console.log(post);
         const boards = new Boards(post);
-        boards.save().status(200)
+        boards.save()
         res.json({
             messsage: "게시물이 등록 되었습니다"
         });
     }
     catch (error) {
-        status(400)
         res.json({
             messsage: "게시물 등록 실패했습니다"
-        })
+        });
     }
 });
 
-app.get("api/posts/getBoardList" , (req , res) => {
+app.get("/api/posts/getBoardList" , (req , res) => {
     try {
         const id = req.body.id
         const boards = Boards.find({id: id} , null , {sort: {createdAt: -1}});
         res.json({
             list: boards
-        })
+        });
     }
     catch (error) {
         console.log(error);
-        status(400);
         res.json({
             messsage: "게시판 조회 실패했습니다"
         })
     }
-})
+});

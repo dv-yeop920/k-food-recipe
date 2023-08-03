@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import NoticeBoardList from "../components/noticeBoard/NoticeBoardList";
 import Navbar from "../components/navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 
 const NoticeBoard = () => {
+    const navigate = useNavigate();
     
     return (
         <>
@@ -29,7 +31,8 @@ const NoticeBoard = () => {
                 <FontAwesomeIcon
                     className ="writing-icon"
                     icon={faPenToSquare}
-                    size = "2x"/>
+                    size = "2x"
+                    onClick={() => { navigate("/writing") }}/>
         </form>
         </styled.SearchContainer>
         
