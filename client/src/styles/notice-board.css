@@ -7,6 +7,7 @@
     margin-left: 10px;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
+    transition: all 0.2s ease-in-out;
 }
 
 @keyframes bounce {
@@ -22,7 +23,7 @@
 }
 
 .writing-icon:hover {
-    animation: bounce 0.4s ease-in-out;
+    transform: perspective(400px) translateZ(50px);
 }
 
 .sroll-to-top:hover {

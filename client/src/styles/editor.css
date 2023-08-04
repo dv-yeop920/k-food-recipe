@@ -10,58 +10,66 @@
     justify-content: center;
 }
 
-
-
 .image-upload__container {
-    background-color: #ddd;
+    background-color: rgb(232, 231, 231);
     border-radius: 20px;
-    width: 30%;
+    width: 25%;
     height: 400px;
     margin: 30px;
     box-sizing: border-box;
     position: relative;
     transition: all 0.2s ease-in-out;
+    box-shadow: #00000059 0px 1px 5px;
     cursor: pointer;
 }
 
 .image-upload__container:hover {
     background-color: rgba(0, 0, 0, 0.2);
+    transform: perspective(100px) translateZ(5px);
 }
-
 
 .camera-icon {
     position: absolute;
     top: 37%;
-    left: 38%;
+    left: 36%;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .writing-container {
     box-sizing: border-box;
-    width: 70%;
+    width: 55%;
 }
 
 .editor-title {
     background-color: #fff;
-    width: 100%;
+    width: 96.2%;
     padding: 10px 10px 10px 20px;
     font-size: 16px;
-    border: 1px solid whitesmoke;
+    border: 1px solid rgb(230, 230, 230);
     margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: #00000059 0px 0px 2px;
 }
 
 .content {
     background-color: #fff;
-    width: 98.8%;
+    width: 95%;
     height: 23em;
     padding: 20px;
     font-size: 16px;
     font-family: "Noto Sans KR", sans-serif;
-    border: 1px solid whitesmoke;
+    border: 1px solid rgb(230, 230, 230);
     resize: none;
+    border-radius: 10px;
+    box-shadow: #00000059 0px 0px 2px;
 }
 
 .content:focus {
     outline: none;
+}
+
+.writing-button__container {
+    margin-top: 15px;
 }
 

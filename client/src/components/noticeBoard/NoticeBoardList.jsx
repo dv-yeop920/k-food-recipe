@@ -26,6 +26,29 @@ const NoticeBoardList = () => {
                         </styled.Title>
                     </div>
                 </styled.Li>
+                <styled.Li>
+                    <div>
+                        <styled.Title>
+                            테스트 게시물
+                        </styled.Title>
+                        <styled.Span>
+                            아이디
+                        </styled.Span>
+                        <styled.Span>
+                            ❤️ 좋아요 0
+                        </styled.Span>
+                        <styled.Span>
+                            댓글 0
+                        </styled.Span>
+                        <styled.Span>
+                            날짜 2023-8-5
+                        </styled.Span>
+                    </div>
+                    <img 
+                    style={{height:"60px" , width: "80px"}}
+                    alt =""
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" />
+                </styled.Li>
             </ul>
         </styled.BoardContainer>
         <ScrollToTopButton/>

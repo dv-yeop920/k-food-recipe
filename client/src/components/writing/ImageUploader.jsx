@@ -6,17 +6,19 @@ const ImageUploader = () => {
     return (
         <>
         <div className = "image-upload__container">
-        <input
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}/>
-        <FontAwesomeIcon
-        className ="camera-icon"
-        icon ={ faCamera }
-        size = "5x"/>
-        <div className="img-wrapper">
-        <img src="" />
-        </div>
+            <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}/>
+
+            <FontAwesomeIcon
+            className ="camera-icon"
+            icon ={ faCamera }
+            size = "5x"/>
+            
+            <div className="img-wrapper">
+                <img src="" alt=""/>
+            </div>
         </div>
         </>
     );

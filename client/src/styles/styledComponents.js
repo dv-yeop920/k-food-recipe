@@ -94,8 +94,8 @@ import { styled } from "styled-components";
 
             export const Li = styled.li`
                 list-style: none;
-                padding: 10px 15px 10px 15px;
-                margin-bottom: 5px;
+                padding: 35px;
+                margin-bottom: 20px;
                 cursor: pointer;
                 background-color: white;
                 display: flex;
