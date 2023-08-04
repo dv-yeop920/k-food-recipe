@@ -1,32 +1,67 @@
 .editor-container {
     position: absolute;
-    top: 15%;
+    top: 20%;
     left: 10%;
     width: 80%;
 }
 
-.editor-title {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    width: 98.1%;
-    padding: 12px 0px 12px 20px
-}
-
-.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-    padding: 30px;
-    min-height: 420px;
-    height: 700px;
-    background-color: #fff;
-}
-
-.writing-button__container {
+.editor-form {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 20px 0px;
 }
 
-.writing-button {
+
+
+.image-upload__container {
+    background-color: #ddd;
+    border-radius: 20px;
+    width: 30%;
+    height: 400px;
+    margin: 30px;
     box-sizing: border-box;
-    width: 100%;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
+
+.image-upload__container:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+.camera-icon {
+    position: absolute;
+    top: 37%;
+    left: 38%;
+    cursor: pointer;
+}
+
+.writing-container {
+    box-sizing: border-box;
+    width: 70%;
+}
+
+.editor-title {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 10px 10px 20px;
+    font-size: 16px;
+    border: 1px solid whitesmoke;
+    margin-bottom: 10px;
+}
+
+.content {
+    background-color: #fff;
+    width: 98.8%;
+    height: 23em;
+    padding: 20px;
+    font-size: 16px;
+    font-family: "Noto Sans KR", sans-serif;
+    border: 1px solid whitesmoke;
+    resize: none;
+}
+
+.content:focus {
+    outline: none;
+}
+
