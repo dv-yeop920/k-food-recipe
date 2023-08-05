@@ -125,7 +125,7 @@ import { styled } from "styled-components";
 
 
             export const DeleteButton = styled.button`
-                padding: 10px 23px 10px 23px;
+                padding: 10px 18px;
                 border: none;
                 color: white;
                 background-color: #bdc3c7;

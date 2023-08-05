@@ -5,22 +5,25 @@
     width: 80%;
 }
 
-.editor-form {
+.content-container {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .image-upload__container {
     background-color: rgb(232, 231, 231);
     border-radius: 20px;
     width: 25%;
-    height: 400px;
+    height: 26em;
     margin: 30px;
     box-sizing: border-box;
-    position: relative;
     transition: all 0.2s ease-in-out;
     box-shadow: #00000059 0px 1px 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .image-upload__container:hover {
@@ -29,9 +32,7 @@
 }
 
 .camera-icon {
-    position: absolute;
-    top: 37%;
-    left: 36%;
+    width: 50%;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
@@ -43,8 +44,8 @@
 
 .editor-title {
     background-color: #fff;
-    width: 96.2%;
-    padding: 10px 10px 10px 20px;
+    width: 97.2%;
+    padding: 10px 0px 10px 20px;
     font-size: 16px;
     border: 1px solid rgb(230, 230, 230);
     margin-bottom: 10px;
@@ -54,9 +55,9 @@
 
 .content {
     background-color: #fff;
-    width: 95%;
     height: 23em;
-    padding: 20px;
+    padding: 10px 0px 10px 20px;
+    width: 97.2%;
     font-size: 16px;
     font-family: "Noto Sans KR", sans-serif;
     border: 1px solid rgb(230, 230, 230);
@@ -71,5 +72,14 @@
 
 .writing-button__container {
     margin-top: 15px;
+    margin-left: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.writing-button__container button {
+    box-sizing: border-box;
+    width: 40.9%;
 }
 
