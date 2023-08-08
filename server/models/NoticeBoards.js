@@ -5,8 +5,6 @@ const noticeBoardsSchema = mongoose.Schema({
     id: {
         type: String,
         required: true,
-        maxlength: 15,
-        minlength: 5,
         unique: true,
         ref: "User"
     },

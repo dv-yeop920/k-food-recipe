@@ -174,7 +174,7 @@ app.post("/api/users/logout" , auth , (req , res) => {
 const { Post } = require("./models/NoticeBoards.js");
 
 
-app.post("/api/posts/register" , (req , res) => {
+app.post("/api/posts/register" , async (req , res) => {
     try {
         const post = {
             id: req.body.id,
@@ -183,7 +183,7 @@ app.post("/api/posts/register" , (req , res) => {
         }
         console.log(post);
         const posts = new Post(post);
-        posts.save()
+        await posts.save()
         res.json({
             success: true,
             messsage: "게시물이 등록 되었습니다"
@@ -197,10 +197,8 @@ app.post("/api/posts/register" , (req , res) => {
     }
 });
 
-app.get("/api/posts/getBoardList" , async (req , res) => {
+app.get("/api/posts/getPostsList" , async (req , res) => {
     try {
-        
-        const id = req.body.id
         const posts = await Post.find().sort({ createdAt: -1 });
         console.log(posts)
         res.json({
