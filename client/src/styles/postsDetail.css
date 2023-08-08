@@ -1,0 +1,8 @@
+.post-detail__container {
+    position: absolute;
+    top: 30%;
+    background-color: black;
+    width: 300px;
+    height: 300px;
+    color: wheat
+}

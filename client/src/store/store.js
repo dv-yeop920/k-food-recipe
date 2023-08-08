@@ -3,16 +3,18 @@ import userSlice from "./slice/userSlice";
 import storageSession from "redux-persist/lib/storage/session";
 import { persistReducer } from "redux-persist";
 import logger from "redux-logger";
+import postsSlice from "./slice/postsSlice";
 
 
 const persistConfig = {
     key: "user",
     storage: storageSession,
-    whitelist: ["user"]
+    whitelist: ["user" , "posts"]
 };
 
 const rootReducer = combineReducers({
     user: userSlice.reducer,
+    posts: postsSlice.reducer
 });
 
 const persistedReducer =  persistReducer(persistConfig, rootReducer);

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import * as styled from "../../styles/styledComponents";
 import ScrollToTopButton from "../ScrollToTopButton";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addPosts } from "../../store/slice/postsSlice";
 
 
-const NoticeBoardList = () => {
+const PostsList = () => {
     const [posts , setPosts] = useState([]);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
         useEffect(() => {
             axios.get("/api/posts/getPostsList")
@@ -13,6 +18,7 @@ const NoticeBoardList = () => {
                 console.log(response.data.list);
                 const getPost = response.data.list;
                 setPosts(getPost);
+                dispatch(addPosts(getPost));
             })
             .catch((error) => console.log(error));
         } , []);
@@ -43,7 +49,10 @@ const NoticeBoardList = () => {
                 {
                     posts.map((item , i) => {
                         return(
-                        <styled.Li className="board-list" key={i}>
+                        <styled.Li 
+                        className="board-list" 
+                        key={i}
+                        onClick ={() => navigate(`/postsDetail/${item._id}`)}>
                             <div>
                                 <styled.Title>
                                     {item.title}
@@ -80,4 +89,4 @@ const NoticeBoardList = () => {
     );
 };
 
-export default NoticeBoardList;
+export default PostsList;

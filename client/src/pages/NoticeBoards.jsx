@@ -2,9 +2,9 @@ import React from 'react';
 import * as styled from "../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import NoticeBoardList from "../components/noticeBoard/NoticeBoardList";
 import Navbar from "../components/navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import PostsList from '../components/noticeBoard/PostsList';
 
 
 const NoticeBoard = () => {
@@ -36,7 +36,7 @@ const NoticeBoard = () => {
         </form>
         </styled.SearchContainer>
         
-        <NoticeBoardList/>
+        <PostsList/>
         </>
     );
 };

@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 const WritingPage = () => {
     const userId = useSelector(user => user.user.id);
     const navigate = useNavigate();
+    
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
 

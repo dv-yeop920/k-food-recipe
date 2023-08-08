@@ -184,7 +184,7 @@ app.post("/api/posts/register" , async (req , res) => {
 
         console.log(post);
         const posts = new Post(post);
-
+        
         await posts.save();
         res.json({
             success: true,
@@ -204,13 +204,12 @@ app.post("/api/posts/register" , async (req , res) => {
 app.get("/api/posts/getPostsList" , async (req , res) => {
     try {
         const posts = await Post.find().sort({ createdAt: -1 });
-        console.log(posts)
+        
         res.json({
             list: posts
         });
     }
     catch (error) {
-        console.log(error);
         res.json({
             messsage: "게시판 조회 실패했습니다"
         })
