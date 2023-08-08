@@ -5,17 +5,17 @@ import axios from "axios";
 
 
 const NoticeBoardList = () => {
-    const [posts , setPosts] = useState([]);
+    const [posts , setPosts] = useState(null);
 
-        useEffect(() => {
+        /*useEffect(() => {
             axios.get("/api/posts/getBoardList")
             .then((response) => {
                 console.log(response.data.list);
-                const getPost = response.data.list["boards"];
-                setPosts(prev => prev.push(getPost));
+                const getPost = response.data;
+                setPosts(getPost);
             })
             .catch((error) => console.log(error));
-        } , []);
+        } , []);*/
     return (
         <>
         <styled.BoardContainer>
@@ -62,7 +62,7 @@ const NoticeBoardList = () => {
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" />
                 </styled.Li>
                 {
-                    posts.map((item , i) => {
+                    /*posts.map((item , i) => {
                         return(
                             <styled.Li key={i}>
                                 <div>
@@ -88,7 +88,7 @@ const NoticeBoardList = () => {
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" />
                             </styled.Li>
                         )
-                    })
+                    })*/
                 }
             </ul>
         </styled.BoardContainer>

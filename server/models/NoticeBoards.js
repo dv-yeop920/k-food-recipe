@@ -28,6 +28,6 @@ const noticeBoardsSchema = mongoose.Schema({
     }
 });
 
-const Boards = mongoose.model("NoticeBoardsSchema" , noticeBoardsSchema);
+const Post = mongoose.model("Post" , noticeBoardsSchema);
 
-module.exports = { Boards };
+module.exports = { Post };

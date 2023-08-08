@@ -171,8 +171,8 @@ app.post("/api/users/logout" , auth , (req , res) => {
 //------------------------게시판------------------------------------------
 
 
-const { Boards } = require("./models/NoticeBoards.js");
-const { status } = require("express/lib/response");
+const { Post } = require("./models/NoticeBoards.js");
+
 
 app.post("/api/posts/register" , (req , res) => {
     try {
@@ -182,8 +182,8 @@ app.post("/api/posts/register" , (req , res) => {
             content: req.body.content
         }
         console.log(post);
-        const boards = new Boards(post);
-        boards.save()
+        const posts = new Post(post);
+        posts.save()
         res.json({
             success: true,
             messsage: "게시물이 등록 되었습니다"
@@ -197,13 +197,14 @@ app.post("/api/posts/register" , (req , res) => {
     }
 });
 
-app.get("/api/posts/getBoardList" , (req , res) => {
+app.get("/api/posts/getBoardList" , async (req , res) => {
     try {
         
         const id = req.body.id
-        const boards = Boards.find({id: id} , null , {sort: {createdAt: -1}});
+        const posts = await Post.find().sort({ createdAt: -1 });
+        console.log(posts)
         res.json({
-            list: boards
+            list: posts
         });
     }
     catch (error) {
