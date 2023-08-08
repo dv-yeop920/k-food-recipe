@@ -6,12 +6,38 @@ import Navbar from "../components/navbar/Navbar";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import ImageUploader from "../components/writing/ImageUploader";
 import Content from '../components/writing/Content';
+import { useSelector } from 'react-redux';
+
 
 const WritingPage = () => {
+    const userId = useSelector(user => user.user.id);
     const navigate = useNavigate();
-    const handleSubmitPost = (e) => {
-        e.preventDefault();
-    }
+    const [title , setTitle] = useState("");
+    const [content, setContent] = useState("");
+
+        const handleSubmitPost = (e) => {
+            e.preventDefault();
+            const post = {
+                id: userId ,
+                title: title,
+                content: content
+            }
+            
+            axios.post("/api/posts/register" , post)
+            .then((response) => {
+                if(response.data.success === false) {
+                    return alert(response.data.messsage);
+                }
+                if(response.data.success === true) {
+                    navigate(-1, { replace: true });
+                    return alert(response.data.messsage);
+                }
+            })
+            .catch((error) => {
+                return console.log(error);
+            })
+        }
+
     return (
         <>
         <Navbar/>
@@ -21,7 +47,11 @@ const WritingPage = () => {
             onSubmit = { handleSubmitPost }>
                 <div className = "content-container">
                     <ImageUploader/>
-                    <Content/>
+                    <Content 
+                    content={ content }
+                    setTitle ={ setTitle }
+                    setContent ={ setContent }
+                    />
                 </div>
                 
                 <div className ="writing-button__container">

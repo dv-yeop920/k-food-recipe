@@ -15,8 +15,17 @@ const modules = {
     }
 }
 
-const Content = () => {
+const Content = ({ setTitle , content , setContent }) => {
 
+    const handleChangeTitle = (e) => {
+        console.log(e.target.value);
+        return setTitle(e.target.value);
+    };
+
+    const handleChangeContent = (e) => {
+        console.log(e);
+        return setContent(e);
+    }
 
     return (
         <>
@@ -25,10 +34,15 @@ const Content = () => {
             <input 
             className ="editor-title" 
             type="text" 
-            placeholder = "제목" />  
+            placeholder = "제목"
+            onChange={ handleChangeTitle } />  
             </div>
             <div className="writing-container__column">
-                <ReactQuill  className="content" modules={modules}/> 
+                <ReactQuill  
+                className="content" 
+                value={ content }
+                modules={ modules }
+                onChange ={ handleChangeContent }/> 
             </div>          
         </div>
         </>

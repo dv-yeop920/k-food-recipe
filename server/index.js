@@ -169,23 +169,48 @@ app.post("/api/users/logout" , auth , (req , res) => {
 
 
 //------------------------게시판------------------------------------------
+
+
 const { Boards } = require("./models/NoticeBoards.js");
 const { status } = require("express/lib/response");
 
-app.delete("/api/posts/delete" , (req , res) => {
+app.post("/api/posts/register" , (req , res) => {
     try {
-        Boards.findOneAndDelete({
-            id: req.body.id
-        })
+        const post = {
+            id: req.body.id,
+            title: req.body.title,
+            content: req.body.content
+        }
+        console.log(post);
+        const boards = new Boards(post);
+        boards.save()
         res.json({
-            messsage: "삭제 되었습니다"
+            success: true,
+            messsage: "게시물이 등록 되었습니다"
         });
-    } 
+    }
+    catch (error) {
+        res.json({
+            success: false,
+            messsage: "게시물 등록 실패했습니다"
+        });
+    }
+});
+
+app.get("/api/posts/getBoardList" , (req , res) => {
+    try {
+        
+        const id = req.body.id
+        const boards = Boards.find({id: id} , null , {sort: {createdAt: -1}});
+        res.json({
+            list: boards
+        });
+    }
     catch (error) {
         console.log(error);
         res.json({
-            messsage: "삭제 실패했습니다"
-        });
+            messsage: "게시판 조회 실패했습니다"
+        })
     }
 });
 
@@ -213,39 +238,19 @@ app.put("/api/posts/update" , (req , res) => {
     }
 });
 
-app.post("/api/posts/register" , (req , res) => {
+app.delete("/api/posts/delete" , (req , res) => {
     try {
-        const post = {
-            id: req.body.id,
-            title: req.body.title,
-            content: req.body.content
-        }
-        console.log(post);
-        const boards = new Boards(post);
-        boards.save()
+        Boards.findOneAndDelete({
+            id: req.body.id
+        })
         res.json({
-            messsage: "게시물이 등록 되었습니다"
+            messsage: "삭제 되었습니다"
         });
-    }
-    catch (error) {
-        res.json({
-            messsage: "게시물 등록 실패했습니다"
-        });
-    }
-});
-
-app.get("/api/posts/getBoardList" , (req , res) => {
-    try {
-        const id = req.body.id
-        const boards = Boards.find({id: id} , null , {sort: {createdAt: -1}});
-        res.json({
-            list: boards
-        });
-    }
+    } 
     catch (error) {
         console.log(error);
         res.json({
-            messsage: "게시판 조회 실패했습니다"
-        })
+            messsage: "삭제 실패했습니다"
+        });
     }
 });
