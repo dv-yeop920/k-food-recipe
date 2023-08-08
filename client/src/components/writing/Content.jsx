@@ -1,8 +1,22 @@
 import React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-
+const modules = {
+    toolbar: {
+        container: [
+            [{ "header" : [1, 2, 3, 4, 5, 6, false] }],
+            [{ "align" : [] }],
+            ["bold" , "underline" , "strike" , "blockquote"],
+            [{ "list" : "ordered" }, { "list" : "bullet" }],
+            [{ "color" : [] }, { "background" : [] }],
+            ["image", "video"], 
+        ],
+    }
+}
 
 const Content = () => {
+
 
     return (
         <>
@@ -14,9 +28,7 @@ const Content = () => {
             placeholder = "제목" />  
             </div>
             <div className="writing-container__column">
-            <textarea
-            className="content"
-            placeholder="내용을 입력하세요"/>  
+                <ReactQuill  className="content" modules={modules}/> 
             </div>          
         </div>
         </>

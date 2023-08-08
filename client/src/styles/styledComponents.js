@@ -133,7 +133,7 @@ import { styled } from "styled-components";
                 text-align: center;
                 font-weight: 600;
                 border-radius: 5px;
-                margin-right: 20px;
+                margin-right: 40px;
                 cursor: pointer;
                 box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
                 transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;

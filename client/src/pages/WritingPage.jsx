@@ -9,13 +9,16 @@ import Content from '../components/writing/Content';
 
 const WritingPage = () => {
     const navigate = useNavigate();
+    const handleSubmitPost = (e) => {
+        e.preventDefault();
+    }
     return (
         <>
         <Navbar/>
         <div className ="editor-container">
             <form 
             className = "editor-form"
-            onSubmit = {(e) => {e.preventDefault()}}>
+            onSubmit = { handleSubmitPost }>
                 <div className = "content-container">
                     <ImageUploader/>
                     <Content/>
