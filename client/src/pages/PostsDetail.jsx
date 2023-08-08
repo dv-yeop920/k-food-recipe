@@ -1,8 +1,11 @@
 import React from 'react';
+import * as styled from "../styles/styledComponents";
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Navbar from "../components/navbar/Navbar";
 import Parser from "html-react-parser";
+import ScrollToTopButton from "../components/ScrollToTopButton";
+import PostFooter from '../components/noticeBoard/PostFooter';
 
 const PostsDetail = () => {
     const {id} = useParams();
@@ -11,10 +14,65 @@ const PostsDetail = () => {
     return (
         <>
         <Navbar/>
-            <div className = "post-detail__container">
-                <header className="post-detail__header">
+            <div className ="post-detail__container">
+
+                <div className ="post-header">
+
+                    <div className ="post-go-to-list">
+                        <li className ="go-to-list">
+                            <span>
+                                게시판으로 돌아가기
+                            </span>
+                        </li>
+                    </div>
+
+                    <div className ="post-title__area">
+                        <h2 className ="post-title">
+                            { Parser(selectPosts.title) }
+                        </h2>
+                    </div>
+
+                    <div className ="post-user__wrap">
+                        <div className ="user-info">
+                            <span className ="user-id">
+                                { Parser(selectPosts.id) }
+                            </span>
+                        </div>
+
+                        <div className ="user-info">
+                            <styled.Span className ="user-date">
+                                { Parser( selectPosts.createdAt) }
+                            </styled.Span>
+                            <styled.Span className ="view-count">
+                                댓글 0
+                            </styled.Span>
+                            
+                            <button type ="button" className ="like-button">좋아요❤️</button>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div className ="post-content">
                     {Parser(selectPosts.content)}
-                </header>
+                </div>
+
+                <div className ="comment-wrap">
+                    <div className ="comment-count">
+                        <h3>댓글 0</h3>
+                    </div>
+                    <div className ="comment-container">
+                        <ul className ="commnet-list">
+                            <li className ="comment"></li>
+                        </ul>
+                    </div>
+                    <div className ="comment-button">
+                        <span>여기를 눌러 댓글을 남겨 보세요!</span>
+                    </div>
+                </div>
+                    <div style={{height:"40px"}}></div>
+                <ScrollToTopButton/>
+                <PostFooter/>
             </div>
         </>
     );

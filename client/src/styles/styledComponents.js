@@ -6,9 +6,10 @@ import { styled } from "styled-components";
                         top: 0;
                         width: 100%;
                         padding: 5px;
-                        background-color: #fff;
+                        background-color: #ffffffff;
                         border-bottom: 1px solid #ddd;
                         height: 4.7em;
+                        box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -23px;
                         z-index:5;
                     `;
 
@@ -70,7 +71,7 @@ import { styled } from "styled-components";
 
         export const ScrollToTopButton = styled.button`
                 position: fixed;
-                bottom: 20px;
+                bottom: 53px;
                 right: 20px;
                 width: 50px;
                 height: 50px;
@@ -82,7 +83,7 @@ import { styled } from "styled-components";
                 cursor: pointer;
                 font-size: 15px;
                 padding-left: 6px;
-                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px 2px;
+                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
             `;
 
             export const BoardContainer = styled.div`
@@ -114,14 +115,6 @@ import { styled } from "styled-components";
                 color:#888;
                 margin-right: 10px;
             `;
-
-            export const BoxDiv = styled.div`
-                padding: 40px 120px 50px 120px;
-                margin-bottom: 5px;
-                background-color: white;
-                height: 20vh;
-                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
-                `;
 
 
             export const DeleteButton = styled.button`
