@@ -7,10 +7,16 @@ const modules = {
         container: [
             [{ "header" : [1, 2, 3, 4, 5, 6, false] }],
             [{ "align" : [] }],
-            ["bold" , "underline" , "strike" , "blockquote"],
-            [{ "list" : "ordered" }, { "list" : "bullet" }],
-            [{ "color" : [] }, { "background" : [] }],
-            ["image", "video"], 
+            ["bold"],
+            ["underline"],
+            ["strike"], 
+            ["blockquote"],
+            [{ "list" : "ordered" }],
+            [{ "list" : "bullet" }],
+            [{ "color" : [] }], 
+            [{ "background" : [] }],
+            ["image"], 
+            ["video"], 
         ],
     }
 }

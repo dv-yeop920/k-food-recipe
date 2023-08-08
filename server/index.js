@@ -181,16 +181,20 @@ app.post("/api/posts/register" , async (req , res) => {
             title: req.body.title,
             content: req.body.content
         }
+
         console.log(post);
         const posts = new Post(post);
-        await posts.save()
+
+        await posts.save();
         res.json({
             success: true,
             messsage: "게시물이 등록 되었습니다"
         });
     }
     catch (error) {
-        res.json({
+        console.log(error)
+        res
+        .json({
             success: false,
             messsage: "게시물 등록 실패했습니다"
         });

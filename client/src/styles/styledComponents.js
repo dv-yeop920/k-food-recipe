@@ -94,15 +94,15 @@ import { styled } from "styled-components";
 
             export const Li = styled.li`
                 list-style: none;
-                padding: 35px;
+                padding: 30px;
                 margin-bottom: 20px;
                 cursor: pointer;
-                background-color: white;
+                background-color: #fff;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 border-radius: 30px;
-                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -5px;
+                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
                 transition: all 0.1s ease-in-out;
             `;
             export const Title = styled.h3`
