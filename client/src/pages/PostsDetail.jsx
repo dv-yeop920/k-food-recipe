@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from "../components/navbar/Navbar";
+import Parser from "html-react-parser";
 
 const PostsDetail = () => {
     const {id} = useParams();
@@ -12,9 +13,7 @@ const PostsDetail = () => {
         <Navbar/>
             <div className = "post-detail__container">
                 <header className="post-detail__header">
-                    {selectPosts.id}
-                    {selectPosts.content}
-                    
+                    {Parser(selectPosts.content)}
                 </header>
             </div>
         </>
