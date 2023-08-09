@@ -32,9 +32,12 @@ const PostsDetail = () => {
     }
 
     const deletePosts = async () => {
-        console.log(selectPosts)
+        console.log(id)
         if(window.confirm("게시물을 정말 삭제하시겠습니까?")) {
-            await axios.delete("/api/posts/delete" , selectPosts)
+            const deletePost = {
+                _id: id
+            }
+            await axios.post("/api/posts/delete" , deletePost)
             .then((response) => {
                 if(response.data.deleteSuccess === true) {
                     alert(response.data.messsage);

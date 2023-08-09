@@ -17,26 +17,27 @@ const WritingPage = () => {
     const [content, setContent] = useState("");
 
         const handleSubmitPost = async (e) => {
-            e.preventDefault();
-            const post = {
-                id: userId ,
-                title: title,
-                content: content
-            }
             
-            await axios.post("/api/posts/register" , post)
-            .then((response) => {
-                if(response.data.success === false) {
-                    return console.log(response.data.messsage);
+                e.preventDefault();
+                const post = {
+                    id: userId ,
+                    title: title,
+                    content: content
                 }
-                if(response.data.success === true) {
-                    navigate(-1, { replace: true });
-                    return alert(response.data.messsage);
-                }
-            })
-            .catch((error) => {
-                return console.log(error);
-            })
+            
+                await axios.post("/api/posts/register" , post)
+                .then((response) => {
+                    if(response.data.success === false) {
+                        return console.log(response.data.messsage);
+                    }
+                    if(response.data.success === true) {
+                        navigate(-1, { replace: true });
+                        return alert(response.data.messsage);
+                    }
+                })
+                .catch((error) => {
+                    return console.log(error);
+                });
         }
 
     return (
@@ -59,7 +60,7 @@ const WritingPage = () => {
                     <styled.DeleteButton
                     className ="writing-button__delete delete-btn"
                     onClick={() => {
-                        if(window.confirm("게시글 작성을 취소 하시겠어요?"))
+                        if(window.confirm("게시글 작성을 취소 하시겠어요?")) 
                             return navigate(-1, { replace: true });
                         }
                     }>

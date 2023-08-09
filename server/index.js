@@ -243,12 +243,11 @@ app.put("/api/posts/update" , (req , res) => {
     }
 });
 
-app.delete("/api/posts/delete" , (req , res) => {
+app.post("/api/posts/delete" , async (req , res) => {
     try {
-        Post.findOneAndDelete({
+        await Post.findOneAndDelete({
             _id: req.body._id
         })
-        console.log(req.body)
         res.json({
             deleteSuccess: true,
             messsage: "삭제 되었습니다"

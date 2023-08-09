@@ -4,19 +4,17 @@ import storageSession from "redux-persist/lib/storage/session";
 import { persistReducer } from "redux-persist";
 import logger from "redux-logger";
 import postsSlice from "./slice/postsSlice";
-import authSlice from "./slice/authSlice";
 
 
 const persistConfig = {
     key: "user",
     storage: storageSession,
-    whitelist: ["user" , "posts" , "auth"]
+    whitelist: ["user" , "posts"]
 };
 
 const rootReducer = combineReducers({
     user: userSlice.reducer,
-    posts: postsSlice.reducer,
-    auth: authSlice.reducer
+    posts: postsSlice.reducer
 });
 
 const persistedReducer =  persistReducer(persistConfig, rootReducer);
