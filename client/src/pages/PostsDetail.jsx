@@ -1,17 +1,52 @@
 import React from 'react';
 import * as styled from "../styles/styledComponents";
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams , useNavigate } from 'react-router-dom';
 import Comment from '../components/noticeBoard/Comment';
 import Navbar from "../components/navbar/Navbar";
 import Parser from "html-react-parser";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import PostFooter from '../components/noticeBoard/PostFooter';
+import axios from 'axios';
+
 
 const PostsDetail = () => {
-    const {id} = useParams();
-    const postsDetail = useSelector(posts => posts.posts);
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const postsDetail = useSelector(post => post.posts);
     const selectPosts = postsDetail.find((posts) => posts._id === id.toString());
+
+    const editPosts = async () => {
+        if(window.confirm("게시물 내용을 수정하시겠습니까?")) {
+            await axios.put("/api/posts/update" , selectPosts)
+            .then((response) => {
+                if(response.data.updateSuccess === true) {
+                    return navigate("/writing");
+                }
+                if(response.data.updateSuccess === false) {
+                    return alert("에러가 발생했습니다");
+                }
+            })
+            .catch((error) => console.log(error));
+        }
+    }
+
+    const deletePosts = async () => {
+        console.log(selectPosts)
+        if(window.confirm("게시물을 정말 삭제하시겠습니까?")) {
+            await axios.delete("/api/posts/delete" , selectPosts)
+            .then((response) => {
+                if(response.data.deleteSuccess === true) {
+                    alert(response.data.messsage);
+                    return navigate(-1, { replace: true });
+                }
+                if(response.data.deleteSuccess === false) {
+                    return alert(response.data.messsage);
+                }
+            })
+            .catch((error) => console.log(error));
+        }
+    }
     return (
         <>
         <Navbar/>
@@ -45,12 +80,25 @@ const PostsDetail = () => {
                                 { selectPosts.createdAt }
                             </styled.Span>
                         </div>
+
+                        <div className ="user-info">
+                            <span 
+                            className ="edit-delete"
+                            onClick ={ editPosts }>
+                                수정
+                            </span>
+                            <span 
+                            className ="edit-delete"
+                            onClick ={ deletePosts }>
+                                삭제
+                            </span>
+                        </div>
                         
                     </div>
                 </div>
 
                 <div className ="post-content">
-                    {Parser(selectPosts.content)}
+                    { Parser(selectPosts.content) }
                 </div>
 
                 <div className ="comment-wrap">
@@ -87,6 +135,7 @@ const PostsDetail = () => {
                             </li>
                         </ul>
                     </div>
+                    
                 </div>
                     <div style={{height:"40px"}}></div>
                 <ScrollToTopButton/>

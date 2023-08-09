@@ -31,7 +31,20 @@
 }
 
 .user-info {
-    margin-top: 5px;
+    margin-top: 10px;
+}
+
+.edit-delete {
+    font-size: 17px;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    margin: 0px 15px 0px 0px;
+}
+
+.edit-delete:hover {
+    border-bottom: 1px solid #888;
+    transform: perspective(500px) translateZ(25px);
 }
 
 .post-title {

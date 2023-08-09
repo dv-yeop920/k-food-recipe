@@ -132,12 +132,13 @@ app.get("/api/users/auth" , auth , (req , res) => {
     .json({
         _id: req.user._id,
         //어드민 유저 설정
-        isAdmin: req.user.role === 0 ? false : true,
+        id: req.user.id,
+        //isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
+        token: req.user.token,
         email: req.user.email,
         name: req.user.name,
-        lastName: req.user.lastName,
-        role: req.user.role,
+        //role: req.user.role,
     });
 });
 
@@ -218,8 +219,8 @@ app.get("/api/posts/getPostsList" , async (req , res) => {
 
 app.put("/api/posts/update" , (req , res) => {
     try {
-        Boards.findOneAndUpdate(
-            { id: req.body.id },
+        Post.findOneAndUpdate(
+            { _id: req.body._id },
             {
                 $set: {
                     id: req.body.id,
@@ -229,12 +230,14 @@ app.put("/api/posts/update" , (req , res) => {
             })
         console.log("업데이트 완료")
         res.json({
+            updateSuccess: true,
             messsage: "업데이트 되었습니다"
         });
     }
     catch (error) {
         console.log(error);
         res.json({
+            updateSuccess: false,
             messsage: "업데이트 실패했습니다"
         });
     }
@@ -242,16 +245,19 @@ app.put("/api/posts/update" , (req , res) => {
 
 app.delete("/api/posts/delete" , (req , res) => {
     try {
-        Boards.findOneAndDelete({
-            id: req.body.id
+        Post.findOneAndDelete({
+            _id: req.body._id
         })
+        console.log(req.body)
         res.json({
+            deleteSuccess: true,
             messsage: "삭제 되었습니다"
         });
     } 
     catch (error) {
         console.log(error);
         res.json({
+            deleteSuccess: false,
             messsage: "삭제 실패했습니다"
         });
     }

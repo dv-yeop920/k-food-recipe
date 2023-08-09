@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import * as styled from "../../styles/styledComponents";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPosts } from "../../store/slice/postsSlice";
 
 
 const PostsList = () => {
-    const [posts , setPosts] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const postList = useSelector((post) => post.posts);
 
         useEffect(() => {
             axios.get("/api/posts/getPostsList")
             .then((response) => {
                 console.log(response.data.list);
                 const getPost = response.data.list;
-                setPosts(getPost);
                 dispatch(addPosts(getPost));
             })
             .catch((error) => console.log(error));
@@ -47,7 +46,7 @@ const PostsList = () => {
                 </styled.Li>
 
                 {
-                    posts.map((item , i) => {
+                    postList.map((item , i) => {
                         return(
                         <styled.Li 
                         className="board-list" 
