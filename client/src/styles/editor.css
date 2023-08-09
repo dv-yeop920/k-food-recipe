@@ -78,3 +78,7 @@
     box-sizing: border-box;
 }
 
+.writing-button__delete {
+    margin-right: 40px;
+}
+

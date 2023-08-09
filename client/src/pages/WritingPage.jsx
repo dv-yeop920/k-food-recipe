@@ -57,7 +57,7 @@ const WritingPage = () => {
                 
                 <div className ="writing-button__container">
                     <styled.DeleteButton
-                    className ="writing-button delete-btn"
+                    className ="writing-button__delete delete-btn"
                     onClick={() => {
                         if(window.confirm("게시글 작성을 취소 하시겠어요?"))
                             return navigate(-1, { replace: true });
@@ -68,7 +68,7 @@ const WritingPage = () => {
 
                     <styled.SubmitButton
                     type = "submit"
-                    className = "writing-button default-btn">
+                    className = "writing-button__submit default-btn">
                         등록
                     </styled.SubmitButton>
                 </div>

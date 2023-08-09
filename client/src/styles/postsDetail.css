@@ -64,17 +64,46 @@
 
 .comment-wrap {
     padding: 15px 100px;
-    
 }
 
-.comment-button {
+.comment {
+    padding: 10px 5px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.show-comment {
     border-top: 1px solid #ddd;
     padding: 20px 10px;
 }
 
-.comment-button span {
+.show-comment span {
     opacity: 0.5;
     cursor: pointer;
+}
+
+#comment-input {
+    outline-style: none;
+    resize: none;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(241, 239, 239);
+    font-size: 17px;
+    padding: 30px;
+    width: 95%;
+    height: 5em;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow-x: auto;
+}
+
+.comment-button__container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.comment-button {
+    margin: 5px 10px 10px 0px;
 }
 
 .footer-bar__container {

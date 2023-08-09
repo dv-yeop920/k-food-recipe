@@ -1,13 +1,14 @@
 import React from 'react';
 import * as styled from "../styles/styledComponents";
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams , Outlet, useNavigate } from 'react-router-dom';
 import Navbar from "../components/navbar/Navbar";
 import Parser from "html-react-parser";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import PostFooter from '../components/noticeBoard/PostFooter';
 
 const PostsDetail = () => {
+    const navigate = useNavigate();
     const {id} = useParams();
     const postsDetail = useSelector(posts => posts.posts);
     const selectPosts = postsDetail.find((posts) => posts._id === id.toString());
@@ -63,11 +64,34 @@ const PostsDetail = () => {
                     </div>
                     <div className ="comment-container">
                         <ul className ="commnet-list">
-                            <li className ="comment"></li>
+                            <li className ="comment">
+                            <p className ="comment-content">
+                                대애애애애앳글 
+                            </p>
+                            <div>
+                                <styled.Span>
+                                    아이디
+                                </styled.Span>
+
+                                <styled.Span>
+                                    좋아요
+                                </styled.Span>
+
+                                <styled.Span>
+                                    2023-8-9 14:00
+                                </styled.Span>
+
+                                <styled.Span>
+                                    답글 쓰기
+                                </styled.Span>
+                            </div>
+                            </li>
                         </ul>
                     </div>
-                    <div className ="comment-button">
-                        <span>여기를 눌러 댓글을 남겨 보세요!</span>
+                    <Outlet></Outlet>
+                    <div className ="show-comment">
+                        <span
+                        onClick={() => navigate("comment")}>여기를 눌러 댓글을 남겨 보세요!</span>
                     </div>
                 </div>
                     <div style={{height:"40px"}}></div>
