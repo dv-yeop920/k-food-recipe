@@ -83,6 +83,7 @@ import { styled } from "styled-components";
                 cursor: pointer;
                 font-size: 15px;
                 padding-left: 6px;
+                transition: all 0.2s ease-in-out;
                 box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
             `;
 

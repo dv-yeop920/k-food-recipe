@@ -6,7 +6,10 @@ const Comment = () => {
         <>
         <div className ="commnet-textarea__wrap">
             <div className ="comment-textarea__container">
-                <textarea id="comment-input"></textarea>
+                <textarea 
+                placeholder="댓글을 달아 보세요!"
+                id="comment-input">
+                </textarea>
             </div>
             <div className ="comment-button__container">
                 <styled.DeleteButton className ="comment-button delete-btn">

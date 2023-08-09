@@ -15,11 +15,11 @@ const ScrollToTopButton = () => {
     return (
         <>
             <styled.ScrollToTopButton 
-            className="sroll-to-top"
-            onClick={handleClickScroll} >
+            className ="sroll-to-top"
+            onClick ={ handleClickScroll } >
                 <FontAwesomeIcon
-                    icon={faUpLong}
-                    size = "2x"/>
+                    icon ={ faUpLong }
+                    size ="2x"/>
             </styled.ScrollToTopButton>
         </>
     );

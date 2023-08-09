@@ -27,6 +27,10 @@
 }
 
 .sroll-to-top:hover {
+    transform: perspective(500px) translateZ(20px);
+}
+
+.sroll-to-top:focus {
     animation: bounce 0.3s ease-in-out;
 }
 

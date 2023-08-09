@@ -256,3 +256,23 @@ app.delete("/api/posts/delete" , (req , res) => {
         });
     }
 });
+
+//------------------------댓글------------------------------------------
+
+const Comment = require("./models/Comment.js");
+
+app.post("/api/posts/comment/register" , async (req , res) => {
+
+});
+
+app.get("/api/posts/comment/getComment" , async (req , res) => {
+
+});
+
+app.put("/api/posts/comment/updateComment" , async (req , res) => {
+
+});
+
+app.delete("/api/posts/comment/deleteComment" , async (req , res) => {
+
+});

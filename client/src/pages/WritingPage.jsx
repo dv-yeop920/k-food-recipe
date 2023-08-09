@@ -16,7 +16,7 @@ const WritingPage = () => {
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
 
-        const handleSubmitPost = (e) => {
+        const handleSubmitPost = async (e) => {
             e.preventDefault();
             const post = {
                 id: userId ,
@@ -24,10 +24,10 @@ const WritingPage = () => {
                 content: content
             }
             
-            axios.post("/api/posts/register" , post)
+            await axios.post("/api/posts/register" , post)
             .then((response) => {
                 if(response.data.success === false) {
-                    return alert(response.data.messsage);
+                    return console.log(response.data.messsage);
                 }
                 if(response.data.success === true) {
                     navigate(-1, { replace: true });

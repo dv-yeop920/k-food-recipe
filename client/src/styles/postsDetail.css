@@ -24,7 +24,6 @@
 .post-go-to-list span {
     color: #1abc9c;
     font-weight: 700;
-    cursor: pointer;
 }
 
 .user-id {
@@ -38,17 +37,6 @@
 .post-title {
     padding-top: 15px;
     margin-bottom: 50px;
-}
-
-.like-button {
-    background-color: #1abc9c;
-    border: none;
-    color: #ffffffff;
-    font-weight: 600;
-    padding: 6px;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
 }
 
 .post-content {
@@ -72,14 +60,9 @@
     margin-bottom: 10px;
 }
 
-.show-comment {
-    border-top: 1px solid #ddd;
-    padding: 20px 10px;
-}
-
-.show-comment span {
-    opacity: 0.5;
-    cursor: pointer;
+.commnet-textarea__wrap {
+    border-bottom: 1px solid #ddd;
+    margin: 10px 0px;
 }
 
 #comment-input {
@@ -87,7 +70,7 @@
     resize: none;
     border: none;
     border-radius: 20px;
-    background-color: rgb(241, 239, 239);
+    background-color: rgb(249, 249, 249);
     font-size: 17px;
     padding: 30px;
     width: 95%;
