@@ -180,13 +180,12 @@ app.post("/api/users/logout" , auth , (req , res) => {
 
 const { Post } = require("./models/NoticeBoards.js");
 
-
 app.post("/api/posts/register" , async (req , res) => {
     try {
         const post = {
             id: req.body.id + "_" + Date.now(),
             title: req.body.title,
-            content: req.body.content,
+            content: req.body.content
         }
 
         console.log(post);

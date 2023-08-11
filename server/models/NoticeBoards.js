@@ -1,6 +1,8 @@
 
 const mongoose = require("mongoose");
 
+
+
 const noticeBoardsSchema = mongoose.Schema({
     //id
     id: {

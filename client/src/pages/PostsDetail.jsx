@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React  from "react";
 import * as styled from "../styles/styledComponents";
 import { useSelector } from "react-redux";
 import { useParams , useNavigate } from "react-router-dom";
@@ -15,6 +15,13 @@ const PostsDetail = () => {
     const { id } = useParams();
     const postsDetail = useSelector(post => post.posts);
     const selectPosts = postsDetail.find((posts) => posts._id === id.toString());
+    
+    const newDate = new Date(selectPosts.createdAt);
+    const year = newDate.getFullYear();
+    const month = newDate.getMonth();
+    const date = newDate.getDate();
+    const hours = newDate.getHours();
+    const minutes = newDate.getMinutes();
 
 
 
@@ -68,7 +75,7 @@ const PostsDetail = () => {
 
                         <div className ="user-info">
                             <styled.Span className ="user-date">
-                                { selectPosts.createdAt }
+                                { `${year}-${month}-${date}. ${hours}:${minutes}` }
                             </styled.Span>
                         </div>
 

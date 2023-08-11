@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPosts } from "../../store/slice/postsSlice";
 
 
+
 const PostsList = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -26,13 +27,12 @@ const PostsList = () => {
         return setFilteredPosts(filteringPost);
     }
 
-    
 
         useEffect(() => {
             axios.get("/api/posts/getPostsList")
             .then((response) => {
                 const getPost = response.data.list;
-                dispatch(addPosts(getPost));
+                return dispatch(addPosts(getPost));
             })
             .catch((error) => console.log(error));
         } , []);
@@ -90,6 +90,12 @@ const PostsList = () => {
 
                 {
                     selectedPostsList.map((item , i) => {
+                        const newDate = new Date(item.createdAt);
+                        const year = newDate.getFullYear();
+                        const month = newDate.getMonth();
+                        const date = newDate.getDate();
+                        const hours = newDate.getHours();
+                        const minutes = newDate.getMinutes();
                         return(
                         <styled.Li 
                         className="board-list" 
@@ -105,7 +111,7 @@ const PostsList = () => {
                                 </styled.Span>
 
                                 <styled.Span>
-                                    ❤️ 좋아요 0
+                                    ❤️0
                                 </styled.Span>
 
                                 <styled.Span>
@@ -117,8 +123,9 @@ const PostsList = () => {
                                 </styled.Span>
 
                                 <styled.Span>
-                                    {item.createdAt}
+                                    {`${year}-${month}-${date}. ${hours}:${minutes}`}
                                 </styled.Span>
+
                             </div>
                                 <img 
                                 style={{height:"60px" , width: "80px"}}
