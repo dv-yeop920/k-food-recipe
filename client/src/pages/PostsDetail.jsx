@@ -35,7 +35,6 @@ const PostsDetail = () => {
     }
 
     const deletePosts = async () => {
-        console.log(id)
         if(window.confirm("게시물을 정말 삭제하시겠습니까?")) {
             const deletePost = {
                 _id: id

@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState , useEffect } from "react";
 import * as styled from "../../styles/styledComponents";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -10,20 +12,62 @@ import { addPosts } from "../../store/slice/postsSlice";
 const PostsList = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const postList = useSelector((post) => post.posts);
+    const [searchValue , setSearchValue] = useState("");
+    const [filteredPosts , setFilteredPosts] = useState(null);
+    const postsList = useSelector((posts) => posts.posts);
+    const realPostsList = filteredPosts ? filteredPosts : postsList;
+
+    const handleSubmitFilteredPosts = (e) => {
+        e.preventDefault();
+
+        const filteringPost = postsList.filter((posts) => {
+            return posts.title.toLowerCase().includes(searchValue.toLocaleLowerCase());
+        });
+        console.log(filteringPost)
+        return setFilteredPosts(filteringPost);
+    }
+
+    
 
         useEffect(() => {
             axios.get("/api/posts/getPostsList")
             .then((response) => {
-                console.log(response.data.list);
                 const getPost = response.data.list;
                 dispatch(addPosts(getPost));
             })
             .catch((error) => console.log(error));
         } , []);
 
+
+
     return (
         <>
+        <styled.SearchContainer>
+            <form
+            className="user-search__form"
+            onSubmit={ handleSubmitFilteredPosts }>
+
+                <styled.Input
+                className="user-search__input"
+                type="text"
+                placeholder="검색어 입력..."
+                onChange={(e) => setSearchValue(e.target.value)}/>
+
+                <styled.SubmitButton
+                className="default-btn"
+                type="submit">
+                    검색
+                </styled.SubmitButton>
+
+                <FontAwesomeIcon
+                    className ="writing-icon"
+                    icon={faPenToSquare}
+                    size = "2x"
+                    onClick={ () => navigate("/writing") }/>
+        </form>
+        </styled.SearchContainer>
+
+
         <styled.BoardContainer>
             <ul className="board">
                 <styled.Li 
@@ -46,7 +90,7 @@ const PostsList = () => {
                 </styled.Li>
 
                 {
-                    postList.map((item , i) => {
+                    realPostsList.map((item , i) => {
                         return(
                         <styled.Li 
                         className="board-list" 
@@ -68,6 +112,10 @@ const PostsList = () => {
                                 <styled.Span>
                                     댓글 0
                                 </styled.Span>
+                                
+                                <styled.Span>
+                                    조회 0
+                                </styled.Span>
 
                                 <styled.Span>
                                     {item.createdAt}
@@ -83,6 +131,7 @@ const PostsList = () => {
                 }
             </ul>
         </styled.BoardContainer>
+
         <ScrollToTopButton/>
         </>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFaceSmileBeam ,faHeart , faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHeart , faFaceSmileBeam} from "@fortawesome/free-regular-svg-icons";
 import { useSelector } from "react-redux";
 import Navbar from "../components/navbar/Navbar";
 
@@ -40,17 +41,19 @@ const MyPage = () => {
 
                 <div className="icon-row__icon">
                     <FontAwesomeIcon
-                    className ="user-icon heart"
-                    icon={faHeart}
-                    size = "1x"/>
+                        style={{color: "red"}}
+                        className ="user-icon"
+                        icon={ faHeart }
+                        size = "1x"/>
                     <span>좋아요 누른 레시피</span>
                 </div>
 
                 <div className="icon-row__icon">
                     <FontAwesomeIcon
-                    className ="user-icon heart"
-                    icon={faHeart}
-                    size = "1x"/>
+                        style={{color: "red"}}
+                        className ="user-icon"
+                        icon={ faHeart }
+                        size = "1x"/>
                     <span>좋아요 누른 게시글</span>
                 </div>
 

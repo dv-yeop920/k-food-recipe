@@ -1,32 +1,52 @@
 .my-page {
-    position: absolute;
-    background-color: #fff;
-    top: 12.5%;
-    left: 0%;
-    height: 87%;
-    width: 20%;
     position: fixed;
+    background-color: #ffffff;
+    top:0%;
+    left: 0%;
+    height: 100%;
+    width: 20%;
     border: 1px solid #ddd;
-    box-shadow: #ddd 0px 0px 6px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.user-component__name {
-    text-align: center;
+.user-component {
+    position: absolute;
+    top: 22%;
+    left: 10%;
+    width: 80%;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-component__name .user-component__title {
+    margin-bottom: 50px;
 }
 
 .icon-row {
-    border-top: 1px solid rgb(201, 201, 201);
-    padding-top: 30px;
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    width: 80%;
+    box-sizing: border-box;
+    padding-top: 70px;
+
 }
 
 .icon-row__icon {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     transition: all 0.1s ease-in-out;
+    box-sizing: border-box;
     cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon-row__icon:hover {
@@ -38,7 +58,7 @@
 }
 
 .icon-row__icon span {
-    font-size: 20px;
+    font-size:132%;
     font-weight: 500;
     cursor: pointer;
 }
