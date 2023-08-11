@@ -232,12 +232,14 @@ app.get("/api/posts/getPostsList" ,  async (req , res) => {
     }
 });
 
-app.get("/api/posts/detail" , async (req , res) => {
+app.post("/api/posts/updateDetail" , async (req , res) => {
     try{
-        const posts = await Post.findOne({_id: req.body._id});
+        const newPosts = await Post.findOne({_id: req.body._id});
         res.json({
             success: true,
-            list: posts
+            title: newPosts.title,
+            content: newPosts.content,
+            createdAt: newPosts.createdAt
         });
     }
     catch (error) {

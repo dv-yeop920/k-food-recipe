@@ -19,7 +19,7 @@ const PostsUpdatePage = () => {
 
     const filteredPosts = posts.filter((posts) => {
         return posts._id === id;
-    })
+    });
 
     const handleSubmitEditPosts = async (e) => {
             e.preventDefault();
@@ -30,6 +30,7 @@ const PostsUpdatePage = () => {
                     title: newTitle,
                     content: newContent,
                 }
+                
                 await axios.put("/api/posts/update" , updatePosts)
                 .then((response) => {
                     if(response.data.updateSuccess === false) {

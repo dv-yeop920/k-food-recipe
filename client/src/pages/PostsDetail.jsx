@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as styled from "../styles/styledComponents";
 import { useSelector } from "react-redux";
 import { useParams , useNavigate } from "react-router-dom";
@@ -15,6 +15,9 @@ const PostsDetail = () => {
     const { id } = useParams();
     const postsDetail = useSelector(post => post.posts);
     const selectPosts = postsDetail.find((posts) => posts._id === id.toString());
+
+
+
 
     const deletePosts = async () => {
         if(window.confirm("게시물을 정말 삭제하시겠습니까?")) {
@@ -34,6 +37,7 @@ const PostsDetail = () => {
             .catch((error) => console.log(error));
         }
     }
+
     return (
         <>
         <Navbar/>
