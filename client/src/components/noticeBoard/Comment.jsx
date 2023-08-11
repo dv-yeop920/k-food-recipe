@@ -12,9 +12,6 @@ const Comment = () => {
                 </textarea>
             </div>
             <div className ="comment-button__container">
-                <styled.DeleteButton className ="comment-button delete-btn">
-                    취소
-                </styled.DeleteButton>
                 <styled.SubmitButton className ="comment-button default-btn">
                     등록
                 </styled.SubmitButton>

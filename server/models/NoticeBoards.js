@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const noticeBoardsSchema = mongoose.Schema({
@@ -5,7 +6,6 @@ const noticeBoardsSchema = mongoose.Schema({
     id: {
         type: String,
         required: true,
-        unique: true,
         ref: "User"
     },
     title: {
@@ -25,6 +25,7 @@ const noticeBoardsSchema = mongoose.Schema({
         default: Date.now
     }
 });
+
 
 const Post = mongoose.model("Post" , noticeBoardsSchema);
 

@@ -6,20 +6,23 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
         loginSuccess: false, 
-        name: "",
         id: "",
+        name: "",
+        email: ""
     },
     reducers: {
         loginUser: (state , action) => {
             const userInfo = action.payload;
             state.loginSuccess = true;
-            state.name = userInfo.name;
             state.id = userInfo.id;
+            state.name = userInfo.name;
+            state.email = userInfo.email;
         },
         logoutUser: (state) => {
             state.loginSuccess = false;
-            state.name = "";
             state.id = "";
+            state.name = "";
+            state.email = "";
         }
     }
 });

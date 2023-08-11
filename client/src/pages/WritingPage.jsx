@@ -20,9 +20,9 @@ const WritingPage = () => {
             
                 e.preventDefault();
                 const post = {
-                    id: userId ,
+                    id: userId,
                     title: title,
-                    content: content
+                    content: content,
                 }
             
                 await axios.post("/api/posts/register" , post)

@@ -18,7 +18,10 @@ const PostsDetail = () => {
 
     const editPosts = async () => {
         if(window.confirm("게시물 내용을 수정하시겠습니까?")) {
-            await axios.put("/api/posts/update" , selectPosts)
+            const editPost = {
+                _id: id
+            }
+            await axios.put("/api/posts/update" , editPost)
             .then((response) => {
                 if(response.data.updateSuccess === true) {
                     return navigate("/writing");

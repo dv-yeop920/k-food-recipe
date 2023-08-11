@@ -103,27 +103,29 @@ const Navbar = () => {
             </div>
         </styled.Header>
         
-        { loginModal === true && 
-            <LoginPage
-            openCloseLoginModal ={ openCloseLoginModal }
-            changeModal ={ changeModal }
-            userId ={ userId }
-            userPassword ={ userPassword }
-            handleChangeValue ={ handleChangeValue }
-            />
+        { 
+            loginModal === true && 
+                <LoginPage
+                openCloseLoginModal ={ openCloseLoginModal }
+                changeModal ={ changeModal }
+                userId ={ userId }
+                userPassword ={ userPassword }
+                handleChangeValue ={ handleChangeValue }
+                />
         }
         
-        { signUpModal === true && 
-            <SignUpPage 
-            openCloseSignUpModal ={ openCloseSignUpModal }
-            changeModal ={ changeModal }
-            userName ={ userName }
-            userId ={ userId }
-            userPassword ={ userPassword }
-            checkPassword ={ checkPassword }
-            userEmail ={ userEmail }
-            handleChangeValue ={ handleChangeValue }
-            />
+        { 
+            signUpModal === true && 
+                <SignUpPage 
+                openCloseSignUpModal ={ openCloseSignUpModal }
+                changeModal ={ changeModal }
+                userName ={ userName }
+                userId ={ userId }
+                userPassword ={ userPassword }
+                checkPassword ={ checkPassword }
+                userEmail ={ userEmail }
+                handleChangeValue ={ handleChangeValue }
+                />
         }
 
         </>

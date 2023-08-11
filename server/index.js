@@ -88,7 +88,7 @@ app.post("/api/users/login",(req , res) =>{
         //비번 비교
         docs.comparePassword(req.body.password, (error, isMatch) => {
             const currentTime = new Date();
-            const oneHourInMilliseconds = 60 * 60 * 1000;
+            const oneHourInMilliseconds = 1000 * 60 * 60;
             const expirationTime = new Date(currentTime.getTime() + oneHourInMilliseconds);
 
             // Password가 일치하다면 토큰 생성
@@ -97,17 +97,23 @@ app.post("/api/users/login",(req , res) =>{
                     if(error) {
                         res.status(400).send(error);
                     }
+                    const cookieOptions = {
+                        domain: "localhost",
+                        path: "/",
+                        expires: expirationTime,
+                        secure: true,
+                        httpOnly: true,
+                        sameSite: "strict"
+                    }
                     // 토큰을 저장
-                        res.cookie("x_auth", user.token, {
-                            expires: expirationTime,
-                            httpOnly: true
-                        })
+                        res.cookie("x_auth", user.token, cookieOptions)
                         .status(200)
                         .json({
                             messsage: "안녕하세요!",
                             loginSuccess: true, 
-                            name: user.name,
                             id: user.id,
+                            name: user.name,
+                            email: user.email
                         });
                 })
             }
@@ -131,13 +137,13 @@ app.get("/api/users/auth" , auth , (req , res) => {
     res.status(200)
     .json({
         _id: req.user._id,
-        //어드민 유저 설정
         id: req.user.id,
+        name: req.user.name,
+        email: req.user.email,
+        //어드민 유저 설정
         //isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
         token: req.user.token,
-        email: req.user.email,
-        name: req.user.name,
         //role: req.user.role,
     });
 });
@@ -152,9 +158,9 @@ app.post("/api/users/logout" , auth , (req , res) => {
             if(docs){
                 res.status(200)
                 .send({
-                    
                     logoutSuccess: true,
-                })
+                    messsage: "로그아웃 되었습니다"
+                });
             }
             else {
                 return res.json({
@@ -178,9 +184,9 @@ const { Post } = require("./models/NoticeBoards.js");
 app.post("/api/posts/register" , async (req , res) => {
     try {
         const post = {
-            id: req.body.id,
+            id: req.body.id + "_" + Date.now(),
             title: req.body.title,
-            content: req.body.content
+            content: req.body.content,
         }
 
         console.log(post);
@@ -202,12 +208,21 @@ app.post("/api/posts/register" , async (req , res) => {
     }
 });
 
-app.get("/api/posts/getPostsList" , async (req , res) => {
+app.get("/api/posts/getPostsList" ,  async (req , res) => {
     try {
         const posts = await Post.find().sort({ createdAt: -1 });
+        const modifiedPosts = posts.map(post => {
+            const parts = post.id.split("_");
+            const userId = parts[0];
+
+            return {
+                ...post.toObject(),
+                id: userId,
+            };
+        });
         
         res.json({
-            list: posts
+            list: modifiedPosts
         });
     }
     catch (error) {
@@ -219,6 +234,7 @@ app.get("/api/posts/getPostsList" , async (req , res) => {
 
 app.put("/api/posts/update" , (req , res) => {
     try {
+        console.log(req.body)
         Post.findOneAndUpdate(
             { _id: req.body._id },
             {
