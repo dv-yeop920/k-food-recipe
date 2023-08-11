@@ -15,7 +15,7 @@ const PostsList = () => {
     const [searchValue , setSearchValue] = useState("");
     const [filteredPosts , setFilteredPosts] = useState(null);
     const postsList = useSelector((posts) => posts.posts);
-    const realPostsList = filteredPosts ? filteredPosts : postsList;
+    const selectedPostsList = filteredPosts ? filteredPosts : postsList;
 
     const handleSubmitFilteredPosts = (e) => {
         e.preventDefault();
@@ -23,7 +23,6 @@ const PostsList = () => {
         const filteringPost = postsList.filter((posts) => {
             return posts.title.toLowerCase().includes(searchValue.toLocaleLowerCase());
         });
-        console.log(filteringPost)
         return setFilteredPosts(filteringPost);
     }
 
@@ -50,7 +49,7 @@ const PostsList = () => {
                 <styled.Input
                 className="user-search__input"
                 type="text"
-                placeholder="검색어 입력..."
+                placeholder="단어 단위로 입력..."
                 onChange={(e) => setSearchValue(e.target.value)}/>
 
                 <styled.SubmitButton
@@ -90,7 +89,7 @@ const PostsList = () => {
                 </styled.Li>
 
                 {
-                    realPostsList.map((item , i) => {
+                    selectedPostsList.map((item , i) => {
                         return(
                         <styled.Li 
                         className="board-list" 

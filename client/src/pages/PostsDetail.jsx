@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import * as styled from "../styles/styledComponents";
-import { useSelector } from 'react-redux';
-import { useParams , useNavigate } from 'react-router-dom';
-import Comment from '../components/noticeBoard/Comment';
+import { useSelector } from "react-redux";
+import { useParams , useNavigate } from "react-router-dom";
+import Comment from "../components/noticeBoard/Comment";
 import Navbar from "../components/navbar/Navbar";
 import Parser from "html-react-parser";
 import ScrollToTopButton from "../components/ScrollToTopButton";
-import PostFooter from '../components/noticeBoard/PostFooter';
-import axios from 'axios';
+import PostFooter from "../components/noticeBoard/PostFooter";
+import axios from "axios";
 
 
 const PostsDetail = () => {
@@ -24,7 +24,7 @@ const PostsDetail = () => {
             await axios.put("/api/posts/update" , editPost)
             .then((response) => {
                 if(response.data.updateSuccess === true) {
-                    return navigate("/writing");
+                    return navigate(`/postsUpdate/${id}`);
                 }
                 if(response.data.updateSuccess === false) {
                     return alert("에러가 발생했습니다");

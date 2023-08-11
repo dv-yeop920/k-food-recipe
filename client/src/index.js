@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import { persistStore} from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
+import { CookiesProvider } from "react-cookie";
 
 
 const persistor = persistStore(store);
@@ -15,13 +16,15 @@ const persistor = persistStore(store);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading ={null} persistor ={persistor}>
-        <BrowserRouter>
+    <CookiesProvider>
+      <Provider store={store}>
+        <PersistGate loading ={null} persistor ={persistor}>
+          <BrowserRouter>
           <App />
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    </CookiesProvider>
   </React.StrictMode>
 );
 

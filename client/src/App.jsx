@@ -6,7 +6,8 @@ import MyPage from "./pages/MyPage";
 import RecipePage from "./pages/RecipePage";
 import WritingPage from "./pages/WritingPage";
 import PostsDetail from "./pages/PostsDetail";
-import Comment from "./components/noticeBoard/Comment";
+import PostsUpdatePage from "./pages/PostsUpdatePage";
+
 
 function App() {
   return (
@@ -17,9 +18,8 @@ function App() {
       <Route path ="/noticeBoards" element ={ <NoticeBoards/>}/>
       <Route path ="/myPage" element ={<MyPage/>}/>
       <Route path ="/writing" element ={<WritingPage/>} />
-      <Route path ="/postsDetail/:id" element ={<PostsDetail/>}>
-        <Route path="comment" element ={<Comment/>}/>
-      </Route>
+      <Route path ="/postsDetail/:id" element ={<PostsDetail/>}/>
+      <Route path="/postsUpdate/:id" element ={<PostsUpdatePage/>} />
     </Routes>
     </>
   );

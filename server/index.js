@@ -232,19 +232,33 @@ app.get("/api/posts/getPostsList" ,  async (req , res) => {
     }
 });
 
-app.put("/api/posts/update" , (req , res) => {
+app.get("/api/posts/detail" , async (req , res) => {
+    try{
+        const posts = await Post.findOne({_id: req.body._id});
+        res.json({
+            success: true,
+            list: posts
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.json({
+            success: false
+        })
+    }
+});
+
+app.put("/api/posts/update" , async (req , res) => {
     try {
         console.log(req.body)
-        Post.findOneAndUpdate(
+        await Post.findOneAndUpdate(
             { _id: req.body._id },
             {
                 $set: {
-                    id: req.body.id,
                     title: req.body.title,
                     content: req.body.content
                 }
-            })
-        console.log("업데이트 완료")
+            });
         res.json({
             updateSuccess: true,
             messsage: "업데이트 되었습니다"

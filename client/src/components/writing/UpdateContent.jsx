@@ -21,16 +21,7 @@ const modules = {
     }
 }
 
-const Content = ({ setTitle , content , setContent }) => {
-
-    const handleChangeTitle = (e) => {
-        return setTitle(e.target.value);
-    };
-
-    const handleChangeContent = (e) => {
-        return setContent(e);
-    }
-
+const UpdateContent = ({setNewTitle , newContent, setNewContent}) => {
     return (
         <>
         <div className ="writing-container">
@@ -39,18 +30,20 @@ const Content = ({ setTitle , content , setContent }) => {
             className ="editor-title" 
             type="text" 
             placeholder = "제목"
-            onChange={ handleChangeTitle } />  
+            onChange={(e) => setNewTitle(e.target.value)}
+            />  
             </div>
             <div className="writing-container__column">
                 <ReactQuill  
                 className="content" 
-                value={ content }
+                value={ newContent }
                 modules={ modules }
-                onChange ={ handleChangeContent }/> 
+                onChange ={(e) => setNewContent(e)}
+                /> 
             </div>          
         </div>
         </>
     );
 };
 
-export default Content;
+export default UpdateContent;
