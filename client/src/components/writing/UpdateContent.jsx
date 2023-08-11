@@ -21,7 +21,7 @@ const modules = {
     }
 }
 
-const UpdateContent = ({setNewTitle , newContent, setNewContent}) => {
+const UpdateContent = ({filteredPosts , setNewTitle , newContent, setNewContent}) => {
     return (
         <>
         <div className ="writing-container">
@@ -29,6 +29,7 @@ const UpdateContent = ({setNewTitle , newContent, setNewContent}) => {
             <input 
             className ="editor-title" 
             type="text" 
+            value={filteredPosts.title}
             placeholder = "제목"
             onChange={(e) => setNewTitle(e.target.value)}
             />  

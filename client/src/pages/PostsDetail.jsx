@@ -16,24 +16,6 @@ const PostsDetail = () => {
     const postsDetail = useSelector(post => post.posts);
     const selectPosts = postsDetail.find((posts) => posts._id === id.toString());
 
-    const editPosts = async () => {
-        if(window.confirm("게시물 내용을 수정하시겠습니까?")) {
-            const editPost = {
-                _id: id
-            }
-            await axios.put("/api/posts/update" , editPost)
-            .then((response) => {
-                if(response.data.updateSuccess === true) {
-                    return navigate(`/postsUpdate/${id}`);
-                }
-                if(response.data.updateSuccess === false) {
-                    return alert("에러가 발생했습니다");
-                }
-            })
-            .catch((error) => console.log(error));
-        }
-    }
-
     const deletePosts = async () => {
         if(window.confirm("게시물을 정말 삭제하시겠습니까?")) {
             const deletePost = {
@@ -89,7 +71,11 @@ const PostsDetail = () => {
                         <div className ="user-info">
                             <span 
                             className ="edit-delete"
-                            onClick ={ editPosts }>
+                            onClick ={() => {
+                                if(window.confirm("게시글을 수정하시겠습니까?")) {
+                                    return navigate(`/postsUpdate/${id}`)
+                                }
+                            } }>
                                 수정
                             </span>
                             <span 

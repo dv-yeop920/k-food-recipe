@@ -1,4 +1,4 @@
-import React ,{ useState , useEffect } from "react";
+import React ,{ useState } from "react";
 import * as styled from "../styles/styledComponents";
 import { useNavigate , useParams } from "react-router-dom";
 import axios from "axios";
@@ -20,29 +20,30 @@ const PostsUpdatePage = () => {
     const filteredPosts = posts.filter((posts) => {
         return posts._id === id;
     })
-    
 
-    const handleSubmitPost = async (e) => {
-                e.preventDefault();
+    const handleSubmitEditPosts = async (e) => {
+            e.preventDefault();
+
+            if(window.confirm("게시물 내용을 수정하시겠습니까?")) {
                 const updatePosts = {
                     _id: filteredPosts[0]._id,
                     title: newTitle,
                     content: newContent,
                 }
-            
                 await axios.put("/api/posts/update" , updatePosts)
                 .then((response) => {
                     if(response.data.updateSuccess === false) {
                         return console.log(response.data.messsage);
                     }
                     if(response.data.updateSuccess === true) {
-                        navigate(-1, { replace: true });
+                        navigate(`/postsDetail/${id}` , { replace: true });
                         return alert(response.data.messsage);
                     }
                 })
                 .catch((error) => {
                     return console.log(error);
                 });
+            }
         }
 
     return (
@@ -51,10 +52,11 @@ const PostsUpdatePage = () => {
         <div className ="editor-container">
             <form 
             className = "editor-form"
-            onSubmit = { handleSubmitPost }>
+            onSubmit = { handleSubmitEditPosts }>
                 <div className = "content-container">
                     <ImageUploader/>
                     <UpdateContent 
+                    filteredPosts ={filteredPosts}
                     setNewTitle ={setNewTitle}
                     newContent ={newContent}
                     setNewContent ={setNewContent}/>
@@ -63,8 +65,9 @@ const PostsUpdatePage = () => {
                 <div className ="writing-button__container">
                     <styled.DeleteButton
                     className ="writing-button__delete delete-btn"
+                    type="button"
                     onClick={() => {
-                        if(window.confirm("게시글 작성을 취소 하시겠어요?")) 
+                        if(window.confirm("게시글 수정을 취소 하시겠어요?")) 
                             return navigate(-1, { replace: true });
                         }
                     }>
