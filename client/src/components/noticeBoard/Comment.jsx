@@ -4,7 +4,7 @@ import * as styled from "../../styles/styledComponents";
 const Comment = ({ comment , setComment }) => {
     const handleChangeComment = async (e) => {
         await setComment(e.target.value);
-        return console.log(comment)
+        return console.log(comment);
     }
     
     return (
