@@ -11,9 +11,6 @@ const commentSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    like: {
-        type: String
-    },
     createdAt: {
         type: Date,
         required: true,

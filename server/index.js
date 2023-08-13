@@ -300,7 +300,30 @@ app.post("/api/posts/delete" , async (req , res) => {
 const Comment = require("./models/Comment.js");
 
 app.post("/api/posts/comment/register" , async (req , res) => {
+    try {
+        const commentBody = {
+            id: req.body.id + "_" + Date.now(),
+            content: req.body.content
+        }
 
+        console.log(commentBody);
+        const comment = new Comment(commentBody);
+
+        await comment.save();
+
+        res.json({
+            success: true,
+            messsage: "댓글이 등록 되었습니다"
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res
+        .json({
+            success: false,
+            messsage: "댓글 등록 실패했습니다"
+        });
+    }
 });
 
 app.get("/api/posts/comment/getComment" , async (req , res) => {
