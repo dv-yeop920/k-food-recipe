@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { useState }  from "react";
 import * as styled from "../styles/styledComponents";
 import { useSelector } from "react-redux";
 import { useParams , useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ const PostsDetail = () => {
     const { id } = useParams();
     const postsDetail = useSelector(post => post.posts);
     const selectPosts = postsDetail.find((posts) => posts._id === id.toString());
+    const [ comment , setComment ] = useState("");
     
     const newDate = new Date(selectPosts.createdAt);
     const year = newDate.getFullYear();
@@ -108,7 +109,12 @@ const PostsDetail = () => {
                         <h3>댓글 0</h3>
                     </div>
                     <div className ="comment-container">
-                        <Comment/>
+
+                        <Comment 
+                        comment = { comment } 
+                        setComment = { setComment }
+                        />
+                        
                         <ul className ="commnet-list">
                             <li className ="comment">
                                 <div>
