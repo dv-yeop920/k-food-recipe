@@ -109,7 +109,7 @@ const PostsList = () => {
                                 </styled.Span>
 
                                 <styled.Span>
-                                    {`${year}-${month}-${date} ${hours}:${minutes}`}
+                                    {`${year}-${month + 1}-${date} ${hours}:${minutes}`}
                                 </styled.Span>
 
                             </div>

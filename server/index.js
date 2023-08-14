@@ -303,6 +303,7 @@ const { Comment } = require("./models/Comment");
 app.post("/api/posts/comment/register" , async (req , res) => {
     try {
         const commentBody = {
+            postsId: req.body.postsId,
             id: req.body.id + "_" + Date.now(),
             content: req.body.content
         }

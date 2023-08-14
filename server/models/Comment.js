@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const commentSchema = mongoose.Schema({
     // 댓글 쓰는 게시물 아이디
-    post_id: {
+    postsId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
     },

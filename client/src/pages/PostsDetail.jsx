@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React from "react";
 import * as styled from "../styles/styledComponents";
 import { useParams , useNavigate, useLocation } from "react-router-dom";
 import Comment from "../components/noticeBoard/Comment";
@@ -17,19 +17,12 @@ const PostsDetail = () => {
     const postsList = location.state && location.state.postsList;
     const selectPosts = postsList.find((posts) => posts._id === id.toString());
 
-    const [ commentContent , setCommentContent ] = useState("");
-    const [comments , setComments] = useState([]);
-
-    
     const newDate = new Date(selectPosts.createdAt);
     const year = newDate.getFullYear();
     const month = newDate.getMonth();
     const date = newDate.getDate();
     const hours = newDate.getHours();
     const minutes = newDate.getMinutes();
-
-
-
 
 
     const deletePosts = async () => {
@@ -51,14 +44,6 @@ const PostsDetail = () => {
         }
     }
 
-    useEffect(() => {
-        axios.get("/api/posts/comment/getComment")
-        .then((response) => {
-            const getComment = response.data.list;
-            return setComments(getComment);
-        })
-        .catch((error) => console.log(error));
-    } , []);
 
     return (
         <>
@@ -90,7 +75,7 @@ const PostsDetail = () => {
 
                         <div className ="user-info">
                             <styled.Span className ="user-date">
-                                { `${year}-${month}-${date} ${hours}:${minutes}` }
+                                { `${year}-${month + 1}-${date} ${hours}:${minutes}` }
                             </styled.Span>
                         </div>
 
@@ -124,71 +109,9 @@ const PostsDetail = () => {
                     </div>
 
                     <div className ="comment-container">
-                        
-                        <Comment 
-                        selectPosts = { selectPosts }
-                        commentContent = { commentContent } 
-                        setCommentContent = { setCommentContent }
-                        />
-
-                        <ul className ="commnet-list">
-                            {   
-                            comments &&
-                                comments.map((comments , i) => {
-                                    return(
-                                    <li className ="comment" key={i}>
-                                        <div>
-                                            <span className ="user-id">
-                                                {comments.id}
-                                            </span>
-                                        </div>
-
-                                        <p className ="comment-content">
-                                            {comments.content}
-                                        </p>
-
-                                        <div>
-                                            <styled.Span>
-                                                2023-8-9 14:00
-                                            </styled.Span>
-
-                                            <styled.Span
-                                            style={{cursor:"pointer"}}>
-                                                답글 쓰기
-                                            </styled.Span>
-                                        </div>
-                                    </li>
-                                    )
-                                })
-                            }
-                            <li className ="comment">
-                                <div>
-                                    <span className ="user-id">
-                                        아이디
-                                    </span>
-                                </div>
-
-                                <p className ="comment-content">
-                                    대애애애애앳글 
-                                </p>
-                                <div>
-                                    <styled.Span>
-                                        좋아요
-                                    </styled.Span>
-
-                                    <styled.Span>
-                                        2023-8-9 14:00
-                                    </styled.Span>
-
-                                    <styled.Span
-                                    style={{cursor:"pointer"}}>
-                                        답글 쓰기
-                                    </styled.Span>
-                                </div>
-                            </li>
-                        </ul>
+                        <Comment selectPosts = { selectPosts }/>
                     </div>
-                    
+
                 </div>
                     <div style={{height:"40px"}}></div>
                 <ScrollToTopButton/>
