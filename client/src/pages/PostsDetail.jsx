@@ -88,7 +88,9 @@ const PostsDetail = () => {
                             className ="edit-delete"
                             onClick ={() => {
                                 if(window.confirm("게시글을 수정하시겠습니까?")) {
-                                    return navigate(`/postsUpdate/${id}`)
+                                    return navigate(
+                                        `/postsUpdate/${id}` , 
+                                        { state: { postsList } })
                                 }
                             } }>
                                 수정

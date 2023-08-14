@@ -1,31 +1,28 @@
 import React ,{ useState } from "react";
 import * as styled from "../styles/styledComponents";
-import { useNavigate , useParams } from "react-router-dom";
+import { useLocation, useNavigate , useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/navbar/Navbar";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import ImageUploader from "../components/writing/ImageUploader";
-import { useSelector } from 'react-redux';
 import UpdateContent from "../components/writing/UpdateContent";
 
 
 const PostsUpdatePage = () => {
     const { id } = useParams();
-    const posts = useSelector(postsList => postsList.posts)
     const navigate = useNavigate();
-    
+    const location = useLocation();
+
+    const selectedPosts = location.state && location.state.postsList;
     const [newTitle , setNewTitle] = useState("");
     const [newContent, setNewContent] = useState("");
 
-    const filteredPosts = posts.filter((posts) => {
-        return posts._id === id;
-    });
 
     const handleSubmitEditPosts = async (e) => {
         e.preventDefault();
 
         const updatePosts = {
-            _id: filteredPosts[0]._id,
+            _id: selectedPosts[0]._id,
             title: newTitle,
             content: newContent,
         }
@@ -35,7 +32,7 @@ const PostsUpdatePage = () => {
                 const response = await axios.put("/api/posts/update" , updatePosts);
 
                 if(response.data.updateSuccess === false) {
-                    return console.log(response.data.messsage);
+                    return alert(response.data.messsage);
                 }
                 
                 if(response.data.updateSuccess === true) {
@@ -56,10 +53,11 @@ const PostsUpdatePage = () => {
             <form 
             className = "editor-form"
             onSubmit = { handleSubmitEditPosts }>
+
                 <div className = "content-container">
                     <ImageUploader/>
                     <UpdateContent 
-                    filteredPosts ={filteredPosts}
+                    selectedPosts ={selectedPosts}
                     setNewTitle ={setNewTitle}
                     newContent ={newContent}
                     setNewContent ={setNewContent}/>

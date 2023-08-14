@@ -21,7 +21,7 @@ const modules = {
     }
 }
 
-const UpdateContent = ({filteredPosts , setNewTitle , newContent, setNewContent}) => {
+const UpdateContent = ({selectedPosts , setNewTitle , newContent, setNewContent}) => {
     return (
         <>
         <div className ="writing-container">
@@ -29,15 +29,15 @@ const UpdateContent = ({filteredPosts , setNewTitle , newContent, setNewContent}
             <input 
             className ="editor-title" 
             type="text" 
-            value={filteredPosts.title}
+            value ={ selectedPosts[0].title }
             placeholder = "제목"
-            onChange={(e) => setNewTitle(e.target.value)}
+            onChange ={(e) => setNewTitle(e.target.value)}
             />  
             </div>
             <div className="writing-container__column">
                 <ReactQuill  
                 className="content" 
-                value={ newContent }
+                value={ selectedPosts[0].content }
                 modules={ modules }
                 onChange ={(e) => setNewContent(e)}
                 /> 
