@@ -38,13 +38,19 @@ const Comment = ({ selectPosts }) => {
         }
     }
 
-    const handleCommentDelete = async () => {
+    const handleCommentDelete = async (commentsId) => {
+
+        const filteredId = comments.filter((comments) => {
+            return commentsId === comments._id;
+        });
+
         const deleteComment = {
-            postsId: selectPostsId
+            _id: filteredId[0]
         }
 
         try {
             if(window.confirm("댓글을 정말 삭제하시겠습니까?")) {
+                console.log(filteredId)
                 const response = 
                 await axios.post("/api/posts/comment/deleteComment" , deleteComment);
 
@@ -66,11 +72,14 @@ const Comment = ({ selectPosts }) => {
         const getComments = async () => {
             try {
                 const response = await axios.get("/api/posts/comment/getComment");
+
                 const getComment = response.data.list;
+
                 const commentsForSelectedPost = getComment.filter((comments) => { 
                     return comments.postsId === selectPostsId;
                 }
                 );
+
                 setComments(commentsForSelectedPost);
             }
             catch (error) {
@@ -146,7 +155,7 @@ const Comment = ({ selectPosts }) => {
                                     </styled.Span>
                                     <styled.Span 
                                     className ="delete-button comment-edit-delete"
-                                    onClick={ handleCommentDelete }>
+                                    onClick={ () => handleCommentDelete(comments._id) }>
                                         삭제
                                     </styled.Span>
                                 </div>

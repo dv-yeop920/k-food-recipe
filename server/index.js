@@ -308,7 +308,6 @@ app.post("/api/posts/comment/register" , async (req , res) => {
             content: req.body.content
         }
 
-        console.log(commentBody);
         const comment = new Comment(commentBody);
 
         await comment.save();
@@ -330,10 +329,12 @@ app.post("/api/posts/comment/register" , async (req , res) => {
 
 app.get("/api/posts/comment/getComment" , async (req , res) => {
     try {
-        const comments = await Comment.find().sort({ createdAt: -1 });
+        const comments = await Comment.find();
+
         const modifiedComments = comments.map(comment => {
-            const parts = comment.id.split("_");
-            const userId = parts[0];
+
+        const parts = comment.id.split("_");
+        const userId = parts[0];
 
             return {
                 ...comment.toObject(),
@@ -359,7 +360,7 @@ app.put("/api/posts/comment/updateComment" , async (req , res) => {
 app.post("/api/posts/comment/deleteComment" , async (req , res) => {
     try {
         await Comment.findOneAndDelete({
-            postsId: req.body.postsId
+            _id: req.body._id
         })
         res.json({
             deleteSuccess: true,
