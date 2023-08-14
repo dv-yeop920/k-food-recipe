@@ -27,12 +27,12 @@ const LoginPage = (
         if(userId === "") return setMessage("아이디를 입력하세요");
         if(userPassword === "") return setMessage("비밀번호를 입력하세요");
 
+        const userInfo = {
+            id: userId,
+            password: userPassword,
+        };
+
         try {
-            const userInfo = {
-                id: userId,
-                password: userPassword,
-            };
-            
             const response = await axios.post("/api/users/login" , userInfo);
 
             if(response.data.loginSuccess === false) {
@@ -46,7 +46,7 @@ const LoginPage = (
             }
         }
         catch (error) {
-            return console.log(error);
+            console.log(error);
         }
     }
 

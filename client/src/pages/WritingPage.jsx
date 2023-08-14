@@ -18,12 +18,14 @@ const WritingPage = () => {
 
     const handleSubmitPost = async (e) => {
         e.preventDefault();
+
+        const post = {
+            id: userId,
+            title: title,
+            content: content,
+        }
+
         try {
-            const post = {
-                id: userId,
-                title: title,
-                content: content,
-            }
             const response = await axios.post("/api/posts/register" , post);
 
             if(response.data.success === false) {
@@ -36,7 +38,7 @@ const WritingPage = () => {
             }
         }
         catch (error) {
-            return console.log(error);
+            console.log(error);
         }
         }
 

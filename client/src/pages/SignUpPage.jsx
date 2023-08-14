@@ -23,13 +23,15 @@ const SignUpPage = (
 
     //서버에 입력한 데이터 보내고 응답 받고 유효성 검사 하는 함수
     const handleSignUpRequest = async () => {
+
+        const userInfo = {
+            name: userName,
+            id: userId,
+            password: userPassword,
+            email: userEmail
+        }
+
         try {
-            const userInfo = {
-                name: userName,
-                id: userId,
-                password: userPassword,
-                email: userEmail
-            }
             const response = await axios.post("/api/users/register" , userInfo);
 
             if(response.data.success === false) {
@@ -43,7 +45,7 @@ const SignUpPage = (
             }
         }
         catch (error) {
-            return console.log(error);
+            console.log(error);
         }
     }
 

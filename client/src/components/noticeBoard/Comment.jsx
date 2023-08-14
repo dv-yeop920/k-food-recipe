@@ -5,6 +5,7 @@ import * as styled from "../../styles/styledComponents";
 
 const Comment = ({ selectPosts }) => {
     const userId = useSelector(user => user.user.id);
+    const selectPostsId = selectPosts._id;
     const [ commentContent , setCommentContent ] = useState("");
     const [comments , setComments] = useState([]);
 
@@ -14,13 +15,13 @@ const Comment = ({ selectPosts }) => {
 
         if(commentContent === "") return alert("내용을 입력해 주세요!");
 
-        try {
-            const commentBody = {
-                postsId: selectPosts._id,
-                id: userId,
-                content: commentContent
-            }
+        const commentBody = {
+            postsId: selectPostsId,
+            id: userId,
+            content: commentContent
+        }
 
+        try {
             const response = await axios.post("/api/posts/comment/register" , commentBody);
 
             if(response.data.success === true) {
@@ -37,24 +38,25 @@ const Comment = ({ selectPosts }) => {
         }
     }
 
-    const getComments = async () => {
-        try {
-            const response = await axios.get("/api/posts/comment/getComment");
-            const getComment = response.data.list;
-            const commentsForSelectedPost = getComment.filter((comments) => { 
-                return comments.postsId === selectPosts._id;
-            }
-            );
-            return setComments(commentsForSelectedPost);
-        }
-        catch (error) {
-            return console.log(error);
-        }
-    }
+    
 
     useEffect(() => {
+        const getComments = async () => {
+            try {
+                const response = await axios.get("/api/posts/comment/getComment");
+                const getComment = response.data.list;
+                const commentsForSelectedPost = getComment.filter((comments) => { 
+                    return comments.postsId === selectPostsId;
+                }
+                );
+                setComments(commentsForSelectedPost);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
         getComments();
-    } , [comments]);
+    } , [selectPostsId]);
 
     return (
         <>

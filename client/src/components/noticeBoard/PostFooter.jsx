@@ -5,6 +5,7 @@ import { faHeart , faCommentDots } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 const PostFooter = () => {
     const navigate = useNavigate();
+    
     return (
         <>
         <nav className ="footer-bar__container">

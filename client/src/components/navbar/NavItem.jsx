@@ -27,7 +27,7 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }) => {
             }
         }
         catch (error) {
-            return console.log(error);
+            console.log(error);
         }
     }
 

@@ -12,20 +12,19 @@ const PostsList = () => {
     const navigate = useNavigate();
     const [postsList , setPostsList] = useState([]);
 
-    const getPostsList = async () => {
-        try {
-            const response = await axios.get("/api/posts/getPostsList");
-            const getPosts = response.data.list;
-            setPostsList(getPosts);
-        }
-        catch (error) {
-            return console.log(error);
-        }
-    }
 
-
-        useEffect(() => {
-            getPostsList();
+    useEffect(() => {
+        const getPostsList = async () => {
+            try {
+                const response = await axios.get("/api/posts/getPostsList");
+                const getPosts = response.data.list;
+                setPostsList(getPosts);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        getPostsList();
         } , []);
 
 

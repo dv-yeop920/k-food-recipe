@@ -24,14 +24,14 @@ const PostsUpdatePage = () => {
     const handleSubmitEditPosts = async (e) => {
         e.preventDefault();
 
+        const updatePosts = {
+            _id: filteredPosts[0]._id,
+            title: newTitle,
+            content: newContent,
+        }
+
         try {
             if(window.confirm("게시물 내용을 수정하시겠습니까?")) {
-                const updatePosts = {
-                    _id: filteredPosts[0]._id,
-                    title: newTitle,
-                    content: newContent,
-                }
-
                 const response = await axios.put("/api/posts/update" , updatePosts);
 
                 if(response.data.updateSuccess === false) {
@@ -45,7 +45,7 @@ const PostsUpdatePage = () => {
             }
         }
         catch (error) {
-            return console.log(error);
+            console.log(error);
         }
         }
 
