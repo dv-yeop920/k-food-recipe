@@ -11,7 +11,7 @@ import UpdateContent from "../components/writing/UpdateContent";
 
 const PostsUpdatePage = () => {
     const { id } = useParams();
-    const posts = useSelector(postsList => postsList.posts);
+    const posts = useSelector(postsList => postsList.posts)
     const navigate = useNavigate();
     
     const [newTitle , setNewTitle] = useState("");
