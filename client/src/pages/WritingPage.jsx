@@ -16,28 +16,28 @@ const WritingPage = () => {
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
 
-        const handleSubmitPost = async (e) => {
-            
-                e.preventDefault();
-                const post = {
-                    id: userId,
-                    title: title,
-                    content: content,
-                }
-            
-                await axios.post("/api/posts/register" , post)
-                .then((response) => {
-                    if(response.data.success === false) {
-                        return console.log(response.data.messsage);
-                    }
-                    if(response.data.success === true) {
-                        navigate(-1, { replace: true });
-                        return alert(response.data.messsage);
-                    }
-                })
-                .catch((error) => {
-                    return console.log(error);
-                });
+    const handleSubmitPost = async (e) => {
+        e.preventDefault();
+        try {
+            const post = {
+                id: userId,
+                title: title,
+                content: content,
+            }
+            const response = await axios.post("/api/posts/register" , post);
+
+            if(response.data.success === false) {
+                return console.log(response.data.messsage);
+            }
+
+            if(response.data.success === true) {
+                navigate(-1, { replace: true });
+                return alert(response.data.messsage);
+            }
+        }
+        catch (error) {
+            return console.log(error);
+        }
         }
 
     return (

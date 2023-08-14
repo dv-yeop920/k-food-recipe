@@ -22,29 +22,31 @@ const PostsUpdatePage = () => {
     });
 
     const handleSubmitEditPosts = async (e) => {
-            e.preventDefault();
+        e.preventDefault();
 
+        try {
             if(window.confirm("게시물 내용을 수정하시겠습니까?")) {
                 const updatePosts = {
                     _id: filteredPosts[0]._id,
                     title: newTitle,
                     content: newContent,
                 }
+
+                const response = await axios.put("/api/posts/update" , updatePosts);
+
+                if(response.data.updateSuccess === false) {
+                    return console.log(response.data.messsage);
+                }
                 
-                await axios.put("/api/posts/update" , updatePosts)
-                .then((response) => {
-                    if(response.data.updateSuccess === false) {
-                        return console.log(response.data.messsage);
-                    }
-                    if(response.data.updateSuccess === true) {
-                        navigate(`/postsDetail/${id}` , { replace: true });
-                        return alert(response.data.messsage);
-                    }
-                })
-                .catch((error) => {
-                    return console.log(error);
-                });
+                if(response.data.updateSuccess === true) {
+                    navigate(`/postsDetail/${id}` , { replace: true });
+                    return alert(response.data.messsage);
+                }
             }
+        }
+        catch (error) {
+            return console.log(error);
+        }
         }
 
     return (

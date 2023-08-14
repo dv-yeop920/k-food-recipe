@@ -21,33 +21,33 @@ const LoginPage = (
     const [message , setMessage] = useState("");
 
 //로그인 버튼 누르면 입력한 정보를 서버로 보내고 응답 받는 함수
-    const handleClickLogin = (e) => {
+    const handleClickLogin = async (e) => {
         e.preventDefault();
         //유효성 검사
         if(userId === "") return setMessage("아이디를 입력하세요");
         if(userPassword === "") return setMessage("비밀번호를 입력하세요");
-        
-        const userInfo = {
-            id: userId,
-            password: userPassword,
-        };
-        
-        axios.post("/api/users/login" , userInfo)
-            .then((response) => {
-                if(response.data.loginSuccess === false) {
-                    return setMessage(response.data.messsage);
-                }
-                if(response.data.loginSuccess === true) {
-                    openCloseLoginModal();
-                    setMessage("");
-                    alert(response.data.messsage);
-                    dispatch(loginUser(response.data));
-                    console.log(response.data , response.status);
-                }
-            })
-            .catch((error) => {
-                return console.log(error);
-            });
+
+        try {
+            const userInfo = {
+                id: userId,
+                password: userPassword,
+            };
+            
+            const response = await axios.post("/api/users/login" , userInfo);
+
+            if(response.data.loginSuccess === false) {
+                return setMessage(response.data.messsage);
+            }
+            if(response.data.loginSuccess === true) {
+                openCloseLoginModal();
+                setMessage("");
+                alert(response.data.messsage);
+                return dispatch(loginUser(response.data));
+            }
+        }
+        catch (error) {
+            return console.log(error);
+        }
     }
 
     return (

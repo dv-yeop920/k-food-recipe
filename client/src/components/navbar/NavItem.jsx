@@ -13,23 +13,24 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }) => {
     const dispatch = useDispatch();
     
 
-    const handleClickLogout = () => {
-        if(window.confirm("로그아웃 하시겠습니까?")) {
-            axios.post("/api/users/logout")
-            .then((response) => {
+    const handleClickLogout = async () => {
+        try {
+            if(window.confirm("로그아웃 하시겠습니까?")) {
+                const response = await axios.post("/api/users/logout");
+
                 if(response.status === 200) {
                     dispatch(logoutUser());
                     console.log(response.data , response.status);
                     alert(response.data.messsage);
                     return navigate("/");
                 }
-            })
-            .catch((error) => {
-                console.log(error);
-                return alert("로그아웃 하는데 실패 했습니다");
-            });
+            }
+        }
+        catch (error) {
+            return console.log(error);
         }
     }
+
     return (
         <>
         <div className="navbar-container">

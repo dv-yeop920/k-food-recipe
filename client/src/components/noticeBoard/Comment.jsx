@@ -14,19 +14,20 @@ const Comment = ({ selectPosts }) => {
 
         if(commentContent === "") return alert("내용을 입력해 주세요!");
 
-        const commentBody = {
-            postsId: selectPosts._id,
-            id: userId,
-            content: commentContent
-        }
-
         try {
+            const commentBody = {
+                postsId: selectPosts._id,
+                id: userId,
+                content: commentContent
+            }
+
             const response = await axios.post("/api/posts/comment/register" , commentBody);
 
             if(response.data.success === true) {
                 setCommentContent("");
                 return alert(response.data.messsage);
             }
+
             if(response.data.success === false) {
                 return alert(response.data.messsage);
             }
@@ -53,7 +54,7 @@ const Comment = ({ selectPosts }) => {
 
     useEffect(() => {
         getComments();
-    });
+    } , [comments]);
 
     return (
         <>

@@ -23,15 +23,15 @@ const SignUpPage = (
 
     //서버에 입력한 데이터 보내고 응답 받고 유효성 검사 하는 함수
     const handleSignUpRequest = async () => {
-        const userInfo = {
-            name: userName,
-            id: userId,
-            password: userPassword,
-            email: userEmail
-        }
+        try {
+            const userInfo = {
+                name: userName,
+                id: userId,
+                password: userPassword,
+                email: userEmail
+            }
+            const response = await axios.post("/api/users/register" , userInfo);
 
-        await axios.post("/api/users/register" , userInfo)
-        .then((response) => {
             if(response.data.success === false) {
                 console.log(response.data)
                 return setMessage(response.data.messsage);
@@ -39,13 +39,12 @@ const SignUpPage = (
             if(response.data.success === true) {
                 changeModal();
                 alert(response.data.messsage);
-                setMessage("");
-                return console.log(response.data , response.status);
+                return setMessage("");
             }
-        })
-        .catch((error) => {
+        }
+        catch (error) {
             return console.log(error);
-        });
+        }
     }
 
 //회원가입 서버 요청
