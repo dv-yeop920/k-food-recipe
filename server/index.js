@@ -192,6 +192,7 @@ app.post("/api/posts/register" , async (req , res) => {
         const posts = new Post(post);
         
         await posts.save();
+
         res.json({
             success: true,
             messsage: "게시물이 등록 되었습니다"
@@ -297,7 +298,7 @@ app.post("/api/posts/delete" , async (req , res) => {
 
 //------------------------댓글------------------------------------------
 
-const Comment = require("./models/Comment.js");
+const { Comment } = require("./models/Comment");
 
 app.post("/api/posts/comment/register" , async (req , res) => {
     try {

@@ -108,13 +108,14 @@ const PostsDetail = () => {
                     <div className ="comment-count">
                         <h3>댓글 0</h3>
                     </div>
-                    <div className ="comment-container">
 
+                    <div className ="comment-container">
+                        
                         <Comment 
                         comment = { comment } 
                         setComment = { setComment }
                         />
-                        
+
                         <ul className ="commnet-list">
                             <li className ="comment">
                                 <div>
