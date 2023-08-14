@@ -5,34 +5,19 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { addPosts } from "../../store/slice/postsSlice";
 
 
 
 const PostsList = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [searchValue , setSearchValue] = useState("");
-    const [filteredPosts , setFilteredPosts] = useState(null);
-    const postsList = useSelector((posts) => posts.posts);
-    const selectedPostsList = filteredPosts ? filteredPosts : postsList;
-
-    const handleSubmitFilteredPosts = (e) => {
-        e.preventDefault();
-
-        const filteringPost = postsList.filter((posts) => {
-            return posts.title.toLowerCase().includes(searchValue.toLocaleLowerCase());
-        });
-        return setFilteredPosts(filteringPost);
-    }
+    const [postsList , setPostsList] = useState([]);
 
 
         useEffect(() => {
             axios.get("/api/posts/getPostsList")
             .then((response) => {
-                const getPost = response.data.list;
-                return dispatch(addPosts(getPost));
+                const getPosts = response.data.list;
+                setPostsList(getPosts);
             })
             .catch((error) => console.log(error));
         } , []);
@@ -43,14 +28,12 @@ const PostsList = () => {
         <>
         <styled.SearchContainer>
             <form
-            className="user-search__form"
-            onSubmit={ handleSubmitFilteredPosts }>
+            className="user-search__form">
 
                 <styled.Input
                 className="user-search__input"
                 type="text"
-                placeholder="단어 단위로 입력..."
-                onChange={(e) => setSearchValue(e.target.value)}/>
+                placeholder="단어 단위로 입력..."/>
 
                 <styled.SubmitButton
                 className="default-btn"
@@ -89,8 +72,8 @@ const PostsList = () => {
                 </styled.Li>
 
                 {
-                    selectedPostsList.map((item , i) => {
-                        const newDate = new Date(item.createdAt);
+                    postsList.map((posts , i) => {
+                        const newDate = new Date(posts.createdAt);
                         const year = newDate.getFullYear();
                         const month = newDate.getMonth();
                         const date = newDate.getDate();
@@ -100,14 +83,17 @@ const PostsList = () => {
                         <styled.Li 
                         className="board-list" 
                         key={i}
-                        onClick ={() => navigate(`/postsDetail/${item._id}`)}>
+                        onClick ={() => 
+                        navigate(`/postsDetail/${posts._id}`,
+                        { state: { postsList } })}>
+
                             <div>
                                 <styled.Title>
-                                    {item.title}
+                                    {posts.title}
                                 </styled.Title>
 
                                 <styled.Span>
-                                    {item.id}
+                                    {posts.id}
                                 </styled.Span>
 
                                 <styled.Span>
@@ -123,7 +109,7 @@ const PostsList = () => {
                                 </styled.Span>
 
                                 <styled.Span>
-                                    {`${year}-${month}-${date}. ${hours}:${minutes}`}
+                                    {`${year}-${month}-${date} ${hours}:${minutes}`}
                                 </styled.Span>
 
                             </div>

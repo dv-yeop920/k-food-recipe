@@ -1,7 +1,6 @@
 import React, { useEffect, useState }  from "react";
 import * as styled from "../styles/styledComponents";
-import { useSelector } from "react-redux";
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams , useNavigate, useLocation } from "react-router-dom";
 import Comment from "../components/noticeBoard/Comment";
 import Navbar from "../components/navbar/Navbar";
 import Parser from "html-react-parser";
@@ -13,8 +12,10 @@ import axios from "axios";
 const PostsDetail = () => {
     const navigate = useNavigate();
     const { id } = useParams();
-    const postsDetail = useSelector(post => post.posts);
-    const selectPosts = postsDetail.find((posts) => posts._id === id.toString());
+    const location = useLocation();
+
+    const postsList = location.state && location.state.postsList;
+    const selectPosts = postsList.find((posts) => posts._id === id.toString());
     const [ commentContent , setCommentContent ] = useState("");
     const [comments , setComments] = useState();
 
@@ -88,7 +89,7 @@ const PostsDetail = () => {
 
                         <div className ="user-info">
                             <styled.Span className ="user-date">
-                                { `${year}-${month}-${date}. ${hours}:${minutes}` }
+                                { `${year}-${month}-${date} ${hours}:${minutes}` }
                             </styled.Span>
                         </div>
 
@@ -124,7 +125,7 @@ const PostsDetail = () => {
                     <div className ="comment-container">
                         
                         <Comment 
-                        postsDetail = { postsDetail }
+                        postsDetail = { selectPosts }
                         commentContent = { commentContent } 
                         setCommentContent = { setCommentContent }
                         />

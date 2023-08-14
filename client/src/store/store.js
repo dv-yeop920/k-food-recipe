@@ -9,12 +9,11 @@ import postsSlice from "./slice/postsSlice";
 const persistConfig = {
     key: "user",
     storage: storageSession,
-    whitelist: ["user" , "posts"]
+    whitelist: ["user"]
 };
 
 const rootReducer = combineReducers({
     user: userSlice.reducer,
-    posts: postsSlice.reducer,
 });
 
 const persistedReducer =  persistReducer(persistConfig, rootReducer);
