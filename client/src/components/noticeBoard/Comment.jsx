@@ -3,19 +3,23 @@ import React from "react";
 import { useSelector } from "react-redux";
 import * as styled from "../../styles/styledComponents";
 
-const Comment = ({ comment , setComment }) => {
+const Comment = ({ postsDetail , commentContent , setCommentContent }) => {
     const userId = useSelector(user => user.user.id)
 
     const handleChangeComment = async (e) => {
-        await setComment(e.target.value);
-        return console.log(comment);
+        await setCommentContent(e.target.value);
+        return console.log(commentContent);
     }
     
     const hadleSubmitComment = async (e) => {
         e.preventDefault();
+
+        if(commentContent === "") return alert("내용을 입력해 주세요!");
+        
         const commentBody = {
+            post_id: postsDetail._id,
             id: userId,
-            content: comment
+            content: commentContent
         }
         await axios.post("/api/posts/comment/register" , commentBody)
         .then((response) => {

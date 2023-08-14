@@ -328,7 +328,27 @@ app.post("/api/posts/comment/register" , async (req , res) => {
 });
 
 app.get("/api/posts/comment/getComment" , async (req , res) => {
+    try {
+        const comments = await Comment.find().sort({ createdAt: -1 });
+        const modifiedComments = comments.map(comment => {
+            const parts = comment.id.split("_");
+            const userId = parts[0];
 
+            return {
+                ...comment.toObject(),
+                id: userId,
+            };
+        });
+        
+        res.json({
+            list: modifiedComments
+        });
+    }
+    catch (error) {
+        res.json({
+            messsage: "게시판 조회 실패했습니다"
+        })
+    }
 });
 
 app.put("/api/posts/comment/updateComment" , async (req , res) => {

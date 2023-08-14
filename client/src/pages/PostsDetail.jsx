@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import * as styled from "../styles/styledComponents";
 import { useSelector } from "react-redux";
 import { useParams , useNavigate } from "react-router-dom";
@@ -15,7 +15,9 @@ const PostsDetail = () => {
     const { id } = useParams();
     const postsDetail = useSelector(post => post.posts);
     const selectPosts = postsDetail.find((posts) => posts._id === id.toString());
-    const [ comment , setComment ] = useState("");
+    const [ commentContent , setCommentContent ] = useState("");
+    const [comments , setComments] = useState();
+
     
     const newDate = new Date(selectPosts.createdAt);
     const year = newDate.getFullYear();
@@ -23,6 +25,7 @@ const PostsDetail = () => {
     const date = newDate.getDate();
     const hours = newDate.getHours();
     const minutes = newDate.getMinutes();
+
 
 
 
@@ -45,6 +48,15 @@ const PostsDetail = () => {
             .catch((error) => console.log(error));
         }
     }
+
+    useEffect(() => {
+        axios.get("/api/posts/comment/getComment")
+        .then((response) => {
+            
+            return setComments(response.data.list);
+        })
+        .catch((error) => console.log(error));
+    } , []);
 
     return (
         <>
@@ -112,11 +124,45 @@ const PostsDetail = () => {
                     <div className ="comment-container">
                         
                         <Comment 
-                        comment = { comment } 
-                        setComment = { setComment }
+                        postsDetail = { postsDetail }
+                        commentContent = { commentContent } 
+                        setCommentContent = { setCommentContent }
                         />
 
                         <ul className ="commnet-list">
+                            {
+                                /*comments.map((comments) => {
+                                    return(
+                                        <li className ="comment">
+                                <div>
+                                    <span className ="user-id">
+                                        {comments.id}
+                                    </span>
+                                </div>
+
+                                <p className ="comment-content">
+                                    {comments.content}
+                                </p>
+                                <div>
+                                    <styled.Span>
+                                        좋아요
+                                    </styled.Span>
+
+                                    <styled.Span>
+                                        2023-8-9 14:00
+                                    </styled.Span>
+
+                                    <styled.Span
+                                    style={{cursor:"pointer"}}>
+                                        답글 쓰기
+                                    </styled.Span>
+                                </div>
+                            </li>
+                                    )
+                                })
+                                */
+
+                            }
                             <li className ="comment">
                                 <div>
                                     <span className ="user-id">
