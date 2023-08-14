@@ -16,8 +16,9 @@ const PostsDetail = () => {
 
     const postsList = location.state && location.state.postsList;
     const selectPosts = postsList.find((posts) => posts._id === id.toString());
+
     const [ commentContent , setCommentContent ] = useState("");
-    const [comments , setComments] = useState();
+    const [comments , setComments] = useState([]);
 
     
     const newDate = new Date(selectPosts.createdAt);
@@ -53,8 +54,8 @@ const PostsDetail = () => {
     useEffect(() => {
         axios.get("/api/posts/comment/getComment")
         .then((response) => {
-            
-            return setComments(response.data.list);
+            const getComment = response.data.list;
+            return setComments(getComment);
         })
         .catch((error) => console.log(error));
     } , []);
@@ -125,44 +126,40 @@ const PostsDetail = () => {
                     <div className ="comment-container">
                         
                         <Comment 
-                        postsDetail = { selectPosts }
+                        selectPosts = { selectPosts }
                         commentContent = { commentContent } 
                         setCommentContent = { setCommentContent }
                         />
 
                         <ul className ="commnet-list">
-                            {
-                                /*comments.map((comments) => {
+                            {   
+                            comments &&
+                                comments.map((comments , i) => {
                                     return(
-                                        <li className ="comment">
-                                <div>
-                                    <span className ="user-id">
-                                        {comments.id}
-                                    </span>
-                                </div>
+                                    <li className ="comment" key={i}>
+                                        <div>
+                                            <span className ="user-id">
+                                                {comments.id}
+                                            </span>
+                                        </div>
 
-                                <p className ="comment-content">
-                                    {comments.content}
-                                </p>
-                                <div>
-                                    <styled.Span>
-                                        좋아요
-                                    </styled.Span>
+                                        <p className ="comment-content">
+                                            {comments.content}
+                                        </p>
 
-                                    <styled.Span>
-                                        2023-8-9 14:00
-                                    </styled.Span>
+                                        <div>
+                                            <styled.Span>
+                                                2023-8-9 14:00
+                                            </styled.Span>
 
-                                    <styled.Span
-                                    style={{cursor:"pointer"}}>
-                                        답글 쓰기
-                                    </styled.Span>
-                                </div>
-                            </li>
+                                            <styled.Span
+                                            style={{cursor:"pointer"}}>
+                                                답글 쓰기
+                                            </styled.Span>
+                                        </div>
+                                    </li>
                                     )
                                 })
-                                */
-
                             }
                             <li className ="comment">
                                 <div>

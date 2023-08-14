@@ -3,7 +3,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import * as styled from "../../styles/styledComponents";
 
-const Comment = ({ postsDetail , commentContent , setCommentContent }) => {
+const Comment = (
+    { 
+        selectPosts ,
+        commentContent , 
+        setCommentContent ,
+    }
+    ) => {
     const userId = useSelector(user => user.user.id)
 
     const handleChangeComment = async (e) => {
@@ -15,15 +21,17 @@ const Comment = ({ postsDetail , commentContent , setCommentContent }) => {
         e.preventDefault();
 
         if(commentContent === "") return alert("내용을 입력해 주세요!");
-        
+
         const commentBody = {
-            post_id: postsDetail._id,
+            post_id: selectPosts._id,
             id: userId,
             content: commentContent
         }
+
         await axios.post("/api/posts/comment/register" , commentBody)
         .then((response) => {
             if(response.data.success === true) {
+                setCommentContent("");
                 return alert(response.data.messsage);
             }
             if(response.data.success === false) {
