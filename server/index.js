@@ -356,6 +356,21 @@ app.put("/api/posts/comment/updateComment" , async (req , res) => {
 
 });
 
-app.delete("/api/posts/comment/deleteComment" , async (req , res) => {
-
+app.post("/api/posts/comment/deleteComment" , async (req , res) => {
+    try {
+        await Comment.findOneAndDelete({
+            postsId: req.body.postsId
+        })
+        res.json({
+            deleteSuccess: true,
+            messsage: "삭제 되었습니다"
+        });
+    } 
+    catch (error) {
+        console.log(error);
+        res.json({
+            deleteSuccess: false,
+            messsage: "삭제 실패했습니다"
+        });
+    }
 });

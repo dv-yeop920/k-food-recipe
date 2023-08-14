@@ -38,7 +38,29 @@ const Comment = ({ selectPosts }) => {
         }
     }
 
-    
+    const handleCommentDelete = async () => {
+        const deleteComment = {
+            postsId: selectPostsId
+        }
+
+        try {
+            if(window.confirm("댓글을 정말 삭제하시겠습니까?")) {
+                const response = 
+                await axios.post("/api/posts/comment/deleteComment" , deleteComment);
+
+                if(response.data.deleteSuccess === true) {
+                    return alert(response.data.messsage);
+                }
+
+                if(response.data.deleteSuccess === false) {
+                    return alert(response.data.messsage);
+                }
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
         const getComments = async () => {
@@ -56,7 +78,7 @@ const Comment = ({ selectPosts }) => {
             }
         }
         getComments();
-    } , [selectPostsId]);
+    });
 
     return (
         <>
@@ -105,15 +127,29 @@ const Comment = ({ selectPosts }) => {
                                 {comments.content}
                             </p>
 
-                            <div>
-                                <styled.Span>
-                                    { `${year}-${month + 1}-${date} ${hours}:${minutes}` }
-                                </styled.Span>
+                            <div className="user-comment__buttons">
+                                <div className="date-reply__container">
+                                    <styled.Span className="comment-date">
+                                        { `${year}-${month + 1}-${date} ${hours}:${minutes}` }
+                                    </styled.Span>
 
-                                <styled.Span
-                                style={{cursor:"pointer"}}>
-                                    답글 쓰기
-                                </styled.Span>
+                                    <styled.Span
+                                    className="reply-button"
+                                    style={{cursor:"pointer"}}>
+                                        답글 쓰기
+                                    </styled.Span>
+                                </div>
+                                <div className ="edit-delete__button">
+                                    <styled.Span 
+                                    className ="edit-button comment-edit-delete">
+                                        수정
+                                    </styled.Span>
+                                    <styled.Span 
+                                    className ="delete-button comment-edit-delete"
+                                    onClick={ handleCommentDelete }>
+                                        삭제
+                                    </styled.Span>
+                                </div>
                             </div>
                         </li>
                         )

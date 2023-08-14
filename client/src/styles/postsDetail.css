@@ -44,7 +44,6 @@
 
 .edit-delete:hover {
     border-bottom: 1px solid #888;
-    transform: perspective(500px) translateZ(25px);
 }
 
 .post-title {
@@ -120,5 +119,22 @@
     justify-content: space-between;
     align-items: center;
     list-style: none;
+}
+
+.user-comment__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-edit-delete {
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+.reply-button:hover {
+    border-bottom: 1px solid #888;
+}
+.comment-edit-delete:hover {
+    border-bottom: 1px solid #888;
 }
 
