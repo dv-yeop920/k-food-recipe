@@ -15,7 +15,6 @@ const PostsDetail = () => {
     const [posts, setPosts] = useState();
 
 
-
 //모르겠는거
     const getPosts = async () => {
         const postId = id;
