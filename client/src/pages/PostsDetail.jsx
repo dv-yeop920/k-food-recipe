@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as styled from "../styles/styledComponents";
-import { useParams , useNavigate, useLocation } from "react-router-dom";
+import { useParams , useNavigate } from "react-router-dom";
 import Comment from "../components/noticeBoard/Comment";
 import Navbar from "../components/navbar/Navbar";
 import Parser from "html-react-parser";
@@ -12,20 +12,19 @@ import axios from "axios";
 const PostsDetail = () => {
     const navigate = useNavigate();
     const { id } = useParams();
-    const location = useLocation();
+    const [posts, setPosts] = useState();
 
-    const postsList = location.state && location.state.postsList;
-    const selectPosts = postsList.find((posts) => posts._id === id.toString());
 
-    const newDate = new Date(selectPosts.createdAt);
-    const year = newDate.getFullYear();
-    const month = newDate.getMonth();
-    const date = newDate.getDate();
-    const hours = newDate.getHours();
-    const minutes = newDate.getMinutes();
 
+//모르겠는거
+    const getPosts = async () => {
+        const postId = id;
+        const response =  await axios.get(`/api/posts/getPosts?id=${postId}`);
+        setPosts(response.data.posts)
+    }
 
     const deletePosts = async () => {
+
         const deletePost = {
             _id: id
         }
@@ -36,11 +35,13 @@ const PostsDetail = () => {
 
                 if(response.data.deleteSuccess === true) {
                     alert(response.data.messsage);
-                    return navigate(-1, { replace: true });
+                    navigate(-1, { replace: true });
+                    return;
                 }
                 
                 if(response.data.deleteSuccess === false) {
-                    return alert(response.data.messsage);
+                    alert(response.data.messsage);
+                    return;
                 }
             }
         }
@@ -48,6 +49,10 @@ const PostsDetail = () => {
             console.log(error);
         }
     }
+
+    useEffect(() => {
+        getPosts()
+    }, [])
 
     return (
         <>
@@ -66,20 +71,21 @@ const PostsDetail = () => {
 
                     <div className ="post-title__area">
                         <h2 className ="post-title">
-                            { selectPosts.title }
+                            { posts?.title }
                         </h2>
                     </div>
 
                     <div className ="post-user__wrap">
                         <div className ="user-info">
                             <span className ="user-id">
-                                { selectPosts.id }
+                                { posts?.id }
                             </span>
                         </div>
 
                         <div className ="user-info">
                             <styled.Span className ="user-date">
-                                { `${year}-${month + 1}-${date} ${hours}:${minutes}` }
+                                { //모름 2
+                                `${getDate(posts?.createdAt).year}-${getDate(posts?.createdAt).month + 1}-${getDate(posts?.createdAt).date} ${getDate(posts?.createdAt).hours}:${getDate(posts?.createdAt).minutes}` }
                             </styled.Span>
                         </div>
 
@@ -88,10 +94,7 @@ const PostsDetail = () => {
                             className ="edit-delete"
                             onClick ={() => {
                                 if(window.confirm("게시글을 수정하시겠습니까?")) {
-                                    return navigate(
-                                        `/postsUpdate/${id}` , 
-                                        { state: { postsList } })
-                                }
+                                    return navigate(`/postsUpdate/${id}`)}
                             } }>
                                 수정
                             </span>
@@ -106,7 +109,7 @@ const PostsDetail = () => {
                 </div>
 
                 <div className ="post-content">
-                    { Parser(selectPosts.content) }
+                    { Parser(posts?.content || "") }
                 </div>
 
                 <div className ="comment-wrap">
@@ -115,7 +118,9 @@ const PostsDetail = () => {
                     </div>
 
                     <div className ="comment-container">
-                        <Comment selectPosts = { selectPosts }/>
+                        <Comment selectPosts = { //모름 3
+                            posts
+                        }/>
                     </div>
 
                 </div>

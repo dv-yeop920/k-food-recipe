@@ -21,25 +21,48 @@ const modules = {
     }
 }
 
-const UpdateContent = ({selectedPosts , setNewTitle , newContent, setNewContent}) => {
+
+const UpdateContent = ({ newDetail , setNewDetail}) => {
+    //구조 분해 할당해서 title 과 content 로 분해
+    const { title , content } = newDetail;
+
+
+    const handelChangeTitle = (e) => {
+        //event.target에서 value 가져옴
+        const { value } = e.target; 
+        console.log(newDetail)
+        return setNewDetail({
+            ...newDetail,
+            title: value,
+        });
+    }
+
+    const handleChangeContent = (e) => {
+        return setNewDetail({
+            ...newDetail,
+            content: e
+        });
+    }
+
     return (
         <>
         <div className ="writing-container">
             <div className="writing-container__column">
-            <input 
-            className ="editor-title" 
-            type="text" 
-            value ={ selectedPosts[0].title }
-            placeholder = "제목"
-            onChange ={(e) => setNewTitle(e.target.value)}
-            />  
+                <input 
+                className ="editor-title" 
+                type="text" 
+                value ={ title }
+                onChange ={ handelChangeTitle }
+                />  
             </div>
+
             <div className="writing-container__column">
                 <ReactQuill  
-                className="content" 
-                value={ selectedPosts[0].content }
+                className="content"
+                name = "content"
+                value={ content }
                 modules={ modules }
-                onChange ={(e) => setNewContent(e)}
+                onChange ={ handleChangeContent }
                 /> 
             </div>          
         </div>

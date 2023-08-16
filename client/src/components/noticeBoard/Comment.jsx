@@ -8,12 +8,32 @@ const Comment = ({ selectPosts }) => {
     const selectPostsId = selectPosts._id;
     const [ commentContent , setCommentContent ] = useState("");
     const [comments , setComments] = useState([]);
+    
+    const getComments = async () => {
+        try {
+            const response = await axios.get("/api/posts/comment/getComment");
 
+            const getComment = response.data.list;
+
+            const commentsForSelectedPost = getComment.filter((comments) => { 
+                return comments.postsId === selectPostsId;
+            }
+            );
+
+            setComments(commentsForSelectedPost);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     const hadleSubmitComment = async (e) => {
         e.preventDefault();
 
-        if(commentContent === "") return alert("내용을 입력해 주세요!");
+        if(commentContent === "") {
+            alert("내용을 입력해 주세요!");
+            return;
+        }
 
         const commentBody = {
             postsId: selectPostsId,
@@ -26,15 +46,18 @@ const Comment = ({ selectPosts }) => {
 
             if(response.data.success === true) {
                 setCommentContent("");
-                return alert(response.data.messsage);
+                getComments();
+                alert(response.data.messsage);
+                return;
             }
 
             if(response.data.success === false) {
-                return alert(response.data.messsage);
+                alert(response.data.messsage);
+                return;
             }
         }
         catch (error) {
-            return console.log(error);
+            console.log(error);
         }
     }
 
@@ -50,16 +73,19 @@ const Comment = ({ selectPosts }) => {
 
         try {
             if(window.confirm("댓글을 정말 삭제하시겠습니까?")) {
-                console.log(filteredId)
                 const response = 
                 await axios.post("/api/posts/comment/deleteComment" , deleteComment);
+                console.log(response.data)
 
                 if(response.data.deleteSuccess === true) {
-                    return alert(response.data.messsage);
+                    alert(response.data.messsage);
+                    getComments();
+                    return;
                 }
 
                 if(response.data.deleteSuccess === false) {
-                    return alert(response.data.messsage);
+                    alert(response.data.messsage);
+                    return;
                 }
             }
         }
@@ -69,25 +95,9 @@ const Comment = ({ selectPosts }) => {
     }
 
     useEffect(() => {
-        const getComments = async () => {
-            try {
-                const response = await axios.get("/api/posts/comment/getComment");
-
-                const getComment = response.data.list;
-
-                const commentsForSelectedPost = getComment.filter((comments) => { 
-                    return comments.postsId === selectPostsId;
-                }
-                );
-
-                setComments(commentsForSelectedPost);
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
         getComments();
-    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>

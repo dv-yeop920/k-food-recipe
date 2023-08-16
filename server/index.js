@@ -208,13 +208,13 @@ app.post("/api/posts/register" , async (req , res) => {
     }
 });
 
+
 app.get("/api/posts/getPostsList" ,  async (req , res) => {
     try {
         const posts = await Post.find().sort({ createdAt: -1 });
         const modifiedPosts = posts.map(post => {
             const parts = post.id.split("_");
             const userId = parts[0];
-
             return {
                 ...post.toObject(),
                 id: userId,
@@ -232,23 +232,13 @@ app.get("/api/posts/getPostsList" ,  async (req , res) => {
     }
 });
 
-app.post("/api/posts/updateDetail" , async (req , res) => {
-    try{
-        const newPosts = await Post.findOne({_id: req.body._id});
-        res.json({
-            success: true,
-            title: newPosts.title,
-            content: newPosts.content,
-            createdAt: newPosts.createdAt
-        });
+app.get("/api/posts/getPosts", async (req, res) => {
+    const postsId = req.query.id;
+    if (postsId) {
+        const posts = await Post.findOne({_id : postsId})
+        res.json({ posts })
     }
-    catch (error) {
-        console.log(error);
-        res.json({
-            success: false
-        })
-    }
-});
+})
 
 app.put("/api/posts/update" , async (req , res) => {
     try {
@@ -274,6 +264,7 @@ app.put("/api/posts/update" , async (req , res) => {
         });
     }
 });
+
 
 app.post("/api/posts/delete" , async (req , res) => {
     try {
@@ -361,7 +352,8 @@ app.post("/api/posts/comment/deleteComment" , async (req , res) => {
     try {
         await Comment.findOneAndDelete({
             _id: req.body._id
-        })
+        });
+
         res.json({
             deleteSuccess: true,
             messsage: "삭제 되었습니다"

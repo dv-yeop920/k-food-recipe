@@ -5,6 +5,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import getDate from "../../utils/PostDate";
 
 
 
@@ -12,22 +13,20 @@ const PostsList = () => {
     const navigate = useNavigate();
     const [postsList , setPostsList] = useState([]);
 
+    const getPostsList = async () => {
+        try {
+            const response = await axios.get("/api/posts/getPostsList");
+            const getPosts = response.data.list;
+            setPostsList(getPosts);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        const getPostsList = async () => {
-            try {
-                const response = await axios.get("/api/posts/getPostsList");
-                const getPosts = response.data.list;
-                setPostsList(getPosts);
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
         getPostsList();
-        } , []);
-
-
+    } , []);
 
     return (
         <>
@@ -78,19 +77,12 @@ const PostsList = () => {
 
                 {
                     postsList.map((posts , i) => {
-                        const newDate = new Date(posts.createdAt);
-                        const year = newDate.getFullYear();
-                        const month = newDate.getMonth();
-                        const date = newDate.getDate();
-                        const hours = newDate.getHours();
-                        const minutes = newDate.getMinutes();
                         return(
                         <styled.Li 
                         className="board-list" 
                         key={i}
                         onClick ={() => 
-                        navigate(`/postsDetail/${posts._id}`,
-                        { state: { postsList } })}>
+                        navigate(`/postsDetail/${posts._id}`)}>
 
                             <div>
                                 <styled.Title>
@@ -114,7 +106,14 @@ const PostsList = () => {
                                 </styled.Span>
 
                                 <styled.Span>
-                                    {`${year}-${month + 1}-${date} ${hours}:${minutes}`}
+                                    {`
+                                        ${getDate(posts.createdAt).year}-${
+                                            getDate(posts.createdAt).month + 1}-${
+                                                getDate(posts.createdAt).date} 
+                                                
+                                        ${getDate(posts.createdAt).hours}:${
+                                            getDate(posts.createdAt).minutes}`
+                                    }
                                 </styled.Span>
 
                             </div>

@@ -13,18 +13,23 @@ const PostsUpdatePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const selectedPosts = location.state && location.state.postsList;
-    const [newTitle , setNewTitle] = useState("");
-    const [newContent, setNewContent] = useState("");
+    const postsList = location.state && location.state.postsList;
+    const selectedPosts = postsList.find((posts) => posts._id === id.toString());
+
+    const [newDetail, setNewDetail] = useState({
+        _id: selectedPosts._id,
+        title: selectedPosts.title,
+        content: selectedPosts.content
+    });
 
 
     const handleSubmitEditPosts = async (e) => {
         e.preventDefault();
 
         const updatePosts = {
-            _id: selectedPosts[0]._id,
-            title: newTitle,
-            content: newContent,
+            _id: newDetail._id,
+            title: newDetail.title,
+            content: newDetail.content,
         }
 
         try {
@@ -32,19 +37,21 @@ const PostsUpdatePage = () => {
                 const response = await axios.put("/api/posts/update" , updatePosts);
 
                 if(response.data.updateSuccess === false) {
-                    return alert(response.data.messsage);
+                    alert(response.data.messsage);
+                    return;
                 }
                 
                 if(response.data.updateSuccess === true) {
-                    navigate(`/postsDetail/${id}` , { replace: true });
-                    return alert(response.data.messsage);
+                    navigate(`/postsDetail/${id}`);
+                    alert(response.data.messsage);
+                    return;
                 }
             }
         }
         catch (error) {
             console.log(error);
         }
-        }
+    }
 
     return (
         <>
@@ -57,10 +64,10 @@ const PostsUpdatePage = () => {
                 <div className = "content-container">
                     <ImageUploader/>
                     <UpdateContent 
-                    selectedPosts ={selectedPosts}
-                    setNewTitle ={setNewTitle}
-                    newContent ={newContent}
-                    setNewContent ={setNewContent}/>
+                    selectedPosts ={ selectedPosts }
+                    newDetail ={ newDetail }
+                    setNewDetail ={ setNewDetail }
+                    />
                 </div>
                 
                 <div className ="writing-button__container">
@@ -69,7 +76,8 @@ const PostsUpdatePage = () => {
                     type="button"
                     onClick={() => {
                         if(window.confirm("게시글 수정을 취소 하시겠어요?")) 
-                            return navigate(-1, { replace: true });
+                            navigate(-1, { replace: true });
+                            return;
                         }
                     }>
                         취소
