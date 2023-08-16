@@ -239,11 +239,11 @@ app.get("/api/posts/getPost", async (req, res) => {
     const postId = req.query.id;
     try {
         if (postId) {
-            const post = await Post.findOne({_id : postId});
+            const post = await Post.findOne({ _id : postId });
 
                 const parts = post.id.split("_");
                 const userId = parts[0];
-    
+
                 post.id = userId;
 
             res.json({ 
@@ -259,7 +259,6 @@ app.get("/api/posts/getPost", async (req, res) => {
 
 app.put("/api/posts/update" , async (req , res) => {
     try {
-        console.log(req.body)
         await Post.findOneAndUpdate(
             { _id: req.body._id },
             {
@@ -268,6 +267,7 @@ app.put("/api/posts/update" , async (req , res) => {
                     content: req.body.content
                 }
             });
+
         res.json({
             updateSuccess: true,
             messsage: "업데이트 되었습니다"
@@ -275,6 +275,7 @@ app.put("/api/posts/update" , async (req , res) => {
     }
     catch (error) {
         console.log(error);
+
         res.json({
             updateSuccess: false,
             messsage: "업데이트 실패했습니다"
@@ -287,7 +288,8 @@ app.post("/api/posts/delete" , async (req , res) => {
     try {
         await Post.findOneAndDelete({
             _id: req.body._id
-        })
+        });
+
         res.json({
             deleteSuccess: true,
             messsage: "삭제 되었습니다"
@@ -362,7 +364,28 @@ app.get("/api/posts/comment/getComment" , async (req , res) => {
 });
 
 app.put("/api/posts/comment/updateComment" , async (req , res) => {
+    try {
+        await Comment.findOneAndUpdate(
+            { _id: req.body._id },
+            {
+                $set: {
+                    content: req.body.content
+                }
+            });
 
+        res.json({
+            updateSuccess: true,
+            messsage: "업데이트 되었습니다"
+        });
+    }
+    catch (error) {
+        console.log(error);
+
+        res.json({
+            updateSuccess: false,
+            messsage: "업데이트 실패했습니다"
+        });
+    }
 });
 
 app.post("/api/posts/comment/deleteComment" , async (req , res) => {

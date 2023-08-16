@@ -13,7 +13,7 @@ const PostsUpdatePage = () => {
     const navigate = useNavigate();
 
     const [newDetail, setNewDetail] = useState({});
-    
+
     const getPost = async () => {
         const postId = id;
 
@@ -93,7 +93,7 @@ const PostsUpdatePage = () => {
                     <styled.SubmitButton
                     type ="submit"
                     className ="writing-button__submit default-btn">
-                        등록
+                        수정
                     </styled.SubmitButton>
                 </div>
             </form>
