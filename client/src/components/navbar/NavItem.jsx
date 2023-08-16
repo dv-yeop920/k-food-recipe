@@ -9,6 +9,7 @@ import axios from "axios";
 
 const NavItem = (
     { 
+        openCloseMenuModal,
         modalRef , 
         modalOutSideClick , 
         openCloseLoginModal , 
@@ -27,9 +28,9 @@ const NavItem = (
                 const response = await axios.post("/api/users/logout");
 
                 if(response.status === 200) {
-                    dispatch(logoutUser());
-                    console.log(response.data , response.status);
+                    openCloseMenuModal();
                     alert(response.data.messsage);
+                    dispatch(logoutUser());
                     return navigate("/");
                 }
             }
@@ -66,6 +67,7 @@ const NavItem = (
                         className ="navbar-link"
                         onClick ={ () => {
                             if(user.loginSuccess === false) {
+                                openCloseMenuModal();
                                 alert("회원만 이용할 수 있습니다");
                                 openCloseSignUpModal();
                                 return;

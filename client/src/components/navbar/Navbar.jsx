@@ -16,7 +16,7 @@ const Navbar = () => {
     
     const [
             menuModal,
-            openMenuModal,
+            openCloseMenuModal,
             loginModal,
             signUpModal, 
             openCloseLoginModal, 
@@ -78,7 +78,7 @@ const Navbar = () => {
                     </button>
 
                     <button 
-                    onClick ={ openMenuModal }
+                    onClick ={ openCloseMenuModal }
                     className ="user-sign__button"
                     >
                         <FontAwesomeIcon
@@ -100,7 +100,8 @@ const Navbar = () => {
         { 
             menuModal === true &&
                 <NavItem
-                modalRef={modalRef} 
+                openCloseMenuModal ={ openCloseMenuModal }
+                modalRef ={ modalRef } 
                 modalOutSideClick={modalOutSideClick}
                 openCloseLoginModal ={ openCloseLoginModal }
                 openCloseSignUpModal ={ openCloseSignUpModal }
@@ -110,8 +111,9 @@ const Navbar = () => {
         { 
             loginModal === true && 
                 <LoginPage
-                modalRef={modalRef} 
-                modalOutSideClick={modalOutSideClick}
+                openCloseMenuModal ={ openCloseMenuModal }
+                modalRef ={ modalRef } 
+                modalOutSideClick ={ modalOutSideClick }
                 openCloseLoginModal ={ openCloseLoginModal }
                 changeModal ={ changeModal }
                 userId ={ userId }
@@ -123,8 +125,8 @@ const Navbar = () => {
         { 
             signUpModal === true && 
                 <SignUpPage 
-                modalRef={modalRef} 
-                modalOutSideClick={modalOutSideClick}
+                modalRef ={ modalRef } 
+                modalOutSideClick ={ modalOutSideClick }
                 openCloseSignUpModal ={ openCloseSignUpModal }
                 changeModal ={ changeModal }
                 userName ={ userName }

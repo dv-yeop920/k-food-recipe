@@ -24,7 +24,7 @@ const useModal = (initialState) => {
         }
     }
 
-    const openMenuModal = () => {
+    const openCloseMenuModal = () => {
         setMenuModal(!menuModal);
         return;
     }
@@ -47,7 +47,7 @@ const useModal = (initialState) => {
 
     return [ 
             menuModal,
-            openMenuModal,
+            openCloseMenuModal,
             loginModal,
             signUpModal,
             openCloseLoginModal, 

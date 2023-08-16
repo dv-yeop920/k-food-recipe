@@ -9,6 +9,7 @@ import axios from "axios";
 
 const LoginPage = (
     { 
+        openCloseMenuModal,
         modalRef,
         modalOutSideClick,
         openCloseLoginModal,
@@ -42,6 +43,7 @@ const LoginPage = (
             }
             if(response.data.loginSuccess === true) {
                 openCloseLoginModal();
+                openCloseMenuModal();
                 setMessage("");
                 alert(response.data.messsage);
                 return dispatch(loginUser(response.data));
