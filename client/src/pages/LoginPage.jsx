@@ -9,6 +9,8 @@ import axios from "axios";
 
 const LoginPage = (
     { 
+        modalRef,
+        modalOutSideClick,
         openCloseLoginModal,
         changeModal,
         userId,
@@ -52,7 +54,11 @@ const LoginPage = (
 
     return (
         <>
-        <div className ="sign-modal">
+        <div 
+        ref ={ modalRef } 
+        onClick ={ (e) => modalOutSideClick(e) }
+        className ="sign-modal">
+
             <main className ="user-form__container">
                 <styled.LoginSignUpform 
                 className ="user-form"

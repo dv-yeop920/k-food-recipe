@@ -62,7 +62,7 @@ const PostsList = () => {
         <styled.BoardContainer>
             <ul className ="board">
                 <styled.Li 
-                className ="board-list"
+                className ="post-list"
                 style ={{
                     color:"rgb(200, 50, 100)"
                 }}>

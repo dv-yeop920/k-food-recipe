@@ -75,9 +75,9 @@ app.post("/api/users/register" , async (req , res) => {
 
 
 
-app.post("/api/users/login",(req , res) =>{
+app.post("/api/users/login", async (req , res) => {
     // 요청된 이메일을 데이터베이스 찾기
-    User.findOne({id: req.body.id})
+    await User.findOne({id: req.body.id})
     .then((docs) =>{
         if(!docs){
             return res.json({
@@ -148,9 +148,9 @@ app.get("/api/users/auth" , auth , (req , res) => {
     });
 });
 
-app.post("/api/users/logout" , auth , (req , res) => {
+app.post("/api/users/logout" , auth , async (req , res) => {
     //db에서 정보를 찾아서 업데이트 시켜서 토큰을 삭제 한다
-    User.findOneAndUpdate(
+    await User.findOneAndUpdate(
         { _id: req.user._id } ,
         { token: "" })
         .then((docs) => {

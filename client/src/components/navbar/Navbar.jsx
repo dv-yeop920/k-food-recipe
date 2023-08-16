@@ -15,13 +15,15 @@ const Navbar = () => {
     const navigate = useNavigate();
     
     const [
-            modal,
-            openModal,
+            menuModal,
+            openMenuModal,
             loginModal,
             signUpModal, 
             openCloseLoginModal, 
             openCloseSignUpModal, 
-            changeModal
+            changeModal,
+            modalRef,
+            modalOutSideClick
         ] = useModal(false);
 
     const [
@@ -76,7 +78,7 @@ const Navbar = () => {
                     </button>
 
                     <button 
-                    onClick ={ openModal }
+                    onClick ={ openMenuModal }
                     className ="user-sign__button"
                     >
                         <FontAwesomeIcon
@@ -91,21 +93,25 @@ const Navbar = () => {
                             size ="1x"
                         />
                     </button>
-
-                    { modal === true && 
-                        <NavItem
-                        openCloseLoginModal ={ openCloseLoginModal }
-                        openCloseSignUpModal ={ openCloseSignUpModal }
-                        />
-                    }
-
                 </div>
             </div>
         </styled.Header>
+
+        { 
+            menuModal === true &&
+                <NavItem
+                modalRef={modalRef} 
+                modalOutSideClick={modalOutSideClick}
+                openCloseLoginModal ={ openCloseLoginModal }
+                openCloseSignUpModal ={ openCloseSignUpModal }
+                />
+        }
         
         { 
             loginModal === true && 
                 <LoginPage
+                modalRef={modalRef} 
+                modalOutSideClick={modalOutSideClick}
                 openCloseLoginModal ={ openCloseLoginModal }
                 changeModal ={ changeModal }
                 userId ={ userId }
@@ -117,6 +123,8 @@ const Navbar = () => {
         { 
             signUpModal === true && 
                 <SignUpPage 
+                modalRef={modalRef} 
+                modalOutSideClick={modalOutSideClick}
                 openCloseSignUpModal ={ openCloseSignUpModal }
                 changeModal ={ changeModal }
                 userName ={ userName }

@@ -13,7 +13,7 @@ const Comment = ({ post }) => {
     const [updateComment , setUpdateComment] = useState("");
     const [isEdit , setIsEdit] = useState(false);
 
-    
+
     const getComment = async () => {
         try {
             const response = await axios.get("/api/posts/comment/getComment");
@@ -31,6 +31,7 @@ const Comment = ({ post }) => {
             console.log(error);
         }
     }
+
 
     const hadleSubmitComment = async (e) => {
         e.preventDefault();
@@ -65,6 +66,7 @@ const Comment = ({ post }) => {
         }
     }
 
+
     const handleClickCommentDelete = async (commentId) => {
 
         const filteredId = comment.filter((comment) => {
@@ -95,6 +97,7 @@ const Comment = ({ post }) => {
             console.log(error);
         }
     }
+
 
     const handleClickCommentEdit  = async (commentId) => {
         const filteredId = comment.filter((comment) => {
@@ -127,6 +130,7 @@ const Comment = ({ post }) => {
             console.log(error);
         }
     }
+
 
     useEffect(() => {
         getComment();

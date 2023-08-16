@@ -1,36 +1,60 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 
 const useModal = (initialState) => {
-    const [modal , setModal] = useState(initialState);
+    const [menuModal , setMenuModal] = useState(initialState);
     const [loginModal , setLoginModal] = useState(initialState);
     const [signUpModal , setSignUpModal] = useState(initialState);
+    const modalRef = useRef(null);
 
-    const openModal = () => {
-        return setModal(!modal);
+
+    const modalOutSideClick = (e) => {
+        if(modalRef.current === e.target) {
+            switch(e.target.className) {
+                case  "sign-modal":
+                    setMenuModal(false);
+                    setLoginModal(false);
+                    setSignUpModal(false);
+                    break;
+                case "menu-modal":
+                    setMenuModal(false);
+                    break;
+                default:
+            }
+        }
+    }
+
+    const openMenuModal = () => {
+        setMenuModal(!menuModal);
+        return;
     }
 
     const openCloseLoginModal = () => {
-        return setLoginModal(!loginModal);
+        setLoginModal(!loginModal);
+        return;
     }
 
     const openCloseSignUpModal = () => {
-        return setSignUpModal(!signUpModal);
+            setSignUpModal(!signUpModal);
+            return;
     }
     
     const changeModal = () => {
         setLoginModal(!loginModal);
-        return setSignUpModal(!signUpModal);
+        setSignUpModal(!signUpModal);
+        return;
     }
 
     return [ 
-            modal,
-            openModal,
+            menuModal,
+            openMenuModal,
             loginModal,
             signUpModal,
             openCloseLoginModal, 
             openCloseSignUpModal, 
-            changeModal 
+            changeModal ,
+            modalRef,
+            modalOutSideClick
         ];
 }
 

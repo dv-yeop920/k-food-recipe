@@ -2,7 +2,9 @@ import React from "react";
 import Navbar from "../components/navbar/Navbar"
 import ScrollToTopButton from "../components/ScrollToTopButton";
 
+
 const MainPage = () => {
+
     return (
         <>
         <Navbar/>

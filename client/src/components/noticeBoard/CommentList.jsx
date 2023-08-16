@@ -67,56 +67,57 @@ const CommentList = (
                                 </div>
                                 <div className ="edit-delete__button">
 
-                                    {
-                                        isEdit === true && editId === comment._id ?
-                                        (
-                                        <>
+                                {
+                                    isEdit === true && editId === comment._id ?
+                                    (
+                                    <>
 
-                                        <styled.Span 
-                                        className ="edit-button comment-edit-delete"
-                                        onClick ={ () => {
-                                            setIsEdit(!isEdit);
-                                            return;
-                                        }}>
-                                            취소
-                                        </styled.Span>
+                                    <styled.Span 
+                                    className ="edit-button comment-edit-delete"
+                                    onClick ={ () => {
+                                        setIsEdit(!isEdit);
+                                        return;
+                                    }}>
+                                        취소
+                                    </styled.Span>
 
-                                        <styled.Span 
-                                        className ="delete-button comment-edit-delete"
-                                        onClick={ () => handleClickCommentEdit(comment._id) }>
-                                            완료
-                                        </styled.Span>
+                                    <styled.Span 
+                                    className ="delete-button comment-edit-delete"
+                                    onClick={ () => handleClickCommentEdit(comment._id) }>
+                                        완료
+                                    </styled.Span>
 
-                                        </>
-                                        )
+                                    </>
+                                    )
 
-                                        :
+                                    :
 
-                                        (
-                                        <>
-                                        <styled.Span 
-                                        className ="edit-button comment-edit-delete"
-                                        onClick ={ () => {
-                                            setIsEdit(!isEdit);
-                                            setEditId(comment._id);
-                                            setUpdateComment(comment.content);
-                                            return;
-                                        }}>
-                                            수정
-                                        </styled.Span>
+                                    (
+                                    <>
+                                    <styled.Span 
+                                    className ="edit-button comment-edit-delete"
+                                    onClick ={ () => {
+                                        setIsEdit(!isEdit);
+                                        setEditId(comment._id);
+                                        setUpdateComment(comment.content);
+                                        return;
+                                    }}>
+                                        수정
+                                    </styled.Span>
 
-                                        <styled.Span 
-                                        className ="delete-button comment-edit-delete"
-                                        onClick ={ () => handleClickCommentDelete(comment._id) }>
-                                            삭제
-                                        </styled.Span>
-                                        </>
-                                        )
-                                    }
+                                    <styled.Span 
+                                    className ="delete-button comment-edit-delete"
+                                    onClick ={ () => handleClickCommentDelete(comment._id) }>
+                                        삭제
+                                    </styled.Span>
+                                    </>
+                                    )
+                                }
+
                                 </div>
                             </div>
                         </li>
-                        )
+                        );
                     })
                 }
             </ul>
