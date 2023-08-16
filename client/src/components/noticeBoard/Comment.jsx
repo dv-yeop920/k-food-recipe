@@ -12,6 +12,7 @@ const Comment = ({ post }) => {
     const [comment , setComment] = useState([]);
     const [updateComment , setUpdateComment] = useState("");
     const [isEdit , setIsEdit] = useState(false);
+
     
     const getComment = async () => {
         try {
@@ -49,8 +50,8 @@ const Comment = ({ post }) => {
             const response = await axios.post("/api/posts/comment/register" , commentBody);
 
             if(response.data.success === true) {
-                setCommentContent("");
                 alert(response.data.messsage);
+                setCommentContent("");
                 return;
             }
 

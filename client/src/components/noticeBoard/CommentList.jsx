@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as styled from "../../styles/styledComponents";
 import getDate from "../../utils/postDate";
 
@@ -13,7 +13,7 @@ const CommentList = (
         handleClickCommentEdit
     }
     ) => {
-
+        const [editId , setEditId] = useState("");
     return (
         <>
             <ul className ="commnet-list">
@@ -30,16 +30,19 @@ const CommentList = (
                             </div>
 
                             {
-                                isEdit === false ?
-                                <p className ="comment-content">
-                                    { comment.content } 
-                                </p>
-                                :
+                                isEdit === true && editId === comment._id ?
+
                                 <textarea
                                 className ="comment-input"
                                 value ={ updateComment }
                                 onChange ={ (e) => setUpdateComment(e.target.value) }>
                                 </textarea>
+
+                                :
+
+                                <p className ="comment-content">
+                                    { comment.content } 
+                                </p>
                             }
 
                             <div className ="user-comment__buttons">
@@ -63,31 +66,52 @@ const CommentList = (
                                     </styled.Span>
                                 </div>
                                 <div className ="edit-delete__button">
-                                    <styled.Span 
-                                    className ="edit-button comment-edit-delete"
-                                    onClick ={ () => {
-                                        setIsEdit(!isEdit);
-                                        setUpdateComment(comment.content);
-                                        return;
-                                    }}>
-                                        {
-                                            isEdit === false ? "수정" : "취소"
-                                        }
-                                    </styled.Span>
 
                                     {
-                                        isEdit === false ?
+                                        isEdit === true && editId === comment._id ?
+                                        (
+                                        <>
+
                                         <styled.Span 
-                                        className ="delete-button comment-edit-delete"
-                                        onClick ={ () => handleClickCommentDelete(comment._id) }>
-                                            삭제
+                                        className ="edit-button comment-edit-delete"
+                                        onClick ={ () => {
+                                            setIsEdit(!isEdit);
+                                            return;
+                                        }}>
+                                            취소
                                         </styled.Span>
-                                        :
+
                                         <styled.Span 
                                         className ="delete-button comment-edit-delete"
                                         onClick={ () => handleClickCommentEdit(comment._id) }>
                                             완료
                                         </styled.Span>
+
+                                        </>
+                                        )
+
+                                        :
+
+                                        (
+                                        <>
+                                        <styled.Span 
+                                        className ="edit-button comment-edit-delete"
+                                        onClick ={ () => {
+                                            setIsEdit(!isEdit);
+                                            setEditId(comment._id);
+                                            setUpdateComment(comment.content);
+                                            return;
+                                        }}>
+                                            수정
+                                        </styled.Span>
+
+                                        <styled.Span 
+                                        className ="delete-button comment-edit-delete"
+                                        onClick ={ () => handleClickCommentDelete(comment._id) }>
+                                            삭제
+                                        </styled.Span>
+                                        </>
+                                        )
                                     }
                                 </div>
                             </div>
