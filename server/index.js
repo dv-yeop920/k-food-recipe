@@ -241,6 +241,11 @@ app.get("/api/posts/getPost", async (req, res) => {
         if (postId) {
             const post = await Post.findOne({_id : postId});
 
+                const parts = post.id.split("_");
+                const userId = parts[0];
+    
+                post.id = userId;
+
             res.json({ 
                 list: post
             });

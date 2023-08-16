@@ -28,16 +28,15 @@ const UpdateContent = ({ newDetail , setNewDetail}) => {
 
 
     const handelChangeTitle = (e) => {
-        //event.target에서 value 가져옴
-        const { value } = e.target; 
         console.log(newDetail)
         return setNewDetail({
             ...newDetail,
-            title: value,
+            title: e.target.value,
         });
     }
 
     const handleChangeContent = (e) => {
+        console.log(newDetail)
         return setNewDetail({
             ...newDetail,
             content: e
@@ -51,7 +50,7 @@ const UpdateContent = ({ newDetail , setNewDetail}) => {
                 <input 
                 className ="editor-title" 
                 type="text" 
-                value ={ title }
+                value ={ title || "" }
                 onChange ={ handelChangeTitle }
                 />  
             </div>
@@ -59,7 +58,6 @@ const UpdateContent = ({ newDetail , setNewDetail}) => {
             <div className="writing-container__column">
                 <ReactQuill  
                 className="content"
-                name = "content"
                 value={ content }
                 modules={ modules }
                 onChange ={ handleChangeContent }

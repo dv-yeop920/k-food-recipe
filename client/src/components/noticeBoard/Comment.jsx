@@ -2,25 +2,26 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import * as styled from "../../styles/styledComponents";
+import getDate from "../../utils/postDate";
 
-const Comment = ({ selectPosts }) => {
-    /*const userId = useSelector(user => user.user.id);
-    const selectPostsId = selectPosts._id;
+const Comment = ({post}) => {
+    const userId = useSelector(user => user.user.id);
+    const postId = post._id;
     const [ commentContent , setCommentContent ] = useState("");
-    const [comments , setComments] = useState([]);
+    const [comment , setComment] = useState([]);
     
-    const getComments = async () => {
+    const getComment = async () => {
         try {
             const response = await axios.get("/api/posts/comment/getComment");
 
-            const getComment = response.data.list;
+            const getComments = response.data.list;
 
-            const commentsForSelectedPost = getComment.filter((comments) => { 
-                return comments.postsId === selectPostsId;
+            const commentForThisPost = getComments.filter((comment) => { 
+                return comment.postsId === postId;
             }
             );
 
-            setComments(commentsForSelectedPost);
+            setComment(commentForThisPost);
         }
         catch (error) {
             console.log(error);
@@ -36,7 +37,7 @@ const Comment = ({ selectPosts }) => {
         }
 
         const commentBody = {
-            postsId: selectPostsId,
+            postsId: postId,
             id: userId,
             content: commentContent
         }
@@ -46,7 +47,6 @@ const Comment = ({ selectPosts }) => {
 
             if(response.data.success === true) {
                 setCommentContent("");
-                getComments();
                 alert(response.data.messsage);
                 return;
             }
@@ -61,10 +61,10 @@ const Comment = ({ selectPosts }) => {
         }
     }
 
-    const handleCommentDelete = async (commentsId) => {
+    const handleCommentDelete = async (commentId) => {
 
-        const filteredId = comments.filter((comments) => {
-            return commentsId === comments._id;
+        const filteredId = comment.filter((comment) => {
+            return commentId === comment._id;
         });
 
         const deleteComment = {
@@ -79,7 +79,6 @@ const Comment = ({ selectPosts }) => {
 
                 if(response.data.deleteSuccess === true) {
                     alert(response.data.messsage);
-                    getComments();
                     return;
                 }
 
@@ -95,9 +94,9 @@ const Comment = ({ selectPosts }) => {
     }
 
     useEffect(() => {
-        getComments();
+        getComment();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [comment]);
 
     return (
         <>
@@ -125,31 +124,33 @@ const Comment = ({ selectPosts }) => {
 
             <ul className ="commnet-list">
                 {   
-                comments &&
-                    comments.map((comments , i) => {
-                        const newDate = new Date(comments.createdAt);
-                        const year = newDate.getFullYear();
-                        const month = newDate.getMonth();
-                        const date = newDate.getDate();
-                        const hours = newDate.getHours();
-                        const minutes = newDate.getMinutes();
+                comment &&
+                comment.map((comment , i) => {
 
                         return(
-                        <li className ="comment" key={i}>
+                        <li className ="comment" key={comment._id}>
                             <div>
                                 <span className ="user-id">
-                                    {comments.id}
+                                    {comment.id}
                                 </span>
                             </div>
 
                             <p className ="comment-content">
-                                {comments.content}
+                                {comment.content}
                             </p>
 
                             <div className="user-comment__buttons">
                                 <div className="date-reply__container">
                                     <styled.Span className="comment-date">
-                                        { `${year}-${month + 1}-${date} ${hours}:${minutes}` }
+                                        {
+                                            `
+                                            ${ getDate(comment.createdAt).year }-${
+                                                getDate(comment.createdAt).month + 1}-${
+                                                    getDate(comment.createdAt).date } 
+
+                                            ${getDate(comment.createdAt).hours}:${
+                                                getDate(comment.createdAt).minutes }`
+                                        }
                                     </styled.Span>
 
                                     <styled.Span
@@ -165,7 +166,7 @@ const Comment = ({ selectPosts }) => {
                                     </styled.Span>
                                     <styled.Span 
                                     className ="delete-button comment-edit-delete"
-                                    onClick={ () => handleCommentDelete(comments._id) }>
+                                    onClick={ () => handleCommentDelete(comment._id) }>
                                         삭제
                                     </styled.Span>
                                 </div>
@@ -178,7 +179,6 @@ const Comment = ({ selectPosts }) => {
         </div>
         </>
     );
-    */
 }
 
 export default Comment;

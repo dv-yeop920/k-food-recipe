@@ -13,12 +13,10 @@ const PostsDetail = () => {
     const navigate = useNavigate();
     //postList 에서 넘겨준 게시물의 고유 _id값
     const { id } = useParams();
-    //const [post, setPost] = useState();
+    const [post, setPost] = useState({});
 
 
-//모르겠는거
-    /*const getPost = async () => {
-
+    const getPost = async () => {
         const postId = id;
 
         try {
@@ -30,15 +28,15 @@ const PostsDetail = () => {
         }
     }
 
-    const deletePosts = async () => {
 
-        const deletePost = {
+    const handleClickdeletePost = async () => {
+        const postId = {
             _id: id
         }
 
         try {
             if(window.confirm("게시물을 정말 삭제하시겠습니까?")) {
-                const response = await axios.post("/api/posts/delete" , deletePost);
+                const response = await axios.post("/api/posts/delete" , postId);
 
                 if(response.data.deleteSuccess === true) {
                     alert(response.data.messsage);
@@ -60,8 +58,8 @@ const PostsDetail = () => {
     useEffect(() => {
         getPost();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-*/
+    }, []);
+
     return (
         <>
         <Navbar/>
@@ -79,27 +77,27 @@ const PostsDetail = () => {
 
                     <div className ="post-title__area">
                         <h2 className ="post-title">
-                            { }
+                            { post.title }
                         </h2>
                     </div>
 
                     <div className ="post-user__wrap">
                         <div className ="user-info">
                             <span className ="user-id">
-                                { }
+                                { post.id }
                             </span>
                         </div>
 
                         <div className ="user-info">
                             <styled.Span className ="user-date">
-                                {/*
+                                {
                                     `
                                     ${ getDate(post.createdAt).year }-${
                                         getDate(post.createdAt).month + 1}-${
                                             getDate(post.createdAt).date } 
 
                                     ${getDate(post.createdAt).hours}:${
-                                        getDate(post.createdAt).minutes }`*/
+                                        getDate(post.createdAt).minutes }`
                                 }
                             </styled.Span>
                         </div>
@@ -109,13 +107,14 @@ const PostsDetail = () => {
                             className ="edit-delete"
                             onClick ={() => {
                                 if(window.confirm("게시글을 수정하시겠습니까?")) {
-                                    return navigate(`/postUpdate/${id}`)}
+                                    navigate(`/postUpdate/${id}`);
+                                }
                             } }>
                                 수정
                             </span>
                             <span 
                             className ="edit-delete"
-                            >
+                            onClick ={ handleClickdeletePost }>
                                 삭제
                             </span>
                         </div>
@@ -124,9 +123,7 @@ const PostsDetail = () => {
                 </div>
 
                 <div className ="post-content">
-                    { 
-                    //Parser(post?.content) 
-                    }
+                    { Parser(String(post.content)) }
                 </div>
 
                 <div className ="comment-wrap">
@@ -135,7 +132,7 @@ const PostsDetail = () => {
                     </div>
 
                     <div className ="comment-container">
-                        <Comment />
+                        <Comment post ={post}/>
                     </div>
 
                 </div>

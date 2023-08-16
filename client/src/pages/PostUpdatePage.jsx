@@ -1,6 +1,6 @@
-import React ,{ useState } from "react";
+import React ,{ useEffect, useState } from "react";
 import * as styled from "../styles/styledComponents";
-import { useLocation, useNavigate , useParams } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/navbar/Navbar";
 import ScrollToTopButton from "../components/ScrollToTopButton";
@@ -9,18 +9,22 @@ import UpdateContent from "../components/writing/UpdateContent";
 
 
 const PostsUpdatePage = () => {
-   /* const { id } = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const postsList = location.state && location.state.postsList;
-    const selectedPosts = postsList.find((posts) => posts._id === id.toString());
+    const [newDetail, setNewDetail] = useState({});
+    
+    const getPost = async () => {
+        const postId = id;
 
-    const [newDetail, setNewDetail] = useState({
-        _id: selectedPosts._id,
-        title: selectedPosts.title,
-        content: selectedPosts.content
-    });
+        try {
+            const response =  await axios.get(`/api/posts/getPost?id=${postId}`);
+            setNewDetail(response.data.list);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
 
     const handleSubmitEditPosts = async (e) => {
@@ -42,7 +46,7 @@ const PostsUpdatePage = () => {
                 }
                 
                 if(response.data.updateSuccess === true) {
-                    navigate(`/postsDetail/${id}`);
+                    navigate(-1 , {replace: true});
                     alert(response.data.messsage);
                     return;
                 }
@@ -52,19 +56,22 @@ const PostsUpdatePage = () => {
             console.log(error);
         }
     }
+    useEffect(() => {
+        getPost();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , []);
 
     return (
         <>
         <Navbar/>
         <div className ="editor-container">
             <form 
-            className = "editor-form"
-            onSubmit = { handleSubmitEditPosts }>
+            className ="editor-form"
+            onSubmit ={ handleSubmitEditPosts }>
 
-                <div className = "content-container">
+                <div className ="content-container">
                     <ImageUploader/>
                     <UpdateContent 
-                    selectedPosts ={ selectedPosts }
                     newDetail ={ newDetail }
                     setNewDetail ={ setNewDetail }
                     />
@@ -73,19 +80,19 @@ const PostsUpdatePage = () => {
                 <div className ="writing-button__container">
                     <styled.DeleteButton
                     className ="writing-button__delete delete-btn"
-                    type="button"
+                    type ="button"
                     onClick={() => {
-                        if(window.confirm("게시글 수정을 취소 하시겠어요?")) 
+                        if(window.confirm("게시글 수정을 취소 하시겠어요?")) {
                             navigate(-1, { replace: true });
                             return;
                         }
-                    }>
+                    }}>
                         취소
                     </styled.DeleteButton>
 
                     <styled.SubmitButton
-                    type = "submit"
-                    className = "writing-button__submit default-btn">
+                    type ="submit"
+                    className ="writing-button__submit default-btn">
                         등록
                     </styled.SubmitButton>
                 </div>
@@ -94,7 +101,6 @@ const PostsUpdatePage = () => {
         <ScrollToTopButton/>
         </>
     );
-    */
 };
 
 export default PostsUpdatePage;

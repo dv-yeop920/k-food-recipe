@@ -1,10 +1,10 @@
+import axios from "axios";
 import React, { useState , useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import ScrollToTopButton from "../ScrollToTopButton";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import getDate from "../../utils/postDate";
 
 
@@ -13,9 +13,6 @@ const PostsList = () => {
     const navigate = useNavigate();
     const [postList , setPostList] = useState([]);
 
-    const handleClickNavigate = (postId) => {
-        navigate(`/postDetail/${postId}`);
-    }
 
     const getPostList = async () => {
         try {
@@ -26,6 +23,10 @@ const PostsList = () => {
         catch (error) {
             console.log(error);
         }
+    }
+
+    const handleClickPostDetailNavigate = (postId) => {
+        navigate(`/postDetail/${postId}`);
     }
 
     useEffect(() => {
@@ -81,12 +82,11 @@ const PostsList = () => {
 
                 {
                     postList.map((post , i) => {
-                        console.log(typeof post._id)
                         return(
                         <styled.Li 
                         className ="post-list" 
-                        key={i}
-                        onClick ={() => handleClickNavigate(post._id) }>
+                        key={post._id}
+                        onClick ={() => handleClickPostDetailNavigate(post._id) }>
 
                             <div>
                                 <styled.Title>
