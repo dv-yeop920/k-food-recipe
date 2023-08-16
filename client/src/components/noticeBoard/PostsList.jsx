@@ -11,13 +11,13 @@ import getDate from "../../utils/PostDate";
 
 const PostsList = () => {
     const navigate = useNavigate();
-    const [postsList , setPostsList] = useState([]);
+    const [postList , setPostList] = useState([]);
 
-    const getPostsList = async () => {
+    const getPostList = async () => {
         try {
             const response = await axios.get("/api/posts/getPostsList");
             const getPosts = response.data.list;
-            setPostsList(getPosts);
+            setPostList(getPosts);
         }
         catch (error) {
             console.log(error);
@@ -25,39 +25,39 @@ const PostsList = () => {
     }
 
     useEffect(() => {
-        getPostsList();
+        getPostList();
     } , []);
 
     return (
         <>
         <styled.SearchContainer>
             <form
-            className="user-search__form">
+            className ="user-search__form">
 
                 <styled.Input
-                className="user-search__input"
-                type="text"
-                placeholder="단어 단위로 입력..."/>
+                className ="user-search__input"
+                type ="text"
+                placeholder ="단어 단위로 입력..."/>
 
                 <styled.SubmitButton
-                className="default-btn"
-                type="submit">
+                className ="default-btn"
+                type ="submit">
                     검색
                 </styled.SubmitButton>
 
                 <FontAwesomeIcon
                     className ="writing-icon"
-                    icon={faPenToSquare}
-                    size = "2x"
+                    icon ={ faPenToSquare }
+                    size ="2x"
                     onClick={ () => navigate("/writing") }/>
         </form>
         </styled.SearchContainer>
 
 
         <styled.BoardContainer>
-            <ul className="board">
+            <ul className ="board">
                 <styled.Li 
-                className="board-list"
+                className ="board-list"
                 style={{
                     color:"rgb(200, 50, 100)"
                 }}>
@@ -76,21 +76,21 @@ const PostsList = () => {
                 </styled.Li>
 
                 {
-                    postsList.map((posts , i) => {
+                    postList.map((post , i) => {
                         return(
                         <styled.Li 
-                        className="board-list" 
+                        className ="post-list" 
                         key={i}
                         onClick ={() => 
-                        navigate(`/postsDetail/${posts._id}`)}>
+                        navigate(`/postsDetail/${ post._id }`)}>
 
                             <div>
                                 <styled.Title>
-                                    {posts.title}
+                                    { post.title }
                                 </styled.Title>
 
                                 <styled.Span>
-                                    {posts.id}
+                                    { post.id }
                                 </styled.Span>
 
                                 <styled.Span>
@@ -107,20 +107,20 @@ const PostsList = () => {
 
                                 <styled.Span>
                                     {`
-                                        ${getDate(posts.createdAt).year}-${
-                                            getDate(posts.createdAt).month + 1}-${
-                                                getDate(posts.createdAt).date} 
-                                                
-                                        ${getDate(posts.createdAt).hours}:${
-                                            getDate(posts.createdAt).minutes}`
+                                        ${ getDate(post.createdAt).year }-${
+                                            getDate(post.createdAt).month + 1}-${
+                                                getDate(post.createdAt).date } 
+
+                                        ${getDate(post.createdAt).hours}:${
+                                            getDate(post.createdAt).minutes }`
                                     }
                                 </styled.Span>
 
                             </div>
                                 <img 
-                                style={{height:"60px" , width: "80px"}}
+                                style ={{ height:"60px" , width: "80px" }}
                                 alt =""
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" />
+                                src ="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" />
                         </styled.Li>
                         )
                     })

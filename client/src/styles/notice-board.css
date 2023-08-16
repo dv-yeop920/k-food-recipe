@@ -42,6 +42,6 @@
     border-bottom: 2px solid black;
 }
 
-.board-list:hover {
+.post-list:hover {
     transform: perspective(500px) translateZ(5px);
 }
