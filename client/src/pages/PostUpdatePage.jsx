@@ -9,7 +9,7 @@ import UpdateContent from "../components/writing/UpdateContent";
 
 
 const PostsUpdatePage = () => {
-    const { id } = useParams();
+   /* const { id } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -94,6 +94,7 @@ const PostsUpdatePage = () => {
         <ScrollToTopButton/>
         </>
     );
+    */
 };
 
 export default PostsUpdatePage;

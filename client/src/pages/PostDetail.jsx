@@ -7,19 +7,27 @@ import Parser from "html-react-parser";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import PostFooter from "../components/noticeBoard/PostFooter";
 import axios from "axios";
-
+import getDate from "../utils/postDate";
 
 const PostsDetail = () => {
     const navigate = useNavigate();
+    //postList 에서 넘겨준 게시물의 고유 _id값
     const { id } = useParams();
-    const [posts, setPosts] = useState();
+    //const [post, setPost] = useState();
 
 
 //모르겠는거
-    const getPosts = async () => {
+    /*const getPost = async () => {
+
         const postId = id;
-        const response =  await axios.get(`/api/posts/getPosts?id=${postId}`);
-        setPosts(response.data.posts)
+
+        try {
+            const response =  await axios.get(`/api/posts/getPost?id=${postId}`);
+            setPost(response.data.list);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
     const deletePosts = async () => {
@@ -50,9 +58,10 @@ const PostsDetail = () => {
     }
 
     useEffect(() => {
-        getPosts()
+        getPost();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
+*/
     return (
         <>
         <Navbar/>
@@ -70,21 +79,28 @@ const PostsDetail = () => {
 
                     <div className ="post-title__area">
                         <h2 className ="post-title">
-                            { posts?.title }
+                            { }
                         </h2>
                     </div>
 
                     <div className ="post-user__wrap">
                         <div className ="user-info">
                             <span className ="user-id">
-                                { posts?.id }
+                                { }
                             </span>
                         </div>
 
                         <div className ="user-info">
                             <styled.Span className ="user-date">
-                                { //모름 2
-                                `${getDate(posts?.createdAt).year}-${getDate(posts?.createdAt).month + 1}-${getDate(posts?.createdAt).date} ${getDate(posts?.createdAt).hours}:${getDate(posts?.createdAt).minutes}` }
+                                {/*
+                                    `
+                                    ${ getDate(post.createdAt).year }-${
+                                        getDate(post.createdAt).month + 1}-${
+                                            getDate(post.createdAt).date } 
+
+                                    ${getDate(post.createdAt).hours}:${
+                                        getDate(post.createdAt).minutes }`*/
+                                }
                             </styled.Span>
                         </div>
 
@@ -93,13 +109,13 @@ const PostsDetail = () => {
                             className ="edit-delete"
                             onClick ={() => {
                                 if(window.confirm("게시글을 수정하시겠습니까?")) {
-                                    return navigate(`/postsUpdate/${id}`)}
+                                    return navigate(`/postUpdate/${id}`)}
                             } }>
                                 수정
                             </span>
                             <span 
                             className ="edit-delete"
-                            onClick ={ deletePosts }>
+                            >
                                 삭제
                             </span>
                         </div>
@@ -108,7 +124,9 @@ const PostsDetail = () => {
                 </div>
 
                 <div className ="post-content">
-                    { Parser(posts?.content || "") }
+                    { 
+                    //Parser(post?.content) 
+                    }
                 </div>
 
                 <div className ="comment-wrap">
@@ -117,9 +135,7 @@ const PostsDetail = () => {
                     </div>
 
                     <div className ="comment-container">
-                        <Comment selectPosts = { //모름 3
-                            posts
-                        }/>
+                        <Comment />
                     </div>
 
                 </div>

@@ -5,7 +5,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import getDate from "../../utils/PostDate";
+import getDate from "../../utils/postDate";
 
 
 
@@ -13,9 +13,13 @@ const PostsList = () => {
     const navigate = useNavigate();
     const [postList , setPostList] = useState([]);
 
+    const handleClickNavigate = (postId) => {
+        navigate(`/postDetail/${postId}`);
+    }
+
     const getPostList = async () => {
         try {
-            const response = await axios.get("/api/posts/getPostsList");
+            const response = await axios.get("/api/posts/getPostList");
             const getPosts = response.data.list;
             setPostList(getPosts);
         }
@@ -77,12 +81,12 @@ const PostsList = () => {
 
                 {
                     postList.map((post , i) => {
+                        console.log(typeof post._id)
                         return(
                         <styled.Li 
                         className ="post-list" 
                         key={i}
-                        onClick ={() => 
-                        navigate(`/postsDetail/${ post._id }`)}>
+                        onClick ={() => handleClickNavigate(post._id) }>
 
                             <div>
                                 <styled.Title>

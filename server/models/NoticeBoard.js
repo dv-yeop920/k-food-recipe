@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 
 
-const noticeBoardsSchema = mongoose.Schema({
+const noticeBoardSchema = mongoose.Schema({
     //id
     id: {
         type: String,
@@ -29,6 +29,6 @@ const noticeBoardsSchema = mongoose.Schema({
 });
 
 
-const Post = mongoose.model("Post" , noticeBoardsSchema);
+const Post = mongoose.model("Post" , noticeBoardSchema);
 
 module.exports = { Post };

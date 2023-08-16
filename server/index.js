@@ -178,7 +178,7 @@ app.post("/api/users/logout" , auth , (req , res) => {
 //------------------------게시판------------------------------------------
 
 
-const { Post } = require("./models/NoticeBoards.js");
+const { Post } = require("./models/NoticeBoard.js");
 
 app.post("/api/posts/register" , async (req , res) => {
     try {
@@ -209,12 +209,14 @@ app.post("/api/posts/register" , async (req , res) => {
 });
 
 
-app.get("/api/posts/getPostsList" ,  async (req , res) => {
+app.get("/api/posts/getPostList" ,  async (req , res) => {
     try {
         const posts = await Post.find().sort({ createdAt: -1 });
+
         const modifiedPosts = posts.map(post => {
             const parts = post.id.split("_");
             const userId = parts[0];
+
             return {
                 ...post.toObject(),
                 id: userId,
@@ -232,13 +234,23 @@ app.get("/api/posts/getPostsList" ,  async (req , res) => {
     }
 });
 
-app.get("/api/posts/getPosts", async (req, res) => {
-    const postsId = req.query.id;
-    if (postsId) {
-        const posts = await Post.findOne({_id : postsId})
-        res.json({ posts })
+
+app.get("/api/posts/getPost", async (req, res) => {
+    const postId = req.query.id;
+    try {
+        if (postId) {
+            const post = await Post.findOne({_id : postId});
+
+            res.json({ 
+                list: post
+            });
+        }
     }
-})
+    catch (error) {
+        console.log(error);
+    }
+});
+
 
 app.put("/api/posts/update" , async (req , res) => {
     try {

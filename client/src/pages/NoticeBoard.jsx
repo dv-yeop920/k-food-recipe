@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/navbar/Navbar";
-import PostsList from '../components/noticeBoard/PostsList';
+import PostList from '../components/noticeBoard/PostList';
 
 
 
@@ -8,7 +8,7 @@ const NoticeBoard = () => {
     return (
         <>
         <Navbar/>
-        <PostsList/>
+        <PostList/>
         </>
     );
 };

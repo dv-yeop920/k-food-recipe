@@ -43,7 +43,8 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }) => {
                             alert("회원만 이용할 수 있습니다");
                             return openCloseSignUpModal();
                         }
-                        return navigate("/noticeBoards")
+                        navigate("/noticeBoard");
+                        return;
                     }}
                     >자유 게시판</li>
                     <li 

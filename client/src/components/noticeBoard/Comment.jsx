@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import * as styled from "../../styles/styledComponents";
 
 const Comment = ({ selectPosts }) => {
-    const userId = useSelector(user => user.user.id);
+    /*const userId = useSelector(user => user.user.id);
     const selectPostsId = selectPosts._id;
     const [ commentContent , setCommentContent ] = useState("");
     const [comments , setComments] = useState([]);
@@ -178,6 +178,7 @@ const Comment = ({ selectPosts }) => {
         </div>
         </>
     );
-};
+    */
+}
 
 export default Comment;
