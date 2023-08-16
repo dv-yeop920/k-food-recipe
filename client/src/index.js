@@ -5,10 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store/store";
 import { persistStore} from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { CookiesProvider } from "react-cookie";
+import store from "./store/store";
 
 
 const persistor = persistStore(store);
@@ -17,8 +17,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <CookiesProvider>
-      <Provider store={store}>
-        <PersistGate loading ={null} persistor ={persistor}>
+      <Provider store ={ store }>
+        <PersistGate loading ={ null } persistor ={ persistor }>
           <BrowserRouter>
             <App/>
           </BrowserRouter>

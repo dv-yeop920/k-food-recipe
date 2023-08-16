@@ -13,6 +13,7 @@ const userSlice = createSlice({
     reducers: {
         loginUser: (state , action) => {
             const userInfo = action.payload;
+
             state.loginSuccess = true;
             state.id = userInfo.id;
             state.name = userInfo.name;

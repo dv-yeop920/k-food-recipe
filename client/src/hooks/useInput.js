@@ -11,7 +11,7 @@ const useInput = (initialState) => {
 
     const handleChangeValue = (e) => {
         const userInput = e.target;
-        
+
         switch(userInput.className) {
             case "user-form__name":
                 setName(userInput.value);

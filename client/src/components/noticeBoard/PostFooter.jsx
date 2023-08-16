@@ -12,37 +12,37 @@ const PostFooter = () => {
             <ul className ="bar-list__area">
                 <li className ="bar-list">
                     <FontAwesomeIcon
-                    style={{marginRight: "5px"}}
+                    style ={{ marginRight: "5px" }}
                     className ="writing-icon"
                     icon={ faBars }
-                    size = "lg"/>
+                    size ="lg"/>
                     <span 
-                    onClick={ () => navigate(-1, { replace: true }) }
-                    style={{cursor:"pointer",fontWeight:"600"}}>
+                    onClick ={ () => navigate(-1, { replace: true }) }
+                    style ={{ cursor:"pointer",fontWeight:"600" }}>
                         목록으로 가기
                     </span>
                 </li>
 
                 <li className ="bar-list">
                     <FontAwesomeIcon
-                    style={{color: "red"}}
+                    style ={{ color: "red" }}
                     className ="writing-icon"
-                    icon={ faHeart }
-                    size = "lg"/>
+                    icon ={ faHeart }
+                    size ="lg"/>
                 </li>
 
                 <li className ="bar-list">
                     <FontAwesomeIcon
                     className ="writing-icon"
-                    icon={ faCommentDots }
-                    size = "lg"/>
+                    icon ={ faCommentDots }
+                    size ="lg"/>
                 </li>
 
                 <li className ="bar-list">
                     <FontAwesomeIcon
                     className ="writing-icon"
-                    icon={ faShareFromSquare }
-                    size = "lg"/>
+                    icon ={ faShareFromSquare }
+                    size ="lg"/>
                 </li>
 
             </ul>

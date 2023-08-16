@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import * as styled from "../styles/styledComponents";
 import { useParams , useNavigate } from "react-router-dom";
+import * as styled from "../styles/styledComponents";
 import Comment from "../components/noticeBoard/Comment";
 import Navbar from "../components/navbar/Navbar";
-import Parser from "html-react-parser";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import PostFooter from "../components/noticeBoard/PostFooter";
+import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
 
@@ -107,7 +107,7 @@ const PostsDetail = () => {
                             className ="edit-delete"
                             onClick ={() => {
                                 if(window.confirm("게시글을 수정하시겠습니까?")) {
-                                    navigate(`/postUpdate/${id}`);
+                                    navigate(`/postUpdate/${ id }`);
                                 }
                             } }>
                                 수정
@@ -132,11 +132,12 @@ const PostsDetail = () => {
                     </div>
 
                     <div className ="comment-container">
-                        <Comment post ={post}/>
+                        <Comment post ={ post }/>
                     </div>
 
                 </div>
-                    <div style={{height:"40px"}}></div>
+                    <div style={{ height:"40px" }}></div>
+
                 <ScrollToTopButton/>
                 <PostFooter/>
             </div>

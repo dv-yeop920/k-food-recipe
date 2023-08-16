@@ -1,13 +1,14 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import * as styled from "../../styles/styledComponents";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import getDate from "../../utils/postDate";
 
-const Comment = ({post}) => {
+const Comment = ({ post }) => {
     const userId = useSelector(user => user.user.id);
     const postId = post._id;
-    const [ commentContent , setCommentContent ] = useState("");
+
+    const [commentContent , setCommentContent] = useState("");
     const [comment , setComment] = useState([]);
     
     const getComment = async () => {
@@ -75,7 +76,6 @@ const Comment = ({post}) => {
             if(window.confirm("댓글을 정말 삭제하시겠습니까?")) {
                 const response = 
                 await axios.post("/api/posts/comment/deleteComment" , deleteComment);
-                console.log(response.data)
 
                 if(response.data.deleteSuccess === true) {
                     alert(response.data.messsage);
@@ -102,20 +102,20 @@ const Comment = ({post}) => {
         <>
         <div className ="commnet-textarea__wrap">
             <form 
-            className="commnet-textarea__form"
-            onSubmit={ hadleSubmitComment }
+            className ="commnet-textarea__form"
+            onSubmit ={ hadleSubmitComment }
             >
                 <div className ="comment-textarea__container">
                     <textarea 
-                    placeholder="댓글을 달아 보세요!"
-                    id="comment-input"
+                    placeholder ="댓글을 달아 보세요!"
+                    id ="comment-input"
                     value ={ commentContent }
-                    onChange={ (e) => setCommentContent(e.target.value) }>
+                    onChange ={ (e) => setCommentContent(e.target.value) }>
                     </textarea>
                 </div>
                 <div className ="comment-button__container">
                     <styled.SubmitButton 
-                    type="submit"
+                    type ="submit"
                     className ="comment-button default-btn">
                         등록
                     </styled.SubmitButton>
@@ -125,37 +125,37 @@ const Comment = ({post}) => {
             <ul className ="commnet-list">
                 {   
                 comment &&
-                comment.map((comment , i) => {
+                comment.map((comment) => {
 
                         return(
-                        <li className ="comment" key={comment._id}>
+                        <li className ="comment" key ={ comment._id }>
                             <div>
                                 <span className ="user-id">
-                                    {comment.id}
+                                    { comment.id }
                                 </span>
                             </div>
 
                             <p className ="comment-content">
-                                {comment.content}
+                                { comment.content } 
                             </p>
 
-                            <div className="user-comment__buttons">
-                                <div className="date-reply__container">
-                                    <styled.Span className="comment-date">
+                            <div className ="user-comment__buttons">
+                                <div className ="date-reply__container">
+                                    <styled.Span className ="comment-date">
                                         {
                                             `
                                             ${ getDate(comment.createdAt).year }-${
-                                                getDate(comment.createdAt).month + 1}-${
+                                                getDate(comment.createdAt).month + 1 }-${
                                                     getDate(comment.createdAt).date } 
 
-                                            ${getDate(comment.createdAt).hours}:${
+                                            ${ getDate(comment.createdAt).hours }:${
                                                 getDate(comment.createdAt).minutes }`
                                         }
                                     </styled.Span>
 
                                     <styled.Span
-                                    className="reply-button"
-                                    style={{cursor:"pointer"}}>
+                                    className ="reply-button"
+                                    style ={{ cursor:"pointer" }}>
                                         답글 쓰기
                                     </styled.Span>
                                 </div>
@@ -166,7 +166,7 @@ const Comment = ({post}) => {
                                     </styled.Span>
                                     <styled.Span 
                                     className ="delete-button comment-edit-delete"
-                                    onClick={ () => handleCommentDelete(comment._id) }>
+                                    onClick ={ () => handleCommentDelete(comment._id) }>
                                         삭제
                                     </styled.Span>
                                 </div>

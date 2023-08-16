@@ -14,12 +14,12 @@ function App() {
     <>
     <Routes>
       <Route path ="/" element ={ <MainPage/> }/>
-      <Route path ="/recipe" element ={<RecipePage/>} />
-      <Route path ="/noticeBoard" element ={<NoticeBoard/>}/>
-      <Route path ="/myPage" element ={<MyPage/>}/>
-      <Route path ="/writing" element ={<WritingPage/>} />
-      <Route path ="/postDetail/:id" element ={<PostDetail/>}/>
-      <Route path="/postUpdate/:id" element ={<PostUpdatePage/>} />
+      <Route path ="/recipe" element ={ <RecipePage/> }/>
+      <Route path ="/noticeBoard" element ={ <NoticeBoard/> }/>
+      <Route path ="/myPage" element ={ <MyPage/> }/>
+      <Route path ="/writing" element ={ <WritingPage/> }/>
+      <Route path ="/postDetail/:id" element ={ <PostDetail/> }/>
+      <Route path ="/postUpdate/:id" element ={ <PostUpdatePage/> }/>
     </Routes>
     </>
   );

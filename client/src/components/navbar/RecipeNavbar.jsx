@@ -10,28 +10,29 @@ const RecipeNavbar = () => {
     return (
         <>
         <styled.Header>
-            <div className="header-container">
-                <div 
-                className="header-title__column">
+            <div className ="header-container">
+                <div className ="header-title__column">
                     <h2
-                    onClick ={() => navigate("/")}>
+                    className ="header-title"
+                    onClick ={ () => navigate("/") }
+                    >
                         k-레시피
                     </h2>
                 </div>
 
-                <div className = "header-recipe-search__column" >
+                <div className ="header-recipe-search__column" >
                 </div>
 
-                <div className="header-button__column">
-                    <button className="light-dark-mode__button header-icon-button">
-                        <span className="moon">🌙</span>
+                <div className ="header-button__column">
+                    <button className ="light-dark-mode__button header-icon-button">
+                        <span className ="moon">🌙</span>
                     </button>
 
-                    <button className="global-language__button header-icon-button">
+                    <button className ="global-language__button header-icon-button">
                         <FontAwesomeIcon
-                            className="header-icon"
-                            icon={faGlobe}
-                            size = "lg"/>
+                            className ="header-icon"
+                            icon ={ faGlobe }
+                            size ="lg"/>
                     </button>
                 </div>
             </div>

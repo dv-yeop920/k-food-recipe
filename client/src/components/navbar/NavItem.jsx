@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { useSelector ,  useDispatch } from "react-redux";
 import { logoutUser } from "../../store/slice/userSlice";
-import { useSelector ,  useDispatch} from "react-redux";
-import axios from 'axios';
+import axios from "axios";
 
 
 
@@ -33,29 +33,32 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }) => {
 
     return (
         <>
-        <div className="navbar-container">
-            <nav className="navbar">
-                <ul className="navbar__column">
+        <div className ="navbar-container">
+            <nav className ="navbar">
+                <ul className ="navbar__column">
                     <li
-                    className="navbar-link"
-                    onClick={() => {
+                    className ="navbar-link"
+                    onClick ={ () => {
                         if(user.loginSuccess === false) {
                             alert("회원만 이용할 수 있습니다");
-                            return openCloseSignUpModal();
+                            openCloseSignUpModal();
+                            return;
                         }
                         navigate("/noticeBoard");
                         return;
                     }}
                     >자유 게시판</li>
                     <li 
-                    style={{borderBottom:"1px solid #ddd"}}
-                    className="navbar-link"
-                    onClick={() => {
+                    style={{ borderBottom:"1px solid #ddd" }}
+                    className ="navbar-link"
+                    onClick ={ () => {
                         if(user.loginSuccess === false) {
                             alert("회원만 이용할 수 있습니다");
-                            return openCloseSignUpModal();
+                            openCloseSignUpModal();
+                            return;
                         }
-                        return navigate("/myPage");
+                        navigate("/myPage");
+                        return;
                     }}>
                         마이페이지
                     </li>
@@ -63,16 +66,18 @@ const NavItem = ({ openCloseLoginModal , openCloseSignUpModal }) => {
                     { 
                         user.loginSuccess === true ? null :
                         <li 
-                        className="navbar-link"
-                        onClick={ openCloseSignUpModal }>
+                        className ="navbar-link"
+                        onClick ={ openCloseSignUpModal }>
                             회원 가입
                         </li>
                     }
+
                     <li 
-                    className="navbar-link"
-                    onClick={() => {
+                    className ="navbar-link"
+                    onClick ={ () => {
                         user.loginSuccess === false && openCloseLoginModal();
-                        return user.loginSuccess === true && handleClickLogout();
+                        user.loginSuccess === true && handleClickLogout();
+                        return;
                     }
                     }>
                         { user.loginSuccess === true ? "로그아웃" : "로그인" }

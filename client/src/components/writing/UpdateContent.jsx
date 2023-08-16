@@ -22,13 +22,13 @@ const modules = {
 }
 
 
-const UpdateContent = ({ newDetail , setNewDetail}) => {
+const UpdateContent = ({ newDetail , setNewDetail }) => {
     //구조 분해 할당해서 title 과 content 로 분해
     const { title , content } = newDetail;
 
 
     const handelChangeTitle = (e) => {
-        console.log(newDetail)
+
         return setNewDetail({
             ...newDetail,
             title: e.target.value,
@@ -36,7 +36,7 @@ const UpdateContent = ({ newDetail , setNewDetail}) => {
     }
 
     const handleChangeContent = (e) => {
-        console.log(newDetail)
+
         return setNewDetail({
             ...newDetail,
             content: e
@@ -46,20 +46,20 @@ const UpdateContent = ({ newDetail , setNewDetail}) => {
     return (
         <>
         <div className ="writing-container">
-            <div className="writing-container__column">
+            <div className ="writing-container__column">
                 <input 
                 className ="editor-title" 
-                type="text" 
+                type ="text" 
                 value ={ title || "" }
                 onChange ={ handelChangeTitle }
                 />  
             </div>
 
-            <div className="writing-container__column">
+            <div className ="writing-container__column">
                 <ReactQuill  
-                className="content"
-                value={ content }
-                modules={ modules }
+                className ="content"
+                value ={ content }
+                modules ={ modules }
                 onChange ={ handleChangeContent }
                 /> 
             </div>          

@@ -1,11 +1,11 @@
 import React ,{ useEffect, useState } from "react";
-import * as styled from "../styles/styledComponents";
 import { useNavigate , useParams } from "react-router-dom";
-import axios from "axios";
+import * as styled from "../styles/styledComponents";
 import Navbar from "../components/navbar/Navbar";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import ImageUploader from "../components/writing/ImageUploader";
 import UpdateContent from "../components/writing/UpdateContent";
+import axios from "axios";
 
 
 const PostsUpdatePage = () => {

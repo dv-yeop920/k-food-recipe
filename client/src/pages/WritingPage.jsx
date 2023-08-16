@@ -1,12 +1,12 @@
-import React ,{ useState }from 'react';
-import * as styled from "../styles/styledComponents";
+import React ,{ useState }from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import * as styled from "../styles/styledComponents";
 import Navbar from "../components/navbar/Navbar";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import ImageUploader from "../components/writing/ImageUploader";
-import Content from '../components/writing/Content';
-import { useSelector } from 'react-redux';
+import Content from "../components/writing/Content";
+import axios from "axios";
 
 
 const WritingPage = () => {
@@ -47,12 +47,12 @@ const WritingPage = () => {
         <Navbar/>
         <div className ="editor-container">
             <form 
-            className = "editor-form"
-            onSubmit = { handleSubmitPost }>
-                <div className = "content-container">
+            className ="editor-form"
+            onSubmit ={ handleSubmitPost }>
+                <div className ="content-container">
                     <ImageUploader/>
                     <Content 
-                    content={ content }
+                    content ={ content }
                     setTitle ={ setTitle }
                     setContent ={ setContent }
                     />
@@ -64,15 +64,16 @@ const WritingPage = () => {
                     type ="button"
                     onClick={() => {
                         if(window.confirm("게시글 작성을 취소 하시겠어요?")) 
-                            return navigate(-1, { replace: true });
+                            navigate(-1, { replace: true });
+                            return;
                         }
                     }>
                         취소
                     </styled.DeleteButton>
 
                     <styled.SubmitButton
-                    type = "submit"
-                    className = "writing-button__submit default-btn">
+                    type ="submit"
+                    className ="writing-button__submit default-btn">
                         등록
                     </styled.SubmitButton>
                 </div>

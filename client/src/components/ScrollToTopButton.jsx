@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faUpLong} from "@fortawesome/free-solid-svg-icons";
+import { faUpLong } from "@fortawesome/free-solid-svg-icons";
 import * as styled from "../styles/styledComponents";
 
 

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as styled from "../../styles/styledComponents";
@@ -6,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import ScrollToTopButton from "../ScrollToTopButton";
 import getDate from "../../utils/postDate";
+import axios from "axios";
 
 
 
@@ -54,7 +54,7 @@ const PostsList = () => {
                     className ="writing-icon"
                     icon ={ faPenToSquare }
                     size ="2x"
-                    onClick={ () => navigate("/writing") }/>
+                    onClick ={ () => navigate("/writing") }/>
         </form>
         </styled.SearchContainer>
 
@@ -63,7 +63,7 @@ const PostsList = () => {
             <ul className ="board">
                 <styled.Li 
                 className ="board-list"
-                style={{
+                style ={{
                     color:"rgb(200, 50, 100)"
                 }}>
                     <div>
@@ -71,7 +71,7 @@ const PostsList = () => {
                             [공지]
                         </styled.Title>
                         <styled.Title 
-                        style={{
+                        style ={{
                             fontSize:"16px",
                             color:"black"
                         }}>
@@ -81,12 +81,12 @@ const PostsList = () => {
                 </styled.Li>
 
                 {
-                    postList.map((post , i) => {
+                    postList.map((post) => {
                         return(
                         <styled.Li 
                         className ="post-list" 
-                        key={post._id}
-                        onClick ={() => handleClickPostDetailNavigate(post._id) }>
+                        key={ post._id }
+                        onClick ={ () => handleClickPostDetailNavigate(post._id) }>
 
                             <div>
                                 <styled.Title>
@@ -112,10 +112,10 @@ const PostsList = () => {
                                 <styled.Span>
                                     {`
                                         ${ getDate(post.createdAt).year }-${
-                                            getDate(post.createdAt).month + 1}-${
+                                            getDate(post.createdAt).month + 1 }-${
                                                 getDate(post.createdAt).date } 
 
-                                        ${getDate(post.createdAt).hours}:${
+                                        ${ getDate(post.createdAt).hours }:${
                                             getDate(post.createdAt).minutes }`
                                     }
                                 </styled.Span>
