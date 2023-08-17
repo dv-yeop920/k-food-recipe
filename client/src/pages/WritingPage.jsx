@@ -7,6 +7,7 @@ import Content from "../components/writing/Content";
 import axios from "axios";
 
 
+
 const WritingPage = () => {
     const userId = useSelector(user => user.user.id);
     const navigate = useNavigate();
@@ -14,67 +15,85 @@ const WritingPage = () => {
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
 
-    const handleSubmitPost = async (e) => {
+    const onSubmitPost = async (e) => {
+
         e.preventDefault();
 
         const post = {
             id: userId,
             title: title,
-            content: content,
+            content: content
         }
 
         try {
-            const response = await axios.post("/api/posts/register" , post);
+                const response = 
+                await axios.post("/api/posts/register" , post);
 
-            if(response.data.success === false) {
-                return console.log(response.data.messsage);
-            }
+                if (response.data.success === false) {
 
-            if(response.data.success === true) {
-                navigate(-1, { replace: true });
-                return alert(response.data.messsage);
-            }
+                    return console.log(response.data.messsage);
+
+                }
+
+                if (response.data.success === true) {
+
+                    navigate(-1, { replace: true });
+                    alert(response.data.messsage);
+                    return;
+
+                }
         }
         catch (error) {
             console.log(error);
         }
-        }
+    }
 
     return (
         <>
-        <div className ="editor-container">
+        <div className = "editor-container">
+
             <form 
-            className ="editor-form"
-            onSubmit ={ handleSubmitPost }>
-                <div className ="content-container">
+            className = "editor-form"
+            onSubmit = { onSubmitPost }>
+                <div className = "content-container">
+
                     <ImageUploader/>
+
                     <Content 
-                    content ={ content }
-                    setTitle ={ setTitle }
-                    setContent ={ setContent }
-                    />
+                    content = { content }
+                    setTitle = { setTitle }
+                    setContent = { setContent } />
+
                 </div>
                 
-                <div className ="writing-button__container">
+                <div className = "writing-button__container">
+
                     <styled.DeleteButton
-                    className ="writing-button__delete delete-btn"
-                    type ="button"
-                    onClick={() => {
-                        if(window.confirm("게시글 작성을 취소 하시겠어요?")) 
+                    className = "writing-button__delete delete-btn"
+                    type = "button"
+                    onClick = { () => {
+
+                        if (window.confirm("게시글 작성을 취소 하시겠어요?")) {
+
                             navigate(-1, { replace: true });
                             return;
+
                         }
-                    }>
+
+                    }} >
                         취소
                     </styled.DeleteButton>
 
                     <styled.SubmitButton
-                    type ="submit"
-                    className ="writing-button__submit default-btn">
+                    type = "submit"
+                    className = "writing-button__submit default-btn">
                         등록
                     </styled.SubmitButton>
+
                 </div>
+
             </form>
+
         </div>
         </>
     );

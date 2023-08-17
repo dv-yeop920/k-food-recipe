@@ -9,11 +9,11 @@ import axios from "axios";
 
 const LoginPage = (
     { 
-        openCloseMenuModal,
+        onClickMenuModal,
+        onClickLoginModal,
+        onClickChangeModal,
         modalRef,
-        modalOutSideClick,
-        openCloseLoginModal,
-        changeModal,
+        onClickModalOutSide,
         userId,
         userPassword,
         onChangeValue
@@ -25,29 +25,43 @@ const LoginPage = (
 
 //로그인 버튼 누르면 입력한 정보를 서버로 보내고 응답 받는 함수
     const handleClickLogin = async (e) => {
+
         e.preventDefault();
         //유효성 검사
-        if(userId === "") return setMessage("아이디를 입력하세요");
-        if(userPassword === "") return setMessage("비밀번호를 입력하세요");
+        if (userId === "") {
+            setMessage("아이디를 입력하세요");
+            return;
+        }
+
+        if (userPassword === "") {
+            setMessage("비밀번호를 입력하세요");
+            return;
+        }
 
         const userInfo = {
             id: userId,
-            password: userPassword,
-        };
+            password: userPassword
+        }
 
         try {
-            const response = await axios.post("/api/users/login" , userInfo);
+                const response = 
+                await axios.post("/api/users/login" , userInfo);
 
-            if(response.data.loginSuccess === false) {
-                return setMessage(response.data.messsage);
-            }
-            if(response.data.loginSuccess === true) {
-                openCloseLoginModal();
-                openCloseMenuModal();
-                setMessage("");
-                alert(response.data.messsage);
-                return dispatch(loginUser(response.data));
-            }
+                if (response.data.loginSuccess === false) {
+
+                    return setMessage(response.data.messsage);
+
+                }
+
+                if (response.data.loginSuccess === true) {
+
+                    onClickLoginModal();
+                    onClickMenuModal();
+                    setMessage("");
+                    alert(response.data.messsage);
+                    return dispatch(loginUser(response.data));
+
+                }
         }
         catch (error) {
             console.log(error);
@@ -57,75 +71,84 @@ const LoginPage = (
     return (
         <>
         <div 
-        ref ={ modalRef } 
-        onClick ={ (e) => modalOutSideClick(e) }
-        className ="sign-modal">
+        ref = { modalRef } 
+        onClick = { (e) => onClickModalOutSide(e) }
+        className = "sign-modal">
 
-            <main className ="user-form__container">
+            <main className = "user-form__container">
+
                 <styled.LoginSignUpform 
-                className ="user-form"
-                onSubmit ={ handleClickLogin }
-                >
+                className = "user-form"
+                onSubmit = { handleClickLogin } >
 
-                    <div className ="sign-header">
+                    <div className = "sign-header">
+
                         <FontAwesomeIcon
-                        className ="user-form__cancel"
-                        icon ={ faX }
-                        size ="lg"
-                        onClick ={ openCloseLoginModal }
-                        />
-                        <h2 className ="user-form__title">
-                        로그인
+                        className = "user-form__cancel"
+                        icon = { faX }
+                        size = "lg"
+                        onClick = { onClickLoginModal } />
+
+                        <h2 className = "user-form__title">
+                            로그인
                         </h2>
+
                         <div></div>
+
                     </div>
 
                     <input 
-                    className ="user-form__id"
-                    type ="text"
-                    placeholder ="아이디"
-                    maxLength ="12"
-                    onChange ={ onChangeValue }
-                    />
+                    className = "user-form__id"
+                    type = "text"
+                    placeholder = "아이디"
+                    maxLength = "12"
+                    onChange = { onChangeValue } />
 
                     <input 
-                    className ="user-form__pw" 
-                    type ="password"
-                    placeholder ="비밀 번호"
-                    maxLength ="15"
-                    onChange ={ onChangeValue }
-                    />
+                    className = "user-form__pw" 
+                    type = "password"
+                    placeholder = "비밀 번호"
+                    maxLength = "15"
+                    onChange = { onChangeValue } />
 
-                    <span className ="error-message">
+                    <span className = "error-message">
                         { message }
                     </span>
 
-                    <div className ="user-form__button-box">
+                    <div className = "user-form__button-box">
+
                         <styled.LoginSignUpButton
-                        className ="default-btn" 
-                        type ="submit">
+                        className = "default-btn" 
+                        type = "submit" >
                             로그인
                         </styled.LoginSignUpButton>
 
                         <styled.LoginSignUpButton
-                        className ="default-btn" 
-                        type ="submit">
+                        className = "default-btn" 
+                        type = "submit" >
                             카카오 로그인
                         </styled.LoginSignUpButton>
+
                     </div>
 
-                    <div className ="question-container">
-                        <span className ="question">
+                    <div className = "question-container">
+
+                        <span className = "question">
                             계정이 없으신가요?&nbsp;
                         </span>
+
                         <span 
-                        className ="signup-login__navigate"
-                        onClick ={ changeModal }>
-                                회원가입
+                        className = "signup-login__navigate"
+                        onClick = { onClickChangeModal } >
+                            회원가입
                         </span>
+
                     </div>
+
                 </styled.LoginSignUpform>
+
             </main>
+
         </div>
         </>
     );

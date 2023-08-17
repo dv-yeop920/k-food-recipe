@@ -22,23 +22,31 @@ const modules = {
 }
 
 const Content = ({ setTitle , content , setContent }) => {
+
     return (
         <>
-        <div className ="writing-container">
-            <div className ="writing-container__column">
+        <div className = "writing-container">
+
+            <div className = "writing-container__column">
+
             <input 
-            className ="editor-title" 
-            type ="text" 
-            placeholder ="제목"
-            onChange ={ (e) => setTitle(e.target.value) } />  
+            className = "editor-title" 
+            type = "text" 
+            placeholder = "제목"
+            onChange = { (e) => setTitle(e.target.value) } />  
+
             </div>
-            <div className ="writing-container__column">
+
+            <div className = "writing-container__column">
+
                 <ReactQuill  
-                className ="content" 
-                value ={ content }
-                modules ={ modules }
-                onChange ={ (e) => setContent(e) }/> 
-            </div>          
+                className = "content" 
+                value = { content }
+                modules = { modules }
+                onChange = { (e) => setContent(e) } /> 
+
+            </div>
+
         </div>
         </>
     );

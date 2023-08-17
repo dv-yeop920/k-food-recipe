@@ -3,6 +3,7 @@ import { useState } from "react";
 
 
 const useInput = (initialState) => {
+
     const [userName , setName] = useState(initialState);
     const [userId , setUserId] = useState(initialState);
     const [userPassword , setUserPassword] = useState(initialState);
@@ -10,24 +11,31 @@ const useInput = (initialState) => {
     const [userEmail , setUserEmail] = useState(initialState);
 
     const onChangeValue = (e) => {
+
         const userInput = e.target;
 
-        switch(userInput.className) {
-            case "user-form__name":
+        switch (userInput.className) {
+
+            case "user-form__name" :
                 setName(userInput.value);
                 break;
-            case "user-form__id":
+
+            case "user-form__id" :
                 setUserId(userInput.value);
                 break;
-            case "user-form__pw":
+
+            case "user-form__pw" :
                 setUserPassword(userInput.value);
                 break;
-            case "user-form__pw-check":
+
+            case "user-form__pw-check" :
                 setCheckPassword(userInput.value);
                 break;
-            case "user-form__email":
+
+            case "user-form__email" :
                 setUserEmail(userInput.value);
                 break;
+
             default:
         }
     }

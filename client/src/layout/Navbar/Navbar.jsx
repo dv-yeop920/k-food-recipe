@@ -12,18 +12,19 @@ import useInput from "../../hooks/useInput";
 
 
 const Navbar = () => {
+
     const navigate = useNavigate();
     
     const [
             menuModal,
-            openCloseMenuModal,
+            onClickMenuModal,
             loginModal,
             signUpModal, 
-            openCloseLoginModal, 
-            openCloseSignUpModal, 
-            changeModal,
+            onClickLoginModal, 
+            onClickSignUpModal, 
+            onClickChangeModal,
             modalRef,
-            modalOutSideClick
+            onClickModalOutSide
         ] = useModal(false);
 
     const [
@@ -35,107 +36,116 @@ const Navbar = () => {
             onChangeValue
         ] = useInput("");
 
-
-
     return (
         <>
         <styled.Header>
-            <div className ="header-container">
-                <div 
-                className ="header-title__column">
+            <div className = "header-container">
+
+                <div className = "header-title__column">
+
                     <h2
-                    onClick ={ () => navigate("/") }>
+                    onClick ={ () => navigate("/") } >
                         k-레시피
                     </h2>
+
                 </div>
 
                 <div 
                 className = "header-recipe-search__column" 
-                onClick ={ () => navigate("/recipe") }>
-                    <button className ="recipe-search__button">
+                onClick = { () => navigate("/recipe") } >
+
+                    <button className = "recipe-search__button">
+
                         <FontAwesomeIcon
-                            style ={{ marginRight:"5px" , color:"#16a085" }}
-                            icon ={ faSearch }
-                            size ="1x"
-                            />
+                            style = {{ marginRight:"5px" , color:"#16a085" }}
+                            icon = { faSearch }
+                            size = "1x" />
+
                         여기를 눌러 레시피를 검색해 보세요!
                     </button>
+
                 </div>
 
-                <div className ="header-button__column">
-                    <button className ="light-dark-mode__button header-icon-button">
-                        <span className ="moon">
+                <div className = "header-button__column">
+
+                    <button className = "light-dark-mode__button header-icon-button">
+
+                        <span className = "moon">
                             🌙
                         </span>
+
                     </button>
 
-                    <button className ="global-language__button header-icon-button">
+                    <button className = "global-language__button header-icon-button">
+
                         <FontAwesomeIcon
-                        className ="header-icon"
-                        icon ={ faGlobe }
-                        size ="lg"
-                        />
+                        className = "header-icon"
+                        icon = { faGlobe }
+                        size = "lg" />
+
                     </button>
 
                     <button 
-                    onClick ={ openCloseMenuModal }
-                    className ="user-sign__button"
-                    >
-                        <FontAwesomeIcon
-                            className ="header-icon"
-                            icon ={ faBars }
-                            size ="1x"
-                        />
+                    onClick = { onClickMenuModal }
+                    className = "user-sign__button">
 
                         <FontAwesomeIcon
-                            className ="header-icon"
-                            icon ={ faUser }
-                            size ="1x"
-                        />
+                            className = "header-icon"
+                            icon = { faBars }
+                            size = "1x" />
+
+                        <FontAwesomeIcon
+                            className = "header-icon"
+                            icon = { faUser }
+                            size = "1x" />
+
                     </button>
+
                 </div>
+
             </div>
+
         </styled.Header>
 
         { 
             menuModal === true &&
-                <NavItem
-                openCloseMenuModal ={ openCloseMenuModal }
-                modalRef ={ modalRef } 
-                modalOutSideClick={modalOutSideClick}
-                openCloseLoginModal ={ openCloseLoginModal }
-                openCloseSignUpModal ={ openCloseSignUpModal }
-                />
+
+            <NavItem
+            onClickMenuModal = { onClickMenuModal }
+            onClickLoginModal = { onClickLoginModal }
+            onClickSignUpModal = { onClickSignUpModal }
+            modalRef = { modalRef } 
+            onClickModalOutSide = { onClickModalOutSide } />
         }
-        
+
         { 
             loginModal === true && 
-                <LoginPage
-                openCloseMenuModal ={ openCloseMenuModal }
-                modalRef ={ modalRef } 
-                modalOutSideClick ={ modalOutSideClick }
-                openCloseLoginModal ={ openCloseLoginModal }
-                changeModal ={ changeModal }
-                userId ={ userId }
-                userPassword ={ userPassword }
-                onChangeValue ={ onChangeValue }
-                />
+
+            <LoginPage
+            onClickMenuModal = { onClickMenuModal }
+            onClickLoginModal = { onClickLoginModal }
+            onClickChangeModal = { onClickChangeModal }
+            modalRef = { modalRef } 
+            onClickModalOutSide = { onClickModalOutSide }
+            userId = { userId }
+            userPassword = { userPassword }
+            onChangeValue = { onChangeValue } />
         }
-        
+
         { 
             signUpModal === true && 
-                <SignUpPage 
-                modalRef ={ modalRef } 
-                modalOutSideClick ={ modalOutSideClick }
-                openCloseSignUpModal ={ openCloseSignUpModal }
-                changeModal ={ changeModal }
-                userName ={ userName }
-                userId ={ userId }
-                userPassword ={ userPassword }
-                checkPassword ={ checkPassword }
-                userEmail ={ userEmail }
-                onChangeValue ={ onChangeValue }
-                />
+
+            <SignUpPage 
+            modalRef = { modalRef } 
+            onClickModalOutSide = { onClickModalOutSide }
+            onClickSignUpModal = { onClickSignUpModal }
+            onClickChangeModal = { onClickChangeModal }
+            userName = { userName }
+            userId = { userId }
+            userPassword = { userPassword }
+            checkPassword = { checkPassword }
+            userEmail = { userEmail }
+            onChangeValue = { onChangeValue } />
         }
 
         </>

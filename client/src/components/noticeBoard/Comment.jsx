@@ -4,7 +4,11 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import CommentList from "./CommentList";
 
+
+
+
 const Comment = ({ post }) => {
+
     const userId = useSelector(user => user.user.id);
     const postId = post._id;
 
@@ -16,14 +20,15 @@ const Comment = ({ post }) => {
 
     const getComment = async () => {
         try {
-            const response = await axios.get("/api/posts/comment/getComment");
+            const response = 
+            await axios.get("/api/posts/comment/getComment");
 
             const getComments = response.data.list;
 
-            const commentForThisPost = getComments.filter((comment) => { 
+            const commentForThisPost = 
+            getComments.filter( (comment) => { 
                 return comment.postsId === postId;
-            }
-            );
+            });
 
             setComment(commentForThisPost);
         }
@@ -33,10 +38,10 @@ const Comment = ({ post }) => {
     }
 
 
-    const hadleSubmitComment = async (e) => {
+    const onSubmitComment = async (e) => {
         e.preventDefault();
 
-        if(commentContent === "") {
+        if (commentContent === "") {
             alert("내용을 입력해 주세요!");
             return;
         }
@@ -48,15 +53,16 @@ const Comment = ({ post }) => {
         }
 
         try {
-            const response = await axios.post("/api/posts/comment/register" , commentBody);
+            const response = 
+            await axios.post("/api/posts/comment/register" , commentBody);
 
-            if(response.data.success === true) {
+            if (response.data.success === true) {
                 alert(response.data.messsage);
                 setCommentContent("");
                 return;
             }
 
-            if(response.data.success === false) {
+            if (response.data.success === false) {
                 alert(response.data.messsage);
                 return;
             }
@@ -67,9 +73,10 @@ const Comment = ({ post }) => {
     }
 
 
-    const handleClickCommentDelete = async (commentId) => {
+    const onClickCommentDelete = async (commentId) => {
 
-        const filteredId = comment.filter((comment) => {
+        const filteredId = 
+        comment.filter((comment) => {
             return commentId === comment._id;
         });
 
@@ -78,20 +85,26 @@ const Comment = ({ post }) => {
         }
 
         try {
-            if(window.confirm("댓글을 정말 삭제 하시겠습니까?")) {
-                const response = 
-                await axios.post("/api/posts/comment/deleteComment" , deleteCommentBody);
+                if (window.confirm("댓글을 정말 삭제 하시겠습니까?")) {
 
-                if(response.data.deleteSuccess === true) {
-                    alert(response.data.messsage);
-                    return;
+                    const response = 
+                    await axios.post(
+                        "/api/posts/comment/deleteComment" , 
+                        deleteCommentBody
+                    );
+
+                    if (response.data.deleteSuccess === true) {
+                        alert(response.data.messsage);
+                        return;
+                    }
+
+                    if (response.data.deleteSuccess === false) {
+                        alert(response.data.messsage);
+                        return;
+                    }
+
                 }
 
-                if(response.data.deleteSuccess === false) {
-                    alert(response.data.messsage);
-                    return;
-                }
-            }
         }
         catch (error) {
             console.log(error);
@@ -99,8 +112,10 @@ const Comment = ({ post }) => {
     }
 
 
-    const handleClickCommentEdit  = async (commentId) => {
-        const filteredId = comment.filter((comment) => {
+    const onClickCommentEdit  = async (commentId) => {
+
+        const filteredId = 
+        comment.filter((comment) => {
             return commentId === comment._id;
         });
 
@@ -110,20 +125,25 @@ const Comment = ({ post }) => {
         }
 
         try {
-            if(window.confirm("댓글을 정말 수정 하시겠습니까?")) {
-                const response = 
-                await axios.put("/api/posts/comment/updateComment" , updateCommentBody);
+                if (window.confirm("댓글을 정말 수정 하시겠습니까?")) {
 
-                if(response.data.deleteSuccess === true) {
-                    alert(response.data.messsage);
-                    return;
-                }
+                    const response = 
+                    await axios.put(
+                        "/api/posts/comment/updateComment" , 
+                        updateCommentBody
+                    );
 
-                if(response.data.deleteSuccess === false) {
-                    alert(response.data.messsage);
-                    return;
-                }
-                setIsEdit(!isEdit);
+                    if (response.data.deleteSuccess === true) {
+                        alert(response.data.messsage);
+                        return;
+                    }
+
+                    if (response.data.deleteSuccess === false) {
+                        alert(response.data.messsage);
+                        return;
+                    }
+                    setIsEdit(!isEdit);
+
             }
         }
         catch (error) {
@@ -139,37 +159,41 @@ const Comment = ({ post }) => {
 
     return (
         <>
-        <div className ="commnet-textarea__wrap">
+        <div className = "commnet-textarea__wrap">
             <form 
-            className ="commnet-textarea__form"
-            onSubmit ={ hadleSubmitComment }
-            >
-                <div className ="comment-textarea__container">
+            className = "commnet-textarea__form"
+            onSubmit = { onSubmitComment } >
+
+                <div className = "comment-textarea__container">
                     <textarea 
-                    placeholder ="댓글을 달아 보세요!"
-                    className ="comment-input"
-                    value ={ commentContent }
-                    onChange ={ (e) => setCommentContent(e.target.value) }>
+                    placeholder = "댓글을 달아 보세요!"
+                    className = "comment-input"
+                    value = { commentContent }
+                    onChange = { (e) => setCommentContent(e.target.value) } >
                     </textarea>
                 </div>
-                <div className ="comment-button__container">
+
+                <div className = "comment-button__container">
+
                     <styled.SubmitButton 
-                    type ="submit"
-                    className ="comment-button default-btn">
+                    type = "submit"
+                    className = "comment-button default-btn">
                         등록
                     </styled.SubmitButton>
+
                 </div>
             </form>
 
             <CommentList
-            comment ={ comment }
+            comment = { comment }
             isEdit = { isEdit }
-            setIsEdit ={ setIsEdit }
-            updateComment ={ updateComment }
-            setUpdateComment ={ setUpdateComment }
-            handleClickCommentDelete ={ handleClickCommentDelete }
-            handleClickCommentEdit ={ handleClickCommentEdit }
+            setIsEdit = { setIsEdit }
+            updateComment = { updateComment }
+            setUpdateComment = { setUpdateComment }
+            onClickCommentDelete = { onClickCommentDelete }
+            onClickCommentEdit = { onClickCommentEdit }
             />
+
         </div>
         </>
     );

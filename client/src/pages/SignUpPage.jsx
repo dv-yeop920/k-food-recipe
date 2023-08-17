@@ -9,9 +9,9 @@ import axios from "axios";
 const SignUpPage = (
     { 
         modalRef,
-        modalOutSideClick,
-        openCloseSignUpModal, 
-        changeModal,
+        onClickModalOutSide,
+        onClickSignUpModal, 
+        onClickChangeModal,
         userName,
         userId,
         userPassword,
@@ -34,18 +34,23 @@ const SignUpPage = (
         }
 
         try {
-            const response = await axios.post("/api/users/register" , userInfo);
+            const response = 
+            await axios.post("/api/users/register" , userInfo);
 
-            if(response.data.success === false) {
+            if (response.data.success === false) {
+
                 setMessage(response.data.messsage);
                 return;
+
             }
 
-            if(response.data.success === true) {
-                changeModal();
+            if (response.data.success === true) {
+
+                onClickChangeModal();
                 alert(response.data.messsage);
                 setMessage("");
                 return;
+
             }
         }
         catch (error) {
@@ -55,6 +60,7 @@ const SignUpPage = (
 
 //회원가입 서버 요청
     const handleClickSignUp = (e) => {
+
         e.preventDefault();
         //정규표현식
         const nameRegex = /[ㄱ-ㅎ가-힣ㅏ-ㅣ]/;
@@ -87,90 +93,91 @@ const SignUpPage = (
     return (
         <>
         <div 
-        ref ={ modalRef } 
-        onClick ={ (e) => modalOutSideClick(e) }
-        className ="sign-modal">
-            <main className ="user-form__container">
+        ref = { modalRef } 
+        onClick = { (e) => onClickModalOutSide(e) }
+        className = "sign-modal">
+            <main className = "user-form__container">
 
                 <styled.LoginSignUpform 
-                className ="user-form"
-                onSubmit ={ handleClickSignUp }
-                >
+                className = "user-form"
+                onSubmit = { handleClickSignUp } >
 
-                    <div className ="sign-header">
+                    <div className = "sign-header">
+
                         <FontAwesomeIcon
-                        className ="user-form__cancel"
-                        icon ={ faX }
-                        size ="lg"
-                        onClick ={ openCloseSignUpModal }
-                        />
+                        className = "user-form__cancel"
+                        icon = { faX }
+                        size = "lg"
+                        onClick = { onClickSignUpModal } />
+
                         <h2 className ="user-form__title">
                             회원 가입
                         </h2>
+
                         <div></div>
+
                     </div>
 
                     <input 
-                    className ="user-form__name" 
-                    type ="text"
-                    placeholder ="이름" 
-                    onChange ={ onChangeValue }
-                    />
+                    className = "user-form__name" 
+                    type = "text"
+                    placeholder = "이름" 
+                    onChange = { onChangeValue } />
 
                     <input 
-                    className ="user-form__id"
-                    type ="text"
-                    placeholder ="아이디 5~15자리 특수 문자는 제외"
-                    maxLength ="15"
-                    onChange ={ onChangeValue }
-                    />
+                    className = "user-form__id"
+                    type = "text"
+                    placeholder = "아이디 5~15자리 특수 문자는 제외"
+                    maxLength = "15"
+                    onChange = { onChangeValue } />
 
                     <input 
-                    className ="user-form__pw" 
-                    type ="password"
-                    maxLength ="15"
-                    placeholder ="비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함" 
-                    onChange ={ onChangeValue }
-                    />
+                    className = "user-form__pw" 
+                    type = "password"
+                    maxLength = "15"
+                    placeholder = "비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함" 
+                    onChange = { onChangeValue } />
 
                     <input 
-                    className ="user-form__pw-check" 
-                    type ="password"
-                    placeholder ="비밀 번호 확인"
-                    onChange ={ onChangeValue }
-                    />
+                    className = "user-form__pw-check" 
+                    type = "password"
+                    placeholder = "비밀 번호 확인"
+                    onChange = { onChangeValue } />
 
                     <input 
-                    className ="user-form__email" 
-                    type ="email"
-                    placeholder ="이메일" 
-                    onChange ={ onChangeValue }
-                    />
+                    className = "user-form__email" 
+                    type = "email"
+                    placeholder = "이메일" 
+                    onChange = { onChangeValue } />
 
-                    <span className ="error-message">
+                    <span className = "error-message">
                         { message }
                     </span>
 
                     <styled.LoginSignUpButton
-                        className ="default-btn" 
-                        type ="submit"
-                    >
+                    className = "default-btn" 
+                    type = "submit" >
                         가입 하기
                     </styled.LoginSignUpButton>
 
-                    <div className ="question-container">
-                        <span className ="question">
+                    <div className = "question-container">
+
+                        <span className = "question">
                             이미 계정이 있으신가요?&nbsp;
                         </span>
+
                         <span 
-                        className ="signup-login__navigate"
-                        onClick ={ changeModal }>
+                        className = "signup-login__navigate"
+                        onClick = { onClickChangeModal } >
                                 로그인
                         </span>
+
                     </div>
 
                 </styled.LoginSignUpform>
+
             </main>
+
         </div>
         </>
     );

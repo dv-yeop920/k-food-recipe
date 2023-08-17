@@ -5,6 +5,7 @@ import logger from "redux-logger";
 import userSlice from "./slice/userSlice";
 
 
+
 const persistConfig = {
     key: "user",
     storage: storageSession,
@@ -18,10 +19,12 @@ const rootReducer = combineReducers({
 const persistedReducer =  persistReducer(persistConfig, rootReducer);
 
 const store =  configureStore({
+
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false
     }).concat(logger)
+
 });
 
 export default store;

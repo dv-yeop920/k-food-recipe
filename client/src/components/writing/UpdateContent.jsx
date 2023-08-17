@@ -32,6 +32,7 @@ const UpdateContent = ({ newDetail , setNewDetail }) => {
         });
     }
 
+
     const handleChangeContent = (e) => {
 
         return setNewDetail({
@@ -42,24 +43,28 @@ const UpdateContent = ({ newDetail , setNewDetail }) => {
 
     return (
         <>
-        <div className ="writing-container">
-            <div className ="writing-container__column">
+        <div className = "writing-container">
+
+            <div className = "writing-container__column">
+
                 <input 
-                className ="editor-title" 
-                type ="text" 
-                value ={ newDetail.title || ""}
-                onChange ={ handelChangeTitle }
-                />  
+                className = "editor-title" 
+                type = "text" 
+                value = { newDetail.title || "" }
+                onChange = { handelChangeTitle } />  
+
             </div>
 
-            <div className ="writing-container__column">
+            <div className = "writing-container__column">
+
                 <ReactQuill  
-                className ="content"
-                value ={ newDetail.content }
-                modules ={ modules }
-                onChange ={ handleChangeContent }
-                /> 
-            </div>          
+                className = "content"
+                value = { newDetail.content }
+                modules = { modules }
+                onChange = { handleChangeContent } /> 
+
+            </div>       
+
         </div>
         </>
     );

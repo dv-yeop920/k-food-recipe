@@ -2,44 +2,57 @@ import { useRef, useState } from "react";
 
 
 const useModal = (initialState) => {
+
     const [menuModal , setMenuModal] = useState(initialState);
     const [loginModal , setLoginModal] = useState(initialState);
     const [signUpModal , setSignUpModal] = useState(initialState);
     const modalRef = useRef(null);
 
 
-    const modalOutSideClick = (e) => {
-        if(modalRef.current === e.target) {
-            switch(e.target.className) {
-                case  "sign-modal":
+    const onClickModalOutSide = (e) => {
+
+        if (modalRef.current === e.target) {
+
+            switch (e.target.className) {
+
+                case  "sign-modal" :
                     setMenuModal(false);
                     setLoginModal(false);
                     setSignUpModal(false);
                     break;
-                case "menu-modal":
+
+                case "menu-modal" :
                     setMenuModal(false);
                     break;
+
                 default:
             }
         }
     }
 
-    const openCloseMenuModal = () => {
+
+    const onClickMenuModal = () => {
+
         setMenuModal(!menuModal);
         return;
     }
 
-    const openCloseLoginModal = () => {
+    const onClickLoginModal = () => {
+
         setLoginModal(!loginModal);
         return;
     }
 
-    const openCloseSignUpModal = () => {
+
+    const onClickSignUpModal = () => {
+
             setSignUpModal(!signUpModal);
             return;
     }
-    
-    const changeModal = () => {
+
+
+    const onClickChangeModal = () => {
+
         setLoginModal(!loginModal);
         setSignUpModal(!signUpModal);
         return;
@@ -47,14 +60,14 @@ const useModal = (initialState) => {
 
     return [ 
             menuModal,
-            openCloseMenuModal,
+            onClickMenuModal,
             loginModal,
             signUpModal,
-            openCloseLoginModal, 
-            openCloseSignUpModal, 
-            changeModal ,
+            onClickLoginModal, 
+            onClickSignUpModal, 
+            onClickChangeModal ,
             modalRef,
-            modalOutSideClick
+            onClickModalOutSide
         ];
 }
 

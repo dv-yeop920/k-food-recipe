@@ -1,5 +1,6 @@
 
 const getDate = (createdAt) => {
+
     const newDate = new Date(createdAt);
     const year = newDate.getFullYear();
     const month = newDate.getMonth();
