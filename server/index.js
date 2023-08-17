@@ -188,7 +188,6 @@ app.post("/api/posts/register" , async (req , res) => {
             content: req.body.content
         }
 
-        console.log(post);
         const posts = new Post(post);
         
         await posts.save();
@@ -239,6 +238,7 @@ app.get("/api/posts/getPost", async (req, res) => {
     const postId = req.query.id;
     try {
         if (postId) {
+
             const post = await Post.findOne({ _id : postId });
 
                 const parts = post.id.split("_");
@@ -319,6 +319,8 @@ app.post("/api/posts/comment/register" , async (req , res) => {
         }
 
         const comment = new Comment(commentBody);
+
+        comment.count += 1;
 
         await comment.save();
 

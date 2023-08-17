@@ -170,23 +170,37 @@ const CommentList = ({ post }) => {
 
     return (
         <>
-        <div className = "commnet-textarea__wrap">
+        <div className = "comment-wrap">
 
-            <CommentInput
-            commentContent = { commentContent }
-            setCommentContent = { setCommentContent }
-            onSubmitRegisterComment = { onSubmitRegisterComment } />
+            <div className = "comment-count">
 
-            <Comment
-            comment = { comment }
-            isEdit = { isEdit }
-            setIsEdit = { setIsEdit }
-            updateComment = { updateComment }
-            setUpdateComment = { setUpdateComment }
-            onClickCommentDelete = { onClickCommentDelete }
-            onClickCommentEdit = { onClickCommentEdit } 
-            replyCommentContent = { replyCommentContent }
-            setReplyCommentContent = { setReplyCommentContent } />
+                <h3>댓글 0</h3>
+
+            </div>
+
+            <div className = "comment-container">
+
+                <div className = "commnet-textarea__wrap">
+
+                    <CommentInput
+                    commentContent = { commentContent }
+                    setCommentContent = { setCommentContent }
+                    onSubmitRegisterComment = { onSubmitRegisterComment } />
+
+                    <Comment
+                    comment = { comment }
+                    isEdit = { isEdit }
+                    setIsEdit = { setIsEdit }
+                    updateComment = { updateComment }
+                    setUpdateComment = { setUpdateComment }
+                    onClickCommentDelete = { onClickCommentDelete }
+                    onClickCommentEdit = { onClickCommentEdit } 
+                    replyCommentContent = { replyCommentContent }
+                    setReplyCommentContent = { setReplyCommentContent } />
+
+                </div>
+
+            </div>
 
         </div>
         </>

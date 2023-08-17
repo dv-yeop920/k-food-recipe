@@ -12,7 +12,6 @@ const PostsList = () => {
 
     const navigate = useNavigate();
     const [postList , setPostList] = useState([]);
-    const [viewCount , setViewCount] = useState(1);
 
 
     const getPostList = async () => {
@@ -29,8 +28,7 @@ const PostsList = () => {
         }
     }
 
-//TODO - 클릭 하면 조회 카운트를 db에 보내줘야함
-//TODO - db의 데이터를 post에서 뿌려서 조회수 카운트 해줌 
+
     const onClickPostDetailNavigate = (postId) => {
 
         return navigate(`/postDetail/${postId}`);
@@ -104,8 +102,7 @@ const PostsList = () => {
                         className = "post-list" 
                         key = { post._id }
                         onClick = { () => {
-                            setViewCount(viewCount + 1);
-                            console.log(viewCount)
+
                             onClickPostDetailNavigate(post._id);
                             return;
 
@@ -130,7 +127,7 @@ const PostsList = () => {
                                 </styled.Span>
                                 
                                 <styled.Span>
-                                    조회 0
+                                    {`조회 ${ post.viewCount }`}
                                 </styled.Span>
 
                                 <styled.Span>

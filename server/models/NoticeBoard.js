@@ -25,6 +25,10 @@ const noticeBoardSchema = mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
+    },
+    viewCount: { 
+        type: Number, 
+        default: 0 
     }
 });
 

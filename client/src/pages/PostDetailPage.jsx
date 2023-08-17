@@ -23,10 +23,11 @@ const PostsDetail = () => {
         const postId = id;
 
         try {
-                const response =  
-                await axios.get(`/api/posts/getPost?id=${postId}`);
+            const response =  
+            await axios.get(`/api/posts/getPost?id=${postId}`);
 
-                setPost(response.data.list);
+            setPost(response.data.list);
+
         }
         catch (error) {
             console.log(error);
@@ -165,21 +166,7 @@ const PostsDetail = () => {
 
             </div>
 
-            <div className = "comment-wrap">
-
-                <div className = "comment-count">
-
-                    <h3>댓글 0</h3>
-
-                </div>
-
-                <div className = "comment-container">
-
-                    <CommentList post = { post }/>
-
-                </div>
-
-            </div>
+            <CommentList post = { post }/>
 
             <div style = {{ height:"40px" }}></div>
 
