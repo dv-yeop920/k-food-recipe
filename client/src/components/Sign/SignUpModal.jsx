@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import * as styled from "../styles/styledComponents";
+import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 
 
-const SignUpPage = (
+const SignUpModal = (
     { 
         modalRef,
         onClickModalOutSide,
@@ -183,4 +183,4 @@ const SignUpPage = (
     );
 };
 
-export default SignUpPage;
+export default SignUpModal;

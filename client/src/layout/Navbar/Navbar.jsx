@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser , faBars , faGlobe , faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import NavItem from "./NavItem";
-import LoginPage from "../../pages/LoginPage";
-import SignUpPage from "../../pages/SignUpPage";
+import LoginModal from "../../components/Sign/LoginModal";
+import SignUpModal from "../../components/Sign/SignUpModal";
 import useModal from "../../hooks/useModal";
 import useInput from "../../hooks/useInput";
 
@@ -121,7 +121,7 @@ const Navbar = () => {
         { 
             loginModal === true && 
 
-            <LoginPage
+            <LoginModal
             onClickMenuModal = { onClickMenuModal }
             onClickLoginModal = { onClickLoginModal }
             onClickChangeModal = { onClickChangeModal }
@@ -135,7 +135,7 @@ const Navbar = () => {
         { 
             signUpModal === true && 
 
-            <SignUpPage 
+            <SignUpModal 
             modalRef = { modalRef } 
             onClickModalOutSide = { onClickModalOutSide }
             onClickSignUpModal = { onClickSignUpModal }

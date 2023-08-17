@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import * as styled from "../../styles/styledComponents";
-import getDate from "../../utils/postDate";
+import * as styled from "../../../styles/styledComponents";
+import getDate from "../../../utils/postDate";
+import ReplyComment from "./ReplyComment";
+import ReplyInput from "./ReplyInput";
 
 
 
 
-const CommentList = (
+const Comment = (
     { 
         comment , 
         isEdit , 
@@ -13,11 +15,14 @@ const CommentList = (
         updateComment , 
         setUpdateComment , 
         onClickCommentDelete , 
-        onClickCommentEdit
+        onClickCommentEdit ,
+        replyCommentContent ,
+        setReplyCommentContent
     }
     ) => {
         
             const [editId , setEditId] = useState("");
+            const [isReply , setIsReply] = useState(false);
 
     return (
         <>
@@ -26,9 +31,8 @@ const CommentList = (
                 comment &&
 
                 comment.map( (comment) => {
-
-                        return(
-
+                    return (
+                        <>
                         <li className = "comment" key = { comment._id }>
 
                             <div>
@@ -41,11 +45,14 @@ const CommentList = (
                                 isEdit === true && editId === comment._id ?
 
                                 <textarea
+                                style = {{ marginTop : "5px" }}
                                 className = "comment-input"
                                 value = { updateComment }
                                 onChange = { (e) => {
+
                                     setUpdateComment(e.target.value);
                                     return;
+
                                 }} >
                                 </textarea>
 
@@ -76,7 +83,14 @@ const CommentList = (
 
                                     <styled.Span
                                     className = "reply-button"
-                                    style = {{ cursor:"pointer" }} >
+                                    style = {{ cursor:"pointer" }}
+                                    onClick = {() => {
+
+                                        setIsReply(!isReply);
+                                        setEditId(comment._id);
+                                        return;
+
+                                    }} >
                                         답글 쓰기
                                     </styled.Span>
                                 </div>
@@ -146,7 +160,21 @@ const CommentList = (
 
                                 </div>
                             </div>
+
+                            {
+                                isReply === true && editId === comment._id &&
+
+                                <ReplyInput
+                                isReply = { isReply }
+                                setIsReply = { setIsReply } 
+                                replyCommentContent = { replyCommentContent }
+                                setReplyCommentContent = { setReplyCommentContent }
+                                />
+
+                            }
+                            <ReplyComment/>
                         </li>
+                        </>
                         );
                     })
                 }
@@ -155,4 +183,4 @@ const CommentList = (
     );
 };
 
-export default CommentList;
+export default Comment;

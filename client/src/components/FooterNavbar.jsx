@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const PostFooter = () => {
+const FooterNavbar = () => {
 
     const navigate = useNavigate();
 
@@ -68,4 +68,4 @@ const PostFooter = () => {
     );
 };
 
-export default PostFooter;
+export default FooterNavbar;

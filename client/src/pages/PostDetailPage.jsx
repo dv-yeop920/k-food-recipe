@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams , useNavigate } from "react-router-dom";
 import * as styled from "../styles/styledComponents";
-import Comment from "../components/NoticeBoard/Comment";
-import PostFooter from "../components/NoticeBoard/PostFooter";
+import CommentList from "../components/NoticeBoard/Comment/CommentList";
+import FooterNavbar from "../components/FooterNavbar";
 import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
@@ -137,8 +137,10 @@ const PostsDetail = () => {
                         onClick = { () => {
 
                             if (window.confirm("게시글을 수정하시겠습니까?")) {
+
                                 navigate(`/postUpdate/${ id }`);
                                 return;
+
                             }
 
                         }} >
@@ -158,24 +160,30 @@ const PostsDetail = () => {
             </div>
 
             <div className = "post-content">
+
                 { Parser(String(post.content)) }
+
             </div>
 
             <div className = "comment-wrap">
 
                 <div className = "comment-count">
+
                     <h3>댓글 0</h3>
+
                 </div>
 
                 <div className = "comment-container">
-                    <Comment post = { post }/>
+
+                    <CommentList post = { post }/>
+
                 </div>
 
             </div>
 
             <div style = {{ height:"40px" }}></div>
 
-            <PostFooter/>
+            <FooterNavbar/>
         </div>
         </>
     );

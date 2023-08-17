@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import * as styled from "../styles/styledComponents";
+import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faX} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../store/slice/userSlice";
+import { loginUser } from "../../store/slice/userSlice";
 import axios from "axios";
 
 
-const LoginPage = (
+const LoginModal = (
     { 
         onClickMenuModal,
         onClickLoginModal,
@@ -154,4 +154,4 @@ const LoginPage = (
     );
 };
 
-export default LoginPage;
+export default LoginModal;

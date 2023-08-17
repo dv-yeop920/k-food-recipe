@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 //유저 모델을 가져옴
 const { User } = require("./models/User.js");
 //로그인 인증 미들웨어
-const { auth } = require("./middleware/auth.js");
+const { auth } = require("./middleware/auth");
 
 //클라이언트의 req 를 json 형태로 해석 하도록 도와줌
 app.use(bodyParser.urlencoded({extended: true}));
@@ -308,7 +308,7 @@ app.post("/api/posts/delete" , async (req , res) => {
 
 //------------------------댓글------------------------------------------
 
-const { Comment } = require("./models/Comment");
+const { Comment } = require("./models/Comment.js");
 
 app.post("/api/posts/comment/register" , async (req , res) => {
     try {

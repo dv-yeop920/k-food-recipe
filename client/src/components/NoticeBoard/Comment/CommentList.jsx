@@ -1,36 +1,38 @@
 import React, { useEffect, useState } from "react";
-import * as styled from "../../styles/styledComponents";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import CommentList from "./CommentList";
+import Comment from "./Comment";
+import CommentInput from "./CommentInput";
 
 
 
 
-const Comment = ({ post }) => {
+const CommentList = ({ post }) => {
 
     const userId = useSelector(user => user.user.id);
     const postId = post._id;
 
     const [commentContent , setCommentContent] = useState("");
-    const [comment , setComment] = useState([]);
     const [updateComment , setUpdateComment] = useState("");
+    const [replyCommentContent , setReplyCommentContent] = useState("");
+    const [comment , setComment] = useState([]);
     const [isEdit , setIsEdit] = useState(false);
+    
 
 
     const getComment = async () => {
         try {
-            const response = 
-            await axios.get("/api/posts/comment/getComment");
+                const response = 
+                await axios.get("/api/posts/comment/getComment");
 
-            const getComments = response.data.list;
+                const getComments = response.data.list;
 
-            const commentForThisPost = 
-            getComments.filter( (comment) => { 
-                return comment.postsId === postId;
-            });
+                const commentForThisPost = 
+                getComments.filter( (comment) => { 
+                    return comment.postsId === postId;
+                });
 
-            setComment(commentForThisPost);
+                setComment(commentForThisPost);
         }
         catch (error) {
             console.log(error);
@@ -38,7 +40,7 @@ const Comment = ({ post }) => {
     }
 
 
-    const onSubmitComment = async (e) => {
+    const onSubmitRegisterComment = async (e) => {
         e.preventDefault();
 
         if (commentContent === "") {
@@ -53,19 +55,23 @@ const Comment = ({ post }) => {
         }
 
         try {
-            const response = 
-            await axios.post("/api/posts/comment/register" , commentBody);
+                const response = 
+                await axios.post("/api/posts/comment/register" , commentBody);
 
-            if (response.data.success === true) {
-                alert(response.data.messsage);
-                setCommentContent("");
-                return;
-            }
+                if (response.data.success === true) {
 
-            if (response.data.success === false) {
-                alert(response.data.messsage);
-                return;
-            }
+                    alert(response.data.messsage);
+                    setCommentContent("");
+                    return;
+
+                }
+
+                if (response.data.success === false) {
+
+                    alert(response.data.messsage);
+                    return;
+
+                }
         }
         catch (error) {
             console.log(error);
@@ -94,13 +100,17 @@ const Comment = ({ post }) => {
                     );
 
                     if (response.data.deleteSuccess === true) {
+
                         alert(response.data.messsage);
                         return;
+
                     }
 
                     if (response.data.deleteSuccess === false) {
+
                         alert(response.data.messsage);
                         return;
+
                     }
 
                 }
@@ -115,7 +125,7 @@ const Comment = ({ post }) => {
     const onClickCommentEdit  = async (commentId) => {
 
         const filteredId = 
-        comment.filter((comment) => {
+        comment.filter( (comment) => {
             return commentId === comment._id;
         });
 
@@ -142,6 +152,7 @@ const Comment = ({ post }) => {
                         alert(response.data.messsage);
                         return;
                     }
+
                     setIsEdit(!isEdit);
 
             }
@@ -160,43 +171,26 @@ const Comment = ({ post }) => {
     return (
         <>
         <div className = "commnet-textarea__wrap">
-            <form 
-            className = "commnet-textarea__form"
-            onSubmit = { onSubmitComment } >
 
-                <div className = "comment-textarea__container">
-                    <textarea 
-                    placeholder = "댓글을 달아 보세요!"
-                    className = "comment-input"
-                    value = { commentContent }
-                    onChange = { (e) => setCommentContent(e.target.value) } >
-                    </textarea>
-                </div>
+            <CommentInput
+            commentContent = { commentContent }
+            setCommentContent = { setCommentContent }
+            onSubmitRegisterComment = { onSubmitRegisterComment } />
 
-                <div className = "comment-button__container">
-
-                    <styled.SubmitButton 
-                    type = "submit"
-                    className = "comment-button default-btn">
-                        등록
-                    </styled.SubmitButton>
-
-                </div>
-            </form>
-
-            <CommentList
+            <Comment
             comment = { comment }
             isEdit = { isEdit }
             setIsEdit = { setIsEdit }
             updateComment = { updateComment }
             setUpdateComment = { setUpdateComment }
             onClickCommentDelete = { onClickCommentDelete }
-            onClickCommentEdit = { onClickCommentEdit }
-            />
+            onClickCommentEdit = { onClickCommentEdit } 
+            replyCommentContent = { replyCommentContent }
+            setReplyCommentContent = { setReplyCommentContent } />
 
         </div>
         </>
     );
 }
 
-export default Comment;
+export default CommentList;
