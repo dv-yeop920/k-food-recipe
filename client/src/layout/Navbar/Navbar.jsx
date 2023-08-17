@@ -32,7 +32,7 @@ const Navbar = () => {
             userPassword,
             checkPassword,
             userEmail,
-            handleChangeValue
+            onChangeValue
         ] = useInput("");
 
 
@@ -118,7 +118,7 @@ const Navbar = () => {
                 changeModal ={ changeModal }
                 userId ={ userId }
                 userPassword ={ userPassword }
-                handleChangeValue ={ handleChangeValue }
+                onChangeValue ={ onChangeValue }
                 />
         }
         
@@ -134,7 +134,7 @@ const Navbar = () => {
                 userPassword ={ userPassword }
                 checkPassword ={ checkPassword }
                 userEmail ={ userEmail }
-                handleChangeValue ={ handleChangeValue }
+                onChangeValue ={ onChangeValue }
                 />
         }
 

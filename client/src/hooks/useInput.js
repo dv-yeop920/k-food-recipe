@@ -9,7 +9,7 @@ const useInput = (initialState) => {
     const [checkPassword , setCheckPassword] = useState(initialState);
     const [userEmail , setUserEmail] = useState(initialState);
 
-    const handleChangeValue = (e) => {
+    const onChangeValue = (e) => {
         const userInput = e.target;
 
         switch(userInput.className) {
@@ -38,7 +38,7 @@ const useInput = (initialState) => {
         userPassword,
         checkPassword,
         userEmail,
-        handleChangeValue
+        onChangeValue
     ];
 }
 

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import ScrollToTopButton from "../ScrollToTopButton";
 import getDate from "../../utils/postDate";
 import axios from "axios";
 
@@ -131,8 +130,6 @@ const PostsList = () => {
                 }
             </ul>
         </styled.BoardContainer>
-
-        <ScrollToTopButton/>
         </>
     );
 };

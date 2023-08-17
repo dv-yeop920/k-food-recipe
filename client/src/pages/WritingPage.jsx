@@ -2,8 +2,6 @@ import React ,{ useState }from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as styled from "../styles/styledComponents";
-import Navbar from "../components/navbar/Navbar";
-import ScrollToTopButton from "../components/ScrollToTopButton";
 import ImageUploader from "../components/writing/ImageUploader";
 import Content from "../components/writing/Content";
 import axios from "axios";
@@ -44,7 +42,6 @@ const WritingPage = () => {
 
     return (
         <>
-        <Navbar/>
         <div className ="editor-container">
             <form 
             className ="editor-form"
@@ -79,7 +76,6 @@ const WritingPage = () => {
                 </div>
             </form>
         </div>
-        <ScrollToTopButton/>
         </>
     );
 };

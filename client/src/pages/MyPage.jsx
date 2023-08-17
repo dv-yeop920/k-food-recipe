@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faHeart , faFaceSmileBeam } from "@fortawesome/free-regular-svg-icons";
 import { useSelector } from "react-redux";
-import Navbar from "../components/navbar/Navbar";
-
 
 
 
@@ -14,8 +12,6 @@ const MyPage = () => {
 
     return (
         <>
-        <Navbar/>
-
         <main className ="my-page">
             <div className ="user-component">
                 <div className ="user-component__column">

@@ -17,7 +17,7 @@ const SignUpPage = (
         userPassword,
         checkPassword,
         userEmail,
-        handleChangeValue
+        onChangeValue
     }
     ) => {
 
@@ -114,7 +114,7 @@ const SignUpPage = (
                     className ="user-form__name" 
                     type ="text"
                     placeholder ="이름" 
-                    onChange ={ handleChangeValue }
+                    onChange ={ onChangeValue }
                     />
 
                     <input 
@@ -122,7 +122,7 @@ const SignUpPage = (
                     type ="text"
                     placeholder ="아이디 5~15자리 특수 문자는 제외"
                     maxLength ="15"
-                    onChange ={ handleChangeValue }
+                    onChange ={ onChangeValue }
                     />
 
                     <input 
@@ -130,21 +130,21 @@ const SignUpPage = (
                     type ="password"
                     maxLength ="15"
                     placeholder ="비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함" 
-                    onChange ={ handleChangeValue }
+                    onChange ={ onChangeValue }
                     />
 
                     <input 
                     className ="user-form__pw-check" 
                     type ="password"
                     placeholder ="비밀 번호 확인"
-                    onChange ={ handleChangeValue }
+                    onChange ={ onChangeValue }
                     />
 
                     <input 
                     className ="user-form__email" 
                     type ="email"
                     placeholder ="이메일" 
-                    onChange ={ handleChangeValue }
+                    onChange ={ onChangeValue }
                     />
 
                     <span className ="error-message">

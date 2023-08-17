@@ -1,7 +1,5 @@
 //import React, { useEffect, useState }  from 'react';
 //import axios from "axios";
-import RecipeNavber from "../components/navbar/RecipeNavbar";
-import ScrollToTopButton from "../components/ScrollToTopButton";
 
 
 
@@ -29,8 +27,6 @@ const RecipePage = () => {
 
     return (
         <>
-        <RecipeNavber/>
-        <ScrollToTopButton/>
         </>
     );
 };

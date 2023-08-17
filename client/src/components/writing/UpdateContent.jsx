@@ -23,9 +23,6 @@ const modules = {
 
 
 const UpdateContent = ({ newDetail , setNewDetail }) => {
-    //구조 분해 할당해서 title 과 content 로 분해
-    const { title , content } = newDetail;
-
 
     const handelChangeTitle = (e) => {
 
@@ -50,7 +47,7 @@ const UpdateContent = ({ newDetail , setNewDetail }) => {
                 <input 
                 className ="editor-title" 
                 type ="text" 
-                value ={ title || "" }
+                value ={ newDetail.title || ""}
                 onChange ={ handelChangeTitle }
                 />  
             </div>
@@ -58,7 +55,7 @@ const UpdateContent = ({ newDetail , setNewDetail }) => {
             <div className ="writing-container__column">
                 <ReactQuill  
                 className ="content"
-                value ={ content }
+                value ={ newDetail.content }
                 modules ={ modules }
                 onChange ={ handleChangeContent }
                 /> 

@@ -16,7 +16,7 @@ const LoginPage = (
         changeModal,
         userId,
         userPassword,
-        handleChangeValue
+        onChangeValue
     }
     ) => {
 
@@ -85,7 +85,7 @@ const LoginPage = (
                     type ="text"
                     placeholder ="아이디"
                     maxLength ="12"
-                    onChange ={ handleChangeValue }
+                    onChange ={ onChangeValue }
                     />
 
                     <input 
@@ -93,7 +93,7 @@ const LoginPage = (
                     type ="password"
                     placeholder ="비밀 번호"
                     maxLength ="15"
-                    onChange ={ handleChangeValue }
+                    onChange ={ onChangeValue }
                     />
 
                     <span className ="error-message">

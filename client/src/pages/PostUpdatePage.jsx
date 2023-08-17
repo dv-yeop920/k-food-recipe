@@ -1,8 +1,6 @@
 import React ,{ useEffect, useState } from "react";
 import { useNavigate , useParams } from "react-router-dom";
 import * as styled from "../styles/styledComponents";
-import Navbar from "../components/navbar/Navbar";
-import ScrollToTopButton from "../components/ScrollToTopButton";
 import ImageUploader from "../components/writing/ImageUploader";
 import UpdateContent from "../components/writing/UpdateContent";
 import axios from "axios";
@@ -63,7 +61,6 @@ const PostsUpdatePage = () => {
 
     return (
         <>
-        <Navbar/>
         <div className ="editor-container">
             <form 
             className ="editor-form"
@@ -98,7 +95,6 @@ const PostsUpdatePage = () => {
                 </div>
             </form>
         </div>
-        <ScrollToTopButton/>
         </>
     );
 };

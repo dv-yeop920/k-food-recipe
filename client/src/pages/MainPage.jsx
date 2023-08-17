@@ -1,6 +1,5 @@
 import React from "react";
-import Navbar from "../components/navbar/Navbar"
-import ScrollToTopButton from "../components/ScrollToTopButton";
+import Navbar from "../layout/Navbar/Navbar"
 
 
 const MainPage = () => {
@@ -22,7 +21,6 @@ const MainPage = () => {
                     <h1>환영 합니다!</h1>
                 메인 페이지 입니다
             </div>
-        <ScrollToTopButton/>
         </>
     );
 };

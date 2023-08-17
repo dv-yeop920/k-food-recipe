@@ -58,6 +58,7 @@ const NavItem = (
                                 openCloseSignUpModal();
                                 return;
                             }
+                            openCloseMenuModal();
                             navigate("/noticeBoard");
                             return;
                         }}
@@ -67,11 +68,11 @@ const NavItem = (
                         className ="navbar-link"
                         onClick ={ () => {
                             if(user.loginSuccess === false) {
-                                openCloseMenuModal();
                                 alert("회원만 이용할 수 있습니다");
                                 openCloseSignUpModal();
                                 return;
                             }
+                            openCloseMenuModal();
                             navigate("/myPage");
                             return;
                         }}>
