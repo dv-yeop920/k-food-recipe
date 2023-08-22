@@ -17,6 +17,8 @@ const PostsDetail = () => {
     const { id } = useParams();
     const [post, setPost] = useState({});
 
+    //TODO - mongodb 로 쿼리를 보내서 서버로 부터 페이지 받아오기 
+    //TODO - 
 
     const getPost = async () => {
 

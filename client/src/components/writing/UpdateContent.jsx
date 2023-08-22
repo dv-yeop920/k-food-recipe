@@ -50,7 +50,7 @@ const UpdateContent = ({ newDetail , setNewDetail }) => {
                 <input 
                 className = "editor-title" 
                 type = "text" 
-                value = { newDetail.title || "" }
+                value = { "" || newDetail.title }
                 onChange = { handelChangeTitle } />  
 
             </div>

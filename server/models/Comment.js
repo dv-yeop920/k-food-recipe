@@ -26,10 +26,6 @@ const commentSchema = mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
-    },
-    count: {
-        type: Number,
-        default: 0
     }
 });
 

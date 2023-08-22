@@ -12,7 +12,7 @@ const ReplyInput = (
 
     return (
         <>
-            <form 
+            <form
             className = "commnet-textarea__form"
             >
 
@@ -25,6 +25,7 @@ const ReplyInput = (
                     placeholder = "답글을 달아 보세요!"
                     onChange = { (e) => setReplyCommentContent(e.target.value) }>
                     </textarea>
+
                 </div>
 
                 <div className = "comment-button__container">

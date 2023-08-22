@@ -209,8 +209,15 @@ app.post("/api/posts/register" , async (req , res) => {
 
 
 app.get("/api/posts/getPostList" ,  async (req , res) => {
+    const pageNumber = req.query.pageNumber || 0;
+
+    const postPerPage = 5;
+
     try {
-        const posts = await Post.find().sort({ createdAt: -1 });
+
+        const posts = await Post.find().sort({ createdAt: -1 })
+        .skip(pageNumber * postPerPage)
+        .limit(postPerPage);
 
         const modifiedPosts = posts.map(post => {
             const parts = post.id.split("_");
@@ -225,6 +232,7 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
         res.json({
             list: modifiedPosts
         });
+
     }
     catch (error) {
         res.json({
@@ -235,16 +243,18 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
 
 
 app.get("/api/posts/getPost", async (req, res) => {
+
     const postId = req.query.id;
+
     try {
         if (postId) {
 
             const post = await Post.findOne({ _id : postId });
 
-                const parts = post.id.split("_");
-                const userId = parts[0];
+            const parts = post.id.split("_");
+            const userId = parts[0];
 
-                post.id = userId;
+            post.id = userId;
 
             res.json({ 
                 list: post
@@ -319,8 +329,6 @@ app.post("/api/posts/comment/register" , async (req , res) => {
         }
 
         const comment = new Comment(commentBody);
-
-        comment.count += 1;
 
         await comment.save();
 

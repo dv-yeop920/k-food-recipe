@@ -21,10 +21,12 @@ const PostsUpdatePage = () => {
         const postId = id;
 
         try {
-                const response =  
-                await axios.get(`/api/posts/getPost?id=${postId}`);
 
-                setNewDetail(response.data.list);
+            const response =  
+            await axios.get(`/api/posts/getPost?id=${postId}`);
+
+            setNewDetail(response.data.list);
+
         }
         catch (error) {
             console.log(error);
@@ -44,25 +46,26 @@ const PostsUpdatePage = () => {
         }
 
         try {
-                if (window.confirm("게시물 내용을 수정하시겠습니까?")) {
-                    const response = 
-                    await axios.put("/api/posts/update" , updatePosts);
+            
+            if (window.confirm("게시물 내용을 수정하시겠습니까?")) {
+                const response = 
+                await axios.put("/api/posts/update" , updatePosts);
 
-                    if (response.data.updateSuccess === false) {
+                if (response.data.updateSuccess === false) {
 
-                        alert(response.data.messsage);
-                        return;
+                    alert(response.data.messsage);
+                    return;
 
-                    }
-                
-                    if (response.data.updateSuccess === true) {
-
-                        navigate(-1 , {replace: true});
-                        alert(response.data.messsage);
-                        return;
-
-                    }
                 }
+                
+                if (response.data.updateSuccess === true) {
+
+                    navigate(-1 , {replace: true});
+                    alert(response.data.messsage);
+                    return;
+
+                }
+            }
         }
         catch (error) {
             console.log(error);

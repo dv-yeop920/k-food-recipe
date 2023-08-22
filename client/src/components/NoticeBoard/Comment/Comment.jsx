@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import * as styled from "../../../styles/styledComponents";
 import getDate from "../../../utils/postDate";
-import ReplyComment from "./ReplyComment";
 import ReplyInput from "./ReplyInput";
 
 
@@ -31,6 +30,7 @@ const Comment = (
                 comment &&
 
                 comment.map( (comment) => {
+
                     return (
                         <>
                         <li className = "comment" key = { comment._id }>
@@ -58,7 +58,8 @@ const Comment = (
 
                                 :
 
-                                <p className = "comment-content">
+                                <p
+                                className = "comment-content">
                                     { comment.content } 
                                 </p>
                             }
@@ -105,8 +106,10 @@ const Comment = (
                                     <styled.Span 
                                     className = "edit-button comment-edit-delete"
                                     onClick = { () => {
+
                                         setIsEdit(!isEdit);
                                         return; 
+
                                     }} >
                                         취소
                                     </styled.Span>
@@ -172,7 +175,6 @@ const Comment = (
                                 />
 
                             }
-                            <ReplyComment/>
                         </li>
                         </>
                         );
