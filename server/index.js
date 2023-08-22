@@ -209,15 +209,17 @@ app.post("/api/posts/register" , async (req , res) => {
 
 
 app.get("/api/posts/getPostList" ,  async (req , res) => {
-    const pageNumber = req.query.pageNumber || 0;
+    const pageNumber = parseInt(req.query.pageNumber) || 0;
 
     const postPerPage = 5;
 
     try {
 
-        const posts = await Post.find().sort({ createdAt: -1 })
+        const posts = 
+        await Post.find()
         .skip(pageNumber * postPerPage)
-        .limit(postPerPage);
+        .limit(postPerPage)
+        .sort({ createdAt: -1 });
 
         const modifiedPosts = posts.map(post => {
             const parts = post.id.split("_");
@@ -230,7 +232,7 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
         });
         
         res.json({
-            list: modifiedPosts
+            list: modifiedPosts,
         });
 
     }

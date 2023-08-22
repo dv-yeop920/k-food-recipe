@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PostSearchInput from "../components/NoticeBoard/PostSearchInput";
 import PostList from "../components/NoticeBoard/PostList";
-import Pagenation from "../components/NoticeBoard/Pagenation"
+
 
 
 
@@ -15,21 +15,20 @@ const NoticeBoardPage = () => {
 
     const postPerPage = 5;
 
-    const pageCount = Math.ceil(postList.length / postPerPage);
 
-
+//NOTE - 데이터 한 페이지당 5개 까지 받아오는 것 확인 
+//TODO - 확인 했으니 버튼을 누르면 pageNumber의 상태가 변하도록 버튼 페이지 구현 해야함
     const getPostList = async () => {
         try {
 
             const response = 
             await axios.get(
-                `/api/posts/getPostList?pageNumber=${ postPerPage }`
+                `/api/posts/getPostList?pageNumber=${ pageNumber }`
                 );
 
             const getPosts = response.data.list;
 
             setPostList(getPosts);
-
         }
         catch (error) {
             console.log(error);
@@ -46,17 +45,21 @@ const NoticeBoardPage = () => {
 
     useEffect(() => {
         getPostList();
-    } , []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , [pageNumber]);
 
     return (
         <>
+
         <PostSearchInput/>
 
         <PostList 
         postList = { postList } 
-        onClickPostDetailNavigate = { onClickPostDetailNavigate } />
+        onClickPostDetailNavigate = { onClickPostDetailNavigate } 
+        postPerPage = { postPerPage }
+        totalPosts = { postList.length }
+        paginate = { setPageNumber } />
 
-        <Pagenation/>
         </>
     );
 };

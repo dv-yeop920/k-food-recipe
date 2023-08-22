@@ -1,8 +1,17 @@
 import React from "react";
 import * as styled from "../../styles/styledComponents";
 import getDate from "../../utils/postDate";
+import Pagenation from "../Pagenation";
 
-const PostList = ({ postList , onClickPostDetailNavigate }) => {
+const PostList = (
+    { 
+        postList , 
+        onClickPostDetailNavigate , 
+        postPerPage , 
+        totalPosts , 
+        paginate
+    }
+    ) => {
     return (
         <>
         <styled.BoardContainer>
@@ -33,6 +42,7 @@ const PostList = ({ postList , onClickPostDetailNavigate }) => {
 
                 {
 
+                postList &&
                 postList.map( (post) => {
 
                     return(
@@ -97,6 +107,11 @@ const PostList = ({ postList , onClickPostDetailNavigate }) => {
                 })
                 }
             </ul>
+
+            <Pagenation
+            postPerPage = { postPerPage }
+            totalPosts = { totalPosts }
+            paginate = { paginate } />
 
         </styled.BoardContainer>
         </>
