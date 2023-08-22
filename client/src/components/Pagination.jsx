@@ -28,7 +28,7 @@ const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
 
                                     <styled.PageSpan  
                                     className = "page-link">
-                                        { number }
+                                        { number + 1 }
                                     </styled.PageSpan>
 
                                 </styled.PageLi>
