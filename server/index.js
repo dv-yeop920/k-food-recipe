@@ -217,7 +217,7 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
 
         const posts = 
         await Post.find()
-        .skip(pageNumber * (postPerPage - 1))
+        .skip(pageNumber * postPerPage)
         .limit(postPerPage)
         .sort({ createdAt: -1 });
 

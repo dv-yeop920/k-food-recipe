@@ -8,7 +8,7 @@ const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
     const pageNumbers = [];
     const totalPage = Math.ceil(totalPosts / postPerPage);
 
-    for (let i = 0; i <= totalPage; i++) {
+    for (let i = 0; i < totalPage; i++) {
         pageNumbers.push(i);
     }
 
