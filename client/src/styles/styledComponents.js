@@ -132,22 +132,29 @@ import { styled } from "styled-components";
                 transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
             `;
 
+            export const PaginationContainer = styled.div`
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            `;
+
+
             export const PageUl = styled.ul`
-                float: left;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 list-style: none;
                 text-align: center;
-                border-radius: 3px;
                 padding: 1px;
                 border-top: 2px solid #1abc9c;
                 border-bottom: 2px solid #1abc9c;
             `;
 
             export const PageLi = styled.li`
-                display: inline-block;
                 font-size: 17px;
                 font-weight: 600;
                 padding: 5px;
-                border-radius: 5px;
                 width: 25px;
                 &:hover {
                     cursor: pointer;

@@ -11,21 +11,24 @@ const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
     for (let i = 0; i <= totalPage; i++) {
         pageNumbers.push(i);
     }
+
     return (
         <>
-        <div>
+        <styled.PaginationContainer>
             <nav>
-                <styled.PageUl className="pagination">
+
+                <styled.PageUl className = "pagination">
                     {
-                        pageNumbers.map((number) => {
+                        pageNumbers.map( (number) => {
                             return(
                                 <styled.PageLi 
-                                key={number} 
-                                className="page-item" 
-                                onClick={() => paginate(number)} >
+                                key = { number } 
+                                className = "page-item" 
+                                onClick = { () => paginate(number) } >
 
-                                    <styled.PageSpan  className="page-link">
-                                        {number}
+                                    <styled.PageSpan  
+                                    className = "page-link">
+                                        { number }
                                     </styled.PageSpan>
 
                                 </styled.PageLi>
@@ -33,8 +36,9 @@ const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
                         })
                     }
                 </styled.PageUl>
+
             </nav>
-        </div>
+        </styled.PaginationContainer>
         </>
     );
 };

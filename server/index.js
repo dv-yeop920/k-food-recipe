@@ -217,9 +217,14 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
 
         const posts = 
         await Post.find()
-        .skip(pageNumber * postPerPage)
+        .skip(pageNumber * (postPerPage - 1))
         .limit(postPerPage)
         .sort({ createdAt: -1 });
+
+        const totalPosts = 
+        await Post.find()
+        .sort({ createdAt: -1 });
+
 
         const modifiedPosts = posts.map(post => {
             const parts = post.id.split("_");
@@ -232,6 +237,7 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
         });
         
         res.json({
+            totalPosts : totalPosts,
             list: modifiedPosts,
         });
 

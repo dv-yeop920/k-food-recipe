@@ -1,7 +1,7 @@
 import React from "react";
 import * as styled from "../../styles/styledComponents";
 import getDate from "../../utils/postDate";
-import Pagenation from "../Pagenation";
+import Pagination from "../Pagination";
 
 const PostList = (
     { 
@@ -108,7 +108,7 @@ const PostList = (
                 }
             </ul>
 
-            <Pagenation
+            <Pagination
             postPerPage = { postPerPage }
             totalPosts = { totalPosts }
             paginate = { paginate } />

@@ -12,12 +12,11 @@ const NoticeBoardPage = () => {
     const navigate = useNavigate();
     const [postList , setPostList] = useState([]);
     const [pageNumber , setPageNumber] = useState(0);
+    const [totalPostLIst , setTotalPostList] = useState([]);
 
     const postPerPage = 5;
 
 
-//NOTE - 데이터 한 페이지당 5개 까지 받아오는 것 확인 
-//TODO - 확인 했으니 버튼을 누르면 pageNumber의 상태가 변하도록 버튼 페이지 구현 해야함
     const getPostList = async () => {
         try {
 
@@ -27,8 +26,10 @@ const NoticeBoardPage = () => {
                 );
 
             const getPosts = response.data.list;
+            const getTotalPosts = response.data.totalPosts;
 
             setPostList(getPosts);
+            setTotalPostList(getTotalPosts);
         }
         catch (error) {
             console.log(error);
@@ -57,7 +58,7 @@ const NoticeBoardPage = () => {
         postList = { postList } 
         onClickPostDetailNavigate = { onClickPostDetailNavigate } 
         postPerPage = { postPerPage }
-        totalPosts = { postList.length }
+        totalPosts = { totalPostLIst.length }
         paginate = { setPageNumber } />
 
         </>
