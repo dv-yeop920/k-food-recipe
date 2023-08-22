@@ -9,6 +9,7 @@ import { persistStore} from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { CookiesProvider } from "react-cookie";
 import store from "./store/store";
+import ScrollTop from "./services/scrollTop";
 
 
 const persistor = persistStore(store);
@@ -20,6 +21,7 @@ root.render(
       <Provider store ={ store }>
         <PersistGate loading ={ null } persistor ={ persistor }>
           <BrowserRouter>
+          <ScrollTop/>
             <App/>
           </BrowserRouter>
         </PersistGate>

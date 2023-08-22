@@ -11,8 +11,8 @@ const NoticeBoardPage = () => {
 
     const navigate = useNavigate();
     const [postList , setPostList] = useState([]);
-    const [pageNumber , setPageNumber] = useState(0);
     const [totalPostLIst , setTotalPostList] = useState([]);
+    const [pageNumber , setPageNumber] = useState(0);
 
     const postPerPage = 5;
 
@@ -46,6 +46,7 @@ const NoticeBoardPage = () => {
 
     useEffect(() => {
         getPostList();
+        window.scrollTo(0, 0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     } , [pageNumber]);
 
