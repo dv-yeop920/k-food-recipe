@@ -60,7 +60,8 @@ const NoticeBoardPage = () => {
         onClickPostDetailNavigate = { onClickPostDetailNavigate } 
         postPerPage = { postPerPage }
         totalPosts = { totalPostLIst.length }
-        paginate = { setPageNumber } />
+        paginate = { setPageNumber }
+        pageNumber = { pageNumber } />
 
         </>
     );

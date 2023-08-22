@@ -154,24 +154,41 @@ import { styled } from "styled-components";
             export const PageLi = styled.li`
                 font-size: 17px;
                 font-weight: 600;
-                padding: 5px;
+                padding: 10px 7px 10px 7px;
+                border-radius: 48%;
                 width: 25px;
+                transition: all 0.2s ease-in-out;
                 &:hover {
                     cursor: pointer;
                     color: white;
                     background-color: #1abc9c;
                 }
-                &:focus::after {
-                    color: white;
-                    background-color: #1abc9c;
-                }   
             `;
 
-            export const PageSpan = styled.span`
-                &:hover::after,
-                &:focus::after {
-                    border-radius: 100%;
-                    color: white;
-                    background-color: #1abc9c;
+            export const NextPageButton = styled.button`
+                border: none;
+                border-radius: 8px;
+                padding: 8px;
+                margin-left: 10px;
+                background: black;
+                color: white;
+                font-size: 1rem;
+                &:hover {
+                    background: tomato;
+                    cursor: pointer;
+                    transform: translateY(-2px);
+                }
+
+                &[disabled] {
+                    background: grey;
+                    cursor: revert;
+                    transform: revert;
+                }
+
+                &[aria-current] {
+                    background: deeppink;
+                    font-weight: bold;
+                    cursor: revert;
+                    transform: revert;
                 }
             `;

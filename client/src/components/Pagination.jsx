@@ -4,7 +4,7 @@ import * as styled from "../styles/styledComponents";
 
 
 
-const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
+const Pagenation = ({ postPerPage , totalPosts , paginate , pageNumber }) => {
 
     const pageNumbers = [];
     const totalPage = Math.ceil(totalPosts / postPerPage);
@@ -24,19 +24,25 @@ const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
                         pageNumbers.map( (number) => {
                             return(
                                 <styled.PageLi 
-                                key = { number } 
+                                key = { number + 1 } 
                                 className = "page-item" 
                                 onClick = { () => paginate(number) } >
 
-                                    <styled.PageSpan  
+                                    <span  
                                     className = "page-link">
                                         { number + 1 }
-                                    </styled.PageSpan>
+                                    </span>
 
                                 </styled.PageLi>
                             )
                         })
                     }
+
+                    <styled.NextPageButton 
+                    onClick = { () => paginate(pageNumber + 1) } 
+                    disabled = {pageNumber === totalPage} >
+                        &gt;
+                    </styled.NextPageButton>
 
                 </styled.PageUl>
 

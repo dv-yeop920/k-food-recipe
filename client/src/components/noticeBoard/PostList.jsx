@@ -9,7 +9,8 @@ const PostList = (
         onClickPostDetailNavigate , 
         postPerPage , 
         totalPosts , 
-        paginate
+        paginate , 
+        pageNumber
     }
     ) => {
     return (
@@ -111,7 +112,8 @@ const PostList = (
             <Pagination
             postPerPage = { postPerPage }
             totalPosts = { totalPosts }
-            paginate = { paginate } />
+            paginate = { paginate } 
+            pageNumber = { pageNumber } />
 
         </styled.BoardContainer>
         </>
