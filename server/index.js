@@ -255,6 +255,7 @@ app.get("/api/posts/getPost", async (req, res) => {
     const postId = req.query.id;
 
     try {
+
         if (postId) {
 
             const post = await Post.findOne({ _id : postId });

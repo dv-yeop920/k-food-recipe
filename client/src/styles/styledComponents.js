@@ -133,22 +133,22 @@ import { styled } from "styled-components";
             `;
 
             export const PaginationContainer = styled.div`
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                position: absolute;
+                background-color: #fff;
+                width: 100%;
+                border=radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
             `;
 
 
             export const PageUl = styled.ul`
-                position: absolute;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 list-style: none;
                 text-align: center;
-                padding: 1px;
-                border-top: 2px solid #1abc9c;
-                border-bottom: 2px solid #1abc9c;
+                padding: 20px;
+                
             `;
 
             export const PageLi = styled.li`

@@ -5,6 +5,7 @@ import * as styled from "../styles/styledComponents";
 
 
 const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
+
     const pageNumbers = [];
     const totalPage = Math.ceil(totalPosts / postPerPage);
 
@@ -18,6 +19,7 @@ const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
             <nav>
 
                 <styled.PageUl className = "pagination">
+
                     {
                         pageNumbers.map( (number) => {
                             return(
@@ -35,6 +37,7 @@ const Pagenation = ( { postPerPage , totalPosts , paginate }) => {
                             )
                         })
                     }
+
                 </styled.PageUl>
 
             </nav>
