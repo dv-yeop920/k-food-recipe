@@ -4,10 +4,20 @@ import * as styled from "../styles/styledComponents";
 
 
 
-const Pagenation = ({ postPerPage , totalPosts , paginate , pageNumber }) => {
+const Pagenation = (
+    { 
+        postPerPage , 
+        totalPosts , 
+        paginate , 
+        pageNumber 
+    }
+    ) => {
 
     const pageNumbers = [];
+    const pageButtonLimit = 5;
     const totalPage = Math.ceil(totalPosts / postPerPage);
+
+
 
     for (let i = 0; i < totalPage; i++) {
         pageNumbers.push(i);
@@ -20,16 +30,24 @@ const Pagenation = ({ postPerPage , totalPosts , paginate , pageNumber }) => {
 
                 <styled.PageUl className = "pagination">
 
+                <styled.BackPageButton 
+                onClick = { () => {
+                    paginate(pageNumber - 1);
+                }} 
+                disabled = { pageNumber + 1 === 1 } >
+                    &lt;
+                </styled.BackPageButton>
+
                     {
                         pageNumbers.map( (number) => {
                             return(
                                 <styled.PageLi 
                                 key = { number + 1 } 
-                                className = "page-item" 
-                                onClick = { () => paginate(number) } >
+                                className = "page-link" 
+                                onClick = { () => paginate(number) } 
+                                disabled = { pageNumber === number + 1} >
 
-                                    <span  
-                                    className = "page-link">
+                                    <span  className = "page-number">
                                         { number + 1 }
                                     </span>
 
@@ -39,8 +57,11 @@ const Pagenation = ({ postPerPage , totalPosts , paginate , pageNumber }) => {
                     }
 
                     <styled.NextPageButton 
-                    onClick = { () => paginate(pageNumber + 1) } 
-                    disabled = {pageNumber === totalPage} >
+                    onClick = { () => {
+                        paginate(pageNumber + 1);
+                    }} 
+
+                    disabled = { pageNumber + 1 === totalPage } >
                         &gt;
                     </styled.NextPageButton>
 

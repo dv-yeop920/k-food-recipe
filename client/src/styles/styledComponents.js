@@ -163,6 +163,10 @@ import { styled } from "styled-components";
                     color: white;
                     background-color: #1abc9c;
                 }
+                &[disabled] {
+                    color: white;
+                    background-color: #1abc9c;
+                }
             `;
 
             export const NextPageButton = styled.button`
@@ -170,6 +174,34 @@ import { styled } from "styled-components";
                 border-radius: 8px;
                 padding: 8px;
                 margin-left: 10px;
+                background: black;
+                color: white;
+                font-size: 1rem;
+                &:hover {
+                    background: tomato;
+                    cursor: pointer;
+                    transform: translateY(-2px);
+                }
+
+                &[disabled] {
+                    background: grey;
+                    cursor: revert;
+                    transform: revert;
+                }
+
+                &[aria-current] {
+                    background: deeppink;
+                    font-weight: bold;
+                    cursor: revert;
+                    transform: revert;
+                }
+            `;
+
+            export const BackPageButton = styled.button`
+                border: none;
+                border-radius: 8px;
+                padding: 8px;
+                margin-right: 10px;
                 background: black;
                 color: white;
                 font-size: 1rem;
