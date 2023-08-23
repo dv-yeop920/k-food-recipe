@@ -157,6 +157,7 @@ import { styled } from "styled-components";
                 padding: 10px 7px 10px 7px;
                 border-radius: 48%;
                 width: 25px;
+                margin: 2px;
                 transition: all 0.2s ease-in-out;
                 &:hover {
                     cursor: pointer;

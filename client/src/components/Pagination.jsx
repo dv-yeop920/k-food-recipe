@@ -18,7 +18,6 @@ const Pagenation = (
     const totalPage = Math.ceil(totalPosts / postPerPage);
 
 
-
     for (let i = 0; i < totalPage; i++) {
         pageNumbers.push(i);
     }
@@ -29,6 +28,14 @@ const Pagenation = (
             <nav>
 
                 <styled.PageUl className = "pagination">
+
+                <styled.BackPageButton 
+                onClick = { () => {
+                    paginate(0);
+                }} 
+                disabled = { pageNumber + 1 === 1 } >
+                    &lt;&lt;
+                </styled.BackPageButton>
 
                 <styled.BackPageButton 
                 onClick = { () => {
@@ -45,7 +52,7 @@ const Pagenation = (
                                 key = { number + 1 } 
                                 className = "page-link" 
                                 onClick = { () => paginate(number) } 
-                                disabled = { pageNumber === number + 1} >
+                                disabled = { pageNumber === number} >
 
                                     <span  className = "page-number">
                                         { number + 1 }
@@ -63,6 +70,15 @@ const Pagenation = (
 
                     disabled = { pageNumber + 1 === totalPage } >
                         &gt;
+                    </styled.NextPageButton>
+
+                    <styled.NextPageButton 
+                    onClick = { () => {
+                        paginate(totalPage - 1);
+                    }} 
+
+                    disabled = { pageNumber + 1 === totalPage } >
+                        &gt;&gt;
                     </styled.NextPageButton>
 
                 </styled.PageUl>
