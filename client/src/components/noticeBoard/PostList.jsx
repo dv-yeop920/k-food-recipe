@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import * as styled from "../../styles/styledComponents";
 import getDate from "../../utils/postDate";
 import Pagination from "../Pagination";
@@ -13,6 +14,19 @@ const PostList = (
         pageNumber
     }
     ) => {
+
+        const onClickUpdatePostViewCount = async (id) => {
+            const postId = {
+                _id: id
+            }
+            try {
+
+                await axios.put("/api/posts/viewCountupdate" , postId);
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
     return (
         <>
         <styled.BoardContainer>
@@ -52,10 +66,9 @@ const PostList = (
                     className = "post-list" 
                     key = { post._id }
                     onClick = { () => {
-
+                        onClickUpdatePostViewCount(post._id);
                         onClickPostDetailNavigate(post._id);
                         return;
-
                     }} >
 
                         <div>

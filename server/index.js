@@ -303,6 +303,23 @@ app.put("/api/posts/update" , async (req , res) => {
     }
 });
 
+app.put("/api/posts/viewCountupdate" , async (req , res) => {
+    try {
+        await Post.findOneAndUpdate(
+            { _id: req.body._id } ,
+            { $inc: { viewCount: 1 } }
+        )
+    }
+    catch (error) {
+        console.log(error);
+
+        res.json({
+            updateSuccess: false,
+            messsage: "업데이트 실패했습니다"
+        });
+    }
+})
+
 
 app.post("/api/posts/delete" , async (req , res) => {
     try {

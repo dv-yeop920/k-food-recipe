@@ -2,7 +2,6 @@
 const mongoose = require("mongoose");
 
 
-
 const noticeBoardSchema = mongoose.Schema({
     //id
     id: {
@@ -28,7 +27,7 @@ const noticeBoardSchema = mongoose.Schema({
     },
     viewCount: { 
         type: Number, 
-        default: 0 
+        default: 0
     }
 });
 
