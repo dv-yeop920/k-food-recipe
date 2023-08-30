@@ -18,7 +18,7 @@ const Pagination = (
     const totalPage = Math.ceil(totalPosts / postPerPage);
 
 
-    for (let i = 0; i < totalPage; i++) {
+    for (let i = 0; i <= totalPage; i++) {
         pageNumbers.push(i);
     }
 
@@ -86,16 +86,16 @@ const Pagination = (
                     onClick = { () => {
                         return paginate(pageNumber + 1);
                     }} 
-                    disabled = { pageNumber + 1 === totalPage } >
+                    disabled = { pageNumber === totalPage } >
                         &gt;
                     </styled.NextPageButton>
 
                     <styled.NextPageButton 
                     className="page-last-button" 
                     onClick = { () => {
-                        return paginate(totalPage - 1);
+                        return paginate(totalPage);
                     }} 
-                    disabled = { pageNumber + 1 === totalPage } >
+                    disabled = { pageNumber === totalPage } >
                         &gt;&gt;
                     </styled.NextPageButton>
 
