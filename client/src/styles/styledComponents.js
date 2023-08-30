@@ -172,12 +172,12 @@ import { styled } from "styled-components";
 
             export const NextPageButton = styled.button`
                 border: none;
-                border-radius: 8px;
+                border-radius: 10px;
                 padding: 8px;
                 margin-left: 10px;
                 background: black;
                 color: white;
-                font-size: 1rem;
+                font-size: 0.8rem;
                 &:hover {
                     background: tomato;
                     cursor: pointer;
@@ -185,9 +185,7 @@ import { styled } from "styled-components";
                 }
 
                 &[disabled] {
-                    background: grey;
-                    cursor: revert;
-                    transform: revert;
+                    display: none;
                 }
 
                 &[aria-current] {
@@ -200,12 +198,12 @@ import { styled } from "styled-components";
 
             export const BackPageButton = styled.button`
                 border: none;
-                border-radius: 8px;
+                border-radius: 10px;
                 padding: 8px;
                 margin-right: 10px;
                 background: black;
                 color: white;
-                font-size: 1rem;
+                font-size: 0.8rem;
                 &:hover {
                     background: tomato;
                     cursor: pointer;
@@ -213,9 +211,7 @@ import { styled } from "styled-components";
                 }
 
                 &[disabled] {
-                    background: grey;
-                    cursor: revert;
-                    transform: revert;
+                    display: none;
                 }
 
                 &[aria-current] {

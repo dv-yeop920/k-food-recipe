@@ -16,7 +16,7 @@ const PostSearchInput = () => {
 
                 <styled.Input
                 className = "user-search__input"
-                type = "text"
+                type = "search"
                 placeholder = "단어 단위로 입력..." />
 
                 <styled.SubmitButton

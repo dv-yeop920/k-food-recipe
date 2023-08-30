@@ -12,12 +12,13 @@ const NoticeBoardPage = () => {
     const navigate = useNavigate();
     const [postList , setPostList] = useState([]);
     const [totalPostLIst , setTotalPostList] = useState([]);
-    const [pageNumber , setPageNumber] = useState(0);
+    const [pageNumber , setPageNumber] = useState(1);
 
-    const postPerPage = 5;
+    const POST_PER_PAGE = 5;
 
 
     const getPostList = async () => {
+
         try {
 
             const response = 
@@ -58,7 +59,7 @@ const NoticeBoardPage = () => {
         <PostList 
         postList = { postList } 
         onClickPostDetailNavigate = { onClickPostDetailNavigate } 
-        postPerPage = { postPerPage }
+        postPerPage = { POST_PER_PAGE }
         totalPosts = { totalPostLIst.length }
         paginate = { setPageNumber }
         pageNumber = { pageNumber } />

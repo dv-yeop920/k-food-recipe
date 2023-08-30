@@ -210,7 +210,7 @@ app.post("/api/posts/register" , async (req , res) => {
 
 app.get("/api/posts/getPostList" ,  async (req , res) => {
 
-    const pageNumber = parseInt(req.query.pageNumber) || 0;
+    const pageNumber = parseInt(req.query.pageNumber) - 1;
 
     const postPerPage = 5;
 
