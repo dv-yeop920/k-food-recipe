@@ -17,18 +17,28 @@ const PostsDetail = () => {
     const { id } = useParams();
     const [post, setPost] = useState({});
 
-    //TODO - mongodb 로 쿼리를 보내서 서버로 부터 페이지 받아오기 
-    //TODO - 
 
-    const getPost = async () => {
+    const getPostDetail = async () => {
 
         const postId = id;
 
         try {
+
             const response =  
             await axios.get(`/api/posts/getPost?id=${postId}`);
 
-            setPost(response.data.list);
+            const postData = response.data.list;
+
+            if (postData) {
+
+                const parts = postData.id.split("_");
+                const userId = parts[0];
+
+                postData.id = userId;
+
+                setPost(postData);
+
+            }
 
         }
         catch (error) {
@@ -38,10 +48,10 @@ const PostsDetail = () => {
     }
 
 
-    const onClickdeletePost = async () => {
+    const onClickDeletePost = async () => {
 
         const postId = {
-            _id: id
+            postId: id
         }
 
         try {
@@ -75,7 +85,7 @@ const PostsDetail = () => {
 
     useEffect(() => {
 
-        getPost();
+        getPostDetail();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [post]);
 
@@ -152,7 +162,7 @@ const PostsDetail = () => {
 
                         <span 
                         className = "edit-delete"
-                        onClick = { onClickdeletePost }>
+                        onClick = { onClickDeletePost }>
                             삭제
                         </span>
 
@@ -168,7 +178,8 @@ const PostsDetail = () => {
 
             </div>
 
-            <CommentList post = { post }/>
+            <CommentList 
+            post = { post } />
 
             <div style = {{ height:"40px" }}></div>
 

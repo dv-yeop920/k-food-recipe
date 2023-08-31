@@ -7,6 +7,10 @@ const cookieParser = require("cookie-parser");
 const { User } = require("./models/User.js");
 //로그인 인증 미들웨어
 const { auth } = require("./middleware/auth");
+//댓글
+const { Comment } = require("./models/Comment.js");
+//게시판
+const { Post } = require("./models/NoticeBoard.js");
 
 //클라이언트의 req 를 json 형태로 해석 하도록 도와줌
 app.use(bodyParser.urlencoded({extended: true}));
@@ -178,8 +182,6 @@ app.post("/api/users/logout" , auth , async (req , res) => {
 //------------------------게시판------------------------------------------
 
 
-const { Post } = require("./models/NoticeBoard.js");
-
 app.post("/api/posts/register" , async (req , res) => {
     try {
         const post = {
@@ -289,11 +291,6 @@ app.get("/api/posts/getPost", async (req, res) => {
 
             const post = await Post.findOne({ _id : postId });
 
-            const parts = post.id.split("_");
-            const userId = parts[0];
-
-            post.id = userId;
-
             res.json({ 
                 list: post
             });
@@ -307,6 +304,7 @@ app.get("/api/posts/getPost", async (req, res) => {
 
 app.put("/api/posts/update" , async (req , res) => {
     try {
+
         await Post.findOneAndUpdate(
             { _id: req.body._id },
             {
@@ -351,9 +349,17 @@ app.put("/api/posts/viewCountupdate" , async (req , res) => {
 
 
 app.post("/api/posts/delete" , async (req , res) => {
+
+    const postId = req.body.postId;
+
     try {
+
         await Post.findOneAndDelete({
-            _id: req.body._id
+            _id: postId
+        });
+
+        await Comment.deleteMany({ 
+            postId: postId 
         });
 
         res.json({
@@ -374,8 +380,8 @@ app.post("/api/posts/delete" , async (req , res) => {
 
 //------------------------댓글------------------------------------------
 
-const { Comment } = require("./models/Comment.js");
-const { query } = require("express");
+
+
 
 app.post("/api/posts/comment/register" , async (req , res) => {
     try {
