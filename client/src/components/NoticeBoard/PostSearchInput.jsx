@@ -4,7 +4,13 @@ import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const PostSearchInput = () => {
+const PostSearchInput = (
+    { 
+        setUserPostSearchValue , 
+        onSubmitGetFilteredPostList 
+    }
+    ) => {
+
     const navigate = useNavigate();
 
     return (
@@ -12,12 +18,18 @@ const PostSearchInput = () => {
         <styled.SearchContainer>
 
             <form
-            className = "user-search__form">
+            className = "user-search__form"
+            onSubmit = { onSubmitGetFilteredPostList } >
 
                 <styled.Input
                 className = "user-search__input"
                 type = "search"
-                placeholder = "단어 단위로 입력..." />
+                placeholder = "단어 단위로 입력..." 
+                onChange = { (e) => { 
+
+                    setUserPostSearchValue(e.target.value);
+
+                }} />
 
                 <styled.SubmitButton
                 className = "default-btn"

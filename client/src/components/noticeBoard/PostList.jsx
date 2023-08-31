@@ -9,7 +9,7 @@ const PostList = (
         postList , 
         onClickPostDetailNavigate , 
         postPerPage , 
-        totalPosts , 
+        totalPosts ,
         paginate , 
         pageNumber
     }
@@ -19,14 +19,17 @@ const PostList = (
             const postId = {
                 _id: id
             }
+
             try {
 
                 await axios.put("/api/posts/viewCountupdate" , postId);
+
             }
             catch (error) {
                 console.log(error)
             }
         }
+
     return (
         <>
         <styled.BoardContainer>
@@ -57,7 +60,7 @@ const PostList = (
 
                 {
 
-                postList &&
+                postList.length > 0 ?
                 postList.map( (post) => {
 
                     return(
@@ -119,14 +122,26 @@ const PostList = (
                     </styled.Li>
                     )
                 })
+
+                :
+
+                <h1 style={{"padding-top": "70px", "textAlign":"center"}} >
+                    검색 결과가 없습니다!
+                </h1>
                 }
+
             </ul>
 
-            <Pagination
-            postPerPage = { postPerPage }
-            totalPosts = { totalPosts }
-            paginate = { paginate } 
-            pageNumber = { pageNumber } />
+            {
+                postList.length > 0 &&
+
+                <Pagination
+                postPerPage = { postPerPage }
+                totalPosts = { totalPosts }
+                paginate = { paginate } 
+                pageNumber = { pageNumber } />
+
+            }
 
         </styled.BoardContainer>
         </>

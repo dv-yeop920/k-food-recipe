@@ -214,20 +214,48 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
 
     const postPerPage = 5;
 
+    const searchValue = req.query.search;
+
+    //NOTE - 정규식 검사 해서 검색어가 특수문자가 들어가 있어도 검색 되도록
+    const RegexValue = (text) => {
+        return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    };
+
+    const RegexSearchValue = RegexValue(searchValue);
+
     try {
 
+        let list;
+
+        if (searchValue) {
+            list = Post.find( 
+                { 
+                    title: { 
+                        $regex: RegexSearchValue , 
+                        $options: "i" 
+                    } 
+                });
+        }
+        else {
+            list = Post.find()
+        }
+
         const posts = 
-        await Post.find()
+        await list
         .skip(pageNumber * postPerPage)
         .limit(postPerPage)
         .sort({ createdAt: -1 });
 
-        const totalPosts = 
-        await Post.find()
-        .sort({ createdAt: -1 });
+        //const totalPosts = 
+        //await Post.find()
+        //.sort({ createdAt: -1 });
+
+        const totalPosts = await Post.find({
+            title: { $regex: RegexSearchValue, $options: "i" },
+        });
 
 
-        const modifiedPosts = posts.map(post => {
+        const modifiedPosts = posts.map((post) => {
             const parts = post.id.split("_");
             const userId = parts[0];
 
@@ -347,6 +375,7 @@ app.post("/api/posts/delete" , async (req , res) => {
 //------------------------댓글------------------------------------------
 
 const { Comment } = require("./models/Comment.js");
+const { query } = require("express");
 
 app.post("/api/posts/comment/register" , async (req , res) => {
     try {
