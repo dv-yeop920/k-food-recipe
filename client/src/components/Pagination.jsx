@@ -30,9 +30,6 @@ const Pagination = (
 
     const newPageNumbers = pageNumbers.slice(start , end);
 
-    //TODO - 토탈 페이지는 1 부터 게시물이 있는 만큼의 페이지 
-    //TODO - 토탈 페이지를 1 부터 5까지 보여주려면 ? 시작점 부터 5번째 인덱스까지 자르기
-    //TODO - 그 5개 중에 마지막 누르면 그 다음 새로운 5개의 버튼이 뜨도록 하기
     return (
         <>
         <styled.PaginationContainer>
