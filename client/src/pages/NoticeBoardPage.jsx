@@ -34,6 +34,12 @@ const NoticeBoardPage = () => {
             setPostList(getPosts);
             setTotalPostList(getTotalPosts);
 
+            if (getPosts.length === 0) {
+                alert("일치하는 결과가 없습니다!");
+                setUserPostSearchValue("");
+                return;
+            }
+
         }
         catch (error) {
             console.log(error);
@@ -48,18 +54,28 @@ const NoticeBoardPage = () => {
     }
 
 
-    const onSubmitGetFilteredPostList = (e) => {
+    const onSubmitGetFilteredPostList = async (e) => {
 
         e.preventDefault();
 
-        if (userPostSearchValue === "") {
-            alert("검색 단어를 입력해 주세요!");
-            getPostList();
-            return;
+        try {
+
+            if (userPostSearchValue === "") {
+                alert("검색 단어를 입력해 주세요!");
+                await getPostList();
+                return;
+            }
+
+            await getPostList();
+                setPageNumber(1);
+                setUserPostSearchValue("");
+                return;
+            
+        } 
+        catch (error) {
+            console.log(error);
         }
 
-        getPostList();
-        return;
     }
 
 
@@ -74,6 +90,7 @@ const NoticeBoardPage = () => {
         <>
 
         <PostSearchInput 
+        userPostSearchValue = { userPostSearchValue }
         setUserPostSearchValue = { setUserPostSearchValue } 
         onSubmitGetFilteredPostList = { onSubmitGetFilteredPostList } />
         

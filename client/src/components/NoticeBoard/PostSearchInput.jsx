@@ -6,6 +6,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const PostSearchInput = (
     { 
+        userPostSearchValue ,
         setUserPostSearchValue , 
         onSubmitGetFilteredPostList 
     }
@@ -24,7 +25,8 @@ const PostSearchInput = (
                 <styled.Input
                 className = "user-search__input"
                 type = "search"
-                placeholder = "단어 단위로 입력..." 
+                placeholder = "단어 단위로 입력..."
+                value = { userPostSearchValue } 
                 onChange = { (e) => { 
 
                     setUserPostSearchValue(e.target.value);

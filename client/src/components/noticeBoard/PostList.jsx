@@ -125,9 +125,13 @@ const PostList = (
 
                 :
 
-                <h1 style={{"padding-top": "70px", "textAlign":"center"}} >
+                <p style={{
+                    "padding" : "70px", 
+                    "textAlign" :"center",
+                    "fontSize" : "35px",
+                    "fontWeight" : "600" }} >
                     검색 결과가 없습니다!
-                </h1>
+                </p>
                 }
 
             </ul>
