@@ -303,6 +303,7 @@ app.put("/api/posts/update" , async (req , res) => {
     }
 });
 
+
 app.put("/api/posts/viewCountupdate" , async (req , res) => {
     try {
         await Post.findOneAndUpdate(
@@ -318,7 +319,7 @@ app.put("/api/posts/viewCountupdate" , async (req , res) => {
             messsage: "업데이트 실패했습니다"
         });
     }
-})
+});
 
 
 app.post("/api/posts/delete" , async (req , res) => {
@@ -349,8 +350,9 @@ const { Comment } = require("./models/Comment.js");
 
 app.post("/api/posts/comment/register" , async (req , res) => {
     try {
+
         const commentBody = {
-            postsId: req.body.postsId,
+            postId: req.body.postId,
             id: req.body.id + "_" + Date.now(),
             content: req.body.content
         }
@@ -358,6 +360,11 @@ app.post("/api/posts/comment/register" , async (req , res) => {
         const comment = new Comment(commentBody);
 
         await comment.save();
+
+        await Post.findOneAndUpdate(
+            { _id: commentBody.postId },
+            { $inc : { commentCount: 1 } }
+        )
 
         res.json({
             success: true,
@@ -373,6 +380,7 @@ app.post("/api/posts/comment/register" , async (req , res) => {
         });
     }
 });
+
 
 app.get("/api/posts/comment/getComment" , async (req , res) => {
     try {
@@ -400,6 +408,7 @@ app.get("/api/posts/comment/getComment" , async (req , res) => {
     }
 });
 
+
 app.put("/api/posts/comment/updateComment" , async (req , res) => {
     try {
         await Comment.findOneAndUpdate(
@@ -425,11 +434,17 @@ app.put("/api/posts/comment/updateComment" , async (req , res) => {
     }
 });
 
+
 app.post("/api/posts/comment/deleteComment" , async (req , res) => {
     try {
         await Comment.findOneAndDelete({
             _id: req.body._id
         });
+
+        await Post.findOneAndUpdate(
+            { _id: req.body.postId },
+            { $inc: { commentCount: -1 } }
+        )
 
         res.json({
             deleteSuccess: true,

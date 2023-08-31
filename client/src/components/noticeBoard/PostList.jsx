@@ -86,11 +86,11 @@ const PostList = (
                             </styled.Span>
 
                             <styled.Span>
-                                댓글 0
+                                { `댓글 ${ post.commentCount }` }
                             </styled.Span>
                     
                             <styled.Span>
-                                {`조회 ${ post.viewCount }`}
+                                { `조회 ${ post.viewCount }` }
                             </styled.Span>
 
                             <styled.Span>

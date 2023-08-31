@@ -29,7 +29,7 @@ const CommentList = ({ post }) => {
 
                 const commentForThisPost = 
                 getComments.filter( (comment) => { 
-                    return comment.postsId === postId;
+                    return comment.postId === postId;
                 });
 
                 setComment(commentForThisPost);
@@ -49,7 +49,7 @@ const CommentList = ({ post }) => {
         }
 
         const commentBody = {
-            postsId: postId,
+            postId: postId,
             id: userId,
             content: commentContent
         }
@@ -87,6 +87,7 @@ const CommentList = ({ post }) => {
         });
 
         const deleteCommentBody = {
+            postId: postId,
             _id: filteredId[0]
         }
 
@@ -174,7 +175,7 @@ const CommentList = ({ post }) => {
 
             <div className = "comment-count">
 
-                <h3>댓글 0</h3>
+                <h3> { `댓글 ${ post.commentCount }` } </h3>
 
             </div>
 

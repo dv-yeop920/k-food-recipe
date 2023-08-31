@@ -163,6 +163,7 @@ import { styled } from "styled-components";
                     cursor: pointer;
                     color: white;
                     background-color: #1abc9c;
+                    transform: translateY(-2px);
                 }
                 &[disabled] {
                     color: white;
@@ -175,24 +176,19 @@ import { styled } from "styled-components";
                 border-radius: 10px;
                 padding: 8px;
                 margin-left: 10px;
-                background: black;
-                color: white;
-                font-size: 0.8rem;
+                background-color: #fff;
+                color: rgba(0,0,0,0.5);
+                font-size: 0.9rem;
+                font-weight: 600;
+                transition: all 0.2s ease-in-out;
                 &:hover {
-                    background: tomato;
+                    background-color: #1abc9c;
+                    color: white;
                     cursor: pointer;
                     transform: translateY(-2px);
                 }
-
                 &[disabled] {
                     display: none;
-                }
-
-                &[aria-current] {
-                    background: deeppink;
-                    font-weight: bold;
-                    cursor: revert;
-                    transform: revert;
                 }
             `;
 
@@ -201,23 +197,19 @@ import { styled } from "styled-components";
                 border-radius: 10px;
                 padding: 8px;
                 margin-right: 10px;
-                background: black;
-                color: white;
-                font-size: 0.8rem;
+                background-color: #fff;
+                color: rgba(0,0,0,0.5);
+                font-size: 0.9rem;
+                font-weight: 600;
+                transition: all 0.2s ease-in-out;
                 &:hover {
-                    background: tomato;
+                    background-color: #1abc9c;
+                    color: white;
                     cursor: pointer;
                     transform: translateY(-2px);
                 }
 
                 &[disabled] {
                     display: none;
-                }
-
-                &[aria-current] {
-                    background: deeppink;
-                    font-weight: bold;
-                    cursor: revert;
-                    transform: revert;
                 }
             `;
