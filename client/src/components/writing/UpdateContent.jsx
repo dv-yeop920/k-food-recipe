@@ -22,22 +22,37 @@ const modules = {
 }
 
 
-const UpdateContent = ({ newDetail , setNewDetail }) => {
+const UpdateContent = (
+    { 
+        originalDetail , 
+        setOriginalDetail ,
+        titleValue , 
+        setTitleValue , 
+        contentValue ,
+        setContentValue
+    }
+    ) => {
+
+
 
     const handelChangeTitle = (e) => {
 
-        return setNewDetail({
-            ...newDetail,
-            title: e.target.value,
+        setTitleValue(e.target.value);
+
+        return setOriginalDetail({
+            ...originalDetail,
+            title: titleValue,
         });
     }
 
 
     const handleChangeContent = (e) => {
 
-        return setNewDetail({
-            ...newDetail,
-            content: e
+        setContentValue(e);
+
+        return setOriginalDetail({
+            ...originalDetail,
+            content: contentValue
         });
     }
 
@@ -50,7 +65,7 @@ const UpdateContent = ({ newDetail , setNewDetail }) => {
                 <input 
                 className = "editor-title" 
                 type = "text" 
-                value = { "" || newDetail.title }
+                value = { titleValue }
                 onChange = { handelChangeTitle } />  
 
             </div>
@@ -59,7 +74,7 @@ const UpdateContent = ({ newDetail , setNewDetail }) => {
 
                 <ReactQuill  
                 className = "content"
-                value = { newDetail.content }
+                value = { contentValue }
                 modules = { modules }
                 onChange = { handleChangeContent } /> 
 

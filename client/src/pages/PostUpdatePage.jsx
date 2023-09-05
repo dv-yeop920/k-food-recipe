@@ -13,7 +13,9 @@ const PostsUpdatePage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [newDetail, setNewDetail] = useState({});
+    const [originalDetail, setOriginalDetail] = useState({});
+    const [titleValue, setTitleValue] = useState("");
+    const [contentValue, setContentValue] = useState("");
 
 
     const getPost = async () => {
@@ -28,7 +30,9 @@ const PostsUpdatePage = () => {
                 { timeout: 10000 }
             );
 
-            setNewDetail(response.data.list);
+            setOriginalDetail(response.data.list);
+            setTitleValue(response.data.list.title);
+            setContentValue(response.data.list.content);
 
         }
         catch (error) {
@@ -43,9 +47,9 @@ const PostsUpdatePage = () => {
         e.preventDefault();
 
         const updatePosts = {
-            _id: newDetail._id,
-            title: newDetail.title,
-            content: newDetail.content
+            _id: originalDetail._id,
+            title: originalDetail.title,
+            content: originalDetail.content
         }
 
         try {
@@ -99,8 +103,12 @@ const PostsUpdatePage = () => {
                     <ImageUploader/>
 
                     <UpdateContent 
-                    newDetail = { newDetail }
-                    setNewDetail = { setNewDetail } />
+                    originalDetail = { originalDetail }
+                    setOriginalDetail = { setOriginalDetail } 
+                    titleValue = { titleValue }
+                    setTitleValue = { setTitleValue }
+                    contentValue = { contentValue }
+                    setContentValue = { setContentValue } />
 
                 </div>
                 
