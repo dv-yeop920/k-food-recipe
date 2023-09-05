@@ -10,6 +10,7 @@ import getDate from "../utils/postDate";
 
 
 
+
 const PostsDetail = () => {
 
     const navigate = useNavigate();
@@ -25,7 +26,10 @@ const PostsDetail = () => {
         try {
 
             const response =  
-            await axios.get(`/api/posts/getPost?id=${postId}`);
+            await axios.get(
+                `/api/posts/getPost?id=${ postId }` , 
+                { timeout: 100000 }
+            );
 
             const postData = response.data.list;
 
@@ -55,10 +59,15 @@ const PostsDetail = () => {
         }
 
         try {
+
                 if (window.confirm("게시물을 정말 삭제하시겠습니까?")) {
 
                     const response = 
-                    await axios.post("/api/posts/delete" , postId);
+                    await axios.post(
+                        "/api/posts/delete" , 
+                        postId , 
+                        { timeout: 10000 }
+                    );
 
                     if (response.data.deleteSuccess === true) {
 
@@ -85,7 +94,9 @@ const PostsDetail = () => {
 
     useEffect(() => {
 
-        getPostDetail();
+        if (post) {
+            getPostDetail();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [post]);
 
@@ -97,13 +108,9 @@ const PostsDetail = () => {
 
                 <div className = "post-go-to-list">
 
-                    <li className = "go-to-list">
-
                         <span>
                             자유 게시판
                         </span>
-
-                    </li>
 
                 </div>
 

@@ -25,8 +25,9 @@ const NoticeBoardPage = () => {
             const response = 
             await axios.get(
                 `/api/posts/getPostList?pageNumber=${ pageNumber }
-                &search=${userPostSearchValue}`
-                );
+                &search=${ userPostSearchValue }` , 
+                { timeout: 10000 }
+            );
 
             const getPosts = response.data.list;
             const getTotalPosts = response.data.totalPosts;
@@ -61,9 +62,11 @@ const NoticeBoardPage = () => {
         try {
 
             if (userPostSearchValue === "") {
+
                 alert("검색 단어를 입력해 주세요!");
                 await getPostList();
                 return;
+
             }
 
             await getPostList();

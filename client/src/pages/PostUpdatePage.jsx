@@ -23,7 +23,10 @@ const PostsUpdatePage = () => {
         try {
 
             const response =  
-            await axios.get(`/api/posts/getPost?id=${postId}`);
+            await axios.get(
+                `/api/posts/getPost?id=${postId}` , 
+                { timeout: 10000 }
+            );
 
             setNewDetail(response.data.list);
 
@@ -48,8 +51,13 @@ const PostsUpdatePage = () => {
         try {
             
             if (window.confirm("게시물 내용을 수정하시겠습니까?")) {
+
                 const response = 
-                await axios.put("/api/posts/update" , updatePosts);
+                await axios.put(
+                    "/api/posts/update" , 
+                    updatePosts , 
+                    { timeout: 10000 }
+                );
 
                 if (response.data.updateSuccess === false) {
 
@@ -75,7 +83,6 @@ const PostsUpdatePage = () => {
 
 
     useEffect(() => {
-
         getPost();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     } , []);

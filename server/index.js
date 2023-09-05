@@ -183,7 +183,9 @@ app.post("/api/users/logout" , auth , async (req , res) => {
 
 
 app.post("/api/posts/register" , async (req , res) => {
+
     try {
+
         const post = {
             id: req.body.id + "_" + Date.now(),
             title: req.body.title,
@@ -230,6 +232,7 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
         let list;
 
         if (searchValue) {
+
             list = Post.find( 
                 { 
                     title: { 
@@ -239,7 +242,7 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
                 });
         }
         else {
-            list = Post.find()
+            list = Post.find();
         }
 
         const posts = 
@@ -248,16 +251,12 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
         .limit(postPerPage)
         .sort({ createdAt: -1 });
 
-        //const totalPosts = 
-        //await Post.find()
-        //.sort({ createdAt: -1 });
-
         const totalPosts = await Post.find({
             title: { $regex: RegexSearchValue, $options: "i" },
-        });
-
+        }).exec();
 
         const modifiedPosts = posts.map((post) => {
+
             const parts = post.id.split("_");
             const userId = parts[0];
 
@@ -289,11 +288,12 @@ app.get("/api/posts/getPost", async (req, res) => {
 
         if (postId) {
 
-            const post = await Post.findOne({ _id : postId });
+            const post = await Post.findOne({ _id : postId }).exec();
 
             res.json({ 
                 list: post
             });
+
         }
     }
     catch (error) {
@@ -312,7 +312,7 @@ app.put("/api/posts/update" , async (req , res) => {
                     title: req.body.title,
                     content: req.body.content
                 }
-            });
+            }).exec();
 
         res.json({
             updateSuccess: true,
@@ -330,12 +330,20 @@ app.put("/api/posts/update" , async (req , res) => {
 });
 
 
-app.put("/api/posts/viewCountupdate" , async (req , res) => {
+app.put("/api/posts/viewCountupdate/:id" , async (req , res) => {
+
     try {
-        await Post.findOneAndUpdate(
-            { _id: req.body._id } ,
-            { $inc: { viewCount: 1 } }
-        )
+
+        const postId = req.params.id;
+
+        if (postId) {
+
+            await Post.findByIdAndUpdate(
+                postId, 
+                { $inc: { viewCount: 1 } }
+            ).exec();
+
+        }
     }
     catch (error) {
         console.log(error);
@@ -356,11 +364,11 @@ app.post("/api/posts/delete" , async (req , res) => {
 
         await Post.findOneAndDelete({
             _id: postId
-        });
+        }).exec();
 
         await Comment.deleteMany({ 
             postId: postId 
-        });
+        }).exec();
 
         res.json({
             deleteSuccess: true,
@@ -368,7 +376,7 @@ app.post("/api/posts/delete" , async (req , res) => {
         });
     } 
     catch (error) {
-        console.log(error);
+
         res.json({
             deleteSuccess: false,
             messsage: "삭제 실패했습니다"
@@ -384,6 +392,7 @@ app.post("/api/posts/delete" , async (req , res) => {
 
 
 app.post("/api/posts/comment/register" , async (req , res) => {
+
     try {
 
         const commentBody = {
@@ -399,7 +408,7 @@ app.post("/api/posts/comment/register" , async (req , res) => {
         await Post.findOneAndUpdate(
             { _id: commentBody.postId },
             { $inc : { commentCount: 1 } }
-        )
+        ).exec();
 
         res.json({
             success: true,
@@ -418,8 +427,10 @@ app.post("/api/posts/comment/register" , async (req , res) => {
 
 
 app.get("/api/posts/comment/getComment" , async (req , res) => {
+
     try {
-        const comments = await Comment.find();
+
+        const comments = await Comment.find().exec();
 
         const modifiedComments = comments.map(comment => {
 
@@ -445,14 +456,16 @@ app.get("/api/posts/comment/getComment" , async (req , res) => {
 
 
 app.put("/api/posts/comment/updateComment" , async (req , res) => {
+
     try {
+
         await Comment.findOneAndUpdate(
             { _id: req.body._id },
             {
                 $set: {
                     content: req.body.content
                 }
-            });
+            }).exec();
 
         res.json({
             updateSuccess: true,
@@ -471,15 +484,17 @@ app.put("/api/posts/comment/updateComment" , async (req , res) => {
 
 
 app.post("/api/posts/comment/deleteComment" , async (req , res) => {
+
     try {
+
         await Comment.findOneAndDelete({
             _id: req.body._id
-        });
+        }).exec();
 
         await Post.findOneAndUpdate(
             { _id: req.body.postId },
             { $inc: { commentCount: -1 } }
-        )
+        ).exec();
 
         res.json({
             deleteSuccess: true,

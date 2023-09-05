@@ -26,8 +26,9 @@ const WritingPage = () => {
         }
 
         try {
+
                 const response = 
-                await axios.post("/api/posts/register" , post);
+                await axios.post("/api/posts/register" , post , { timeout: 10000 });
 
                 if (response.data.success === false) {
 
@@ -42,6 +43,7 @@ const WritingPage = () => {
                     return;
 
                 }
+
         }
         catch (error) {
             console.log(error);

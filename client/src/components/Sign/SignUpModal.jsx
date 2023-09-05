@@ -35,7 +35,11 @@ const SignUpModal = (
 
         try {
             const response = 
-            await axios.post("/api/users/register" , userInfo);
+            await axios.post(
+                "/api/users/register" , 
+                userInfo , 
+                { timeout: 10000 }
+            );
 
             if (response.data.success === false) {
 

@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+//import axios from "axios";
 import * as styled from "../../styles/styledComponents";
 import getDate from "../../utils/postDate";
 import Pagination from "../Pagination";
@@ -15,20 +15,21 @@ const PostList = (
     }
     ) => {
 
-        const onClickUpdatePostViewCount = async (id) => {
-            const postId = {
-                _id: id
-            }
 
-            try {
+    /*const onClickUpdatePostViewCount = async (id) => {
 
-                await axios.put("/api/posts/viewCountupdate" , postId);
+        try {
 
-            }
-            catch (error) {
-                console.log(error)
-            }
+            await axios.put(
+                `/api/posts/viewCountupdate/${id}` ,  
+                { timeout: 5000 }
+            );
+
         }
+        catch (error) {
+            console.log(error)
+        }
+    }*/
 
     return (
         <>
@@ -69,7 +70,7 @@ const PostList = (
                     className = "post-list" 
                     key = { post._id }
                     onClick = { () => {
-                        onClickUpdatePostViewCount(post._id);
+                        //onClickUpdatePostViewCount(post._id);
                         onClickPostDetailNavigate(post._id);
                         return;
                     }} >

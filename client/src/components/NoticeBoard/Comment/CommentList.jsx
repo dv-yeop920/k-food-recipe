@@ -12,18 +12,23 @@ const CommentList = ({ post }) => {
     const userId = useSelector(user => user.user.id);
     const postId = post._id;
 
+    const [comment , setComment] = useState([]);
     const [commentContent , setCommentContent] = useState("");
     const [updateComment , setUpdateComment] = useState("");
     const [replyCommentContent , setReplyCommentContent] = useState("");
-    const [comment , setComment] = useState([]);
     const [isEdit , setIsEdit] = useState(false);
     
 
 
     const getComment = async () => {
+
         try {
+
                 const response = 
-                await axios.get("/api/posts/comment/getComment");
+                await axios.get(
+                    "/api/posts/comment/getComment" , 
+                    { timeout: 10000 }
+                );
 
                 const getComments = response.data.list;
 
@@ -33,6 +38,7 @@ const CommentList = ({ post }) => {
                 });
 
                 setComment(commentForThisPost);
+
         }
         catch (error) {
             console.log(error);
@@ -41,6 +47,7 @@ const CommentList = ({ post }) => {
 
 
     const onSubmitRegisterComment = async (e) => {
+
         e.preventDefault();
 
         if (commentContent === "") {
@@ -56,7 +63,9 @@ const CommentList = ({ post }) => {
 
         try {
                 const response = 
-                await axios.post("/api/posts/comment/register" , commentBody);
+                await axios.post("/api/posts/comment/register" , 
+                commentBody , 
+                { timeout: 10000 });
 
                 if (response.data.success === true) {
 
@@ -92,12 +101,14 @@ const CommentList = ({ post }) => {
         }
 
         try {
+
                 if (window.confirm("댓글을 정말 삭제 하시겠습니까?")) {
 
                     const response = 
                     await axios.post(
                         "/api/posts/comment/deleteComment" , 
-                        deleteCommentBody
+                        deleteCommentBody , 
+                        { timeout: 10000 }
                     );
 
                     if (response.data.deleteSuccess === true) {
@@ -136,27 +147,30 @@ const CommentList = ({ post }) => {
         }
 
         try {
-                if (window.confirm("댓글을 정말 수정 하시겠습니까?")) {
 
-                    const response = 
-                    await axios.put(
-                        "/api/posts/comment/updateComment" , 
-                        updateCommentBody
-                    );
+            if (window.confirm("댓글을 정말 수정 하시겠습니까?")) {
 
-                    if (response.data.deleteSuccess === true) {
-                        alert(response.data.messsage);
-                        return;
-                    }
+                const response = 
+                await axios.put(
+                    "/api/posts/comment/updateComment" , 
+                    updateCommentBody , 
+                    { timeout: 10000 }
+                );
 
-                    if (response.data.deleteSuccess === false) {
-                        alert(response.data.messsage);
-                        return;
-                    }
+                if (response.data.deleteSuccess === true) {
+                    alert(response.data.messsage);
+                    return;
+                }
 
-                    setIsEdit(!isEdit);
+                if (response.data.deleteSuccess === false) {
+                    alert(response.data.messsage);
+                    return;
+                }
+
+                setIsEdit(!isEdit);
 
             }
+
         }
         catch (error) {
             console.log(error);
@@ -165,6 +179,7 @@ const CommentList = ({ post }) => {
 
 
     useEffect(() => {
+
         getComment();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [comment]);
@@ -188,16 +203,22 @@ const CommentList = ({ post }) => {
                     setCommentContent = { setCommentContent }
                     onSubmitRegisterComment = { onSubmitRegisterComment } />
 
-                    <Comment
-                    comment = { comment }
-                    isEdit = { isEdit }
-                    setIsEdit = { setIsEdit }
-                    updateComment = { updateComment }
-                    setUpdateComment = { setUpdateComment }
-                    onClickCommentDelete = { onClickCommentDelete }
-                    onClickCommentEdit = { onClickCommentEdit } 
-                    replyCommentContent = { replyCommentContent }
-                    setReplyCommentContent = { setReplyCommentContent } />
+                    {
+                        comment &&
+                        comment.map((comment) => (
+                            <Comment key={comment._id}
+                            comment = { comment }
+                            isEdit = { isEdit }
+                            setIsEdit = { setIsEdit }
+                            updateComment = { updateComment }
+                            setUpdateComment = { setUpdateComment }
+                            onClickCommentDelete = { onClickCommentDelete }
+                            onClickCommentEdit = { onClickCommentEdit } 
+                            replyCommentContent = { replyCommentContent }
+                            setReplyCommentContent = { setReplyCommentContent } />
+                        ))
+                    }
+                    
 
                 </div>
 

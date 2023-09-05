@@ -45,7 +45,11 @@ const LoginModal = (
 
         try {
                 const response = 
-                await axios.post("/api/users/login" , userInfo);
+                await axios.post(
+                    "/api/users/login" , 
+                    userInfo , 
+                    { timeout: 10000 }
+                );
 
                 if (response.data.loginSuccess === false) {
 

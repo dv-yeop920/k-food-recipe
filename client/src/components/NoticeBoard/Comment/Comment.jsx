@@ -26,161 +26,154 @@ const Comment = (
     return (
         <>
         <ul className = "commnet-list">
-            {   
-                comment &&
 
-                comment.map( (comment) => {
+            <li className = "comment" key = { comment.id }>
 
-                    return (
-                        <>
-                        <li className = "comment" key = { comment._id }>
+                <div>
+                    <span className = "user-id">
+                        { comment.id }
+                    </span>
+                </div>
 
-                            <div>
-                                <span className = "user-id">
-                                    { comment.id }
-                                </span>
-                            </div>
+                {
+                    isEdit === true && editId === comment._id ?
 
-                            {
-                                isEdit === true && editId === comment._id ?
+                    <textarea
+                    style = {{ marginTop : "5px" }}
+                    className = "comment-input"
+                    value = { updateComment }
+                    onChange = { (e) => {
 
-                                <textarea
-                                style = {{ marginTop : "5px" }}
-                                className = "comment-input"
-                                value = { updateComment }
-                                onChange = { (e) => {
+                        setUpdateComment(e.target.value);
+                        return;
 
-                                    setUpdateComment(e.target.value);
-                                    return;
+                    }} >
+                    </textarea>
 
-                                }} >
-                                </textarea>
+                    :
 
-                                :
-
-                                <p
-                                className = "comment-content">
-                                    { comment.content } 
-                                </p>
-                            }
-
-                            <div className = "user-comment__buttons">
-
-                                <div className = "date-reply__container">
-
-                                    <styled.Span className = "comment-date">
-
-                                        {
-                                            `
-                                            ${ getDate(comment.createdAt).year }-${
-                                                getDate(comment.createdAt).month + 1 }-${
-                                                    getDate(comment.createdAt).date } 
-
-                                            ${ getDate(comment.createdAt).hours }:${
-                                                getDate(comment.createdAt).minutes }`
-                                        }
-
-                                    </styled.Span>
-
-                                    <styled.Span
-                                    className = "reply-button"
-                                    style = {{ cursor:"pointer" }}
-                                    onClick = {() => {
-
-                                        setIsReply(!isReply);
-                                        setEditId(comment._id);
-                                        return;
-
-                                    }} >
-                                        답글 쓰기
-                                    </styled.Span>
-                                </div>
-
-                                <div className = "edit-delete__button">
-
-                                {
-                                    isEdit === true && editId === comment._id ?
-                                    (
-                                    <>
-
-                                    <styled.Span 
-                                    className = "edit-button comment-edit-delete"
-                                    onClick = { () => {
-
-                                        setIsEdit(!isEdit);
-                                        return; 
-
-                                    }} >
-                                        취소
-                                    </styled.Span>
-
-                                    <styled.Span 
-                                    className = "delete-button comment-edit-delete"
-                                    onClick = { () => {
-
-                                        onClickCommentEdit(comment._id);
-                                        return;
-
-                                    }} >
-                                        완료
-                                    </styled.Span>
-
-                                    </>
-                                    )
-
-                                    :
-
-                                    (
-                                    <>
-
-                                    <styled.Span 
-                                    className = "edit-button comment-edit-delete"
-                                    onClick = { () => {
-
-                                        setIsEdit(!isEdit);
-                                        setEditId(comment._id);
-                                        setUpdateComment(comment.content);
-                                        return;
-
-                                    }} >
-                                        수정
-                                    </styled.Span>
-
-                                    <styled.Span 
-                                    className = "delete-button comment-edit-delete"
-                                    onClick = { () => {
-
-                                    onClickCommentDelete(comment._id); 
-                                    return;
-
-                                    }} >
-                                        삭제
-                                    </styled.Span>
-
-                                    </>
-                                    )
-                                }
-
-                                </div>
-                            </div>
-
-                            {
-                                isReply === true && editId === comment._id &&
-
-                                <ReplyInput
-                                isReply = { isReply }
-                                setIsReply = { setIsReply } 
-                                replyCommentContent = { replyCommentContent }
-                                setReplyCommentContent = { setReplyCommentContent }
-                                />
-
-                            }
-                        </li>
-                        </>
-                        );
-                    })
+                    <p
+                    className = "comment-content">
+                        { comment.content } 
+                    </p>
                 }
-            </ul>
+
+                <div className = "user-comment__buttons">
+
+                    <div className = "date-reply__container">
+
+                        <styled.Span className = "comment-date">
+
+                            {
+                                `
+                                ${ getDate(comment.createdAt).year }-${
+                                    getDate(comment.createdAt).month + 1 }-${
+                                        getDate(comment.createdAt).date } 
+
+                                ${ getDate(comment.createdAt).hours }:${
+                                    getDate(comment.createdAt).minutes }`
+                            }
+
+                        </styled.Span>
+
+                        <styled.Span
+                        className = "reply-button"
+                        style = {{ cursor:"pointer" }}
+                        onClick = {() => {
+
+                            setIsReply(!isReply);
+                            setEditId(comment._id);
+                            return;
+
+                        }} >
+                            답글 쓰기
+                        </styled.Span>
+
+                    </div>
+
+                    <div className = "edit-delete__button">
+
+                    {
+                        isEdit === true && editId === comment._id ?
+                        (
+                        <>
+
+                        <styled.Span 
+                        className = "edit-button comment-edit-delete"
+                        onClick = { () => {
+
+                            setIsEdit(!isEdit);
+                            return; 
+
+                        }} >
+                            취소
+                        </styled.Span>
+
+                        <styled.Span 
+                        className = "delete-button comment-edit-delete"
+                        onClick = { () => {
+
+                            onClickCommentEdit(comment._id);
+                            return;
+
+                        }} >
+                            완료
+                        </styled.Span>
+
+                        </>
+                        )
+
+                        :
+
+                        (
+                        <>
+
+                        <styled.Span 
+                        className = "edit-button comment-edit-delete"
+                        onClick = { () => {
+
+                            setIsEdit(!isEdit);
+                            setEditId(comment._id);
+                            setUpdateComment(comment.content);
+                            return;
+
+                        }} >
+                            수정
+                        </styled.Span>
+
+                        <styled.Span 
+                        className = "delete-button comment-edit-delete"
+                        onClick = { () => {
+
+                        onClickCommentDelete(comment._id); 
+                        return;
+
+                        }} >
+                            삭제
+                        </styled.Span>
+
+                        </>
+                        )
+                    }
+
+                    </div>
+
+                </div>
+
+                {
+                    isReply === true && editId === comment._id &&
+
+                    <ReplyInput
+                    isReply = { isReply }
+                    setIsReply = { setIsReply } 
+                    replyCommentContent = { replyCommentContent }
+                    setReplyCommentContent = { setReplyCommentContent }
+                    />
+
+                }
+            </li>
+
+        </ul>
         </>
     );
 };
