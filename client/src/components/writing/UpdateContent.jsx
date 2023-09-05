@@ -41,7 +41,7 @@ const UpdateContent = (
 
         return setOriginalDetail({
             ...originalDetail,
-            title: titleValue,
+            title: e.target.value,
         });
     }
 
@@ -52,7 +52,7 @@ const UpdateContent = (
 
         return setOriginalDetail({
             ...originalDetail,
-            content: contentValue
+            content: e
         });
     }
 
