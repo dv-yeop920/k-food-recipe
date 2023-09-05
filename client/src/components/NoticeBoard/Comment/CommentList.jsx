@@ -207,7 +207,8 @@ const CommentList = ({ post }) => {
                         comment &&
                         comment.map((comment) => (
 
-                            <Comment key={comment._id}
+                            <Comment key = { comment._id }
+                            commentId = { comment._id }
                             comment = { comment }
                             isEdit = { isEdit }
                             setIsEdit = { setIsEdit }

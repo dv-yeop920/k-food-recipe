@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import * as styled from "../../../styles/styledComponents";
 import getDate from "../../../utils/postDate";
-import ReplyInput from "./ReplyInput";
 
 
 
 
 const Comment = (
     { 
+        commentId , 
         comment , 
         isEdit , 
         setIsEdit , 
@@ -27,7 +27,7 @@ const Comment = (
         <>
         <ul className = "commnet-list">
 
-            <li className = "comment" key = { comment._id }>
+            <li className = "comment">
 
                 <div>
                     <span className = "user-id">
@@ -36,17 +36,16 @@ const Comment = (
                 </div>
 
                 {
-                    isEdit === true && editId === comment._id ?
+                    isEdit === true && editId === commentId ?
 
                     <textarea
                     style = {{ marginTop : "5px" }}
                     className = "comment-input"
                     value = { updateComment }
+                    name = { updateComment }
                     onChange = { (e) => {
-
                         setUpdateComment(e.target.value);
                         return;
-
                     }} >
                     </textarea>
 
@@ -82,7 +81,7 @@ const Comment = (
                         onClick = {() => {
 
                             setIsReply(!isReply);
-                            setEditId(comment._id);
+                            setEditId(commentId);
                             return;
 
                         }} >
@@ -94,15 +93,15 @@ const Comment = (
                     <div className = "edit-delete__button">
 
                     {
-                        isEdit === true && editId === comment._id ?
+                        isEdit === true && editId === commentId ?
                         (
                         <>
 
                         <styled.Span 
                         className = "edit-button comment-edit-delete"
                         onClick = { () => {
-
                             setIsEdit(!isEdit);
+                            setEditId("");
                             return; 
 
                         }} >
@@ -113,7 +112,8 @@ const Comment = (
                         className = "delete-button comment-edit-delete"
                         onClick = { () => {
 
-                            onClickCommentEdit(comment._id);
+                            onClickCommentEdit(commentId);
+                            setEditId("");
                             return;
 
                         }} >
@@ -133,7 +133,7 @@ const Comment = (
                         onClick = { () => {
 
                             setIsEdit(!isEdit);
-                            setEditId(comment._id);
+                            setEditId(commentId);
                             setUpdateComment(comment.content);
                             return;
 
@@ -145,7 +145,7 @@ const Comment = (
                         className = "delete-button comment-edit-delete"
                         onClick = { () => {
 
-                        onClickCommentDelete(comment._id); 
+                        onClickCommentDelete(commentId); 
                         return;
 
                         }} >
@@ -160,17 +160,6 @@ const Comment = (
 
                 </div>
 
-                {
-                    isReply === true && editId === comment._id &&
-
-                    <ReplyInput
-                    isReply = { isReply }
-                    setIsReply = { setIsReply } 
-                    replyCommentContent = { replyCommentContent }
-                    setReplyCommentContent = { setReplyCommentContent }
-                    />
-
-                }
             </li>
 
         </ul>

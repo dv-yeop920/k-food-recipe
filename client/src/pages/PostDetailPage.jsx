@@ -33,16 +33,20 @@ const PostsDetail = () => {
                 { timeout: 100000 }
             );
 
-            const postData = response.data.list;
+            if (response) {
 
-            if (postData) {
+                const postData = response.data.list;
 
-                const parts = postData.id.split("_");
-                const userId = parts[0];
+                if (postData) {
 
-                postData.id = userId;
-
-                setPost(postData);
+                    const parts = postData.id.split("_");
+                    const userId = parts[0];
+    
+                    postData.id = userId;
+    
+                    setPost(postData);
+    
+                }
 
             }
 
@@ -194,8 +198,7 @@ const PostsDetail = () => {
 
             </div>
 
-            <CommentList 
-            post = { post } />
+            <CommentList post = { post } />
 
             <div style = {{ height:"40px" }}></div>
 

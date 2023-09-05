@@ -18,9 +18,11 @@ const CommentInput = (
                 <div className = "comment-textarea__container">
 
                     <textarea 
+                    id = "comment-input"
                     className = "comment-input"
                     placeholder = "댓글을 달아 보세요!"
                     value = { commentContent }
+                    name = { commentContent }
                     onChange = { (e) => setCommentContent(e.target.value) } >
                     </textarea>
 
