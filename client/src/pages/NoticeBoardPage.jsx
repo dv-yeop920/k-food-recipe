@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PostSearchInput from "../components/NoticeBoard/PostSearchInput";
 import PostList from "../components/NoticeBoard/PostList";
+import Loading from "../components/Loading";
 
 
 
@@ -14,7 +15,7 @@ const NoticeBoardPage = () => {
     const [postList , setPostList] = useState([]);
     const [totalPostLIst , setTotalPostList] = useState([]);
     const [pageNumber , setPageNumber] = useState(1);
-
+    const [isLoading , setIsLoading] = useState(true);
     const POST_PER_PAGE = 5;
 
 
@@ -29,18 +30,21 @@ const NoticeBoardPage = () => {
                 { timeout: 10000 }
             );
 
-            const getPosts = response.data.list;
-            const getTotalPosts = response.data.totalPosts;
+            if (response) {
+                const getPosts = response.data.list;
+                const getTotalPosts = response.data.totalPosts;
 
-            setPostList(getPosts);
-            setTotalPostList(getTotalPosts);
+                setPostList(getPosts);
+                setTotalPostList(getTotalPosts);
 
-            if (getPosts.length === 0) {
-                alert("일치하는 결과가 없습니다!");
-                setUserPostSearchValue("");
-                return;
+                if (getPosts.length === 0) {
+                    alert("일치하는 결과가 없습니다!");
+                    setUserPostSearchValue("");
+                    return;
+                }
             }
 
+            setIsLoading(false);
         }
         catch (error) {
             console.log(error);
@@ -96,14 +100,22 @@ const NoticeBoardPage = () => {
         userPostSearchValue = { userPostSearchValue }
         setUserPostSearchValue = { setUserPostSearchValue } 
         onSubmitGetFilteredPostList = { onSubmitGetFilteredPostList } />
+
+        {
+            isLoading ? 
+            <Loading /> 
+            : 
+            <PostList 
+            postList = { postList }
+            onClickPostDetailNavigate = { onClickPostDetailNavigate } 
+            postPerPage = { POST_PER_PAGE }
+            totalPosts = { totalPostLIst.length }
+            paginate = { setPageNumber }
+            pageNumber = { pageNumber } />
+
+        }
+
         
-        <PostList 
-        postList = { postList }
-        onClickPostDetailNavigate = { onClickPostDetailNavigate } 
-        postPerPage = { POST_PER_PAGE }
-        totalPosts = { totalPostLIst.length }
-        paginate = { setPageNumber }
-        pageNumber = { pageNumber } />
         
 
         </>

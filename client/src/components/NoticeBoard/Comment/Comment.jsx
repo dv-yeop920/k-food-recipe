@@ -27,7 +27,7 @@ const Comment = (
         <>
         <ul className = "commnet-list">
 
-            <li className = "comment" key = { comment.id }>
+            <li className = "comment" key = { comment._id }>
 
                 <div>
                     <span className = "user-id">

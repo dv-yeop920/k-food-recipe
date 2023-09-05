@@ -206,6 +206,7 @@ const CommentList = ({ post }) => {
                     {
                         comment &&
                         comment.map((comment) => (
+
                             <Comment key={comment._id}
                             comment = { comment }
                             isEdit = { isEdit }
@@ -216,6 +217,7 @@ const CommentList = ({ post }) => {
                             onClickCommentEdit = { onClickCommentEdit } 
                             replyCommentContent = { replyCommentContent }
                             setReplyCommentContent = { setReplyCommentContent } />
+
                         ))
                     }
                     

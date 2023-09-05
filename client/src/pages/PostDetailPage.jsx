@@ -6,6 +6,7 @@ import FooterNavbar from "../components/FooterNavbar";
 import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
+import Loading from "../components/Loading";
 
 
 
@@ -17,6 +18,7 @@ const PostsDetail = () => {
     //postList 에서 넘겨준 게시물의 고유 _id값
     const { id } = useParams();
     const [post, setPost] = useState({});
+    const [isLoading , setIsLoading] = useState(true);
 
 
     const getPostDetail = async () => {
@@ -43,6 +45,8 @@ const PostsDetail = () => {
                 setPost(postData);
 
             }
+
+            setIsLoading(false);
 
         }
         catch (error) {
@@ -102,6 +106,11 @@ const PostsDetail = () => {
 
     return (
         <>
+        {
+            
+        isLoading ?
+        <Loading />
+        :
         <div className = "post-detail__container">
 
             <div className = "post-header">
@@ -192,6 +201,8 @@ const PostsDetail = () => {
 
             <FooterNavbar/>
         </div>
+
+        }
         </>
     );
 };

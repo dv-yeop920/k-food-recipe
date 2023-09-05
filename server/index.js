@@ -249,7 +249,8 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
         await list
         .skip(pageNumber * postPerPage)
         .limit(postPerPage)
-        .sort({ createdAt: -1 });
+        .sort({ createdAt: -1 })
+        .exec();
 
         const totalPosts = await Post.find({
             title: { $regex: RegexSearchValue, $options: "i" },
