@@ -63,9 +63,11 @@ const UpdateContent = (
             <div className = "writing-container__column">
 
                 <input 
+                id = "editor-title"
                 className = "editor-title" 
                 type = "text" 
                 value = { titleValue }
+                name = { titleValue }
                 onChange = { handelChangeTitle } />  
 
             </div>
@@ -73,8 +75,10 @@ const UpdateContent = (
             <div className = "writing-container__column">
 
                 <ReactQuill  
+                id = "content"
                 className = "content"
                 value = { contentValue }
+                name = { titleValue }
                 modules = { modules }
                 onChange = { handleChangeContent } /> 
 

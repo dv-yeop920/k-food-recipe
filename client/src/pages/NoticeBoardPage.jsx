@@ -13,7 +13,7 @@ const NoticeBoardPage = () => {
     const navigate = useNavigate();
     const [userPostSearchValue , setUserPostSearchValue] = useState("");
     const [postList , setPostList] = useState([]);
-    const [totalPostLIst , setTotalPostList] = useState([]);
+    const [totalPostList , setTotalPostList] = useState([]);
     const [pageNumber , setPageNumber] = useState(1);
     const [isLoading , setIsLoading] = useState(true);
 
@@ -32,20 +32,27 @@ const NoticeBoardPage = () => {
             );
 
             if (response) {
+
                 const getPosts = response.data.list;
                 const getTotalPosts = response.data.totalPosts;
 
-                setPostList(getPosts);
-                setTotalPostList(getTotalPosts);
+                if (getPosts && getTotalPosts) {
+
+                    setPostList(getPosts);
+                    setTotalPostList(getTotalPosts);
+
+                }
+
+                setIsLoading(false);
 
                 if (getPosts.length === 0) {
                     alert("일치하는 결과가 없습니다!");
                     setUserPostSearchValue("");
                     return;
                 }
+
             }
 
-            setIsLoading(false);
         }
         catch (error) {
             console.log(error);
@@ -88,11 +95,11 @@ const NoticeBoardPage = () => {
 
 
     useEffect(() => {
+
         getPostList();
         window.scrollTo(0 , 0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     } , [pageNumber]);
-
 
     return (
         <>
@@ -103,21 +110,21 @@ const NoticeBoardPage = () => {
         onSubmitGetFilteredPostList = { onSubmitGetFilteredPostList } />
 
         {
-            isLoading ? 
-            <Loading /> 
-            : 
+            isLoading ?
+
+            <Loading />
+
+            :
+
             <PostList 
             postList = { postList }
             onClickPostDetailNavigate = { onClickPostDetailNavigate } 
             postPerPage = { POST_PER_PAGE }
-            totalPosts = { totalPostLIst.length }
+            totalPost = { totalPostList.length }
             paginate = { setPageNumber }
             pageNumber = { pageNumber } />
 
         }
-
-        
-        
 
         </>
     );

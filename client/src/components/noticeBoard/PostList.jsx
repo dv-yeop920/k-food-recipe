@@ -9,27 +9,27 @@ const PostList = (
         postList , 
         onClickPostDetailNavigate , 
         postPerPage , 
-        totalPosts ,
+        totalPost ,
         paginate , 
         pageNumber
     }
     ) => {
 
 
-    /*const onClickUpdatePostViewCount = async (id) => {
+        /*const onClickUpdatePostViewCount = async (id) => {
 
-        try {
-
-            await axios.put(
-                `/api/posts/viewCountupdate/${id}` ,  
-                { timeout: 5000 }
-            );
-
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }*/
+            try {
+    
+                await axios.put(
+                    `/api/posts/viewCountupdate/${id}` ,  
+                    { timeout: 5000 }
+                );
+    
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }*/
 
     return (
         <>
@@ -61,7 +61,7 @@ const PostList = (
 
                 {
 
-                postList.length > 0 ?
+                postList &&
                 postList.map( (post) => {
 
                     return(
@@ -123,9 +123,10 @@ const PostList = (
                     </styled.Li>
                     )
                 })
-
-                :
-
+            }
+                
+            {
+                postList.length <= 0 &&
                 <p style={{
                     "padding" : "70px", 
                     "textAlign" :"center",
@@ -133,16 +134,16 @@ const PostList = (
                     "fontWeight" : "600" }} >
                     검색 결과가 없습니다!
                 </p>
-                }
+            }
 
             </ul>
 
             {
-                postList.length > 0 &&
+                postList &&
 
                 <Pagination
                 postPerPage = { postPerPage }
-                totalPosts = { totalPosts }
+                totalPost = { totalPost }
                 paginate = { paginate } 
                 pageNumber = { pageNumber } />
 

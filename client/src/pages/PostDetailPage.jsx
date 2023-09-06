@@ -41,11 +41,11 @@ const PostsDetail = () => {
 
                     const parts = postData.id.split("_");
                     const userId = parts[0];
-    
+
                     postData.id = userId;
-    
+
                     setPost(postData);
-    
+
                 }
 
             }

@@ -23,10 +23,12 @@ const PostSearchInput = (
             onSubmit = { onSubmitGetFilteredPostList } >
 
                 <styled.Input
+                id = "search-post"
                 className = "user-search__input"
                 type = "search"
                 placeholder = "단어 단위로 입력..."
-                value = { userPostSearchValue } 
+                value = { userPostSearchValue }
+                name = { userPostSearchValue } 
                 onChange = { (e) => { 
 
                     setUserPostSearchValue(e.target.value);
