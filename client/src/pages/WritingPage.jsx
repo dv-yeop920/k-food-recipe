@@ -15,6 +15,7 @@ const WritingPage = () => {
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
 
+
     const onSubmitPost = async (e) => {
 
         e.preventDefault();

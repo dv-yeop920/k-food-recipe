@@ -229,30 +229,18 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
 
     try {
 
-        let list;
-
-        if (searchValue) {
-
-            list = Post.find( 
-                { 
-                    title: { 
-                        $regex: RegexSearchValue , 
-                        $options: "i" 
-                    } 
-                });
-        }
-        else {
-            list = Post.find();
-        }
-
         const posts = 
-        await list
+        await Post.find({
+            title: { 
+            $regex: RegexSearchValue , 
+            $options: "i" 
+        }})
         .skip(pageNumber * postPerPage)
         .limit(postPerPage)
         .sort({ createdAt: -1 })
         .exec();
 
-        const totalPosts = await Post.find({
+        const totalPostLength = await Post.countDocuments({
             title: { $regex: RegexSearchValue, $options: "i" },
         }).exec();
 
@@ -268,7 +256,7 @@ app.get("/api/posts/getPostList" ,  async (req , res) => {
         });
         
         res.json({
-            totalPosts : totalPosts,
+            totalPostLength : totalPostLength,
             list: modifiedPosts,
         });
 

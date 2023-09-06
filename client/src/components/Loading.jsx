@@ -7,9 +7,12 @@ const Loading = () => {
             <div 
             className = "loading"
             style={{
-            "position": "absolute",
+            "position": "fixed",
             "top":"50%",
-            "left": "45%"}} >
+            "left": "47%",
+            "backgroundColor": "white",
+            "width": "100%",
+            "height": "100%"}} >
 
                 <h3 className = "loading-text">
                     로딩중

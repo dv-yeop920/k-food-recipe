@@ -7,6 +7,7 @@ const ImageUploader = () => {
     return (
         <>
         <div className = "image-upload__container">
+            
 
             <input
             type = "file"

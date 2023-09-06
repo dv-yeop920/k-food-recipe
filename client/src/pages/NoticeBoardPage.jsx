@@ -13,14 +13,16 @@ const NoticeBoardPage = () => {
     const navigate = useNavigate();
     const [userPostSearchValue , setUserPostSearchValue] = useState("");
     const [postList , setPostList] = useState([]);
-    const [totalPostList , setTotalPostList] = useState([]);
+    const [totalPostLength , setTotalPostLength] = useState([]);
     const [pageNumber , setPageNumber] = useState(1);
-    const [isLoading , setIsLoading] = useState(true);
+    const [isLoading , setIsLoading] = useState(false);
 
     const POST_PER_PAGE = 5;
 
 
     const getPostList = async () => {
+
+        setIsLoading(true);
 
         try {
 
@@ -34,24 +36,18 @@ const NoticeBoardPage = () => {
             if (response) {
 
                 const getPosts = response.data.list;
-                const getTotalPosts = response.data.totalPosts;
+                const getTotalPostsLength = response.data.totalPostLength;
 
-                if (getPosts && getTotalPosts) {
+                if (getPosts) {
 
                     setPostList(getPosts);
-                    setTotalPostList(getTotalPosts);
+                    setTotalPostLength(getTotalPostsLength);
 
-                }
-
-                setIsLoading(false);
-
-                if (getPosts.length === 0) {
-                    alert("일치하는 결과가 없습니다!");
-                    setUserPostSearchValue("");
-                    return;
                 }
 
             }
+
+            setIsLoading(false);
 
         }
         catch (error) {
@@ -76,16 +72,16 @@ const NoticeBoardPage = () => {
             if (userPostSearchValue === "") {
 
                 alert("검색 단어를 입력해 주세요!");
-                await getPostList();
                 return;
 
             }
+            else {
 
-            await getPostList();
+                await getPostList();
                 setPageNumber(1);
-                setUserPostSearchValue("");
-                return;
             
+            }
+
         } 
         catch (error) {
             console.log(error);
@@ -120,7 +116,7 @@ const NoticeBoardPage = () => {
             postList = { postList }
             onClickPostDetailNavigate = { onClickPostDetailNavigate } 
             postPerPage = { POST_PER_PAGE }
-            totalPost = { totalPostList.length }
+            totalPostLength = { totalPostLength }
             paginate = { setPageNumber }
             pageNumber = { pageNumber } />
 

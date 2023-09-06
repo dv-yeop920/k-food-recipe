@@ -6,10 +6,10 @@ import Pagination from "../Pagination";
 
 const PostList = (
     { 
-        postList , 
+        postList ,  
         onClickPostDetailNavigate , 
         postPerPage , 
-        totalPost ,
+        totalPostLength ,
         paginate , 
         pageNumber
     }
@@ -61,10 +61,11 @@ const PostList = (
 
                 {
 
-                postList &&
+                postList.length > 0 ?
+
                 postList.map( (post) => {
 
-                    return(
+                    return (
 
                     <styled.Li 
                     className = "post-list" 
@@ -123,10 +124,7 @@ const PostList = (
                     </styled.Li>
                     )
                 })
-            }
-                
-            {
-                postList.length <= 0 &&
+                :
                 <p style={{
                     "padding" : "70px", 
                     "textAlign" :"center",
@@ -139,11 +137,11 @@ const PostList = (
             </ul>
 
             {
-                postList &&
+                postList.length > 0 &&
 
                 <Pagination
                 postPerPage = { postPerPage }
-                totalPost = { totalPost }
+                totalPostLength = { totalPostLength }
                 paginate = { paginate } 
                 pageNumber = { pageNumber } />
 

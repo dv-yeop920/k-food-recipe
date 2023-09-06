@@ -7,7 +7,7 @@ import * as styled from "../styles/styledComponents";
 const Pagination = (
     { 
         postPerPage , //NOTE - 페이지당 게시물 개수 
-        totalPost , //NOTE - 게시물의 총 개수
+        totalPostLength , //NOTE - 게시물의 총 개수
         pageNumber ,  //NOTE - 페이지의 초기값
         paginate //NOTE - 페이지 초기값 변경 하는 함수 
     }
@@ -15,7 +15,7 @@ const Pagination = (
 
     const pageNumbers = [];
     const PAGE_NUMBER_LIMIT = 5;
-    const totalPage = Math.ceil(totalPost / postPerPage);
+    const totalPage = Math.ceil(totalPostLength / postPerPage);
 
 
     for (let i = 0; i <= totalPage; i++) {
