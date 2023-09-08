@@ -11,16 +11,20 @@ const ImageUploader = ({ setImageFile }) => {
 
 
     const onClickShowImageFile = (e) => {
+
         fileInput.current.click();
+
     }
 
 
     const onChangeUpload = async (e) => {
+
         const file = e.target.files[0];
 
         setImageFile(file);
 
         const reader = new FileReader();
+
         reader.readAsDataURL(file);
 
         return new Promise((resolve) => { 

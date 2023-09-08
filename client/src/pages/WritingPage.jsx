@@ -6,6 +6,7 @@ import ImageUploader from "../components/writing/ImageUploader";
 import Content from "../components/writing/Content";
 import axios from "axios";
 import AWS from "aws-sdk";
+import Loading from "../components/Loading";
 
 
 
@@ -13,6 +14,8 @@ const WritingPage = () => {
 
     const userId = useSelector(user => user.user.id);
     const navigate = useNavigate();
+    const [isLoading , setIsLoading] = useState(false);
+
     
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -59,12 +62,11 @@ const WritingPage = () => {
     }
 
 
-    
-
-
     const onSubmitPost = async (e) => {
 
         e.preventDefault();
+
+        setIsLoading(true);
 
         try {
 
@@ -82,7 +84,8 @@ const WritingPage = () => {
 
             if (response.data.success === false) {
 
-                return console.log(response.data.messsage);
+                console.log(response.data.messsage);
+                return;
 
             }
 
@@ -94,61 +97,74 @@ const WritingPage = () => {
 
             }
 
+            setIsLoading(false);
+
         }
         catch (error) {
             console.log(error);
+            throw error;
         }
     }
 
 
     return (
         <>
-        <div className = "editor-container">
+        {
+            isLoading ?
 
-            <form 
-            className = "editor-form"
-            onSubmit = { onSubmitPost }>
-                <div className = "content-container">
+            <Loading />
 
-                    <ImageUploader 
-                    setImageFile = { setImageFile } />
+            :
 
-                    <Content 
-                    content = { content }
-                    setTitle = { setTitle }
-                    setContent = { setContent } />
+            <div className = "editor-container">
 
-                </div>
+                <form 
+                className = "editor-form"
+                onSubmit = { onSubmitPost }>
+
+                    <div className = "content-container">
+
+                        <ImageUploader 
+                        setImageFile = { setImageFile } />
+
+                        <Content 
+                        content = { content }
+                        setTitle = { setTitle }
+                        setContent = { setContent } />
+
+                    </div>
                 
-                <div className = "writing-button__container">
+                    <div className = "writing-button__container">
 
-                    <styled.DeleteButton
-                    className = "writing-button__delete delete-btn"
-                    type = "button"
-                    onClick = { () => {
+                        <styled.DeleteButton
+                        className = "writing-button__delete delete-btn"
+                        type = "button"
+                        onClick = { () => {
 
-                        if (window.confirm("게시글 작성을 취소 하시겠어요?")) {
+                            if (window.confirm("게시글 작성을 취소 하시겠어요?")) {
 
-                            navigate(-1, { replace: true });
-                            return;
+                                navigate(-1, { replace: true });
+                                return;
 
-                        }
+                            }
 
-                    }} >
-                        취소
-                    </styled.DeleteButton>
+                        }} >
+                            취소
+                        </styled.DeleteButton>
 
-                    <styled.SubmitButton
-                    type = "submit"
-                    className = "writing-button__submit default-btn">
-                        등록
-                    </styled.SubmitButton>
+                        <styled.SubmitButton
+                        type = "submit"
+                        className = "writing-button__submit default-btn">
+                            등록
+                        </styled.SubmitButton>
 
-                </div>
+                    </div>
 
-            </form>
+                </form>
 
-        </div>
+            </div>
+
+        }
         </>
     );
 };
