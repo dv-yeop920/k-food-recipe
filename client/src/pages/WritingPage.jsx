@@ -5,15 +5,56 @@ import * as styled from "../styles/styledComponents";
 import ImageUploader from "../components/writing/ImageUploader";
 import Content from "../components/writing/Content";
 import axios from "axios";
+import AWS from "aws-sdk";
 
 
 
 const WritingPage = () => {
+
     const userId = useSelector(user => user.user.id);
     const navigate = useNavigate();
     
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [imageUrl , setImageUrl] = useState("ㅁㄴㅇㅁㄴㅇㅁ");
+    const [imageSrc, setImageSrc] = useState(null);
+
+    const REGION = process.env.REACT_APP_REGION
+    const ACCESS_KEY_ID = process.env.REACT_APP_ACCESS_KEY_ID
+    const SECRET_ACCESS_KEY_ID = process.env.REACT_APP_SECRET_ACCESS_KEY_ID
+    const S3_BUCKET = "dv-yeop-imagebucket";
+
+
+    AWS.config.update({
+        accessKeyId: ACCESS_KEY_ID,
+        secretAccessKey: SECRET_ACCESS_KEY_ID,
+    });
+
+    const s3 = new AWS.S3({
+        params: { Bucket: S3_BUCKET },
+        region: REGION,
+    });
+
+
+    const uploadImageToS3 = async (file) => {
+
+        const params = {
+
+            Key: `image/${file.name}`,
+            Body: file,
+
+        }
+
+        try {
+            const result = await s3.upload(params).promise();
+            console.log("Image uploaded successfully:", result.Location);
+            return result.Location; // 업로드된 이미지의 URL 반환
+        } 
+        catch (error) {
+            console.error("Error uploading image:", error);
+            throw error;
+        }
+    }
 
 
     const onSubmitPost = async (e) => {
@@ -23,27 +64,28 @@ const WritingPage = () => {
         const post = {
             id: userId,
             title: title,
-            content: content
+            content: content,
+            image: imageUrl
         }
 
         try {
 
-                const response = 
-                await axios.post("/api/posts/register" , post , { timeout: 10000 });
+            const response = 
+            await axios.post("/api/posts/register" , post , { timeout: 10000 });
 
-                if (response.data.success === false) {
+            if (response.data.success === false) {
 
-                    return console.log(response.data.messsage);
+                return console.log(response.data.messsage);
 
-                }
+            }
 
-                if (response.data.success === true) {
+            if (response.data.success === true) {
 
-                    navigate(-1, { replace: true });
-                    alert(response.data.messsage);
-                    return;
+                navigate(-1, { replace: true });
+                alert(response.data.messsage);
+                return;
 
-                }
+            }
 
         }
         catch (error) {
@@ -60,7 +102,12 @@ const WritingPage = () => {
             onSubmit = { onSubmitPost }>
                 <div className = "content-container">
 
-                    <ImageUploader/>
+                    <ImageUploader 
+                    imageSrc = { imageSrc }
+                    setImageSrc = { setImageSrc }
+                    imageUrl = { imageUrl }
+                    setImageUrl = { setImageUrl } 
+                    uploadImageToS3 = { uploadImageToS3 }/>
 
                     <Content 
                     content = { content }

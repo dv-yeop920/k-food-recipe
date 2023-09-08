@@ -12,6 +12,7 @@ import store from "./store/store";
 import ScrollTop from "./services/scrollTop";
 
 
+
 const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

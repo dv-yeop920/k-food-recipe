@@ -189,7 +189,8 @@ app.post("/api/posts/register" , async (req , res) => {
         const post = {
             id: req.body.id + "_" + Date.now(),
             title: req.body.title,
-            content: req.body.content
+            content: req.body.content,
+            image: req.body.image
         }
 
         const posts = new Post(post);

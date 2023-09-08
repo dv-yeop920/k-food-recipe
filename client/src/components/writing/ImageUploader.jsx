@@ -2,18 +2,66 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
-const ImageUploader = () => {
+
+const ImageUploader = (
+    { 
+        imageUrl , 
+        setImageUrl ,
+        imageSrc , 
+        setImageSrc ,  
+        uploadImageToS3 
+    }
+    ) => {
+
+    const fileInput = React.useRef(null);
+
+
+    const onClickShowImageFile = (e) => {
+        fileInput.current.click();
+    }
+
+
+    const onChangeUpload = async (e) => {
+        const file = e.target.files[0];
+
+        try {
+
+            const imageUrl = await uploadImageToS3(file);
+
+            setImageUrl(imageUrl);
+
+        }
+        catch (error) {
+
+            console.error("Error uploading image:", error);
+            throw error;
+
+        }
+
+        /*const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        return new Promise((resolve) => { 
+            reader.onload = () => {	
+                setImageSrc(reader.result || null); // 파일의 컨텐츠
+                resolve();
+            };
+        });*/
+    }
 
     return (
         <>
-        <div className = "image-upload__container">
-            
+        <div 
+        className = "image-upload__container"
+        onClick = { onClickShowImageFile } >
 
             <input
-            type = "file"
             accept = "image/*"
-            style = {{ display: "none" }} />
-
+            type = "file"
+            ref = { fileInput }
+            style = {{ "display": "none" }}
+            onChange = { onChangeUpload } />
+            
             <FontAwesomeIcon
             className = "camera-icon"
             icon = { faCamera }
@@ -21,7 +69,7 @@ const ImageUploader = () => {
             
             <div className = "img-wrapper">
 
-                <img src = "" alt = "" />
+                <img src = { imageUrl } alt = "" />
 
             </div>
 

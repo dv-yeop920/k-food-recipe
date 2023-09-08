@@ -1,6 +1,38 @@
 import React from "react";
-import ReactQuill from "react-quill";
+import ReactQuill , { Quill } from "react-quill";
+import ImageUploader from "react-quill-image-uploader";
 import "react-quill/dist/quill.snow.css";
+import AWS from "aws-sdk";
+
+Quill.register('modules/imageUploader', ImageUploader);
+
+const handleImageUpload = async (imageFile) => {
+
+    try {
+
+        const s3 = new AWS.S3({
+            accessKeyId: 'YOUR_ACCESS_KEY',
+            secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',
+            region: 'YOUR_AWS_REGION',
+        });
+
+        const params = {
+            Bucket: 'YOUR_S3_BUCKET_NAME',
+            Key: imageFile.name,
+            Body: imageFile,
+        };
+    
+        await s3.upload(params).promise();
+
+        const imageUrl = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`;
+
+        return imageUrl;
+    }
+    catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
 
 const modules = {
     toolbar: {
@@ -17,11 +49,17 @@ const modules = {
             [{ "background" : [] }],
             ["image"], 
             ["video"], 
-        ],
-    }
+        ]
+    },
+    imageUploader: {
+        upload: handleImageUpload,
+        }
 }
 
+
+
 const Content = ({ setTitle , content , setContent }) => {
+
 
     return (
         <>

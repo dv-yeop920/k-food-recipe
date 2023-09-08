@@ -20,6 +20,7 @@ const NoticeBoardPage = () => {
     const POST_PER_PAGE = 5;
 
 
+
     const getPostList = async () => {
 
         setIsLoading(true);
