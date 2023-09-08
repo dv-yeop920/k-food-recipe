@@ -25,7 +25,6 @@ const ImageUploader = (
         const file = e.target.files[0];
 
         try {
-
             const imageUrl = await uploadImageToS3(file);
 
             setImageUrl(imageUrl);
@@ -35,7 +34,6 @@ const ImageUploader = (
 
             console.error("Error uploading image:", error);
             throw error;
-
         }
 
         /*const reader = new FileReader();

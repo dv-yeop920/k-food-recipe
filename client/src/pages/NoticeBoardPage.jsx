@@ -70,18 +70,8 @@ const NoticeBoardPage = () => {
 
         try {
 
-            if (userPostSearchValue === "") {
-
-                alert("검색 단어를 입력해 주세요!");
-                return;
-
-            }
-            else {
-
-                await getPostList();
-                setPageNumber(1);
-            
-            }
+            await getPostList();
+            setPageNumber(1);
 
         } 
         catch (error) {
