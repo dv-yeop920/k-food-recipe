@@ -16,8 +16,8 @@ const WritingPage = () => {
     
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [imageUrl , setImageUrl] = useState("ㅁㄴㅇㅁㄴㅇㅁ");
-    const [imageSrc, setImageSrc] = useState(null);
+    const [imageFile , setImageFile] = useState({});
+
 
     const REGION = process.env.REACT_APP_REGION
     const ACCESS_KEY_ID = process.env.REACT_APP_ACCESS_KEY_ID
@@ -46,9 +46,11 @@ const WritingPage = () => {
         }
 
         try {
+
             const result = await s3.upload(params).promise();
             console.log("Image uploaded successfully:", result.Location);
             return result.Location; // 업로드된 이미지의 URL 반환
+
         } 
         catch (error) {
             console.error("Error uploading image:", error);
@@ -57,18 +59,23 @@ const WritingPage = () => {
     }
 
 
+    
+
+
     const onSubmitPost = async (e) => {
 
         e.preventDefault();
 
-        const post = {
-            id: userId,
-            title: title,
-            content: content,
-            image: imageUrl
-        }
-
         try {
+
+            const imageUrl = await uploadImageToS3(imageFile);
+
+            const post = {
+                id: userId,
+                title: title,
+                content: content,
+                image: imageUrl
+            }
 
             const response = 
             await axios.post("/api/posts/register" , post , { timeout: 10000 });
@@ -93,6 +100,7 @@ const WritingPage = () => {
         }
     }
 
+
     return (
         <>
         <div className = "editor-container">
@@ -103,11 +111,7 @@ const WritingPage = () => {
                 <div className = "content-container">
 
                     <ImageUploader 
-                    imageSrc = { imageSrc }
-                    setImageSrc = { setImageSrc }
-                    imageUrl = { imageUrl }
-                    setImageUrl = { setImageUrl } 
-                    uploadImageToS3 = { uploadImageToS3 }/>
+                    setImageFile = { setImageFile } />
 
                     <Content 
                     content = { content }

@@ -1,17 +1,11 @@
-import React from "react";
+import React , { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 
-const ImageUploader = (
-    { 
-        imageUrl , 
-        setImageUrl ,
-        imageSrc , 
-        setImageSrc ,  
-        uploadImageToS3 
-    }
-    ) => {
+const ImageUploader = ({ setImageFile }) => {
+
+    const [imageSrc, setImageSrc] = useState(null);
 
     const fileInput = React.useRef(null);
 
@@ -24,28 +18,19 @@ const ImageUploader = (
     const onChangeUpload = async (e) => {
         const file = e.target.files[0];
 
-        try {
-            const imageUrl = await uploadImageToS3(file);
+        setImageFile(file);
 
-            setImageUrl(imageUrl);
-
-        }
-        catch (error) {
-
-            console.error("Error uploading image:", error);
-            throw error;
-        }
-
-        /*const reader = new FileReader();
+        const reader = new FileReader();
         reader.readAsDataURL(file);
 
         return new Promise((resolve) => { 
             reader.onload = () => {	
-                setImageSrc(reader.result || null); // 파일의 컨텐츠
+                setImageSrc(reader.result || null);
                 resolve();
             };
-        });*/
+        });
     }
+
 
     return (
         <>
@@ -67,7 +52,7 @@ const ImageUploader = (
             
             <div className = "img-wrapper">
 
-                <img src = { imageUrl } alt = "" />
+                <img src = { imageSrc } alt = "" />
 
             </div>
 
