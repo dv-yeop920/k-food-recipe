@@ -116,9 +116,18 @@ const PostList = (
                         </div>
 
                         <img 
-                        style = {{ height:"70px" , width: "90px" }}
+                        style = 
+                        {
+                            post.image ? 
+
+                            { height:"70px" , width: "90px" } 
+
+                            : 
+
+                            {"display": "none"}
+                        }
                         alt = ""
-                        src = { post.image ? post.image : null } 
+                        src = { post.image } 
                         />
 
                     </styled.Li>
