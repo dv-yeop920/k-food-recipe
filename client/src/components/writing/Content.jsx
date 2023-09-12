@@ -1,31 +1,39 @@
 import React, { useMemo, useRef } from "react";
-import ReactQuill , { Quill } from "react-quill";
-import ImageUploader from "react-quill-image-uploader";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-//Quill.register('modules/imageUploader', ImageUploader);
 
 
 
-
-
-
-const Content = ({ setTitle , content , setContent , uploadImageToS3}) => {
+const Content = (
+    { 
+        setTitle , 
+        content , 
+        setContent , 
+        resizeFile , 
+        uploadImageToS3
+    }
+    ) => {
 
     const quillRef = useRef(null);
 
     const imageHandler = async () => {
 
         const input = document.createElement("input");
+
         input.setAttribute("type", "file");
         input.setAttribute("accept", "image/*");
         input.click();
         input.addEventListener("change", async () => {
           //이미지를 담아 전송할 file을 만든다
             const file = input.files?.[0];
+
+            const compressedFile = await resizeFile(file)
+
             try {
-                const imageUrl = await uploadImageToS3(file);
-            
+
+                const imageUrl = await uploadImageToS3(compressedFile);
+
                 //이미지 업로드 후
                 //곧바로 업로드 된 이미지 url을 가져오기
                 //useRef를 사용해 에디터에 접근한 후
@@ -34,7 +42,7 @@ const Content = ({ setTitle , content , setContent , uploadImageToS3}) => {
                 const range = editor.getSelection();
                 // 가져온 위치에 이미지를 삽입한다
                 editor.insertEmbed(range.index, "image", imageUrl);
-                console.log(imageUrl)
+
             }
             catch (error) {
                 console.log(error);
@@ -71,24 +79,19 @@ const Content = ({ setTitle , content , setContent , uploadImageToS3}) => {
 
 
     const formats = [
+        "image",
+        "video",
         "header",
-        "font",
-        "size",
+        "align",
         "bold",
-        "italic",
         "underline",
         "strike",
-        "align",
         "blockquote",
         "list",
         "bullet",
-        "indent",
-        "background",
+        "ordered",
         "color",
-        "link",
-        "image",
-        "video",
-        "width",
+        "background",
     ];
 
 
@@ -110,7 +113,7 @@ const Content = ({ setTitle , content , setContent , uploadImageToS3}) => {
 
                 <ReactQuill  
                 className = "content"
-                ref = { quillRef } 
+                ref = { quillRef }
                 value = { content }
                 modules = { modules }
                 formats = { formats }

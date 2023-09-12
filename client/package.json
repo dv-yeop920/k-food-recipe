@@ -21,7 +21,6 @@
     "react-dom": "^18.2.0",
     "react-image-file-resizer": "^0.4.8",
     "react-quill": "^2.0.0",
-    "react-quill-image-uploader": "^0.1.1",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",

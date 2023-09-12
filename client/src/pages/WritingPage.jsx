@@ -6,6 +6,7 @@ import ImageUploader from "../components/writing/ImageUploader";
 import Content from "../components/writing/Content";
 import axios from "axios";
 import AWS from "aws-sdk";
+import Resizer from "react-image-file-resizer";
 import Loading from "../components/Loading";
 
 
@@ -66,6 +67,17 @@ const WritingPage = () => {
         }
 
     }
+
+    const resizeFile = (file) =>
+    new Promise((resolve) => {
+
+        Resizer.imageFileResizer(file, 500, 500, "JPEG", 100, 0, (uri) => {
+
+            resolve(uri);
+
+        },"file");
+
+    });
 
 
     const onSubmitPost = async (e) => {
@@ -141,12 +153,14 @@ const WritingPage = () => {
                     <div className = "content-container">
 
                         <ImageUploader 
-                        setImageFile = { setImageFile } />
+                        setImageFile = { setImageFile } 
+                        resizeFile = { resizeFile } />
 
                         <Content 
                         content = { content }
                         setTitle = { setTitle }
                         setContent = { setContent } 
+                        resizeFile = { resizeFile }
                         uploadImageToS3 = { uploadImageToS3 } />
 
                     </div>

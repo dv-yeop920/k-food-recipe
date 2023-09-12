@@ -1,10 +1,10 @@
 import React , { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import Resizer from "react-image-file-resizer";
 
 
-const ImageUploader = ({ setImageFile }) => {
+
+const ImageUploader = ({ setImageFile , resizeFile}) => {
 
     const [imageSrc, setImageSrc] = useState(null);
 
@@ -16,14 +16,6 @@ const ImageUploader = ({ setImageFile }) => {
         fileInput.current.click();
 
     }
-
-    const resizeFile = (file) =>
-    new Promise((resolve) => {
-        Resizer.imageFileResizer(file, 200, 200, "JPEG", 100, 0, (uri) => {
-            resolve(uri);
-        },"file");
-    });
-
 
 
     const onChangeUpload = async (e) => {
