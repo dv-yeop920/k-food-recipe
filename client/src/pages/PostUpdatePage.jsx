@@ -4,6 +4,7 @@ import * as styled from "../styles/styledComponents";
 import ImageUploader from "../components/writing/ImageUploader";
 import UpdateContent from "../components/writing/UpdateContent";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 
 
@@ -16,6 +17,7 @@ const PostsUpdatePage = () => {
     const [originalDetail, setOriginalDetail] = useState({});
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
+    const [isLoading , setIsLoading] = useState(false);
 
 
     const getPost = async () => {
@@ -52,7 +54,14 @@ const PostsUpdatePage = () => {
             content: originalDetail.content
         }
 
+        setIsLoading(true);
         try {
+
+            if (titleValue === "" || contentValue === "") {
+                alert("내용을 입력했는지 확인해 주세요!");
+                setIsLoading(false);
+                return;
+            }
             
             if (window.confirm("게시물 내용을 수정하시겠습니까?")) {
 
@@ -93,54 +102,62 @@ const PostsUpdatePage = () => {
 
     return (
         <>
-        <div className = "editor-container">
-            <form 
-            className = "editor-form"
-            onSubmit = { onSubmitEditPosts }>
+        {
+            isLoading ?
 
-                <div className = "content-container">
+            <Loading/>
 
-                    <ImageUploader/>
+            :
 
-                    <UpdateContent 
-                    originalDetail = { originalDetail }
-                    setOriginalDetail = { setOriginalDetail } 
-                    titleValue = { titleValue }
-                    setTitleValue = { setTitleValue }
-                    contentValue = { contentValue }
-                    setContentValue = { setContentValue } />
+            <div className = "editor-container">
+                <form 
+                className = "editor-form"
+                onSubmit = { onSubmitEditPosts }>
 
-                </div>
+                    <div className = "content-container">
+
+                        <ImageUploader/>
+
+                        <UpdateContent 
+                        originalDetail = { originalDetail }
+                        setOriginalDetail = { setOriginalDetail } 
+                        titleValue = { titleValue }
+                        setTitleValue = { setTitleValue }
+                        contentValue = { contentValue }
+                        setContentValue = { setContentValue } />
+
+                    </div>
                 
-                <div className = "writing-button__container">
+                    <div className = "writing-button__container">
 
-                    <styled.DeleteButton
-                    className = "writing-button__delete delete-btn"
-                    type = "button"
-                    onClick = { () => {
+                        <styled.DeleteButton
+                        className = "writing-button__delete delete-btn"
+                        type = "button"
+                        onClick = { () => {
 
-                        if (window.confirm("게시글 수정을 취소 하시겠어요?")) {
+                            if (window.confirm("게시글 수정을 취소 하시겠어요?")) {
 
-                            navigate(-1, { replace: true });
-                            return;
+                                navigate(-1, { replace: true });
+                                return;
 
-                        }
+                            }
 
-                    }} >
-                        취소
-                    </styled.DeleteButton>
+                        }} >
+                            취소
+                        </styled.DeleteButton>
 
-                    <styled.SubmitButton
-                    type = "submit"
-                    className = "writing-button__submit default-btn">
-                        수정
-                    </styled.SubmitButton>
+                        <styled.SubmitButton
+                        type = "submit"
+                        className = "writing-button__submit default-btn">
+                            수정
+                        </styled.SubmitButton>
 
-                </div>
+                    </div>
 
-            </form>
+                </form>
 
-        </div>
+            </div>
+        }
         </>
     );
 };

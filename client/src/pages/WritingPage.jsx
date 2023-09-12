@@ -90,6 +90,12 @@ const WritingPage = () => {
 
         try {
 
+            if (title === "" || content === "") {
+                alert("내용을 입력했는지 확인해 주세요!");
+                setIsLoading(false);
+                return;
+            }
+
             if (imageFile === null) {
                 imageUrl = null;
             }
@@ -126,7 +132,6 @@ const WritingPage = () => {
             }
 
             setIsLoading(false);
-
         }
         catch (error) {
             console.log(error);

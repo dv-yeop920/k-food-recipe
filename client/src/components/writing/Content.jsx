@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from "react";
-import ReactQuill from "react-quill";
+import ReactQuill , { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 
@@ -16,6 +16,7 @@ const Content = (
     ) => {
 
     const quillRef = useRef(null);
+
 
     const imageHandler = async () => {
 
@@ -52,6 +53,7 @@ const Content = (
 
 
     const modules = useMemo(() => {
+
         return {
             
                 toolbar: {
@@ -71,7 +73,7 @@ const Content = (
                     ],
                     handlers: {
                         image: imageHandler
-                    }
+                    },
                 }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
