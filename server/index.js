@@ -3,6 +3,8 @@ const app = express();
 const PORT = 7070;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+
+require("dotenv").config();
 //유저 모델을 가져옴
 const { User } = require("./models/User.js");
 //로그인 인증 미들웨어
@@ -17,9 +19,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const mongoURI = "mongodb+srv://jyeop920:toddlf0826@cluster0.mvqy3yr.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI = process.env.MONGODB_URI;
 const mongoose = require("mongoose");
-mongoose.connect(mongoURI , {
+
+mongoose.connect(MONGODB_URI , {
 }).then((req , res) => {
     console.log("MongoDB Connected!");
 }).catch((error) => {

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 
 const noticeBoardSchema = mongoose.Schema({
-    //id
+
     id: {
         type: String,
         required: true,
