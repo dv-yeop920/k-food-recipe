@@ -6,31 +6,46 @@ import AWS from "aws-sdk";
 
 Quill.register('modules/imageUploader', ImageUploader);
 
-const handleImageUpload = async (imageFile) => {
+
+const REGION = process.env.REACT_APP_REGION
+const ACCESS_KEY_ID = process.env.REACT_APP_ACCESS_KEY_ID
+const SECRET_ACCESS_KEY_ID = process.env.REACT_APP_SECRET_ACCESS_KEY_ID
+const S3_BUCKET = "dv-yeop-imagebucket";
+
+AWS.config.update({
+    accessKeyId: ACCESS_KEY_ID,
+    secretAccessKey: SECRET_ACCESS_KEY_ID,
+});
+
+const s3 = new AWS.S3({
+    params: { Bucket: S3_BUCKET },
+    region: REGION,
+});
+
+const handleImageUpload = async (file) => {
+
+    const params = {
+
+        Key: `image/${file.name}`,
+        Body: file
+
+    };
 
     try {
 
-        const s3 = new AWS.S3({
-            accessKeyId: 'YOUR_ACCESS_KEY',
-            secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',
-            region: 'YOUR_AWS_REGION',
-        });
+        const result = await s3.upload(params).promise();
 
-        const params = {
-            Bucket: 'YOUR_S3_BUCKET_NAME',
-            Key: imageFile.name,
-            Body: imageFile,
-        };
-    
-        await s3.upload(params).promise();
+        console.log("Image uploaded successfully:", result.Location);
 
-        const imageUrl = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`;
+        return result.Location; // 업로드된 이미지의 URL 반환
 
-        return imageUrl;
     }
     catch (error) {
-        console.error(error);
+
+        console.error("Error uploading image:", error);
+
         throw error;
+
     }
 }
 
@@ -58,8 +73,7 @@ const modules = {
 
 
 
-const Content = ({ setTitle , content , setContent }) => {
-
+const Content = ({ setTitle , content , setContent ,}) => {
 
     return (
         <>

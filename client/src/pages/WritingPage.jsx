@@ -51,14 +51,20 @@ const WritingPage = () => {
         try {
 
             const result = await s3.upload(params).promise();
+
             console.log("Image uploaded successfully:", result.Location);
+
             return result.Location; // 업로드된 이미지의 URL 반환
 
         } 
         catch (error) {
+
             console.error("Error uploading image:", error);
+
             throw error;
+
         }
+
     }
 
 
