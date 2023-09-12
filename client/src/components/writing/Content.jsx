@@ -1,57 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ReactQuill , { Quill } from "react-quill";
 import ImageUploader from "react-quill-image-uploader";
 import "react-quill/dist/quill.snow.css";
-import AWS from "aws-sdk";
 
 Quill.register('modules/imageUploader', ImageUploader);
-
-
-const REGION = process.env.REACT_APP_REGION
-const ACCESS_KEY_ID = process.env.REACT_APP_ACCESS_KEY_ID
-const SECRET_ACCESS_KEY_ID = process.env.REACT_APP_SECRET_ACCESS_KEY_ID
-const S3_BUCKET = "dv-yeop-imagebucket";
-
-AWS.config.update({
-    accessKeyId: ACCESS_KEY_ID,
-    secretAccessKey: SECRET_ACCESS_KEY_ID,
-});
-
-const s3 = new AWS.S3({
-    params: { Bucket: S3_BUCKET },
-    region: REGION,
-});
-
-const handleImageUpload = async (file) => {
-
-    const params = {
-
-        Key: `image/${file.name}`,
-        Body: file
-
-    };
-
-    try {
-
-        const result = await s3.upload(params).promise();
-
-        console.log("Image uploaded successfully:", result.Location);
-
-        return result.Location; // 업로드된 이미지의 URL 반환
-
-    }
-    catch (error) {
-
-        console.error("Error uploading image:", error);
-
-        throw error;
-
-    }
-}
 
 const modules = {
     toolbar: {
         container: [
+            ["image"],
+            ["video"],  
             [{ "header" : [1, 2, 3, 4, 5, 6, false] }],
             [{ "align" : [] }],
             ["bold"],
@@ -62,18 +20,46 @@ const modules = {
             [{ "list" : "bullet" }],
             [{ "color" : [] }], 
             [{ "background" : [] }],
-            ["image"], 
-            ["video"], 
         ]
     },
     imageUploader: {
-        upload: handleImageUpload,
+        upload: (file) => {
+            return new Promise((resolve, reject) => {
+              // 여기서 file 객체 대신에 서버에서 받아온 URL 값을 resolve() 함수의 인자로 넣어줍니다.
+                resolve();
+            });
         }
+    }
 }
+
+const formats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "align",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "background",
+    "color",
+    "link",
+    "image",
+    "video",
+    "width",
+];
+
 
 
 
 const Content = ({ setTitle , content , setContent ,}) => {
+
+    const quillRef = useRef(null);
+
 
     return (
         <>
@@ -92,9 +78,11 @@ const Content = ({ setTitle , content , setContent ,}) => {
             <div className = "writing-container__column">
 
                 <ReactQuill  
-                className = "content" 
+                className = "content"
+                ref = { quillRef } 
                 value = { content }
                 modules = { modules }
+                formats = { formats }
                 onChange = { (e) => setContent(e) } /> 
 
             </div>

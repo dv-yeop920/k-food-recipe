@@ -1,6 +1,7 @@
 import React , { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import Resizer from "react-image-file-resizer";
 
 
 const ImageUploader = ({ setImageFile }) => {
@@ -10,22 +11,32 @@ const ImageUploader = ({ setImageFile }) => {
     const fileInput = React.useRef(null);
 
 
-    const onClickShowImageFile = (e) => {
+    const onClickShowImageFile = () => {
 
         fileInput.current.click();
 
     }
+
+    const resizeFile = (file) =>
+    new Promise((resolve) => {
+        Resizer.imageFileResizer(file, 200, 200, "JPEG", 100, 0, (uri) => {
+            resolve(uri);
+        },"file");
+    });
+
 
 
     const onChangeUpload = async (e) => {
 
         const file = e.target.files[0];
 
-        setImageFile(file);
+        const compressedFile = await resizeFile(file);
+
+        setImageFile(compressedFile);
 
         const reader = new FileReader();
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(compressedFile);
 
         return new Promise((resolve) => { 
             reader.onload = () => {	
@@ -43,6 +54,7 @@ const ImageUploader = ({ setImageFile }) => {
         onClick = { onClickShowImageFile } >
 
             <input
+            className = "image-file-uploader"
             accept = "image/*"
             type = "file"
             ref = { fileInput }

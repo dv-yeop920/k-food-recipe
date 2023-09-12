@@ -19,7 +19,7 @@ const WritingPage = () => {
     
     const [title , setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [imageFile , setImageFile] = useState({});
+    const [imageFile , setImageFile] = useState(null);
 
 
     const REGION = process.env.REACT_APP_REGION
@@ -74,16 +74,26 @@ const WritingPage = () => {
 
         setIsLoading(true);
 
+        let imageUrl;
+
         try {
 
-            const imageUrl = await uploadImageToS3(imageFile);
+            if (imageFile === null) {
+                imageUrl = null;
+            }
+
+            if (imageFile !== null) {
+                imageUrl = await uploadImageToS3(imageFile);
+            }
+
+            
 
             const post = {
-                id: userId,
-                title: title,
-                content: content,
-                image: imageUrl
-            }
+                    id: userId,
+                    title: title,
+                    content: content,
+                    image: imageUrl
+                }
 
             const response = 
             await axios.post("/api/posts/register" , post , { timeout: 10000 });
