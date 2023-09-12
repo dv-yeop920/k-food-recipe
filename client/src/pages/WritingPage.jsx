@@ -146,7 +146,8 @@ const WritingPage = () => {
                         <Content 
                         content = { content }
                         setTitle = { setTitle }
-                        setContent = { setContent } />
+                        setContent = { setContent } 
+                        uploadImageToS3 = { uploadImageToS3 } />
 
                     </div>
                 

@@ -1,64 +1,95 @@
-import React, { useEffect, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import ReactQuill , { Quill } from "react-quill";
 import ImageUploader from "react-quill-image-uploader";
 import "react-quill/dist/quill.snow.css";
 
-Quill.register('modules/imageUploader', ImageUploader);
-
-const modules = {
-    toolbar: {
-        container: [
-            ["image"],
-            ["video"],  
-            [{ "header" : [1, 2, 3, 4, 5, 6, false] }],
-            [{ "align" : [] }],
-            ["bold"],
-            ["underline"],
-            ["strike"], 
-            ["blockquote"],
-            [{ "list" : "ordered" }],
-            [{ "list" : "bullet" }],
-            [{ "color" : [] }], 
-            [{ "background" : [] }],
-        ]
-    },
-    imageUploader: {
-        upload: (file) => {
-            return new Promise((resolve, reject) => {
-              // 여기서 file 객체 대신에 서버에서 받아온 URL 값을 resolve() 함수의 인자로 넣어줍니다.
-                resolve();
-            });
-        }
-    }
-}
-
-const formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "align",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "background",
-    "color",
-    "link",
-    "image",
-    "video",
-    "width",
-];
+//Quill.register('modules/imageUploader', ImageUploader);
 
 
 
 
-const Content = ({ setTitle , content , setContent ,}) => {
+
+
+const Content = ({ setTitle , content , setContent , uploadImageToS3}) => {
 
     const quillRef = useRef(null);
+
+    const imageHandler = async () => {
+
+        const input = document.createElement("input");
+        input.setAttribute("type", "file");
+        input.setAttribute("accept", "image/*");
+        input.click();
+        input.addEventListener("change", async () => {
+          //이미지를 담아 전송할 file을 만든다
+            const file = input.files?.[0];
+            try {
+                const imageUrl = await uploadImageToS3(file);
+            
+                //이미지 업로드 후
+                //곧바로 업로드 된 이미지 url을 가져오기
+                //useRef를 사용해 에디터에 접근한 후
+                //에디터의 현재 커서 위치에 이미지 삽입
+                const editor = quillRef.current.getEditor();
+                const range = editor.getSelection();
+                // 가져온 위치에 이미지를 삽입한다
+                editor.insertEmbed(range.index, "image", imageUrl);
+                console.log(imageUrl)
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    };
+
+
+    const modules = useMemo(() => {
+        return {
+            
+                toolbar: {
+                    container: [
+                        ["image"],
+                        ["video"],  
+                        [{ "header" : [1, 2, 3, 4, 5, 6, false] }],
+                        [{ "align" : [] }],
+                        ["bold"],
+                        ["underline"],
+                        ["strike"], 
+                        ["blockquote"],
+                        [{ "list" : "ordered" }],
+                        [{ "list" : "bullet" }],
+                        [{ "color" : [] }], 
+                        [{ "background" : [] }],
+                    ],
+                    handlers: {
+                        image: imageHandler
+                    }
+                }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , []);
+
+
+    const formats = [
+        "header",
+        "font",
+        "size",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "align",
+        "blockquote",
+        "list",
+        "bullet",
+        "indent",
+        "background",
+        "color",
+        "link",
+        "image",
+        "video",
+        "width",
+    ];
 
 
     return (
