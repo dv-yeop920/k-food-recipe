@@ -5,9 +5,8 @@ import * as styled from "../styles/styledComponents";
 import ImageUploader from "../components/writing/ImageUploader";
 import Content from "../components/writing/Content";
 import axios from "axios";
-import Resizer from "react-image-file-resizer";
 import Loading from "../components/Loading";
-import { s3 } from "../utils/awsS3Setting";
+import { uploadImageToS3 , resizeFile } from "../utils/awsS3Setting";
 
 
 
@@ -19,58 +18,17 @@ const WritingPage = () => {
 
     const [title , setTitle] = useState("");
     const [content, setContent] = useState(null);
-    const [imageFile , setImageFile] = useState(null);
+    const [previewImageFile , setPreviewImageFile] = useState(null);
     const [imageSrc, setImageSrc] = useState(null);
 
 
-    const uploadImageToS3 = async (file) => {
-
-        const params = {
-
-            Key: `image/${file.name}`,
-            Body: file,
-
-        }
-
-        try {
-
-            const result = await s3.upload(params).promise();
-
-            console.log("Image uploaded successfully:", result.Location);
-
-            return result.Location; // 업로드된 이미지의 URL 반환
-
-        } 
-        catch (error) {
-
-            console.error("Error uploading image:", error);
-
-            throw error;
-
-        }
-
-    }
-
-
-    const resizeFile = (file) =>
-    new Promise((resolve) => {
-
-        Resizer.imageFileResizer(file, 500, 500, "JPEG", 100, 0, (uri) => {
-
-            resolve(uri);
-
-        },"file");
-
-    });
-
-
-    const onSubmitPost = async (e) => {
+    const onSubmitRegisterPost = async (e) => {
 
         e.preventDefault();
 
         setIsLoading(true);
 
-        let imageUrl;
+        let previewImageUrl;
 
         try {
 
@@ -82,24 +40,26 @@ const WritingPage = () => {
 
             }
 
-            if (imageFile === null) {
+            if (previewImageFile === null) {
 
-                imageUrl = null;
+                previewImageUrl = null;
 
             }
 
-            if (imageFile !== null) {
+            if (previewImageFile !== null) {
 
-                imageUrl = await uploadImageToS3(imageFile);
+                previewImageUrl = await uploadImageToS3(previewImageFile);
 
             }
 
             const post = {
-                    id: userId,
-                    title: title,
-                    content: content,
-                    image: imageUrl
-                }
+
+                id: userId,
+                title: title,
+                content: content,
+                image: previewImageUrl
+
+            }
 
             const response = 
             await axios.post(
@@ -123,7 +83,7 @@ const WritingPage = () => {
 
             }
 
-            imageFile(null);
+            setPreviewImageFile(null);
             imageSrc(null);
             setIsLoading(false);
 
@@ -150,12 +110,12 @@ const WritingPage = () => {
 
                 <form 
                 className = "editor-form"
-                onSubmit = { onSubmitPost }>
+                onSubmit = { onSubmitRegisterPost }>
 
                     <div className = "content-container">
 
                         <ImageUploader 
-                        setImageFile = { setImageFile } 
+                        setPreviewImageFile = { setPreviewImageFile } 
                         resizeFile = { resizeFile } 
                         imageSrc = { imageSrc }
                         setImageSrc = { setImageSrc }/>

@@ -1,10 +1,11 @@
 import React ,{ useEffect, useState } from "react";
 import { useNavigate , useParams } from "react-router-dom";
 import * as styled from "../styles/styledComponents";
-import ImageUploader from "../components/writing/ImageUploader";
 import UpdateContent from "../components/writing/UpdateContent";
 import axios from "axios";
 import Loading from "../components/Loading";
+import { uploadImageToS3 , resizeFile , deleteImageToS3 } from "../utils/awsS3Setting";
+import UpdateImageUploader from "../components/writing/UpdateImageUploader";
 
 
 
@@ -15,8 +16,10 @@ const PostsUpdatePage = () => {
     const navigate = useNavigate();
 
     const [originalDetail, setOriginalDetail] = useState({});
-    const [titleValue, setTitleValue] = useState("");
-    const [contentValue, setContentValue] = useState(null);
+    const [editTitleValue, setEditTitleValue] = useState("");
+    const [editContentValue, setEditContentValue] = useState(null);
+    const [editPreviewImageFile , setEditPreviewImageFile] = useState(null);
+    const [editImageSrc, setEditImageSrc] = useState(null);
     const [isLoading , setIsLoading] = useState(false);
 
 
@@ -33,8 +36,8 @@ const PostsUpdatePage = () => {
             );
 
             setOriginalDetail(response.data.list);
-            setTitleValue(response.data.list.title);
-            setContentValue(response.data.list.content);
+            setEditTitleValue(response.data.list.title);
+            setEditContentValue(response.data.list.content);
 
         }
         catch (error) {
@@ -48,22 +51,42 @@ const PostsUpdatePage = () => {
 
         e.preventDefault();
 
-        const updatePosts = {
-            _id: originalDetail._id,
-            title: originalDetail.title,
-            content: originalDetail.content
-        }
+        let previewEditImageUrl;
 
-        setIsLoading(true);
         try {
 
-            if (titleValue === "" || contentValue === null) {
+            if (editTitleValue === "" || editContentValue === null) {
+
                 alert("내용을 입력했는지 확인해 주세요!");
                 setIsLoading(false);
                 return;
+
+            }
+
+            if (editPreviewImageFile === null) {
+
+                previewEditImageUrl = null;
+
+            }
+
+            if (editPreviewImageFile !== null) {
+
+                previewEditImageUrl = await uploadImageToS3(editPreviewImageFile);
+
+                await deleteImageToS3(originalDetail.image);
+
             }
             
             if (window.confirm("게시물 내용을 수정하시겠습니까?")) {
+
+                setIsLoading(true);
+
+                const updatePosts = {
+                    _id: originalDetail._id,
+                    title: originalDetail.title,
+                    content: originalDetail.content,
+                    image: previewEditImageUrl
+                }
 
                 const response = 
                 await axios.put(
@@ -86,6 +109,8 @@ const PostsUpdatePage = () => {
                     return;
 
                 }
+
+                setIsLoading(false);
             }
         }
         catch (error) {
@@ -116,15 +141,21 @@ const PostsUpdatePage = () => {
 
                     <div className = "content-container">
 
-                        <ImageUploader/>
+                        <UpdateImageUploader
+                        editImageSrc = { editImageSrc }
+                        setEditImageSrc = { setEditImageSrc } 
+                        setEditPreviewImageFile = { setEditPreviewImageFile }
+                        resizeFile = { resizeFile } />
 
                         <UpdateContent 
                         originalDetail = { originalDetail }
                         setOriginalDetail = { setOriginalDetail } 
-                        titleValue = { titleValue }
-                        setTitleValue = { setTitleValue }
-                        contentValue = { contentValue }
-                        setContentValue = { setContentValue } />
+                        editTitleValue = { editTitleValue }
+                        setEditTitleValue = { setEditTitleValue }
+                        editContentValue = { editContentValue }
+                        setEditContentValue = { setEditContentValue } 
+                        uploadImageToS3 = { uploadImageToS3 }
+                        resizeFile = { resizeFile } />
 
                     </div>
                 

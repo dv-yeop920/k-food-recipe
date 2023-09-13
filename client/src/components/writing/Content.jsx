@@ -26,12 +26,13 @@ const Content = (
         input.setAttribute("accept", "image/*");
         input.click();
         input.addEventListener("change", async () => {
-          //이미지를 담아 전송할 file을 만든다
+             //이미지를 담아 전송할 file을 만든다
             const file = input.files?.[0];
 
-            const compressedFile = await resizeFile(file)
 
             try {
+
+                const compressedFile = await resizeFile(file);
 
                 const imageUrl = await uploadImageToS3(compressedFile);
 

@@ -2,14 +2,12 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
-
-
-const ImageUploader = (
-    { 
-        setPreviewImageFile , 
-        resizeFile , 
-        imageSrc , 
-        setImageSrc
+const UpdateImageUploader = (
+    {
+        editImageSrc , 
+        setEditImageSrc , 
+        setEditPreviewImageFile , 
+        resizeFile
     }
     ) => {
 
@@ -29,7 +27,7 @@ const ImageUploader = (
 
         const compressedFile = await resizeFile(file);
 
-        setPreviewImageFile(compressedFile);
+        setEditPreviewImageFile(compressedFile);
 
         const reader = new FileReader();
 
@@ -39,14 +37,13 @@ const ImageUploader = (
 
             reader.onload = () => {	
 
-                setImageSrc(reader.result || null);
+                setEditImageSrc(reader.result || null);
                 resolve();
 
             };
 
         });
     }
-
 
     return (
         <>
@@ -69,7 +66,7 @@ const ImageUploader = (
             
             <div className = "img-wrapper">
 
-                <img src = { imageSrc } alt = "" />
+                <img src = { editImageSrc } alt = "" />
 
             </div>
 
@@ -78,4 +75,4 @@ const ImageUploader = (
     );
 };
 
-export default ImageUploader;
+export default UpdateImageUploader;

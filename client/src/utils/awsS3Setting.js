@@ -1,6 +1,5 @@
 import AWS from "aws-sdk";
-
-
+import Resizer from "react-image-file-resizer";
 
 
 const REGION = process.env.REACT_APP_REGION
@@ -20,3 +19,53 @@ export const s3 = new AWS.S3({
 });
 
 
+export const uploadImageToS3 = async (file) => {
+
+    const params = {
+
+        Key: `image/${file.name}`,
+        Body: file,
+
+    }
+
+    try {
+
+        const result = await s3.upload(params).promise();
+
+        console.log("Image uploaded successfully:", result.Location);
+
+        return result.Location; // 업로드된 이미지의 URL 반환
+
+    } 
+    catch (error) {
+
+        console.error("Error uploading image:", error);
+
+        throw error;
+
+    }
+
+};
+
+
+export const deleteImageToS3 = async (postImageUrl) => {
+
+    const imageUrl = postImageUrl.split("/").pop();
+
+    return await s3.deleteObject({
+        Key: `image/${ imageUrl }`
+    }).promise();
+
+};
+
+
+export const resizeFile = (file) =>
+    new Promise((resolve) => {
+
+        Resizer.imageFileResizer(file, 500, 500, "JPEG", 100, 0, (uri) => {
+
+            resolve(uri);
+
+        },"file");
+
+    });

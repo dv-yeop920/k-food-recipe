@@ -303,7 +303,8 @@ app.put("/api/posts/update" , async (req , res) => {
             {
                 $set: {
                     title: req.body.title,
-                    content: req.body.content
+                    content: req.body.content,
+                    image: req.body.image
                 }
             }).exec();
 

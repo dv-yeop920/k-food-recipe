@@ -7,7 +7,7 @@ import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
 import Loading from "../components/Loading";
-import { s3 } from "../utils/awsS3Setting";
+import { deleteImageToS3 } from "../utils/awsS3Setting";
 
 
 
@@ -60,16 +60,6 @@ const PostsDetail = () => {
 
     }
 
-    const deleteImageToS3 = async (postImageUrl) => {
-        
-        const imageUrl = postImageUrl.split("/").pop();
-
-        return await s3.deleteObject({
-            Key: `image/${ imageUrl }`
-        }).promise();
-
-    }
-
 
     const onClickDeletePost = async () => {
 
@@ -83,7 +73,9 @@ const PostsDetail = () => {
 
                 setIsLoading(true);
 
-                await deleteImageToS3(post.image);
+                if (post.image !== "") {
+                    await deleteImageToS3(post.image);
+                }
 
                 const response = 
                 await axios.post(
