@@ -65,7 +65,7 @@ const PostsUpdatePage = () => {
 
             if (editPreviewImageFile === null) {
 
-                previewEditImageUrl = null;
+                previewEditImageUrl = originalDetail.image;
 
             }
 

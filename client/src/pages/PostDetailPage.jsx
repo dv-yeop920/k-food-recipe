@@ -73,7 +73,7 @@ const PostsDetail = () => {
 
                 setIsLoading(true);
 
-                if (post.image !== "") {
+                if (post.image) {
                     await deleteImageToS3(post.image);
                 }
 
