@@ -1,12 +1,17 @@
-import React , { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 
 
-const ImageUploader = ({ setImageFile , resizeFile}) => {
-
-    const [imageSrc, setImageSrc] = useState(null);
+const ImageUploader = (
+    { 
+        setImageFile , 
+        resizeFile , 
+        imageSrc , 
+        setImageSrc
+    }
+    ) => {
 
     const fileInput = React.useRef(null);
 
@@ -31,10 +36,14 @@ const ImageUploader = ({ setImageFile , resizeFile}) => {
         reader.readAsDataURL(compressedFile);
 
         return new Promise((resolve) => { 
+
             reader.onload = () => {	
+
                 setImageSrc(reader.result || null);
                 resolve();
+
             };
+
         });
     }
 

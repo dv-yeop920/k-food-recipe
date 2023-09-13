@@ -68,6 +68,7 @@ const UpdateContent = (
                 type = "text" 
                 value = { titleValue }
                 name = { titleValue }
+                maxLength = "20"
                 onChange = { handelChangeTitle } />  
 
             </div>

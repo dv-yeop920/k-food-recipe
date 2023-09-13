@@ -7,6 +7,7 @@ import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
 import Loading from "../components/Loading";
+import { s3 } from "../utils/awsS3Setting";
 
 
 
@@ -59,6 +60,16 @@ const PostsDetail = () => {
 
     }
 
+    const deleteImageToS3 = async (postImageUrl) => {
+        
+        const imageUrl = postImageUrl.split("/").pop();
+
+        return await s3.deleteObject({
+            Key: `image/${ imageUrl }`
+        }).promise();
+
+    }
+
 
     const onClickDeletePost = async () => {
 
@@ -68,31 +79,37 @@ const PostsDetail = () => {
 
         try {
 
-                if (window.confirm("게시물을 정말 삭제하시겠습니까?")) {
+            if (window.confirm("게시물을 정말 삭제하시겠습니까?")) {
 
-                    const response = 
-                    await axios.post(
-                        "/api/posts/delete" , 
-                        postId , 
-                        { timeout: 10000 }
-                    );
+                setIsLoading(true);
 
-                    if (response.data.deleteSuccess === true) {
+                await deleteImageToS3(post.image);
 
-                        alert(response.data.messsage);
-                        navigate(-1, { replace: true });
-                        return;
+                const response = 
+                await axios.post(
+                    "/api/posts/delete" , 
+                    postId , 
+                    { timeout: 10000 }
+                );
 
-                    }
-                
-                    if (response.data.deleteSuccess === false) {
+                if (response.data.deleteSuccess === true) {
 
-                        alert(response.data.messsage);
-                        return;
-
-                    }
+                    alert(response.data.messsage);
+                    navigate(-1, { replace: true });
+                    return;
 
                 }
+                
+                if (response.data.deleteSuccess === false) {
+
+                    alert(response.data.messsage);
+                    return;
+
+                }
+
+                setIsLoading(false);
+            }
+
         }
         catch (error) {
             console.log(error);
@@ -106,15 +123,18 @@ const PostsDetail = () => {
             getPostDetail();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [post]);
+    }, []);
 
     return (
         <>
         {
             
         isLoading ?
+
         <Loading />
+
         :
+
         <div className = "post-detail__container">
 
             <div className = "post-header">

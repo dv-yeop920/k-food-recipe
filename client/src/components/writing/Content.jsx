@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from "react";
-import ReactQuill , { Quill } from "react-quill";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 
@@ -73,7 +73,7 @@ const Content = (
                     ],
                     handlers: {
                         image: imageHandler
-                    },
+                    }
                 }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -106,6 +106,7 @@ const Content = (
             <input 
             className = "editor-title" 
             type = "text" 
+            maxLength = "30"
             placeholder = "제목"
             onChange = { (e) => setTitle(e.target.value) } />  
 

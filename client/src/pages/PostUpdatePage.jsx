@@ -16,7 +16,7 @@ const PostsUpdatePage = () => {
 
     const [originalDetail, setOriginalDetail] = useState({});
     const [titleValue, setTitleValue] = useState("");
-    const [contentValue, setContentValue] = useState("");
+    const [contentValue, setContentValue] = useState(null);
     const [isLoading , setIsLoading] = useState(false);
 
 
@@ -57,7 +57,7 @@ const PostsUpdatePage = () => {
         setIsLoading(true);
         try {
 
-            if (titleValue === "" || contentValue === "") {
+            if (titleValue === "" || contentValue === null) {
                 alert("내용을 입력했는지 확인해 주세요!");
                 setIsLoading(false);
                 return;

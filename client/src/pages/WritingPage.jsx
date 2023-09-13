@@ -1,13 +1,13 @@
-import React ,{ useState }from "react";
+import React , { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as styled from "../styles/styledComponents";
 import ImageUploader from "../components/writing/ImageUploader";
 import Content from "../components/writing/Content";
 import axios from "axios";
-import AWS from "aws-sdk";
 import Resizer from "react-image-file-resizer";
 import Loading from "../components/Loading";
+import { s3 } from "../utils/awsS3Setting";
 
 
 
@@ -17,27 +17,10 @@ const WritingPage = () => {
     const navigate = useNavigate();
     const [isLoading , setIsLoading] = useState(false);
 
-    
     const [title , setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [content, setContent] = useState(null);
     const [imageFile , setImageFile] = useState(null);
-
-
-    const REGION = process.env.REACT_APP_REGION
-    const ACCESS_KEY_ID = process.env.REACT_APP_ACCESS_KEY_ID
-    const SECRET_ACCESS_KEY_ID = process.env.REACT_APP_SECRET_ACCESS_KEY_ID
-    const S3_BUCKET = "dv-yeop-imagebucket";
-
-
-    AWS.config.update({
-        accessKeyId: ACCESS_KEY_ID,
-        secretAccessKey: SECRET_ACCESS_KEY_ID,
-    });
-
-    const s3 = new AWS.S3({
-        params: { Bucket: S3_BUCKET },
-        region: REGION,
-    });
+    const [imageSrc, setImageSrc] = useState(null);
 
 
     const uploadImageToS3 = async (file) => {
@@ -68,6 +51,7 @@ const WritingPage = () => {
 
     }
 
+
     const resizeFile = (file) =>
     new Promise((resolve) => {
 
@@ -90,21 +74,25 @@ const WritingPage = () => {
 
         try {
 
-            if (title === "" || content === "") {
+            if (title === "" || content === null) {
+
                 alert("내용을 입력했는지 확인해 주세요!");
                 setIsLoading(false);
                 return;
+
             }
 
             if (imageFile === null) {
+
                 imageUrl = null;
+
             }
 
             if (imageFile !== null) {
-                imageUrl = await uploadImageToS3(imageFile);
-            }
 
-            
+                imageUrl = await uploadImageToS3(imageFile);
+
+            }
 
             const post = {
                     id: userId,
@@ -114,7 +102,11 @@ const WritingPage = () => {
                 }
 
             const response = 
-            await axios.post("/api/posts/register" , post , { timeout: 10000 });
+            await axios.post(
+                "/api/posts/register" , 
+                post , 
+                { timeout: 10000 }
+            );
 
             if (response.data.success === false) {
 
@@ -131,11 +123,16 @@ const WritingPage = () => {
 
             }
 
+            imageFile(null);
+            imageSrc(null);
             setIsLoading(false);
+
         }
         catch (error) {
+
             console.log(error);
             throw error;
+
         }
     }
 
@@ -159,7 +156,9 @@ const WritingPage = () => {
 
                         <ImageUploader 
                         setImageFile = { setImageFile } 
-                        resizeFile = { resizeFile } />
+                        resizeFile = { resizeFile } 
+                        imageSrc = { imageSrc }
+                        setImageSrc = { setImageSrc }/>
 
                         <Content 
                         content = { content }

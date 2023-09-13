@@ -80,6 +80,10 @@
     border-bottom-right-radius: 10px;
 }
 
+.ql-editor strong{
+    font-weight: bold;
+}
+
 .writing-button__container {
     display: flex;
     justify-content: center;
