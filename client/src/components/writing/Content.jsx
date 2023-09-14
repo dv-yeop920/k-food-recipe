@@ -1,6 +1,7 @@
 import React, { useMemo, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { uploadContentImageToS3 } from "../../utils/awsS3Setting";
 
 
 
@@ -11,7 +12,6 @@ const Content = (
         content , 
         setContent , 
         resizeFile , 
-        uploadImageToS3
     }
     ) => {
 
@@ -34,7 +34,7 @@ const Content = (
 
                 const compressedFile = await resizeFile(file);
 
-                const imageUrl = await uploadImageToS3(compressedFile);
+                const imageUrl = await uploadContentImageToS3(compressedFile);
 
                 //이미지 업로드 후
                 //곧바로 업로드 된 이미지 url을 가져오기

@@ -6,7 +6,7 @@ import ImageUploader from "../components/writing/ImageUploader";
 import Content from "../components/writing/Content";
 import axios from "axios";
 import Loading from "../components/Loading";
-import { uploadImageToS3 , resizeFile } from "../utils/awsS3Setting";
+import { uploadPostPreviewImageToS3 , resizeFile } from "../utils/awsS3Setting";
 
 
 
@@ -18,8 +18,8 @@ const WritingPage = () => {
 
     const [title , setTitle] = useState("");
     const [content, setContent] = useState(null);
-    const [previewImageFile , setPreviewImageFile] = useState(null);
-    const [imageSrc, setImageSrc] = useState(null);
+    const [PostPreviewImageFile , setPostPreviewImageFile] = useState(null);
+    const [PostPreviewImageSrc, setPostPreviewImageSrc] = useState(null);
 
 
     const onSubmitRegisterPost = async (e) => {
@@ -40,15 +40,16 @@ const WritingPage = () => {
 
             }
 
-            if (previewImageFile === null) {
+            if (PostPreviewImageFile === null) {
 
                 previewImageUrl = null;
 
             }
 
-            if (previewImageFile !== null) {
+            if (PostPreviewImageFile !== null) {
 
-                previewImageUrl = await uploadImageToS3(previewImageFile);
+                previewImageUrl = 
+                await uploadPostPreviewImageToS3(PostPreviewImageFile);
 
             }
 
@@ -83,8 +84,8 @@ const WritingPage = () => {
 
             }
 
-            setPreviewImageFile(null);
-            imageSrc(null);
+            setPostPreviewImageFile(null);
+            setPostPreviewImageSrc(null);
             setIsLoading(false);
 
         }
@@ -115,17 +116,16 @@ const WritingPage = () => {
                     <div className = "content-container">
 
                         <ImageUploader 
-                        setPreviewImageFile = { setPreviewImageFile } 
+                        setPostPreviewImageFile = { setPostPreviewImageFile } 
                         resizeFile = { resizeFile } 
-                        imageSrc = { imageSrc }
-                        setImageSrc = { setImageSrc }/>
+                        PostPreviewImageSrc = { PostPreviewImageSrc }
+                        setPostPreviewImageSrc = { setPostPreviewImageSrc }/>
 
                         <Content 
                         content = { content }
                         setTitle = { setTitle }
                         setContent = { setContent } 
-                        resizeFile = { resizeFile }
-                        uploadImageToS3 = { uploadImageToS3 } />
+                        resizeFile = { resizeFile } />
 
                     </div>
                 

@@ -4,8 +4,15 @@ import * as styled from "../styles/styledComponents";
 import UpdateContent from "../components/writing/UpdateContent";
 import axios from "axios";
 import Loading from "../components/Loading";
-import { uploadImageToS3 , resizeFile , deleteImageToS3 } from "../utils/awsS3Setting";
 import UpdateImageUploader from "../components/writing/UpdateImageUploader";
+import 
+{ 
+    uploadPostPreviewImageToS3 , 
+    resizeFile , 
+    deletePostPreviewImageToS3 
+} 
+from "../utils/awsS3Setting";
+
 
 
 
@@ -18,8 +25,8 @@ const PostsUpdatePage = () => {
     const [originalDetail, setOriginalDetail] = useState({});
     const [editTitleValue, setEditTitleValue] = useState("");
     const [editContentValue, setEditContentValue] = useState(null);
-    const [editPreviewImageFile , setEditPreviewImageFile] = useState(null);
-    const [editImageSrc, setEditImageSrc] = useState(null);
+    const [editPostPreviewImageFile , setEditPostPreviewImageFile] = useState(null);
+    const [editPostPrevuewImageSrc, setEditPostPrevuewImageSrc] = useState(null);
     const [isLoading , setIsLoading] = useState(false);
 
 
@@ -63,17 +70,18 @@ const PostsUpdatePage = () => {
 
             }
 
-            if (editPreviewImageFile === null) {
+            if (editPostPreviewImageFile === null) {
 
                 previewEditImageUrl = originalDetail.image;
 
             }
 
-            if (editPreviewImageFile !== null) {
+            if (editPostPreviewImageFile !== null) {
 
-                previewEditImageUrl = await uploadImageToS3(editPreviewImageFile);
+                previewEditImageUrl = 
+                await uploadPostPreviewImageToS3(editPostPreviewImageFile);
 
-                await deleteImageToS3(originalDetail.image);
+                await deletePostPreviewImageToS3(originalDetail.image);
 
             }
             
@@ -142,9 +150,9 @@ const PostsUpdatePage = () => {
                     <div className = "content-container">
 
                         <UpdateImageUploader
-                        editImageSrc = { editImageSrc }
-                        setEditImageSrc = { setEditImageSrc } 
-                        setEditPreviewImageFile = { setEditPreviewImageFile }
+                        editPostPrevuewImageSrc = { editPostPrevuewImageSrc }
+                        setEditPostPrevuewImageSrc = { setEditPostPrevuewImageSrc } 
+                        setEditPostPreviewImageFile = { setEditPostPreviewImageFile }
                         resizeFile = { resizeFile } />
 
                         <UpdateContent 
@@ -154,7 +162,6 @@ const PostsUpdatePage = () => {
                         setEditTitleValue = { setEditTitleValue }
                         editContentValue = { editContentValue }
                         setEditContentValue = { setEditContentValue } 
-                        uploadImageToS3 = { uploadImageToS3 }
                         resizeFile = { resizeFile } />
 
                     </div>

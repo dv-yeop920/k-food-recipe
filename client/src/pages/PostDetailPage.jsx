@@ -7,7 +7,7 @@ import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
 import Loading from "../components/Loading";
-import { deleteImageToS3 } from "../utils/awsS3Setting";
+import { deletePostPreviewImageToS3 } from "../utils/awsS3Setting";
 
 
 
@@ -74,7 +74,7 @@ const PostsDetail = () => {
                 setIsLoading(true);
 
                 if (post.image) {
-                    await deleteImageToS3(post.image);
+                    await deletePostPreviewImageToS3(post.image);
                 }
 
                 const response = 

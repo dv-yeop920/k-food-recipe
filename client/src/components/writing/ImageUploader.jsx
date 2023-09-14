@@ -6,10 +6,10 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 const ImageUploader = (
     { 
-        setPreviewImageFile , 
+        setPostPreviewImageFile , 
         resizeFile , 
-        imageSrc , 
-        setImageSrc
+        PostPreviewImageSrc , 
+        setPostPreviewImageSrc
     }
     ) => {
 
@@ -29,7 +29,7 @@ const ImageUploader = (
 
         const compressedFile = await resizeFile(file);
 
-        setPreviewImageFile(compressedFile);
+        setPostPreviewImageFile(compressedFile);
 
         const reader = new FileReader();
 
@@ -39,7 +39,7 @@ const ImageUploader = (
 
             reader.onload = () => {	
 
-                setImageSrc(reader.result || null);
+                setPostPreviewImageSrc(reader.result || null);
                 resolve();
 
             };
@@ -69,7 +69,7 @@ const ImageUploader = (
             
             <div className = "img-wrapper">
 
-                <img src = { imageSrc } alt = "" />
+                <img src = { PostPreviewImageSrc } alt = "" />
 
             </div>
 
