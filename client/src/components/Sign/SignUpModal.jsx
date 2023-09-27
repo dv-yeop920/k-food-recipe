@@ -99,7 +99,7 @@ const SignUpModal = (
         <div 
         ref = { modalRef } 
         onClick = { (e) => onClickModalOutSide(e) }
-        className = "sign-modal">
+        className = "sign-modal" >
             <main className = "user-form__container">
 
                 <styled.LoginSignUpform 

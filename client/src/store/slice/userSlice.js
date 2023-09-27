@@ -7,7 +7,7 @@ const userSlice = createSlice({
     name: "user",
 
     initialState: {
-        loginSuccess: false , 
+        isLogin: false , 
         id: "" ,
         name: "" ,
         email: ""
@@ -19,7 +19,7 @@ const userSlice = createSlice({
 
             const userInfo = action.payload;
 
-            state.loginSuccess = true;
+            state.isLogin = true;
             state.id = userInfo.id;
             state.name = userInfo.name;
             state.email = userInfo.email;
@@ -28,7 +28,7 @@ const userSlice = createSlice({
 
         logoutUser: (state) => {
 
-            state.loginSuccess = false;
+            state.isLogin = false;
             state.id = "";
             state.name = "";
             state.email = "";

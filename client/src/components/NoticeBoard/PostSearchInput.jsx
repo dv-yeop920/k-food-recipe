@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const PostSearchInput = (
     { 
@@ -13,6 +14,18 @@ const PostSearchInput = (
     ) => {
 
     const navigate = useNavigate();
+
+    const onClickWritingButton = async () => {
+        const response = await axios.get("/api/users/auth");
+        console.log(response)
+        if (response.data.isAuth === true) {
+            navigate("/writing");
+        }
+        else {
+            navigate("/");
+        }
+        
+    }
 
     return (
         <>
@@ -45,7 +58,9 @@ const PostSearchInput = (
                     className = "writing-icon"
                     icon = { faPenToSquare }
                     size = "2x"
-                    onClick = { () => navigate("/writing") } />
+                    onClick = { () => {
+                        onClickWritingButton();
+                        } } />
 
             </form>
 

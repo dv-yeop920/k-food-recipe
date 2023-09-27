@@ -83,12 +83,12 @@ app.post("/api/users/register" , async (req , res) => {
 
 
 app.post("/api/users/login", async (req , res) => {
-    // 요청된 이메일을 데이터베이스 찾기
+    // 요청된 아이디와 일치 하는 데이터베이스 찾기
     await User.findOne({id: req.body.id})
     .then((docs) =>{
         if(!docs){
             return res.json({
-                loginSuccess: false,
+                isLogin: false,
                 messsage: "해당 아이디로 가입된 회원이 없습니다."
             });
         }
@@ -108,7 +108,6 @@ app.post("/api/users/login", async (req , res) => {
                         domain: "localhost",
                         path: "/",
                         expires: expirationTime,
-                        secure: true,
                         httpOnly: true,
                         sameSite: "strict"
                     }
@@ -117,10 +116,11 @@ app.post("/api/users/login", async (req , res) => {
                         .status(200)
                         .json({
                             messsage: "안녕하세요!",
-                            loginSuccess: true, 
+                            isLogin: true, 
                             id: user.id,
                             name: user.name,
-                            email: user.email
+                            email: user.email,
+                            token: user.token
                         });
                 })
             }
@@ -161,8 +161,9 @@ app.post("/api/users/logout" , auth , async (req , res) => {
         { _id: req.user._id } ,
         { token: "" })
         .then((docs) => {
-            res.clearCookie("x_auth");
+            
             if(docs){
+                res.clearCookie("x_auth");
                 res.status(200)
                 .send({
                     logoutSuccess: true,

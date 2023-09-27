@@ -61,11 +61,11 @@ const NavItem = (
                         className = "navbar-link"
                         onClick = { () => {
 
-                            if (user.loginSuccess === false) {
+                            /*if (user.isLogin === false) {
                                 alert("회원만 이용할 수 있습니다");
                                 onClickSignUpModal();
                                 return;
-                            }
+                            }*/
 
                             onClickMenuModal();
                             navigate("/noticeBoard");
@@ -79,11 +79,11 @@ const NavItem = (
                         className = "navbar-link"
                         onClick = { () => {
 
-                            if (user.loginSuccess === false) {
+                            /*if (user.isLogin === false) {
                                 alert("회원만 이용할 수 있습니다");
                                 onClickSignUpModal();
                                 return;
-                            }
+                            }*/
 
                             onClickMenuModal();
                             navigate("/myPage");
@@ -93,7 +93,7 @@ const NavItem = (
                         </li>
 
                         { 
-                            user.loginSuccess === true ? 
+                            user.isLogin === true ? 
 
                             null 
 
@@ -111,12 +111,12 @@ const NavItem = (
                         className = "navbar-link"
                         onClick = { () => {
 
-                            user.loginSuccess === false && onClickLoginModal();
-                            user.loginSuccess === true && handleClickLogout();
+                            user.isLogin === false && onClickLoginModal();
+                            user.isLogin === true && handleClickLogout();
                             return;
 
                         }} >
-                            { user.loginSuccess === true ? "로그아웃" : "로그인" }
+                            { user.isLogin === true ? "로그아웃" : "로그인" }
                         </li>
 
                     </ul>

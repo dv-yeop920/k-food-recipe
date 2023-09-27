@@ -51,13 +51,13 @@ const LoginModal = (
                     { timeout: 10000 }
                 );
 
-                if (response.data.loginSuccess === false) {
+                if (response.data.isLogin === false) {
 
                     return setMessage(response.data.messsage);
 
                 }
 
-                if (response.data.loginSuccess === true) {
+                if (response.data.isLogin === true) {
 
                     onClickLoginModal();
                     onClickMenuModal();
