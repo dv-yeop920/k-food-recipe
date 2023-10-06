@@ -15,7 +15,7 @@ const useModal = (initialState) => {
 
             switch (e.target.className) {
 
-                case  "sign-modal" :
+                case "sign-modal" :
                     setMenuModal(false);
                     setLoginModal(false);
                     setSignUpModal(false);
@@ -46,8 +46,8 @@ const useModal = (initialState) => {
 
     const onClickSignUpModal = () => {
 
-            setSignUpModal(!signUpModal);
-            return;
+        setSignUpModal(!signUpModal);
+        return;
     }
 
 

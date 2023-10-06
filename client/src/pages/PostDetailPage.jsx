@@ -115,7 +115,7 @@ const PostsDetail = () => {
             getPostDetail();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [post]);
 
     return (
         <>

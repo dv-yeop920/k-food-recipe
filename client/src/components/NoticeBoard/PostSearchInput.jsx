@@ -1,31 +1,20 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+
+
+
 
 const PostSearchInput = (
     { 
         userPostSearchValue ,
-        setUserPostSearchValue , 
-        onSubmitGetFilteredPostList 
+        onSubmitGetFilteredPostList
     }
     ) => {
 
-    const navigate = useNavigate();
-
-    const onClickWritingButton = async () => {
-        const response = await axios.get("/api/users/auth");
-        console.log(response)
-        if (response.data.isAuth === true) {
-            navigate("/writing");
-        }
-        else {
-            navigate("/");
-        }
-        
-    }
+    const {authAndNavigate} = useAuth("");
 
     return (
         <>
@@ -38,15 +27,10 @@ const PostSearchInput = (
                 <styled.Input
                 id = "search-post"
                 className = "user-search__input"
+                ref = {userPostSearchValue}
                 type = "search"
                 placeholder = "단어 단위로 입력..."
-                value = { userPostSearchValue }
-                name = { userPostSearchValue } 
-                onChange = { (e) => { 
-
-                    setUserPostSearchValue(e.target.value);
-
-                }} />
+                name = { userPostSearchValue } />
 
                 <styled.SubmitButton
                 className = "default-btn"
@@ -55,13 +39,13 @@ const PostSearchInput = (
                 </styled.SubmitButton>
 
                 <FontAwesomeIcon
-                    className = "writing-icon"
-                    icon = { faPenToSquare }
-                    size = "2x"
-                    onClick = { () => {
-                        onClickWritingButton();
-                        } } />
-
+                id = "writing-icon"
+                className = "writing-icon"
+                icon = { faPenToSquare }
+                size = "2x"
+                onClick = { (e) => {
+                    authAndNavigate(e)
+                }} />
             </form>
 
         </styled.SearchContainer>

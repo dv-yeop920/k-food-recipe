@@ -4,6 +4,7 @@ const PORT = 7070;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
+//env 파일 값을 읽을 수 있게 해주는 모듈
 require("dotenv").config();
 //유저 모델을 가져옴
 const { User } = require("./models/User.js");

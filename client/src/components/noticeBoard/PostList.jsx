@@ -1,5 +1,4 @@
 import React from "react";
-//import axios from "axios";
 import * as styled from "../../styles/styledComponents";
 import getDate from "../../utils/postDate";
 import Pagination from "../Pagination";

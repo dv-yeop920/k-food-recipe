@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PostSearchInput from "../components/NoticeBoard/PostSearchInput";
@@ -10,8 +10,9 @@ import Loading from "../components/Loading";
 
 const NoticeBoardPage = () => {
 
+
     const navigate = useNavigate();
-    const [userPostSearchValue , setUserPostSearchValue] = useState("");
+    const userPostSearchValue = useRef(null);
     const [postList , setPostList] = useState([]);
     const [totalPostLength , setTotalPostLength] = useState([]);
     const [pageNumber , setPageNumber] = useState(1);
@@ -30,7 +31,7 @@ const NoticeBoardPage = () => {
             const response = 
             await axios.get(
                 `/api/posts/getPostList?pageNumber=${ pageNumber }
-                &search=${ userPostSearchValue }` , 
+                &search=${ userPostSearchValue.current.value }` , 
                 { timeout: 10000 }
             );
 
@@ -93,7 +94,6 @@ const NoticeBoardPage = () => {
 
         <PostSearchInput 
         userPostSearchValue = { userPostSearchValue }
-        setUserPostSearchValue = { setUserPostSearchValue } 
         onSubmitGetFilteredPostList = { onSubmitGetFilteredPostList } />
 
         {
