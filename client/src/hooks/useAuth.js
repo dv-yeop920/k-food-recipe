@@ -8,8 +8,7 @@ const useAuth = () => {
         const navigate = useNavigate();
 
 
-        const authAndNavigate = async (e) => {
-            const target = e.target;
+        const authAndNavigate = async (route) => {
 
             try {
 
@@ -21,10 +20,7 @@ const useAuth = () => {
                     return;
                 }
 
-                if (target.id === "writing-icon") { 
-                    navigate("/writing");
-                    return;
-                }
+                navigate(route);
 
             }
             catch (error) {

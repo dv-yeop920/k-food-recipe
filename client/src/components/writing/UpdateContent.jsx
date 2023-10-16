@@ -20,9 +20,6 @@ const UpdateContent = (
 
         const updateQuillRef = useRef(null);
 
-
-
-
         const imageHandler = async () => {
 
             const input = document.createElement("input");

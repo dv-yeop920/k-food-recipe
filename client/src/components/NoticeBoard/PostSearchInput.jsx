@@ -14,7 +14,7 @@ const PostSearchInput = (
     }
     ) => {
 
-    const {authAndNavigate} = useAuth("");
+    const { authAndNavigate } = useAuth("");
 
     return (
         <>
@@ -27,7 +27,7 @@ const PostSearchInput = (
                 <styled.Input
                 id = "search-post"
                 className = "user-search__input"
-                ref = {userPostSearchValue}
+                ref = { userPostSearchValue }
                 type = "search"
                 placeholder = "단어 단위로 입력..."
                 name = { userPostSearchValue } />
@@ -43,8 +43,8 @@ const PostSearchInput = (
                 className = "writing-icon"
                 icon = { faPenToSquare }
                 size = "2x"
-                onClick = { (e) => {
-                    authAndNavigate(e)
+                onClick = { () => {
+                    authAndNavigate("/writing");
                 }} />
             </form>
 
