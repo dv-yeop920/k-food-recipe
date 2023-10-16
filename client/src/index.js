@@ -8,7 +8,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { persistStore} from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
-import { CookiesProvider } from "react-cookie";
 import store from "./store/store";
 import ScrollTop from "./services/scrollTop";
 
@@ -19,7 +18,6 @@ const persistor = persistStore(store);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CookiesProvider>
       <Provider store ={ store }>
         <PersistGate loading ={ null } persistor ={ persistor }>
           <BrowserRouter>
@@ -28,7 +26,6 @@ root.render(
           </BrowserRouter>
         </PersistGate>
       </Provider>
-    </CookiesProvider>
   </React.StrictMode>
 );
 

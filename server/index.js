@@ -15,6 +15,8 @@ const { Comment } = require("./models/Comment.js");
 //게시판
 const { Post } = require("./models/NoticeBoard.js");
 
+
+
 //클라이언트의 req 를 json 형태로 해석 하도록 도와줌
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -102,7 +104,7 @@ app.post("/api/users/login", async (req , res) => {
             // Password가 일치하다면 토큰 생성
             if(isMatch) {
                 docs.generateToken((err, user)=>{
-                    if(error) {
+                    if(err) {
                         res.status(400).send(error);
                     }
                     const cookieOptions = {
@@ -151,7 +153,6 @@ app.get("/api/users/auth" , auth , (req , res) => {
         //어드민 유저 설정
         //isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
-        token: req.user.token,
         //role: req.user.role,
     });
 });

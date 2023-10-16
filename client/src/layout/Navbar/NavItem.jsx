@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useSelector ,  useDispatch } from "react-redux";
 import { logoutUser } from "../../store/slice/userSlice";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
 
 
@@ -20,6 +21,7 @@ const NavItem = (
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const { authAndNavigate } = useAuth();
 
 
     const handleClickLogout = async () => {
@@ -61,12 +63,6 @@ const NavItem = (
                         className = "navbar-link"
                         onClick = { () => {
 
-                            /*if (user.isLogin === false) {
-                                alert("회원만 이용할 수 있습니다");
-                                onClickSignUpModal();
-                                return;
-                            }*/
-
                             onClickMenuModal();
                             navigate("/noticeBoard");
                             return;
@@ -79,14 +75,9 @@ const NavItem = (
                         className = "navbar-link"
                         onClick = { () => {
 
-                            /*if (user.isLogin === false) {
-                                alert("회원만 이용할 수 있습니다");
-                                onClickSignUpModal();
-                                return;
-                            }*/
-
+                            authAndNavigate("/myPage");
                             onClickMenuModal();
-                            navigate("/myPage");
+                            onClickLoginModal();
                             return;
                         }}>
                             마이페이지
