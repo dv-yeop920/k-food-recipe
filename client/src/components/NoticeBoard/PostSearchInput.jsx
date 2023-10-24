@@ -14,6 +14,7 @@ const PostSearchInput = (
     }
     ) => {
 
+
     const { authAndNavigate } = useAuth("");
 
     return (

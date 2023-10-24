@@ -74,10 +74,8 @@ const NavItem = (
                         style = {{ borderBottom:"1px solid #ddd" }}
                         className = "navbar-link"
                         onClick = { () => {
-
                             authAndNavigate("/myPage");
                             onClickMenuModal();
-                            onClickLoginModal();
                             return;
                         }}>
                             마이페이지
