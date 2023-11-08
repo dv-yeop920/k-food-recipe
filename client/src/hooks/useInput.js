@@ -10,32 +10,26 @@ const useInput = (initialState) => {
     const [checkPassword , setCheckPassword] = useState(initialState);
     const [userEmail , setUserEmail] = useState(initialState);
 
-    const onChangeValue = (e) => {
 
+    const onChangeValue = (e) => {
         const userInput = e.target;
 
         switch (userInput.className) {
-
             case "user-form__name" :
                 setName(userInput.value);
                 break;
-
             case "user-form__id" :
                 setUserId(userInput.value);
                 break;
-
             case "user-form__pw" :
                 setUserPassword(userInput.value);
                 break;
-
             case "user-form__pw-check" :
                 setCheckPassword(userInput.value);
                 break;
-
             case "user-form__email" :
                 setUserEmail(userInput.value);
                 break;
-
             default:
         }
     }
@@ -49,5 +43,6 @@ const useInput = (initialState) => {
         onChangeValue
     ];
 }
+
 
 export default useInput;

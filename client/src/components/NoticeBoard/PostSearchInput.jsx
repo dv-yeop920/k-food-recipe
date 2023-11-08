@@ -3,6 +3,8 @@ import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../store/slice/modalSlice";
 
 
 
@@ -13,8 +15,8 @@ const PostSearchInput = (
         onSubmitGetFilteredPostList
     }
     ) => {
-
-
+        
+    const dispatch = useDispatch();
     const { authAndNavigate } = useAuth("");
 
     return (
@@ -45,7 +47,9 @@ const PostSearchInput = (
                 icon = { faPenToSquare }
                 size = "2x"
                 onClick = { () => {
-                    authAndNavigate("/writing");
+                    authAndNavigate("/writing")
+                    dispatch(closeModal());
+                    return;
                 }} />
             </form>
 

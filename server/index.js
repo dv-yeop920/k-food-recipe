@@ -98,7 +98,7 @@ app.post("/api/users/login", async (req , res) => {
         //비번 비교
         docs.comparePassword(req.body.password, (error, isMatch) => {
             const currentTime = new Date();
-            const oneHourInMilliseconds = 1000 * 60;
+            const oneHourInMilliseconds = 1000 * 60 * 60;
             const expirationTime = new Date(currentTime.getTime() + oneHourInMilliseconds);
 
             // Password가 일치하다면 토큰 생성

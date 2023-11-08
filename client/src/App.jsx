@@ -7,8 +7,10 @@ import RecipePage from "./pages/RecipePage";
 import WritingPage from "./pages/WritingPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import PostUpdatePage from "./pages/PostUpdatePage";
-import Navbar from "./layout/Navbar/Navbar";
 import ScrollToTopButton from "./layout/ScrollToTopButton";
+import Navbar from "./layout/Navbar";
+import ModalContainer from "./components/Modal/ModalContainer";
+
 
 
 
@@ -17,7 +19,7 @@ function App() {
   return (
     <>
     <Navbar/>
-
+    <ModalContainer/>
     <Routes>
       <Route path = "/" element = { <MainPage/> }/>
       <Route path = "/recipe" element = { <RecipePage/> }/>

@@ -11,6 +11,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import store from "./store/store";
 import ScrollTop from "./services/scrollTop";
 
+
 axios.defaults.withCredentials = true;
 
 const persistor = persistStore(store);
@@ -21,8 +22,8 @@ root.render(
       <Provider store ={ store }>
         <PersistGate loading ={ null } persistor ={ persistor }>
           <BrowserRouter>
-            <ScrollTop/>
-            <App/>
+              <ScrollTop/>
+                <App/>
           </BrowserRouter>
         </PersistGate>
       </Provider>

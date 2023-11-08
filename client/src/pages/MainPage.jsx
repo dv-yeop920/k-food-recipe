@@ -1,12 +1,11 @@
 import React from "react";
-import Navbar from "../layout/Navbar/Navbar"
+import Navbar from "../layout/Navbar"
 
 
 const MainPage = () => {
 
     return (
         <>
-        <Navbar/>
             <div style={
                 {
                     position:"absolute",

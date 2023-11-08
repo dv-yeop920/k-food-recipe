@@ -12,6 +12,20 @@ import { styled } from "styled-components";
                         box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -23px;
                         z-index:5;
                     `;
+            
+            export const Container = styled.div`
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: fixed;
+                        inset: 0;
+                        z-index: 1;
+                    `;
+            export const Overlay = styled.div`
+                        position: fixed;
+                        inset: 0;
+                        background-color: rgba(0, 0, 0, 0.3);
+                    `;
 
 
             export const LoginSignUpform = styled.form`
