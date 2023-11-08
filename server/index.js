@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
-const PORT = 7070;
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-
 //env 파일 값을 읽을 수 있게 해주는 모듈
 require("dotenv").config();
+
+const PORT = process.env.PORT_NUMBER;
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 //유저 모델을 가져옴
 const { User } = require("./models/User.js");
 //로그인 인증 미들웨어
