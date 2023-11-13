@@ -4,17 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser , faBars , faGlobe , faSearch } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { openModal } from "../../store/slice/modalSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggle, selectDark } from "../../store/slice/themeSlice";
 
 
 
 
 const Navbar = () => {
     const dispatch = useDispatch();
-
+    const { isDark } = useSelector(selectDark);
     return (
         <>
-        <header className = { styles.header } >
+        <header 
+        className = { styles.header } >
             <div className = { styles.headerBox } >
                 <div className = { styles.titleArea } >
                     <h2>
@@ -40,9 +42,13 @@ const Navbar = () => {
                 </div>
 
                 <div className = { styles.headerButtonArea } >
-                    <button className = { styles.iconButton } >
-                        <span className = {styles.moon } >
-                            🌙
+                    <button 
+                    className = { styles.iconButton } 
+                    onClick = {() => {
+                        dispatch(toggle());
+                    }}>
+                        <span className = { styles.moon } >
+                            { isDark ? "☀️" : "🌙" }
                         </span>
                     </button>
 

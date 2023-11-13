@@ -4,6 +4,7 @@ import storageSession from "redux-persist/lib/storage/session";
 import logger from "redux-logger";
 import userSlice from "./slice/userSlice";
 import modalSlice from "./slice/modalSlice";
+import themeSlice from "./slice/themeSlice";
 
 
 
@@ -15,7 +16,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     user: userSlice.reducer,
-    modal: modalSlice.reducer
+    modal: modalSlice.reducer,
+    theme: themeSlice.reducer,
 });
 
 const persistedReducer =  persistReducer(persistConfig, rootReducer);
