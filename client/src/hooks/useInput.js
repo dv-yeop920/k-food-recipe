@@ -14,14 +14,14 @@ const useInput = (initialState) => {
     const onChangeValue = (e) => {
         const userInput = e.target;
 
-        switch (userInput.className) {
+        switch (userInput.id) {
             case "user-form__name" :
                 setName(userInput.value);
                 break;
-            case "user-form__id" :
+            case "user-form-id" :
                 setUserId(userInput.value);
                 break;
-            case "user-form__pw" :
+            case "user-form-pw" :
                 setUserPassword(userInput.value);
                 break;
             case "user-form__pw-check" :

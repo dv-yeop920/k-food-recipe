@@ -1,5 +1,5 @@
 import React from "react";
-import * as styled from "../styles/styledComponents";
+import styles from "./PagiNation.module.css";
 
 
 
@@ -10,13 +10,11 @@ const Pagination = (
         totalPostLength , //NOTE - 게시물의 총 개수
         pageNumber ,  //NOTE - 페이지의 초기값
         paginate //NOTE - 페이지 초기값 변경 하는 함수 
-    }
-    ) => {
+    }) => {
 
     const pageNumbers = [];
     const PAGE_NUMBER_LIMIT = 5;
     const totalPage = Math.ceil(totalPostLength / postPerPage);
-
 
     for (let i = 0; i <= totalPage; i++) {
         pageNumbers.push(i);
@@ -27,42 +25,39 @@ const Pagination = (
     //NOTE - 페이지 블록 마다 보여줄 페이지 번호 개수
     const start = ((pageBlockArea - 1 ) * PAGE_NUMBER_LIMIT) + 1;
     const end = pageBlockArea * PAGE_NUMBER_LIMIT + 1;
-
     const newPageNumbers = pageNumbers.slice(start , end);
 
     return (
         <>
-        <styled.PaginationContainer>
+        <div className = { styles.container } >
             <nav>
+                <ul className = { styles.ul } >
 
-                <styled.PageUl className = "pagination">
-
-                <styled.BackPageButton
-                className="page-start-button" 
+                <button
+                className = { styles.back }
                 type="button"
                 onClick = { () => {
                     return paginate(1);
                 } } 
                 disabled = { pageNumber === 1 } >
                     &lt;&lt;
-                </styled.BackPageButton>
+                </button>
 
-                <styled.BackPageButton 
-                className="page-back-button" 
+                <button 
+                className = { styles.back } 
                 onClick = { () => {
                     return paginate(pageNumber - 1);
                 }} 
                 disabled = { pageNumber === 1 } >
                     &lt;
-                </styled.BackPageButton>
+                </button>
 
                     {
                         newPageNumbers.map((number) => {
                             return(
-
-                                <styled.PageLi 
+                                <li 
                                 key = { number } 
-                                className = "page-button" 
+                                className = { styles.li } 
                                 onClick = { () => {
                                     return paginate(number);
                                 }} 
@@ -72,34 +67,31 @@ const Pagination = (
                                         { number }
                                     </span>
 
-                                </styled.PageLi>
-
+                                </li>
                             )
                         })
                     }
 
-                    <styled.NextPageButton 
-                    className="page-next-button"
+                    <button 
+                    className = { styles.next }
                     onClick = { () => {
                         return paginate(pageNumber + 1);
                     }} 
                     disabled = { pageNumber === totalPage } >
                         &gt;
-                    </styled.NextPageButton>
+                    </button>
 
-                    <styled.NextPageButton 
-                    className="page-last-button" 
+                    <button 
+                    className = { styles.next }
                     onClick = { () => {
                         return paginate(totalPage);
                     }} 
                     disabled = { pageNumber === totalPage } >
                         &gt;&gt;
-                    </styled.NextPageButton>
-
-                </styled.PageUl>
-
+                    </button>
+                </ul>
             </nav>
-        </styled.PaginationContainer>
+        </div>
         </>
     );
 };

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import * as styled from "../../styles/styledComponents";
+import btn from "../../../styles/Button.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import styles from "./SignModal.module.css";
 import axios from "axios";
 
 
@@ -89,18 +90,18 @@ const SignUpModal = (
 
     return (
         <>
-        <main className = "user-form__container">
-            <styled.LoginSignUpform 
-            className = "user-form"
+        <div className = { styles.container } >
+            <form
+            className = { styles.form }
             onSubmit = { handleClickSignUp }>
-                <div className = "sign-header">
+                <div className = { styles.header} >
                     <FontAwesomeIcon
-                    className = "user-form__cancel"
+                    className = { styles.cancel }
                     icon = { faX }
                     size = "lg"
                     onClick = { closeModal }/>
 
-                    <h2 className ="user-form__title">
+                    <h2 className = { styles.title } >
                         회원 가입
                     </h2>
 
@@ -108,60 +109,60 @@ const SignUpModal = (
                 </div>
 
                 <input 
-                className = "user-form__name" 
+                className = { styles.input }
                 type = "text"
                 placeholder = "이름" 
                 onChange = { onChangeValue } />
 
                 <input 
-                className = "user-form__id"
+                className = { styles.input }
                 type = "text"
                 placeholder = "아이디 5~15자리 특수 문자는 제외"
                 maxLength = "15"
                 onChange = { onChangeValue } />
 
                 <input 
-                className = "user-form__pw" 
+                className = { styles.input }
                 type = "password"
                 maxLength = "15"
                 placeholder = "비밀 번호  8자리~15자리 영어,숫자,특수 문자 포함" 
                 onChange = { onChangeValue } />
 
                 <input 
-                className = "user-form__pw-check" 
+                className = { styles.input } 
                 type = "password"
                 placeholder = "비밀 번호 확인"
                 onChange = { onChangeValue } />
 
                 <input 
-                className = "user-form__email" 
+                className = { styles.input } 
                 type = "email"
                 placeholder = "이메일" 
                 onChange = { onChangeValue } />
 
-                <span className = "error-message">
+                <span className = { styles.message } >
                     { message }
                 </span>
 
-                <styled.LoginSignUpButton
-                className = "default-btn" 
+                <button
+                className = { btn.signButton } 
                 type = "submit" >
                     가입 하기
-                </styled.LoginSignUpButton>
+                </button>
 
-                <div className = "question-container">
-                    <span className = "question">
+                <div className = { styles.questionBox } >
+                    <span className = { styles.question } >
                         이미 계정이 있으신가요?&nbsp;
                     </span>
 
                     <span 
-                    className = "signup-login__navigate"
+                    className = { styles.navigate }
                     onClick = { () => openModal("login") }>
                         로그인
                     </span>
                 </div>
-            </styled.LoginSignUpform>
-        </main>
+            </form>
+        </div>
         </>
     );
 };

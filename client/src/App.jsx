@@ -7,11 +7,9 @@ import RecipePage from "./pages/RecipePage";
 import WritingPage from "./pages/WritingPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import PostUpdatePage from "./pages/PostUpdatePage";
-import ScrollToTopButton from "./layout/ScrollToTopButton";
-import Navbar from "./layout/Navbar";
+import ScrollUpButton from "./layout/ScrollUp/ScrollUpButton";
+import Navbar from "./layout/Navbar/Navbar";
 import ModalContainer from "./components/Modal/ModalContainer";
-
-
 
 
 
@@ -20,17 +18,18 @@ function App() {
     <>
     <Navbar/>
     <ModalContainer/>
+
     <Routes>
-      <Route path = "/" element = { <MainPage/> }/>
-      <Route path = "/recipe" element = { <RecipePage/> }/>
-      <Route path = "/noticeBoard" element = { <NoticeBoardPage/> }/>
-      <Route path = "/myPage" element = { <MyPage/> }/>
-      <Route path = "/writing" element = { <WritingPage/> }/>
-      <Route path = "/postDetail/:id" element = { <PostDetailPage/> }/>
-      <Route path = "/postUpdate/:id" element = { <PostUpdatePage/> }/>
+      <Route path = "/" element = { <MainPage/> } />
+      <Route path = "/recipe" element = { <RecipePage/> } />
+      <Route path = "/noticeBoard" element = { <NoticeBoardPage/> } />
+      <Route path = "/myPage" element = { <MyPage/> } />
+      <Route path = "/writing" element = { <WritingPage/> } />
+      <Route path = "/postDetail/:id" element = { <PostDetailPage/> } />
+      <Route path = "/postUpdate/:id" element = { <PostUpdatePage/> } />
     </Routes>
 
-    <ScrollToTopButton/>
+    <ScrollUpButton/>
     </>
   );
 }

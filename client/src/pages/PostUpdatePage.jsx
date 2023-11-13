@@ -1,10 +1,9 @@
 import React ,{ useEffect, useState } from "react";
 import { useNavigate , useParams } from "react-router-dom";
-import * as styled from "../styles/styledComponents";
-import UpdateContent from "../components/writing/UpdateContent";
+import UpdateContent from "../components/Writing/UpdateContent";
 import axios from "axios";
 import Loading from "../components/Loading";
-import UpdateImageUploader from "../components/writing/UpdateImageUploader";
+import UpdateImageUploader from "../components/Writing/UpdateImageUploader";
 import 
 { 
     uploadPostPreviewImageToS3 , 
@@ -12,8 +11,8 @@ import
     deletePostPreviewImageToS3 
 } 
 from "../utils/awsS3Setting";
-
-
+import styles from "../components/Writing/Writing.module.css";
+import button from "../styles/Button.module.css";
 
 
 
@@ -31,11 +30,9 @@ const PostsUpdatePage = () => {
 
 
     const getPost = async () => {
-
         const postId = id;
 
         try {
-
             const response =  
             await axios.get(
                 `/api/posts/getPost?id=${postId}` , 
@@ -45,48 +42,36 @@ const PostsUpdatePage = () => {
             setOriginalDetail(response.data.list);
             setEditTitleValue(response.data.list.title);
             setEditContentValue(response.data.list.content);
-
         }
         catch (error) {
             console.log(error);
         }
-
     }
 
 
     const onSubmitEditPosts = async (e) => {
-
         e.preventDefault();
 
         let previewEditImageUrl;
 
         try {
-
             if (editTitleValue === "" || editContentValue === null) {
-
                 alert("내용을 입력했는지 확인해 주세요!");
                 setIsLoading(false);
                 return;
-
             }
 
             if (editPostPreviewImageFile === null) {
-
                 previewEditImageUrl = originalDetail.image;
-
             }
 
             if (editPostPreviewImageFile !== null) {
-
                 previewEditImageUrl = 
                 await uploadPostPreviewImageToS3(editPostPreviewImageFile);
-
                 await deletePostPreviewImageToS3(originalDetail.image);
-
             }
             
             if (window.confirm("게시물 내용을 수정하시겠습니까?")) {
-
                 setIsLoading(true);
 
                 const updatePosts = {
@@ -104,18 +89,14 @@ const PostsUpdatePage = () => {
                 );
 
                 if (response.data.updateSuccess === false) {
-
                     alert(response.data.messsage);
                     return;
-
                 }
                 
                 if (response.data.updateSuccess === true) {
-
                     navigate(-1 , {replace: true});
                     alert(response.data.messsage);
                     return;
-
                 }
 
                 setIsLoading(false);
@@ -124,7 +105,6 @@ const PostsUpdatePage = () => {
         catch (error) {
             console.log(error);
         }
-
     }
 
 
@@ -137,18 +117,14 @@ const PostsUpdatePage = () => {
         <>
         {
             isLoading ?
-
             <Loading/>
-
             :
-
-            <div className = "editor-container">
+            <div className = { styles.editorContainer } >
                 <form 
                 className = "editor-form"
                 onSubmit = { onSubmitEditPosts }>
 
-                    <div className = "content-container">
-
+                    <div className = { styles.contentContainer }>
                         <UpdateImageUploader
                         editPostPrevuewImageSrc = { editPostPrevuewImageSrc }
                         setEditPostPrevuewImageSrc = { setEditPostPrevuewImageSrc } 
@@ -163,37 +139,34 @@ const PostsUpdatePage = () => {
                         editContentValue = { editContentValue }
                         setEditContentValue = { setEditContentValue } 
                         resizeFile = { resizeFile } />
-
                     </div>
                 
-                    <div className = "writing-button__container">
-
-                        <styled.DeleteButton
-                        className = "writing-button__delete delete-btn"
+                    <div className = { styles.buttonArea } >
+                        <button
+                        className = { 
+                            `${ styles.writingButton }
+                            ${ button.cancle }`
+                        } 
                         type = "button"
                         onClick = { () => {
-
                             if (window.confirm("게시글 수정을 취소 하시겠어요?")) {
-
                                 navigate(-1, { replace: true });
                                 return;
-
                             }
-
-                        }} >
+                        }}>
                             취소
-                        </styled.DeleteButton>
+                        </button>
 
-                        <styled.SubmitButton
-                        type = "submit"
-                        className = "writing-button__submit default-btn">
+                        <button
+                        className = { 
+                            `${ styles.writingButton }
+                            ${ button.submit }`
+                        } 
+                        type = "submit" >
                             수정
-                        </styled.SubmitButton>
-
+                        </button>
                     </div>
-
                 </form>
-
             </div>
         }
         </>

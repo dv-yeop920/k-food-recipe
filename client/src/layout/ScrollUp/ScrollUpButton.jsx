@@ -1,32 +1,28 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpLong } from "@fortawesome/free-solid-svg-icons";
-import * as styled from "../styles/styledComponents";
+import styles from "./ScrollUpButton.module.css";
 
 
-const ScrollToTopButton = () => {
+const ScrollUpButton = () => {
 
     const handleClickScroll = () => {
-
         window.scrollTo({
             top : 0,
             behavior : "smooth",
         });
-
-    };
+    }
 
     return (
         <>
-        <styled.ScrollToTopButton 
-        className = "sroll-to-top"
+        <button
+        className = { styles.scroll }
         onClick = { handleClickScroll } >
-
             <FontAwesomeIcon
                 icon = { faUpLong }
                 size = "2x" />
-
-        </styled.ScrollToTopButton>
+        </button>
         </>
     );
 };
 
-export default ScrollToTopButton;
+export default ScrollUpButton;

@@ -1,0 +1,118 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 5px;
+  background-color: #ffffffff;
+  border-bottom: 1px solid #ddd;
+  height: 4.7em;
+  box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -23px;
+  z-index:5;
+}
+
+.headerBox {
+  position: fixed;
+  left: 5%;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.7em;
+}
+
+.titleArea {
+  width: 33%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.title {
+  color: #16a085;
+  cursor: pointer;
+}
+
+.recipeSearchArea {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.recipeSearchLink {
+  border: none;
+  padding: 12px;
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.recipeSearchLink:hover {
+  transform: perspective(300px) translateZ(10px);
+  background-color: #cbd0d3;
+}
+
+.headerButtonArea {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 33%;
+  box-sizing: border-box;
+}
+
+.menuButton {
+  border: none;
+  padding: 7px;
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-left: 15px;
+  transition: all 0.2s ease-in-out;
+}
+
+.menuButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) -4px 9px 25px -15px;
+  transform: perspective(300px) translateZ(15px);
+}
+
+.iconButton {
+  margin-right: 4px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.moon {
+  font-size: large;
+}
+
+.iconButton:hover {
+  background-color: rgb(238, 238, 238);
+  transform: perspective(150px) translateZ(25px);
+}
+
+.icon {
+  padding: 5px;
+  color: #2c3e50;
+}
+
+
+
+
+
+
+
+
+
+

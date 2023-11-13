@@ -1,5 +1,6 @@
 import React from "react";
-import * as styled from "../../styles/styledComponents";
+import styles from "./NoticeBoard.module.css";
+import button from "../../styles/Button.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
@@ -15,45 +16,40 @@ const PostSearchInput = (
         onSubmitGetFilteredPostList
     }
     ) => {
-        
+
     const dispatch = useDispatch();
     const { authAndNavigate } = useAuth("");
 
     return (
         <>
-        <styled.SearchContainer>
-
+        <div className = { styles.searchContainer } >
             <form
-            className = "user-search__form"
+            className = { styles.form }
             onSubmit = { onSubmitGetFilteredPostList } >
-
-                <styled.Input
-                id = "search-post"
-                className = "user-search__input"
+                <input
+                className = { styles.input }
                 ref = { userPostSearchValue }
                 type = "search"
                 placeholder = "단어 단위로 입력..."
                 name = { userPostSearchValue } />
 
-                <styled.SubmitButton
-                className = "default-btn"
+                <button
+                className = { button.submit }
                 type = "submit" >
                     검색
-                </styled.SubmitButton>
+                </button>
 
                 <FontAwesomeIcon
-                id = "writing-icon"
-                className = "writing-icon"
+                className = { styles.icon }
                 icon = { faPenToSquare }
                 size = "2x"
                 onClick = { () => {
-                    authAndNavigate("/writing")
+                    authAndNavigate("/writing");
                     dispatch(closeModal());
                     return;
                 }} />
             </form>
-
-        </styled.SearchContainer>
+        </div>
         </>
     );
 };

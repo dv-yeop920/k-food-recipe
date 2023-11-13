@@ -1,72 +1,76 @@
 import React from "react";
-import * as styled from "../styles/styledComponents";
+import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser , faBars , faGlobe , faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import { openModal } from "../store/slice/modalSlice";
+import { NavLink } from "react-router-dom";
+import { openModal } from "../../store/slice/modalSlice";
 import { useDispatch } from "react-redux";
 
 
 
+
 const Navbar = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     return (
         <>
-        <styled.Header>
-            <div className = "header-container">
-                <div className = "header-title__column">
-                    <h2
-                    onClick ={ () => navigate("/") } >
-                        k-레시피
+        <header className = { styles.header } >
+            <div className = { styles.headerBox } >
+                <div className = { styles.titleArea } >
+                    <h2>
+                        <NavLink 
+                        className = { styles.title }
+                        to = "/">
+                            k-레시피
+                        </NavLink>
                     </h2>
                 </div>
 
                 <div 
-                className = "header-recipe-search__column" 
-                onClick = { () => navigate("/recipe") } >
-                    <button className = "recipe-search__button">
+                className = { styles.recipeSearchArea } >
+                    <NavLink 
+                    className = { styles.recipeSearchLink } 
+                    to = "/recipe" >
                         <FontAwesomeIcon
                             style = {{ marginRight:"5px" , color:"#16a085" }}
                             icon = { faSearch }
                             size = "1x" />
                         여기를 눌러 레시피를 검색해 보세요!
-                    </button>
+                    </NavLink>
                 </div>
 
-                <div className = "header-button__column">
-                    <button className = "light-dark-mode__button header-icon-button">
-                        <span className = "moon">
+                <div className = { styles.headerButtonArea } >
+                    <button className = { styles.iconButton } >
+                        <span className = {styles.moon } >
                             🌙
                         </span>
                     </button>
 
-                    <button className = "global-language__button header-icon-button">
+                    <button className = { styles.iconButton } >
                         <FontAwesomeIcon
-                        className = "header-icon"
+                        className = { styles.icon }
                         icon = { faGlobe }
                         size = "lg" />
                     </button>
 
                     <button 
+                    className = { styles.menuButton }
                     onClick = {() => {
                         dispatch(openModal("menu"));
-                    }}
-                    className = "user-sign__button">
+                    }} >
                         <FontAwesomeIcon
-                            className = "header-icon"
+                            className = { styles.icon }
                             icon = { faBars }
                             size = "1x" />
 
                         <FontAwesomeIcon
-                            className = "header-icon"
+                            className = { styles.icon }
                             icon = { faUser }
                             size = "1x" />
                     </button>
                 </div>
             </div>
-        </styled.Header>
+        </header>
         </>
     );
 };

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import Comment from "./Comment";
 import CommentInput from "./CommentInput";
-
+import styles from "./Comment.module.css";
 
 
 
@@ -17,13 +17,10 @@ const CommentList = ({ post }) => {
     const [updateComment , setUpdateComment] = useState("");
     const [replyCommentContent , setReplyCommentContent] = useState("");
     const [isEdit , setIsEdit] = useState(false);
-    
 
 
     const getComment = async () => {
-
         try {
-
                 const response = 
                 await axios.get(
                     "/api/posts/comment/getComment" , 
@@ -38,7 +35,6 @@ const CommentList = ({ post }) => {
                 });
 
                 setComment(commentForThisPost);
-
         }
         catch (error) {
             console.log(error);
@@ -47,7 +43,6 @@ const CommentList = ({ post }) => {
 
 
     const onSubmitRegisterComment = async (e) => {
-
         e.preventDefault();
 
         if (commentContent === "") {
@@ -68,18 +63,14 @@ const CommentList = ({ post }) => {
                 { timeout: 10000 });
 
                 if (response.data.success === true) {
-
                     alert(response.data.messsage);
                     setCommentContent("");
                     return;
-
                 }
 
                 if (response.data.success === false) {
-
                     alert(response.data.messsage);
                     return;
-
                 }
         }
         catch (error) {
@@ -89,7 +80,6 @@ const CommentList = ({ post }) => {
 
 
     const onClickCommentDelete = async (commentId) => {
-
         const filteredId = 
         comment.filter((comment) => {
             return commentId === comment._id;
@@ -101,9 +91,7 @@ const CommentList = ({ post }) => {
         }
 
         try {
-
                 if (window.confirm("댓글을 정말 삭제 하시겠습니까?")) {
-
                     const response = 
                     await axios.post(
                         "/api/posts/comment/deleteComment" , 
@@ -112,21 +100,15 @@ const CommentList = ({ post }) => {
                     );
 
                     if (response.data.deleteSuccess === true) {
-
                         alert(response.data.messsage);
                         return;
-
                     }
 
                     if (response.data.deleteSuccess === false) {
-
                         alert(response.data.messsage);
                         return;
-
                     }
-
                 }
-
         }
         catch (error) {
             console.log(error);
@@ -135,7 +117,6 @@ const CommentList = ({ post }) => {
 
 
     const onClickCommentEdit  = async (commentId) => {
-
         const filteredId = 
         comment.filter( (comment) => {
             return commentId === comment._id;
@@ -147,30 +128,26 @@ const CommentList = ({ post }) => {
         }
 
         try {
+                if (window.confirm("댓글을 정말 수정 하시겠습니까?")) {
+                    const response = 
+                    await axios.put(
+                        "/api/posts/comment/updateComment" , 
+                        updateCommentBody , 
+                        { timeout: 10000 }
+                    );
 
-            if (window.confirm("댓글을 정말 수정 하시겠습니까?")) {
+                    if (response.data.deleteSuccess === true) {
+                        alert(response.data.messsage);
+                        return;
+                    }
 
-                const response = 
-                await axios.put(
-                    "/api/posts/comment/updateComment" , 
-                    updateCommentBody , 
-                    { timeout: 10000 }
-                );
+                    if (response.data.deleteSuccess === false) {
+                        alert(response.data.messsage);
+                        return;
+                    }
 
-                if (response.data.deleteSuccess === true) {
-                    alert(response.data.messsage);
-                    return;
+                    setIsEdit(!isEdit);
                 }
-
-                if (response.data.deleteSuccess === false) {
-                    alert(response.data.messsage);
-                    return;
-                }
-
-                setIsEdit(!isEdit);
-
-            }
-
         }
         catch (error) {
             console.log(error);
@@ -179,25 +156,19 @@ const CommentList = ({ post }) => {
 
 
     useEffect(() => {
-
         getComment();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [comment]);
 
     return (
         <>
-        <div className = "comment-wrap">
-
+        <div className = { styles.commentWrap } >
             <div className = "comment-count">
-
                 <h3> { `댓글 ${ post.commentCount }` } </h3>
-
             </div>
 
             <div className = "comment-container">
-
-                <div className = "commnet-textarea__wrap">
-
+                <div className = { styles.inputWrap } >
                     <CommentInput
                     commentContent = { commentContent }
                     setCommentContent = { setCommentContent }
@@ -206,7 +177,6 @@ const CommentList = ({ post }) => {
                     {
                         comment &&
                         comment.map((comment) => (
-
                             <Comment key = { comment._id }
                             commentId = { comment._id }
                             comment = { comment }
@@ -218,15 +188,10 @@ const CommentList = ({ post }) => {
                             onClickCommentEdit = { onClickCommentEdit } 
                             replyCommentContent = { replyCommentContent }
                             setReplyCommentContent = { setReplyCommentContent } />
-
                         ))
                     }
-                    
-
                 </div>
-
             </div>
-
         </div>
         </>
     );

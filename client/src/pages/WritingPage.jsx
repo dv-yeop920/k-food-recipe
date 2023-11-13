@@ -1,12 +1,13 @@
-import React , { useState } from "react";
+import React , { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import * as styled from "../styles/styledComponents";
-import ImageUploader from "../components/writing/ImageUploader";
-import Content from "../components/writing/Content";
+import ImageUploader from "../components/Writing/ImageUploader";
+import Content from "../components/Writing/Content";
 import axios from "axios";
 import Loading from "../components/Loading";
 import { uploadPostPreviewImageToS3 , resizeFile } from "../utils/awsS3Setting";
+import styles from "../components/Writing/Writing.module.css";
+import button from "../styles/Button.module.css";
 
 
 
@@ -17,148 +18,122 @@ const WritingPage = () => {
     const [isLoading , setIsLoading] = useState(false);
 
     const [title , setTitle] = useState("");
-    const [content, setContent] = useState(null);
+    const [content, setContent] = useState("");
     const [PostPreviewImageFile , setPostPreviewImageFile] = useState(null);
     const [PostPreviewImageSrc, setPostPreviewImageSrc] = useState(null);
+    const quillRef = useRef(null);
 
 
-    const onSubmitRegisterPost = async (e) => {
+    const onSubmitRegisterPost = useCallback(
+        async (e) => {
+            e.preventDefault();
+            setIsLoading(true);
 
-        e.preventDefault();
-
-        setIsLoading(true);
-
-        let previewImageUrl;
-
-        try {
-
-            if (title === "" || content === null) {
-
-                alert("내용을 입력했는지 확인해 주세요!");
+            let previewImageUrl;
+    
+            try {
+                if (title === "" || content === null) {
+                    alert("내용을 입력했는지 확인해 주세요!");
+                    setIsLoading(false);
+                    return;
+                }
+    
+                if (PostPreviewImageFile === null) {
+                    previewImageUrl = null;
+                }
+    
+                if (PostPreviewImageFile !== null) {
+                    previewImageUrl = 
+                    await uploadPostPreviewImageToS3(PostPreviewImageFile);
+                }
+    
+                const post = {
+                    id: userId,
+                    title: title,
+                    content: content,
+                    image: previewImageUrl
+                }
+    
+                const response = 
+                await axios.post(
+                    "/api/posts/register" , 
+                    post , 
+                    { timeout: 10000 }
+                );
+    
+                if (response.data.success === false) {
+                    console.log(response.data.messsage);
+                }
+    
+                if (response.data.success === true) {
+                    navigate(-1, { replace: true });
+                    alert(response.data.messsage);
+                    return;
+                }
+    
+                setPostPreviewImageFile(null);
+                setPostPreviewImageSrc(null);
                 setIsLoading(false);
-                return;
-
             }
-
-            if (PostPreviewImageFile === null) {
-
-                previewImageUrl = null;
-
+            catch (error) {
+                console.log(error);
+                throw error;
             }
-
-            if (PostPreviewImageFile !== null) {
-
-                previewImageUrl = 
-                await uploadPostPreviewImageToS3(PostPreviewImageFile);
-
-            }
-
-            const post = {
-
-                id: userId,
-                title: title,
-                content: content,
-                image: previewImageUrl
-
-            }
-
-            const response = 
-            await axios.post(
-                "/api/posts/register" , 
-                post , 
-                { timeout: 10000 }
-            );
-
-            if (response.data.success === false) {
-
-                console.log(response.data.messsage);
-                return;
-
-            }
-
-            if (response.data.success === true) {
-
-                navigate(-1, { replace: true });
-                alert(response.data.messsage);
-                return;
-
-            }
-
-            setPostPreviewImageFile(null);
-            setPostPreviewImageSrc(null);
-            setIsLoading(false);
-
-        }
-        catch (error) {
-
-            console.log(error);
-            throw error;
-
-        }
-    }
+        }, [userId, title, content, PostPreviewImageFile, navigate]);
 
 
     return (
         <>
         {
             isLoading ?
-
             <Loading />
-
             :
-
-            <div className = "editor-container">
-
+            <div className = { styles.editorContainer } >
                 <form 
                 className = "editor-form"
                 onSubmit = { onSubmitRegisterPost }>
-
-                    <div className = "content-container">
-
+                    <div className = { styles.contentContainer } >
                         <ImageUploader 
                         setPostPreviewImageFile = { setPostPreviewImageFile } 
                         resizeFile = { resizeFile } 
                         PostPreviewImageSrc = { PostPreviewImageSrc }
-                        setPostPreviewImageSrc = { setPostPreviewImageSrc }/>
+                        setPostPreviewImageSrc = { setPostPreviewImageSrc } />
 
                         <Content 
+                        quillRef = { quillRef }
                         content = { content }
                         setTitle = { setTitle }
                         setContent = { setContent } 
                         resizeFile = { resizeFile } />
-
                     </div>
-                
-                    <div className = "writing-button__container">
 
-                        <styled.DeleteButton
-                        className = "writing-button__delete delete-btn"
+                    <div className = { styles.buttonArea } >
+                        <button
+                        className = { 
+                            `${ styles.writingButton }
+                            ${ button.cancle }`
+                        } 
                         type = "button"
                         onClick = { () => {
-
                             if (window.confirm("게시글 작성을 취소 하시겠어요?")) {
-
                                 navigate(-1, { replace: true });
                                 return;
-
                             }
-
                         }} >
                             취소
-                        </styled.DeleteButton>
+                        </button>
 
-                        <styled.SubmitButton
-                        type = "submit"
-                        className = "writing-button__submit default-btn">
+                        <button
+                        className = { 
+                            `${ styles.writingButton }
+                            ${ button.submit }`
+                        } 
+                        type = "submit" >
                             등록
-                        </styled.SubmitButton>
-
+                        </button>
                     </div>
-
                 </form>
-
             </div>
-
         }
         </>
     );

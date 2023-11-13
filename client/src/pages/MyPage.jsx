@@ -3,109 +3,76 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faHeart , faFaceSmileBeam } from "@fortawesome/free-regular-svg-icons";
-
+import styles from "../components/MyPage/MyPage.module.css";
 
 
 const MyPage = () => {
 
     const user = useSelector(state => state.user);
 
+    const listTitle = 
+    [
+        {
+            title:"내정보",
+            icon: faUser
+        }, 
+        {
+            title:"좋아요 누른 레시피",
+            icon: faHeart
+        }, 
+        {
+            title:"좋아요 누른 게시글",
+            icon: faHeart
+        }, 
+        {
+            title:"최근 본 레시피",
+            icon: faFaceSmileBeam
+        }, 
+        {
+            title:"최근 본 게시글",
+            icon: faFaceSmileBeam
+        }, 
+        {
+            title:"내 게시글",
+            icon: faFaceSmileBeam
+        }
+    ];
+
     return (
         <>
-        <main className = "my-page">
-
-            <div className = "user-component">
-
+        <main className = { styles.main } >
+            <div className = { styles.component } >
                 <div className = "user-component__column">
-
                     <div className = "user-component__text">
-
-                        <h1 className = "user-component__title">
+                        <h1 className = { styles.hello } >
                             안녕하세요
                         </h1>
 
-                        <h2 className = "user-component__name"> 
+                        <h2 className = { styles.hello } > 
                             { `${ user.name } 님!` }
                         </h2>
-
                     </div>
-
                 </div>
-
             </div>
 
-            <div className = "icon-row">
+            <div className = { styles.iconRow } >
+                {
+                    listTitle.map((item) => {
+                        return(
+                            <div className = { styles.iconArea } >
+                                <FontAwesomeIcon
+                                className = { styles.icon }
+                                icon = { item.icon }
+                                size = "1x" />
 
-                <div className = "icon-row__icon">
-
-                    <FontAwesomeIcon
-                        className = "user-icon"
-                        icon = { faUser }
-                        size = "1x" />
-
-                    <span>내정보</span>
-
-                </div>
-
-                <div className = "icon-row__icon">
-
-                    <FontAwesomeIcon
-                        style = {{ color: "red" }}
-                        className = "user-icon"
-                        icon = { faHeart }
-                        size = "1x" />
-
-                    <span>좋아요 누른 레시피</span>
-
-                </div>
-
-                <div className = "icon-row__icon">
-
-                    <FontAwesomeIcon
-                        style = {{ color: "red" }}
-                        className = "user-icon"
-                        icon = { faHeart }
-                        size = "1x" />
-
-                    <span>좋아요 누른 게시글</span>
-
-                </div>
-
-                <div className = "icon-row__icon">
-
-                    <FontAwesomeIcon
-                    className = "user-icon smile"
-                    icon = { faFaceSmileBeam }
-                    size = "1x"/>
-
-                    <span>최근 본 레시피</span>
-
-                </div>
-
-                <div className = "icon-row__icon">
-
-                    <FontAwesomeIcon
-                    className = "user-icon smile"
-                    icon = { faFaceSmileBeam }
-                    size = "1x" />
-
-                    <span>최근 본 게시글</span>
-
-                </div>
-
-                <div className = "icon-row__icon">
-
-                    <FontAwesomeIcon
-                    className = "user-icon smile"
-                    icon = { faFaceSmileBeam }
-                    size = "1x" />
-
-                    <span>내 게시글</span>
-
-                </div>
-
+                                <span className = { styles.title } >
+                                    { item.title }
+                                </span>
+                            </div>
+                        )
+                    })
+                }
             </div>
-
         </main>
         </>
     );

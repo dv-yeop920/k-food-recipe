@@ -1,8 +1,6 @@
-@import "../src/styles/login-sign-up.css";
-@import "../src/styles/reset.css";
-@import "../src/styles/notice-board.css";
-@import "../src/styles/my-page.css";
-@import "../src/styles/navbar.css";
-@import "../src/styles/editor.css";
-@import "../src/styles/postsDetail.css";
 
+@import "../src/styles/reset.css";
+@import "../src/styles/quill.css";
+
+/* Google web font CDN*/
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap");

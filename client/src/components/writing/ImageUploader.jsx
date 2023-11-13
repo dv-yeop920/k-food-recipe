@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import styles from "./Writing.module.css";
 
 
 
@@ -17,16 +18,12 @@ const ImageUploader = (
 
 
     const onClickShowImageFile = () => {
-
         fileInput.current.click();
-
     }
 
 
     const onChangeUpload = async (e) => {
-
         const file = e.target.files[0];
-
         const compressedFile = await resizeFile(file);
 
         setPostPreviewImageFile(compressedFile);
@@ -36,14 +33,10 @@ const ImageUploader = (
         reader.readAsDataURL(compressedFile);
 
         return new Promise((resolve) => { 
-
             reader.onload = () => {	
-
                 setPostPreviewImageSrc(reader.result || null);
                 resolve();
-
             };
-
         });
     }
 
@@ -51,9 +44,8 @@ const ImageUploader = (
     return (
         <>
         <div 
-        className = "image-upload__container"
+        className = { styles.imageUploadContainer }
         onClick = { onClickShowImageFile } >
-
             <input
             className = "image-file-uploader"
             accept = "image/*"
@@ -63,16 +55,15 @@ const ImageUploader = (
             onChange = { onChangeUpload } />
             
             <FontAwesomeIcon
-            className = "camera-icon"
+            className = { styles.camera }
             icon = { faCamera }
             size = "5x" />
             
-            <div className = "img-wrapper">
-
-                <img src = { PostPreviewImageSrc } alt = "" />
-
+            <div className = { styles.imgWrapper } >
+                <img 
+                className = { styles.image }
+                src = { PostPreviewImageSrc } alt = "" />
             </div>
-
         </div>
         </>
     );

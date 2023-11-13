@@ -1,7 +1,7 @@
 import React from "react";
-import * as styled from "../../styles/styledComponents";
+import styles from "./NoticeBoard.module.css";
 import getDate from "../../utils/postDate";
-import Pagination from "../Pagination";
+import Pagination from "../PagiNation/Pagination";
 
 const PostList = (
     { 
@@ -14,148 +14,109 @@ const PostList = (
     }
     ) => {
 
-
-        /*const onClickUpdatePostViewCount = async (id) => {
-
-            try {
-    
-                await axios.put(
-                    `/api/posts/viewCountupdate/${id}` ,  
-                    { timeout: 5000 }
-                );
-    
-            }
-            catch (error) {
-                console.log(error)
-            }
-        }*/
-
     return (
         <>
-        <styled.BoardContainer>
-
+        <div className = { styles.boardContainer } >
             <ul className = "board">
-
-                <styled.Li 
-                className = "post-list"
+                <li 
+                className = { styles.li }
                 style = {{ color: "rgb(200, 50, 100)" }} >
+                    <div>
+                        <h3 className = { styles.title } >
+                            [공지]
+                        </h3>
 
-                <div>
-
-                    <styled.Title>
-                        [공지]
-                    </styled.Title>
-
-                    <styled.Title 
-                    style = {{
-                        fontSize:"16px",
-                        color:"black"
-                    }} >
-                        게시판 이용 수칙
-                    </styled.Title>
-
-                </div>
-
-                </styled.Li>
+                        <h3 
+                        style = {{
+                            fontSize:"16px",
+                            color:"black"
+                        }}>
+                            게시판 이용 수칙
+                        </h3>
+                    </div>
+                </li>
 
                 {
+                    postList.length > 0 ?
+                    postList.map( (post) => {
+                        return (
+                        <li 
+                        className = { styles.li } 
+                        key = { post._id }
+                        onClick = { () => {
+                            onClickPostDetailNavigate(post._id);
+                            return;
+                        }}>
 
-                postList.length > 0 ?
+                            <div>
+                                <h3 className = { styles.title } >
+                                    { post.title }
+                                </h3>
 
-                postList.map( (post) => {
+                                <span className = { styles.content } >
+                                    { post.id }
+                                </span>
 
-                    return (
+                                <span className = { styles.content } >
+                                    ❤️0
+                                </span>
 
-                    <styled.Li 
-                    className = "post-list" 
-                    key = { post._id }
-                    onClick = { () => {
-                        //onClickUpdatePostViewCount(post._id);
-                        onClickPostDetailNavigate(post._id);
-                        return;
-                    }} >
-
-                        <div>
-
-                            <styled.Title>
-                                { post.title }
-                            </styled.Title>
-
-                            <styled.Span>
-                                { post.id }
-                            </styled.Span>
-
-                            <styled.Span>
-                                ❤️0
-                            </styled.Span>
-
-                            <styled.Span>
-                                { `댓글 ${ post.commentCount }` }
-                            </styled.Span>
+                                <span className = { styles.content } >
+                                    { `댓글 ${ post.commentCount }` }
+                                </span>
                     
-                            <styled.Span>
-                                { `조회 ${ post.viewCount }` }
-                            </styled.Span>
+                                <span className = { styles.content } >
+                                    { `조회 ${ post.viewCount }` }
+                                </span>
 
-                            <styled.Span>
+                                <span className = { styles.content } >
+                                    {
+                                        `
+                                        ${ getDate(post.createdAt).year }-${
+                                            getDate(post.createdAt).month + 1 }-${
+                                                getDate(post.createdAt).date } 
 
+                                        ${ getDate(post.createdAt).hours }:${
+                                            getDate(post.createdAt).minutes }
+                                        `
+                                    }
+                                </span>
+                            </div>
+
+                            <img 
+                            style = 
                             {
-                                `
-                                ${ getDate(post.createdAt).year }-${
-                                    getDate(post.createdAt).month + 1 }-${
-                                        getDate(post.createdAt).date } 
-
-                                ${ getDate(post.createdAt).hours }:${
-                                    getDate(post.createdAt).minutes }
-                                `
+                                post.image ? 
+                                { height:"70px" , width: "90px" } 
+                                : 
+                                {"display": "none"}
                             }
-
-                            </styled.Span>
-
-                        </div>
-
-                        <img 
-                        style = 
-                        {
-                            post.image ? 
-
-                            { height:"70px" , width: "90px" } 
-
-                            : 
-
-                            {"display": "none"}
-                        }
-                        alt = ""
-                        src = { post.image } 
-                        />
-
-                    </styled.Li>
-                    )
-                })
-                :
-                <p style={{
-                    "padding" : "70px", 
-                    "textAlign" :"center",
-                    "fontSize" : "35px",
-                    "fontWeight" : "600" }} >
-                    검색 결과가 없습니다!
-                </p>
-            }
-
+                            alt = ""
+                            src = { post.image } 
+                            />
+                        </li>
+                        );
+                    })
+                    :
+                    <p style={{
+                        "padding" : "70px", 
+                        "textAlign" :"center",
+                        "fontSize" : "35px",
+                        "fontWeight" : "600" }} >
+                        검색 결과가 없습니다!
+                    </p>
+                }
             </ul>
 
             {
                 postList.length > 0 &&
-
                 <Pagination
                 postPerPage = { postPerPage }
                 totalPostLength = { totalPostLength }
                 paginate = { paginate } 
                 pageNumber = { pageNumber } />
-
             }
-
-        </styled.BoardContainer>
+        </div>
         </>
     );
 };

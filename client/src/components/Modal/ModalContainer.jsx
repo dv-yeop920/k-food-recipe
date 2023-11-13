@@ -1,10 +1,12 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal, selectModal } from "../../store/slice/modalSlice";
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignUpModal";
-import NavItem from "./NavItem";
+import LoginModal from "./Sign/LoginModal";
+import SignUpModal from "./Sign/SignUpModal";
+import MenuModal from "./Menu/MenuModal";
 import useInput from "../../hooks/useInput";
+import styles from "./Sign/SignModal.module.css";
+
 
 const ModalContainer = () => {
   const dispatch = useDispatch();
@@ -61,7 +63,9 @@ const ModalContainer = () => {
                 userEmail = { userEmail } 
                 onChangeValue = { onChangeValue } />
       case "menu":
-        return <NavItem />
+        return <MenuModal 
+                openModal = { handleOpenModal }
+                closeModal = { handleCloseModal } />
       default:
         return null;
     }
@@ -69,9 +73,12 @@ const ModalContainer = () => {
 
   return (
     <div 
-    className = { type === "menu" ? "menu-modal" : "sign-modal" }
+    className = { 
+      type === "signup" | type === "login" ? 
+      styles.signModal : styles.modal 
+    }
     ref = { modalRef }
-    onClick = { handleClickOutside }>
+    onClick = { handleClickOutside } >
       { renderModal() }
     </div>
   );

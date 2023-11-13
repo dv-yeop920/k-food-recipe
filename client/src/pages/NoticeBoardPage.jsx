@@ -10,7 +10,6 @@ import Loading from "../components/Loading";
 
 const NoticeBoardPage = () => {
 
-
     const navigate = useNavigate();
     const userPostSearchValue = useRef(null);
     const [postList , setPostList] = useState([]);
@@ -21,13 +20,10 @@ const NoticeBoardPage = () => {
     const POST_PER_PAGE = 5;
 
 
-
     const getPostList = async () => {
-
         setIsLoading(true);
 
         try {
-
             const response = 
             await axios.get(
                 `/api/posts/getPostList?pageNumber=${ pageNumber }
@@ -36,21 +32,16 @@ const NoticeBoardPage = () => {
             );
 
             if (response) {
-
                 const getPosts = response.data.list;
                 const getTotalPostsLength = response.data.totalPostLength;
 
                 if (getPosts) {
-
                     setPostList(getPosts);
                     setTotalPostLength(getTotalPostsLength);
-
                 }
-
             }
 
             setIsLoading(false);
-
         }
         catch (error) {
             console.log(error);
@@ -59,50 +50,38 @@ const NoticeBoardPage = () => {
 
 
     const onClickPostDetailNavigate = (postId) => {
-
-        return navigate(`/postDetail/${postId}`);
-
+        return navigate(`/postDetail/${ postId }`);
     }
 
 
     const onSubmitGetFilteredPostList = async (e) => {
-
         e.preventDefault();
 
         try {
-
             await getPostList();
             setPageNumber(1);
-
         } 
         catch (error) {
             console.log(error);
         }
-
     }
 
 
     useEffect(() => {
-
         getPostList();
-        window.scrollTo(0 , 0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     } , [pageNumber]);
 
     return (
         <>
-
         <PostSearchInput 
         userPostSearchValue = { userPostSearchValue }
         onSubmitGetFilteredPostList = { onSubmitGetFilteredPostList } />
 
         {
             isLoading ?
-
             <Loading />
-
             :
-
             <PostList 
             postList = { postList }
             onClickPostDetailNavigate = { onClickPostDetailNavigate } 
@@ -110,9 +89,7 @@ const NoticeBoardPage = () => {
             totalPostLength = { totalPostLength }
             paginate = { setPageNumber }
             pageNumber = { pageNumber } />
-
         }
-
         </>
     );
 };

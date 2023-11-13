@@ -1,0 +1,71 @@
+.main {
+  position: fixed;
+  background-color: #ffffff;
+  top:0%;
+  left: 0%;
+  height: 100%;
+  width: 20%;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.component {
+  position: absolute;
+  top: 22%;
+  left: 10%;
+  width: 80%;
+  padding-bottom: 23px;
+  border-bottom: 1px solid rgb(201, 201, 201);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hello {
+  margin-bottom: 40px;
+}
+
+.iconRow {
+  position: absolute;
+  top: 45%;
+  left: 10%;
+  width: 80%;
+  box-sizing: border-box;
+  padding-top: 70px;
+}
+
+.iconArea {
+  margin-bottom: 23px;
+  transition: all 0.1s ease-in-out;
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconArea:hover {
+  color: #1abc9c;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.title {
+  font-size:132%;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.heart {
+  color: rgb(212, 2, 2);
+}
+
+.smile {
+  color: rgb(225, 225, 4);
+}

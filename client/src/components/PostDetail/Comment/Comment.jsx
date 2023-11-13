@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as styled from "../../../styles/styledComponents";
+import styles from "./Comment.module.css";
 import getDate from "../../../utils/postDate";
 
 
@@ -14,21 +14,17 @@ const Comment = (
         updateComment , 
         setUpdateComment , 
         onClickCommentDelete , 
-        onClickCommentEdit ,
-        replyCommentContent ,
-        setReplyCommentContent
+        onClickCommentEdit 
     }
     ) => {
         
-            const [editId , setEditId] = useState("");
-            const [isReply , setIsReply] = useState(false);
+    const [editId , setEditId] = useState("");
+    const [isReply , setIsReply] = useState(false);
 
     return (
         <>
         <ul className = "commnet-list">
-
-            <li className = "comment">
-
+            <li className = { styles.comment } >
                 <div>
                     <span className = "user-id">
                         { comment.id }
@@ -40,7 +36,7 @@ const Comment = (
 
                     <textarea
                     style = {{ marginTop : "5px" }}
-                    className = "comment-input"
+                    className = { styles.input }
                     value = { updateComment }
                     name = { updateComment }
                     onChange = { (e) => {
@@ -48,21 +44,16 @@ const Comment = (
                         return;
                     }} >
                     </textarea>
-
                     :
-
                     <p
-                    className = "comment-content">
+                    className = { styles.content } >
                         { comment.content } 
                     </p>
                 }
 
-                <div className = "user-comment__buttons">
-
+                <div className = { styles.buttons } >
                     <div className = "date-reply__container">
-
-                        <styled.Span className = "comment-date">
-
+                        <span className = { styles.text } >
                             {
                                 `
                                 ${ getDate(comment.createdAt).year }-${
@@ -72,96 +63,70 @@ const Comment = (
                                 ${ getDate(comment.createdAt).hours }:${
                                     getDate(comment.createdAt).minutes }`
                             }
+                        </span>
 
-                        </styled.Span>
-
-                        <styled.Span
-                        className = "reply-button"
+                        <span
+                        className = { styles.text } 
                         style = {{ cursor:"pointer" }}
                         onClick = {() => {
-
                             setIsReply(!isReply);
                             setEditId(commentId);
                             return;
-
                         }} >
                             답글 쓰기
-                        </styled.Span>
-
+                        </span>
                     </div>
 
                     <div className = "edit-delete__button">
-
                     {
-                        isEdit === true && editId === commentId ?
-                        (
+                        isEdit === true && editId === commentId ? (
                         <>
-
-                        <styled.Span 
-                        className = "edit-button comment-edit-delete"
+                        <span 
+                        className = { styles.button }
                         onClick = { () => {
                             setIsEdit(!isEdit);
                             setEditId("");
                             return; 
-
-                        }} >
+                        }}>
                             취소
-                        </styled.Span>
+                        </span>
 
-                        <styled.Span 
-                        className = "delete-button comment-edit-delete"
+                        <span 
+                        className = { styles.button }
                         onClick = { () => {
-
                             onClickCommentEdit(commentId);
                             setEditId("");
                             return;
-
-                        }} >
+                        }}>
                             완료
-                        </styled.Span>
-
-                        </>
-                        )
-
-                        :
-
-                        (
+                        </span>
+                        </>)
+                        : (
                         <>
-
-                        <styled.Span 
-                        className = "edit-button comment-edit-delete"
+                        <span 
+                        className = { styles.button }
                         onClick = { () => {
-
                             setIsEdit(!isEdit);
                             setEditId(commentId);
                             setUpdateComment(comment.content);
                             return;
-
-                        }} >
+                        }}>
                             수정
-                        </styled.Span>
+                        </span>
 
-                        <styled.Span 
-                        className = "delete-button comment-edit-delete"
+                        <span 
+                        className = { styles.button }
                         onClick = { () => {
-
                         onClickCommentDelete(commentId); 
                         return;
-
                         }} >
                             삭제
-                        </styled.Span>
-
-                        </>
-                        )
+                        </span>
+                        </>)
                     }
-
                     </div>
-
                 </div>
-
             </li>
-
         </ul>
         </>
     );

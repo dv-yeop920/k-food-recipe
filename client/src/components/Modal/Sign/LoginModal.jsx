@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import * as styled from "../../styles/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "./SignModal.module.css";
+import btn from "../../../styles/Button.module.css";
 import {faX} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../store/slice/userSlice";
+import { loginUser } from "../../../store/slice/userSlice";
 import axios from "axios";
 
 
@@ -65,18 +66,18 @@ const LoginModal = (
 
     return (
         <>
-        <main className = "user-form__container">
-            <styled.LoginSignUpform 
-            className = "user-form"
+        <div className = { styles.container }>
+            <form
+            className = { styles.form }
             onSubmit = { handleClickLogin } >
-                <div className = "sign-header">
+                <div className = { styles.header} >
                     <FontAwesomeIcon
-                    className = "user-form__cancel"
+                    className = { styles.cancel }
                     icon = { faX }
                     size = "lg"
                     onClick = { closeModal } />
 
-                    <h2 className = "user-form__title">
+                    <h2 className = { styles.title } >
                         로그인
                     </h2>
 
@@ -84,50 +85,52 @@ const LoginModal = (
                 </div>
 
                 <input 
-                className = "user-form__id"
+                id = "user-form-id"
+                className = { styles.input }
                 type = "text"
                 placeholder = "아이디"
                 maxLength = "12"
                 onChange = { onChangeValue } />
 
                 <input 
-                className = "user-form__pw" 
+                id = "user-form-pw"
+                className = { styles.input } 
                 type = "password"
                 placeholder = "비밀 번호"
                 maxLength = "15"
                 onChange = { onChangeValue } />
 
-                <span className = "error-message">
+                <span className = { styles.message } >
                     { message }
                 </span>           
 
                 <div className = "user-form__button-box">
-                    <styled.LoginSignUpButton
-                    className = "default-btn" 
+                    <button
+                    className = { btn.signButton } 
                     type = "submit" >
                         로그인
-                    </styled.LoginSignUpButton>
+                    </button>
 
-                    <styled.LoginSignUpButton
-                    className = "default-btn" 
+                    <button
+                    className = { btn.signButton }  
                     type = "submit" >
                         카카오 로그인
-                    </styled.LoginSignUpButton>
+                    </button>
                 </div>
 
-                <div className = "question-container">
-                    <span className = "question">
+                <div className = { styles.questionBox } >
+                    <span className = { styles.question } >
                         계정이 없으신가요?&nbsp;
                     </span>
 
                     <span 
-                    className = "signup-login__navigate"
-                    onClick = { () => openModal('signup') }>
+                    className = { styles.navigate }
+                    onClick = { () => openModal('signup') } >
                         회원가입
                     </span>
                 </div>
-            </styled.LoginSignUpform>
-        </main>
+            </form>
+        </div>
         </>
     );
 };

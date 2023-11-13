@@ -1,0 +1,30 @@
+.menuContainer {
+  position: absolute;
+  width: 20%;
+  background-color: #fff;
+  border: 1px solid rgb(186, 185, 185);
+  z-index: 100;
+  top: 10.5%;
+  right: 5%;
+  border-radius: 17px;
+  padding: 15px 0px;
+  box-shadow: rgb(198, 197, 197) -1px 2px 30px -15px;
+}
+
+.menu {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  padding: 5px 5px 5px 15px;
+  transition: all 0.1s ease-in-out;
+}
+
+.menu:hover {
+  background-color: rgb(238, 238, 238);
+}
+
+.menuLink {
+  display: block;
+  padding: 12px 5px;
+  width: 100%; 
+}

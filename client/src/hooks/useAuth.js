@@ -5,11 +5,11 @@ import { useDispatch } from "react-redux";
 
 
 
-
 const useAuth = () => {
 
         const navigate = useNavigate();
         const dispatch = useDispatch();
+
 
         const authAndNavigate = async (route) => {
             try {

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams , useNavigate } from "react-router-dom";
-import * as styled from "../styles/styledComponents";
-import CommentList from "../components/NoticeBoard/Comment/CommentList";
-import FooterNavbar from "../components/FooterNavbar";
+import CommentList from "../components/PostDetail/Comment/CommentList";
+import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
 import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
 import Loading from "../components/Loading";
 import { deletePostPreviewImageToS3 } from "../utils/awsS3Setting";
+import styles from "../components/PostDetail/PostDetail.module.css";
 
 
 
@@ -23,11 +23,9 @@ const PostsDetail = () => {
 
 
     const getPostDetail = async () => {
-
         const postId = id;
 
         try {
-
             const response =  
             await axios.get(
                 `/api/posts/getPost?id=${ postId }` , 
@@ -35,44 +33,31 @@ const PostsDetail = () => {
             );
 
             if (response) {
-
                 const postData = response.data.list;
 
                 if (postData) {
-
                     const parts = postData.id.split("_");
                     const userId = parts[0];
-
                     postData.id = userId;
-
                     setPost(postData);
-
                 }
-
             }
 
             setIsLoading(false);
-
         }
         catch (error) {
             console.log(error);
         }
-
     }
 
 
     const onClickDeletePost = async () => {
-
         const postId = {
             postId: id
         }
 
         try {
-
             if (window.confirm("게시물을 정말 삭제하시겠습니까?")) {
-
-                setIsLoading(true);
-
                 if (post.image) {
                     await deletePostPreviewImageToS3(post.image);
                 }
@@ -85,21 +70,15 @@ const PostsDetail = () => {
                 );
 
                 if (response.data.deleteSuccess === true) {
-
                     alert(response.data.messsage);
                     navigate(-1, { replace: true });
                     return;
-
                 }
-                
-                if (response.data.deleteSuccess === false) {
 
+                if (response.data.deleteSuccess === false) {
                     alert(response.data.messsage);
                     return;
-
                 }
-
-                setIsLoading(false);
             }
 
         }
@@ -110,7 +89,6 @@ const PostsDetail = () => {
 
 
     useEffect(() => {
-
         if (post) {
             getPostDetail();
         }
@@ -120,103 +98,75 @@ const PostsDetail = () => {
     return (
         <>
         {
-            
-        isLoading ?
-
-        <Loading />
-
-        :
-
-        <div className = "post-detail__container">
-
-            <div className = "post-header">
-
-                <div className = "post-go-to-list">
-
+            isLoading ?
+            <Loading />
+            :
+            <div className = { styles.detailContainer } >
+                <div className = { styles.header } >
+                    <div className = { styles.headerTitle} >
                         <span>
                             자유 게시판
                         </span>
-
-                </div>
-
-                <div className = "post-title__area">
-
-                    <h2 className = "post-title">
-                        { post.title }
-                    </h2>
-
-                </div>
-
-                <div className = "post-user__wrap">
-
-                    <div className = "user-info">
-
-                        <span className = "user-id">
-                            { post.id }
-                        </span>
-
                     </div>
 
-                    <div className = "user-info">
-
-                        <styled.Span className = "user-date">
-
-                            {
-                                `
-                                ${ getDate(post.createdAt).year }-${
-                                    getDate(post.createdAt).month + 1 }-${
-                                        getDate(post.createdAt).date } 
-
-                                ${ getDate(post.createdAt).hours }:${
-                                    getDate(post.createdAt).minutes }`
-                            }
-
-                        </styled.Span>
-
+                    <div className = "post-title__area">
+                        <h2 className = { styles.title } >
+                            { post.title }
+                        </h2>
                     </div>
 
-                    <div className = "user-info">
+                    <div className = "post-user__wrap">
+                        <div className = { styles.info} >
+                            <span className = { styles.id } >
+                                { post.id }
+                            </span>
+                        </div>
 
-                        <span 
-                        className = "edit-delete"
-                        onClick = { () => {
+                        <div className = { styles.info} >
+                            <span className = "user-date">
+                                {
+                                    `
+                                    ${ getDate(post.createdAt).year }-${
+                                        getDate(post.createdAt).month + 1 }-${
+                                            getDate(post.createdAt).date } 
 
-                            if (window.confirm("게시글을 수정하시겠습니까?")) {
+                                    ${ getDate(post.createdAt).hours }:${
+                                        getDate(post.createdAt).minutes }`
+                                }
+                            </span>
+                        </div>
 
-                                navigate(`/postUpdate/${ id }`);
-                                return;
+                        <div className = { styles.info} >
+                            <span 
+                            className = { styles.button }
+                            onClick = { () => {
+                                if (window.confirm("게시글을 수정하시겠습니까?")) {
+                                    navigate(`/postUpdate/${ id }`);
+                                    return;
+                                }
+                            }} >
+                                수정
+                            </span>
 
-                            }
-
-                        }} >
-                            수정
-                        </span>
-
-                        <span 
-                        className = "edit-delete"
-                        onClick = { onClickDeletePost }>
-                            삭제
-                        </span>
-
+                            <span 
+                            className = { styles.button }
+                            onClick = { onClickDeletePost } >
+                                삭제
+                            </span>
+                        </div>
                     </div>
-
                 </div>
 
+                <div className = { styles.content } >
+                    { Parser(String(post.content)) }
+                </div>
+
+                <CommentList post = { post } />
+
+                <div style = {{ height:"40px" }}></div>
+
+                <FooterNavbar/>
             </div>
-
-            <div className = "post-content">
-
-                { Parser(String(post.content)) }
-
-            </div>
-
-            <CommentList post = { post } />
-
-            <div style = {{ height:"40px" }}></div>
-
-            <FooterNavbar/>
-        </div>
-
         }
         </>
     );
