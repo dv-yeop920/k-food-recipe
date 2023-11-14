@@ -59,7 +59,9 @@ const MyPage = () => {
                 {
                     listTitle.map((item) => {
                         return(
-                            <div className = { styles.iconArea } >
+                            <div 
+                            key = { item.title }
+                            className = { styles.iconArea } >
                                 <FontAwesomeIcon
                                 className = { styles.icon }
                                 icon = { item.icon }

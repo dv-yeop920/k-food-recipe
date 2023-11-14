@@ -9,9 +9,9 @@ import themeSlice from "./slice/themeSlice";
 
 
 const persistConfig = {
-    key: "user",
+    key: ["user", "theme"],
     storage: storageSession,
-    whitelist: ["user"]
+    whitelist: ["user", "theme"]
 };
 
 const rootReducer = combineReducers({

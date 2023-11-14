@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars , faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { faHeart , faCommentDots } from "@fortawesome/free-regular-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./FooterNavbar.module.css";
 
 
@@ -10,45 +10,43 @@ import styles from "./FooterNavbar.module.css";
 
 const FooterNavbar = () => {
 
-    const navigate = useNavigate();
-
     return (
         <>
         <nav className = { styles.container } >
             <ul className = { styles.listArea } >
                 <li className = "bar-list">
+                    <NavLink to = { '/noticeBoard' } >
+                        <FontAwesomeIcon
+                        style = {{ marginRight: "5px" }}
+                        className = { styles.icon }
+                        icon = { faBars }
+                        size = "lg" />
 
-                    <FontAwesomeIcon
-                    style = {{ marginRight: "5px" }}
-                    className = "writing-icon"
-                    icon = { faBars }
-                    size = "lg" />
-
-                    <span 
-                    onClick = { () => navigate(-1, { replace: true }) }
-                    style = {{ cursor:"pointer" , fontWeight:"600" }} >
-                        목록으로 가기
-                    </span>
+                        <span 
+                        className = { styles.icon } >
+                            목록으로 가기
+                        </span>
+                    </NavLink>
                 </li>
 
                 <li className = "bar-list">
                     <FontAwesomeIcon
                     style = {{ color: "red" }}
-                    className = "writing-icon"
+                    className = { styles.icon }
                     icon = { faHeart }
                     size = "lg" />
                 </li>
 
                 <li className = "bar-list">
                     <FontAwesomeIcon
-                    className = "writing-icon"
+                    className = { styles.icon }
                     icon = { faCommentDots }
                     size = "lg" />
                 </li>
 
                 <li className = "bar-list">
                     <FontAwesomeIcon
-                    className = "writing-icon"
+                    className = { styles.icon }
                     icon = { faShareFromSquare }
                     size = "lg" />
                 </li>

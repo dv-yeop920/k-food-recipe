@@ -1,6 +1,8 @@
+@import "../../styles/dark-mode.css";
+
 .main {
   position: fixed;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   top:0%;
   left: 0%;
   height: 100%;
@@ -10,6 +12,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all 0.2s ease-in-out;
 }
 
 .component {

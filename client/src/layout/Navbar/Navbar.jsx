@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser , faBars , faGlobe , faSearch } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { openModal } from "../../store/slice/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toggle, selectDark } from "../../store/slice/themeSlice";
+import { toggleTheme, theme } from "../../store/slice/themeSlice";
 
 
 
 
 const Navbar = () => {
     const dispatch = useDispatch();
-    const { isDark } = useSelector(selectDark);
+    const isDark = useSelector(theme);
+
+    useEffect(() => {
+        document.documentElement.style.setProperty(
+            '--text-color', isDark ? '#fff' : '#333');
+        document.documentElement.style.setProperty(
+            '--background-color', isDark ? '#1d242a' : '#fff');
+        document.documentElement.style.setProperty(
+            '--box-shadow', isDark ? '#1d242a' : '#fff');
+        document.documentElement.style.setProperty(
+            '--border', isDark ? '0.5px solid #fff' : '0.5px solid rgba(0, 0, 0, 0.2)'
+        )
+    }, [isDark]);
+
     return (
         <>
         <header 
@@ -45,7 +58,7 @@ const Navbar = () => {
                     <button 
                     className = { styles.iconButton } 
                     onClick = {() => {
-                        dispatch(toggle());
+                        dispatch(toggleTheme());
                     }}>
                         <span className = { styles.moon } >
                             { isDark ? "☀️" : "🌙" }

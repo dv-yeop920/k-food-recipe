@@ -1,14 +1,16 @@
+@import "../../../styles/dark-mode.css";
+
 .menuContainer {
   position: absolute;
   width: 20%;
-  background-color: #fff;
+  background-color: var(--background-color);
   border: 1px solid rgb(186, 185, 185);
   z-index: 100;
   top: 10.5%;
   right: 5%;
   border-radius: 17px;
   padding: 15px 0px;
-  box-shadow: rgb(198, 197, 197) -1px 2px 30px -15px;
+  box-shadow: rgb(198, 197, 197) -1px 2px 30px -22px;
 }
 
 .menu {

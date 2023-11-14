@@ -1,13 +1,16 @@
-.header {
+@import "../../styles/dark-mode.css";
+
+.header  {
   position: fixed;
   top: 0;
   width: 100%;
   padding: 5px;
-  background-color: #ffffffff;
   border-bottom: 1px solid #ddd;
   height: 4.7em;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -23px;
   z-index:5;
+  background-color: var(--background-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .headerBox {
@@ -49,7 +52,6 @@
   cursor: pointer;
   border-radius: 25px;
   border: 1px solid #ddd;
-  background-color: #fff;
   transition: all 0.2s ease-in-out;
 }
 
@@ -74,7 +76,7 @@
   cursor: pointer;
   border-radius: 20px;
   border: 1px solid #ddd;
-  background-color: #fff;
+  background-color: var(--background-color);;
   margin-left: 15px;
   transition: all 0.2s ease-in-out;
 }
@@ -88,7 +90,7 @@
   margin-right: 4px;
   border: none;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: var(--background-color);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -104,8 +106,10 @@
 
 .icon {
   padding: 5px;
-  color: #2c3e50;
+  color: var(--text-color);
 }
+
+
 
 
 

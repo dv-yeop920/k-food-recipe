@@ -5,7 +5,7 @@ import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
 import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
-import Loading from "../components/Loading";
+import Loading from "../components//Loading/Loading";
 import { deletePostPreviewImageToS3 } from "../utils/awsS3Setting";
 import styles from "../components/PostDetail/PostDetail.module.css";
 

@@ -1,8 +1,10 @@
+@import "../../styles/dark-mode.css";
+
 .editorContainer {
   position: absolute;
   top: 20%;
-  left: 10%;
-  width: 80%;
+  left: 5%;
+  width: 90%;
 }
 
 .contentContainer {
@@ -19,12 +21,12 @@
   height: 25.8em;
   margin-right: 2%;
   box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
   box-shadow: #00000059 0px 1px 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease-in-out;
 }
 
 .imageUploadContainer:hover {
@@ -58,13 +60,15 @@
 
 .title {
   width: 96.5%;
-  background-color: #fff;
+  background-color: var(--background-color);
+  color: var(--text-color);
   padding: 10px 0px 10px 20px;
   font-size: 16px;
   border: 1px solid rgb(203, 203, 203);
   margin-bottom: 10px;
   border-radius: 10px;
   box-sizing: content-box;
+  transition: all 0.2s ease-in-out;
 }
 
 .buttonArea {

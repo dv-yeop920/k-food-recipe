@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import ImageUploader from "../components/Writing/ImageUploader";
 import Content from "../components/Writing/Content";
 import axios from "axios";
-import Loading from "../components/Loading";
+import Loading from "../components/Loading/Loading";
 import { uploadPostPreviewImageToS3 , resizeFile } from "../utils/awsS3Setting";
 import styles from "../components/Writing/Writing.module.css";
 import button from "../styles/Button.module.css";

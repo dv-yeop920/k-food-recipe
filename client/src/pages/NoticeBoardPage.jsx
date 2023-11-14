@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PostSearchInput from "../components/NoticeBoard/PostSearchInput";
 import PostList from "../components/NoticeBoard/PostList";
-import Loading from "../components/Loading";
+import Loading from "../components/Loading/Loading";
 
 
 
@@ -77,7 +77,6 @@ const NoticeBoardPage = () => {
         <PostSearchInput 
         userPostSearchValue = { userPostSearchValue }
         onSubmitGetFilteredPostList = { onSubmitGetFilteredPostList } />
-
         {
             isLoading ?
             <Loading />

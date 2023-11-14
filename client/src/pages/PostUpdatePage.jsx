@@ -2,7 +2,7 @@ import React ,{ useEffect, useState } from "react";
 import { useNavigate , useParams } from "react-router-dom";
 import UpdateContent from "../components/Writing/UpdateContent";
 import axios from "axios";
-import Loading from "../components/Loading";
+import Loading from "../components/Loading/Loading";
 import UpdateImageUploader from "../components/Writing/UpdateImageUploader";
 import 
 { 
