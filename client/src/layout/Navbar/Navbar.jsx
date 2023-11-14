@@ -13,6 +13,7 @@ import { toggleTheme, theme } from "../../store/slice/themeSlice";
 const Navbar = () => {
     const dispatch = useDispatch();
     const isDark = useSelector(theme);
+
     const darkMode = () => {
         const DOM_STYLE = document.documentElement.style;
 
@@ -32,10 +33,10 @@ const Navbar = () => {
             '0.5px solid rgba(0, 0, 0, 0.2)');
         DOM_STYLE.setProperty(
             '--submit-background-color', isDark ? 
-            '#2980b9' : '#1abc9c');
+            '#3498db' : '#1abc9c');
         DOM_STYLE.setProperty(
             '--title-color', isDark ? 
-            '#2980b9' : '#1abc9c');
+            '#3498db' : '#1abc9c');
         DOM_STYLE.setProperty(
             '--submit-hover-background-color', isDark ? 
             '#286791' : '#2980b9');

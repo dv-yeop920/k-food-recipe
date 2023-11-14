@@ -55,7 +55,7 @@
 
 .li {
   list-style: none;
-  padding: 30px;
+  padding: 0px 30px;
   margin-bottom: 20px;
   cursor: pointer;
   background-color: var(--background-color);
@@ -69,6 +69,11 @@
 
 .li:hover {
   transform: perspective(500px) translateZ(5px);
+}
+
+.navLink {
+  width: 100%;
+  padding: 30px 0px;
 }
 
 .title {

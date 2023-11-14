@@ -59,10 +59,9 @@ const Pagination = (
                                 key = { number } 
                                 className = { styles.li } 
                                 onClick = { () => {
-                                    return paginate(number);
+                                    paginate(number);
                                 }} 
                                 disabled = { pageNumber === number} >
-
                                     <span  className = "page-number">
                                         { number }
                                     </span>
