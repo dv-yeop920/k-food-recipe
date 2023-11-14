@@ -1,10 +1,15 @@
+@import "./dark-mode.css";
+
 .content {
     width: 100%;
+    background-color: var(--input-background-color);
 }
 .content .ql-toolbar {
+    background-color: var(--input-background-color);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+
 .content .ql-container {
     height: 18.5em;
     font-size: 17px;

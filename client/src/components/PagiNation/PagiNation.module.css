@@ -28,12 +28,12 @@
   &:hover {
       cursor: pointer;
       color: white;
-      background-color: #1abc9c;
+      background-color: var(--submit-background-color);
       transform: translateY(-2px);
   }
   &[disabled] {
       color: white;
-      background-color: #1abc9c;
+      background-color: var(--submit-background-color);
   }
 }
 
@@ -48,7 +48,7 @@
   font-weight: 600;
   transition: all 0.2s ease-in-out;
   &:hover {
-      background-color: #1abc9c;
+      background-color: var(--submit-background-color);
       color: white;
       cursor: pointer;
       transform: translateY(-2px);
@@ -69,7 +69,7 @@
   font-weight: 600;
   transition: all 0.2s ease-in-out;
   &:hover {
-      background-color: #1abc9c;
+      background-color: var(--submit-background-color);
       color: white;
       cursor: pointer;
       transform: translateY(-2px);

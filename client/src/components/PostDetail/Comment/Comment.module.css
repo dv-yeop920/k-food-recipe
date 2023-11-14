@@ -19,7 +19,7 @@
   resize: none;
   border: var(--border);
   border-radius: 20px;
-  background-color: var(--background-color);
+  background-color: var(--input-background-color);
   color: var(--text-color);
   font-size: 17px;
   padding: 30px;

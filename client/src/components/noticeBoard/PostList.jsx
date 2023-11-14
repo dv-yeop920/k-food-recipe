@@ -19,18 +19,13 @@ const PostList = (
         <div className = { styles.boardContainer } >
             <ul className = "board">
                 <li 
-                className = { styles.li }
-                style = {{ color: "rgb(200, 50, 100)" }} >
+                className = { styles.li } >
                     <div>
-                        <h3 className = { styles.title } >
+                        <h3 style = {{ color: "rgb(200, 50, 100)" }} >
                             [공지]
                         </h3>
 
-                        <h3 
-                        style = {{
-                            fontSize:"16px",
-                            color:"black"
-                        }}>
+                        <h3 className = { styles.title } >
                             게시판 이용 수칙
                         </h3>
                     </div>

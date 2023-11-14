@@ -1,3 +1,5 @@
+@import "./dark-mode.css";
+
 .signButton {
   width: 100%;
   margin-top: 15px;
@@ -7,11 +9,11 @@
   font-size: 17px;
   text-align: center;
   font-weight: 600;
-  background-color: #1abc9c;
+  background-color: var(--submit-background-color);
   border-radius: 5px;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .submit {
@@ -21,11 +23,11 @@
   font-size: 17px;
   text-align: center;
   font-weight: 600;
-  background-color: #1abc9c;
+  background-color: var(--submit-background-color);
   border-radius: 5px;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .cancle {
@@ -39,16 +41,16 @@
   border-radius: 5px;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  transition: all 0.2s ease-in-out;
   margin-right: 40px;
 }
 
 .signButton:hover {
-  background-color: #16a085;
+  background-color: var(--submit-hover-background-color);
 }
 
 .submit:hover {
-  background-color: #16a085;
+  background-color: var(--submit-hover-background-color);
 }
 
 .cancle:hover {

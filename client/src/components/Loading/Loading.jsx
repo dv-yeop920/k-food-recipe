@@ -1,8 +1,12 @@
 import React from "react";
 import { BounceLoader } from "react-spinners";
 import styles from "./Loading.module.css";
+import { useSelector } from "react-redux";
+import { theme } from "../../store/slice/themeSlice";
 
 const Loading = () => {
+    const isDark = useSelector(theme);
+
     return (
         <>
         <div 
@@ -13,7 +17,7 @@ const Loading = () => {
 
             <BounceLoader 
             className = "loadig-spinner" 
-            color="#36d7b7" />
+            color = { isDark ? "#2980b9" : "#36d7b7" } />
         </div>
         </>
     );

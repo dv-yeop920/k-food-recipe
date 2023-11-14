@@ -13,7 +13,7 @@
     height: 100%;
     position: fixed;
     z-index: 5;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .container {
@@ -22,7 +22,7 @@
     top: 7%;
     left: 33%;
     width: 33%;
-    box-shadow: #00000059 0px 5px 15px;
+    box-shadow: var(--box-shadow);
     border-radius: 8px;
     z-index: 10;
 }
@@ -53,23 +53,24 @@
 }
 
 .input {
-    background-color: var(--background-color);
+    background-color: var(--input-background-color);
     color: var(--text-color);
     font-size: 17px;
     border: none;
-    padding: 8px 0px 10px 10px;
+    border-radius: 7px 7px 0px 0px;
+    padding: 10px 0px 10px 10px;
     cursor: pointer;
     margin-bottom: 20px;
     border-bottom: 2px solid var( --text-color);
     transition: all 0.2s ease-in-out;
 }
 
-.input:hover:focus {
-    border-bottom: 2px solid #1abc9c;
+.input:hover {
+    border-bottom: 2px solid var(--submit-background-color);
 }
 
 .input:focus {
-    border-bottom: 2px solid #1abc9c;
+    border-bottom: 2px solid var(--submit-background-color);
 }
 
 .user-form__button-box {

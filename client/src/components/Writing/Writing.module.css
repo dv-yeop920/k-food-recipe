@@ -15,9 +15,9 @@
 
 .imageUploadContainer {
   position: relative;
-  background-color: rgb(232, 231, 231);
+  background-color: var(--input-background-color);
   border-radius: 20px;
-  width: 25%;
+  width: 20%;
   height: 25.8em;
   margin-right: 2%;
   box-sizing: border-box;
@@ -55,12 +55,12 @@
 
 .writingContainer {
   box-sizing: border-box;
-  width: 55%;
+  width: 80%;
 }
 
 .title {
-  width: 96.5%;
-  background-color: var(--background-color);
+  width: 97.3%;
+  background-color: var(--input-background-color);
   color: var(--text-color);
   padding: 10px 0px 10px 20px;
   font-size: 16px;

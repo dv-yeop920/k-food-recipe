@@ -32,7 +32,7 @@
 }
 
 .title {
-  color: #16a085;
+  color: var(--title-color);
   cursor: pointer;
 }
 
