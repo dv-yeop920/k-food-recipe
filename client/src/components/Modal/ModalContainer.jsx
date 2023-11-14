@@ -19,7 +19,8 @@ const ModalContainer = () => {
     userPassword,
     checkPassword,
     userEmail,
-    onChangeValue
+    onChangeValue,
+    setValueInit
 ] = useInput("");
 
   if (!isOpen) {
@@ -51,7 +52,8 @@ const ModalContainer = () => {
                 closeModal = { handleCloseModal } 
                 userId = { userId }
                 userPassword = { userPassword }
-                onChangeValue = { onChangeValue } />
+                onChangeValue = { onChangeValue }
+                setValueInit = { setValueInit } />
       case "signup":
         return <SignUpModal 
                 openModal = { handleOpenModal }
@@ -61,7 +63,8 @@ const ModalContainer = () => {
                 userPassword = { userPassword }
                 checkPassword = { checkPassword }
                 userEmail = { userEmail } 
-                onChangeValue = { onChangeValue } />
+                onChangeValue = { onChangeValue } 
+                setValueInit = { setValueInit } />
       case "menu":
         return <MenuModal 
                 openModal = { handleOpenModal }
@@ -75,7 +78,8 @@ const ModalContainer = () => {
     <div 
     className = { 
       type === "signup" | type === "login" ? 
-      styles.signModal : styles.modal 
+      styles.signModal : 
+      styles.modal 
     }
     ref = { modalRef }
     onClick = { handleClickOutside } >

@@ -79,7 +79,14 @@ const WritingPage = () => {
                 console.log(error);
                 throw error;
             }
-        }, [userId, title, content, PostPreviewImageFile, navigate]);
+        }, 
+        [
+            userId, 
+            title, 
+            content, 
+            PostPreviewImageFile, 
+            navigate
+        ]);
 
 
     return (

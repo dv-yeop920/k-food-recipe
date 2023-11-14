@@ -84,7 +84,7 @@ const Content = (
         [{ "list" : "bullet" }],
         [{ "color" : [] }], 
         [{ "background" : [] }],
-    ]
+    ];
 
     const modules = useMemo(() => {
         return {

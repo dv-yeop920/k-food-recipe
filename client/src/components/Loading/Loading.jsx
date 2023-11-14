@@ -17,7 +17,7 @@ const Loading = () => {
 
             <BounceLoader 
             className = "loadig-spinner" 
-            color = { isDark ? "#2980b9" : "#36d7b7" } />
+            color = { isDark ? "#3498db" : "#36d7b7" } />
         </div>
         </>
     );

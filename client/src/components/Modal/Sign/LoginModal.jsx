@@ -16,6 +16,7 @@ const LoginModal = (
         userId,
         userPassword,
         onChangeValue,
+        setValueInit
     }) => {
 
     const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const LoginModal = (
         }
 
         try {
+            console.log(userId)
                 const response = 
                 await axios.post(
                     "/api/users/login" , 
@@ -54,6 +56,7 @@ const LoginModal = (
 
                 if (response.data.isLogin === true) {
                     setMessage("");
+                    setValueInit("login");
                     alert(response.data.messsage);
                     closeModal();
                     dispatch(loginUser(response.data));

@@ -17,6 +17,7 @@ const SignUpModal = (
         checkPassword,
         userEmail,
         onChangeValue,
+        setValueInit
     }) => {
 
     const [message , setMessage] = useState("");
@@ -47,7 +48,8 @@ const SignUpModal = (
             if (response.data.success === true) {
                 alert(response.data.messsage);
                 setMessage("");
-                closeModal();
+                setValueInit("signUp");
+                openModal("login");
                 return;
             }
         }
@@ -109,12 +111,14 @@ const SignUpModal = (
                 </div>
 
                 <input 
+                id = "user-form__name"
                 className = { styles.input }
                 type = "text"
                 placeholder = "이름" 
                 onChange = { onChangeValue } />
 
                 <input 
+                id = "user-form-id"
                 className = { styles.input }
                 type = "text"
                 placeholder = "아이디 5~15자리 특수 문자는 제외"
@@ -122,6 +126,7 @@ const SignUpModal = (
                 onChange = { onChangeValue } />
 
                 <input 
+                id = "user-form-pw"
                 className = { styles.input }
                 type = "password"
                 maxLength = "15"
@@ -129,12 +134,14 @@ const SignUpModal = (
                 onChange = { onChangeValue } />
 
                 <input 
+                id = "user-form__pw-check"
                 className = { styles.input } 
                 type = "password"
                 placeholder = "비밀 번호 확인"
                 onChange = { onChangeValue } />
 
                 <input 
+                id = "user-form__email"
                 className = { styles.input } 
                 type = "email"
                 placeholder = "이메일" 

@@ -49,38 +49,13 @@ const UpdateContent = (
         });
     }
 
-    const modules = useMemo(() => {
-        return {
-            toolbar: {
-                container: [
-                    ["image"],
-                    ["video"],  
-                    [{ "header" : [1, 2, 3, 4, 5, 6, false] }],
-                    [{ "align" : [] }],
-                    ["bold"],
-                    ["underline"],
-                    ["strike"], 
-                    ["blockquote"],
-                    [{ "list" : "ordered" }],
-                    [{ "list" : "bullet" }],
-                    [{ "color" : [] }], 
-                    [{ "background" : [] }],
-                ],
-                handlers: {
-                    image: imageHandler
-                }
-            }
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    } , []);
-    
-    
     const formats = [
         "image",
         "video",
         "header",
         "align",
         "bold",
+        "size",
         "underline",
         "strike",
         "blockquote",
@@ -91,6 +66,33 @@ const UpdateContent = (
         "background",
     ];
 
+    const toolbarOptions = [
+        ["image"],
+        ["video"],  
+        ["bold"],
+        [{ "header" : [1, 2, 3, 4, 5, 6, false] }],
+        [{ "align" : [] }],
+        [{ "size": ['small', false, 'large', 'huge'] }], 
+        ["underline"],
+        ["strike"], 
+        ["blockquote"],
+        [{ "list" : "ordered" }],
+        [{ "list" : "bullet" }],
+        [{ "color" : [] }], 
+        [{ "background" : [] }],
+    ];
+
+    const modules = useMemo(() => {
+        return {
+            toolbar: {
+                container: toolbarOptions ,
+                handlers: {
+                    image: imageHandler,
+                }
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , []);
 
 
     const handelChangeTitle = (e) => {
@@ -131,7 +133,6 @@ const UpdateContent = (
                 ref = { updateQuillRef }
                 theme = "snow"
                 value = { editContentValue }
-                name = { editContentValue }
                 modules = { modules }
                 formats = { formats }
                 onChange = { handleChangeContent } /> 

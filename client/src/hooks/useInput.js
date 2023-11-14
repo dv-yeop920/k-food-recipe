@@ -34,13 +34,30 @@ const useInput = (initialState) => {
         }
     }
 
+    const setValueInit = (value) => {
+        if (value === "login") {
+            setUserId("");
+            setUserPassword("");
+            return;
+        }
+        if (value === "signUp") {
+            setName("");
+            setUserId("");
+            setUserPassword("");
+            setCheckPassword("");
+            setUserEmail("");
+            return;
+        }
+    }
+
     return [
         userName,
         userId,
         userPassword,
         checkPassword,
         userEmail,
-        onChangeValue
+        onChangeValue,
+        setValueInit
     ];
 }
 
