@@ -2,6 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { openModal } from "../store/slice/modalSlice";
 import { useDispatch } from "react-redux";
+import { loginUser } from "../store/slice/userSlice";
 
 
 
@@ -16,11 +17,13 @@ const useAuth = () => {
                 const response = await axios.get("/api/users/auth");
 
                 if (response.data.isAuth === true) {
+                    dispatch(loginUser(response.data));
                     navigate(route);
+                    return;
                 }
 
                 if (response.data.isAuth === false) {
-                    alert("로그인 유저만 이용할 수 있습니다");
+                    alert(response.data.message);
                     dispatch(openModal('login'));
                     return;
                 }

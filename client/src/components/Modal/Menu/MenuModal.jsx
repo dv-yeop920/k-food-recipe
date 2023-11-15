@@ -54,15 +54,14 @@ const MenuModal = ({ openModal, closeModal }) => {
 
                 <li 
                 style = {{ borderBottom:"1px solid #ddd" }}
-                className = { styles.menu } >
-                    <NavLink 
-                    className = { styles.menuLink }
-                    onClick = {() => {
-                        authAndNavigate("/myPage");
-                        closeModal();
+                className = { styles.menu } 
+                onClick = { () => {
+                    authAndNavigate("/mypage");
+                    closeModal();
                     }} >
+                    <span className = { styles.menuLink } >
                         마이 페이지
-                    </NavLink>
+                    </span>
                 </li>
 
                 { 

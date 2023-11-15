@@ -98,15 +98,21 @@ app.post("/api/users/login", async (req , res) => {
         //비번 비교
         docs.comparePassword(req.body.password, (error, isMatch) => {
             const currentTime = new Date();
-            const oneHourInMilliseconds = 1000 * 60 * 60;
+            const oneHourInMilliseconds = 1000 * 60 * 100;
             const expirationTime = new Date(currentTime.getTime() + oneHourInMilliseconds);
 
-            // Password가 일치하다면 토큰 생성
-            if(isMatch) {
-                docs.generateToken((err, user)=>{
+            // Password가 일치하다면 리프레시 , 엑세스 토큰 생성
+            if (isMatch) {
+                docs.generateRefreshToken((err, user) => {
                     if(err) {
                         res.status(400).send(error);
                     }
+
+                    docs.generateAccessToken((err, accessToken) => {
+                        if (err) {
+                            res.status(400).send(error);
+                        }
+
                     const cookieOptions = {
                         domain: "localhost",
                         path: "/",
@@ -114,26 +120,28 @@ app.post("/api/users/login", async (req , res) => {
                         httpOnly: true,
                         sameSite: "strict"
                     }
-                    // 토큰을 저장
+
+                    // 리프레시토큰을 브라우저에 저장
                         res.cookie("x_auth", user.token, cookieOptions)
                         .status(200)
                         .json({
-                            messsage: "안녕하세요!",
                             isLogin: true, 
+                            messsage: "안녕하세요!",
                             id: user.id,
                             name: user.name,
                             email: user.email,
-                            token: user.token
+                            accessToken: accessToken
                         });
-                })
+                    });
+                });
             }
             else {
                 return res.json({
-                    loginSuccess: false, 
+                    isLogin: false, 
                     messsage: "비밀번호가 틀렸습니다."
                 });
             }
-        })
+        });
     })
     .catch((error)=>{
         return res.status(400).send(error);
@@ -150,9 +158,10 @@ app.get("/api/users/auth" , auth , (req , res) => {
         id: req.user.id,
         name: req.user.name,
         email: req.user.email,
+        isAuth: true,
+        accessToken: req.user.accessToken
         //어드민 유저 설정
         //isAdmin: req.user.role === 0 ? false : true,
-        isAuth: true,
         //role: req.user.role,
     });
 });

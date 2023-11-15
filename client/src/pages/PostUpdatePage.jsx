@@ -173,4 +173,4 @@ const PostsUpdatePage = () => {
     );
 };
 
-export default PostsUpdatePage;
+export default  PostsUpdatePage;

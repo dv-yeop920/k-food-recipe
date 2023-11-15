@@ -1,16 +1,12 @@
 import React, { useState , useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PostSearchInput from "../components/NoticeBoard/PostSearchInput";
 import PostList from "../components/NoticeBoard/PostList";
 import Loading from "../components/Loading/Loading";
 
 
-
-
 const NoticeBoardPage = () => {
 
-    const navigate = useNavigate();
     const userPostSearchValue = useRef(null);
     const [postList , setPostList] = useState([]);
     const [totalPostLength , setTotalPostLength] = useState([]);
@@ -49,11 +45,6 @@ const NoticeBoardPage = () => {
     }
 
 
-    const onClickPostDetailNavigate = (postId) => {
-        return navigate(`/postDetail/${ postId }`);
-    }
-
-
     const onSubmitGetFilteredPostList = async (e) => {
         e.preventDefault();
 
@@ -83,7 +74,6 @@ const NoticeBoardPage = () => {
             :
             <PostList 
             postList = { postList }
-            onClickPostDetailNavigate = { onClickPostDetailNavigate } 
             postPerPage = { POST_PER_PAGE }
             totalPostLength = { totalPostLength }
             paginate = { setPageNumber }

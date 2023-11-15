@@ -15,7 +15,7 @@ const FooterNavbar = () => {
         <nav className = { styles.container } >
             <ul className = { styles.listArea } >
                 <li className = "bar-list">
-                    <NavLink to = { '/noticeBoard' } >
+                    <NavLink to = "/noticeBoard" >
                         <FontAwesomeIcon
                         style = {{ marginRight: "5px" }}
                         className = { styles.icon }

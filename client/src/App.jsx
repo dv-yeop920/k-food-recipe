@@ -13,7 +13,6 @@ import ModalContainer from "./components/Modal/ModalContainer";
 
 
 
-
 function App() {
   return (
     <>
@@ -24,7 +23,7 @@ function App() {
       <Route path = "/" element = { <MainPage/> } />
       <Route path = "/recipe" element = { <RecipePage/> } />
       <Route path = "/noticeBoard" element = { <NoticeBoardPage/> } />
-      <Route path = "/myPage" element = { <MyPage/> } />
+      <Route path = "/myPage" element = { <MyPage/>} />
       <Route path = "/writing" element = { <WritingPage/> } />
       <Route path = "/postDetail/:id" element = { <PostDetailPage/> } />
       <Route path = "/postUpdate/:id" element = { <PostUpdatePage/> } />

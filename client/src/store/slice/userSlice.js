@@ -10,7 +10,8 @@ const userSlice = createSlice({
         isLogin: false , 
         id: "" ,
         name: "" ,
-        email: ""
+        email: "",
+        accessToken: ""
     },
 
     reducers: {

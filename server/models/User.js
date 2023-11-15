@@ -62,13 +62,28 @@ userSchema.methods.comparePassword = function(plainPassword , callBack) {
         callBack(null , isMatch);
     });
 }
-//토큰 생성 함수
-userSchema.methods.generateToken = function(callBack) {
+
+//accessToken 생성함수
+userSchema.methods.generateAccessToken = function(callBack)  {
+    const user = this;
+    //accessToken 생성
+    try {
+        const accessToken = jwt.sign({ _id: user._id.toJSON() } , "accessToken", { expiresIn: "1h" });
+        console.log(accessToken)
+        callBack(null, accessToken);
+    }
+    catch (error) {
+        console.error("AccessToken생성에러: ", error);
+        callBack(error);
+    }
+}
+
+//리프레시 토큰 생성 함수
+userSchema.methods.generateRefreshToken = function(callBack) {
     const user = this;
     //jwt로 토큰 생성하는 함수
-    const token = jwt.sign(user._id.toJSON() , "userToken");
-    user.token = token;
-
+    const refreshToken = jwt.sign(user._id.toJSON() , "userToken");
+    user.token = refreshToken;
     user.save()
     .then((result)=>{
         callBack(null , result);

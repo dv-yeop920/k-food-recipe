@@ -6,8 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const PostList = (
     { 
-        postList ,  
-        onClickPostDetailNavigate , 
+        postList ,   
         postPerPage , 
         totalPostLength ,
         paginate , 
