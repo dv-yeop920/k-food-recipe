@@ -5,12 +5,13 @@ import Comment from "./Comment";
 import CommentInput from "./CommentInput";
 import styles from "./Comment.module.css";
 import useAuth from "../../../hooks/useAuth";
+import { selectUser } from "../../../store/slice/userSlice";
 
 
 
 const CommentList = ({ post }) => {
 
-    const userId = useSelector(user => user.user.id);
+    const { userId } = useSelector(selectUser);
     const postId = post._id;
     const { authAndNavigate } = useAuth();
 

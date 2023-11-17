@@ -8,12 +8,13 @@ import Loading from "../components/Loading/Loading";
 import { uploadPostPreviewImageToS3 , resizeFile } from "../utils/awsS3Setting";
 import styles from "../components/Writing/Writing.module.css";
 import button from "../styles/Button.module.css";
+import { selectUser } from "../store/slice/userSlice";
 
 
 
 const WritingPage = () => {
 
-    const userId = useSelector(user => user.user.id);
+    const { userId } = useSelector(selectUser);
     const navigate = useNavigate();
     const [isLoading , setIsLoading] = useState(false);
 

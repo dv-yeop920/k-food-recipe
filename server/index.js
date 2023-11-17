@@ -133,9 +133,9 @@ app.post("/api/users/login", async (req , res) => {
                         .json({
                             isLogin: true, 
                             messsage: "안녕하세요!",
-                            id: user.id,
-                            name: user.name,
-                            email: user.email,
+                            userId: user.id,
+                            userName: user.name,
+                            userEmail: user.email,
                         //엑세스는 응답 값으로 전달
                             accessToken: accessToken
                         });
@@ -163,9 +163,9 @@ app.get("/api/users/auth" , auth , (req , res) => {
     res.status(200)
     .json({
         _id: req.user._id,
-        id: req.user.id,
-        name: req.user.name,
-        email: req.user.email,
+        userId: req.user.id,
+        userName: req.user.name,
+        userEmail: req.user.email,
         isAuth: true,
         accessToken: req.user.accessToken
         //어드민 유저 설정

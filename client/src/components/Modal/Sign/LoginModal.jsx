@@ -6,7 +6,7 @@ import {faX} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../store/slice/userSlice";
 import axios from "axios";
-import { setAccessToken } from "../../../utils/accessToken";
+//import { setAccessToken } from "../../../utils/accessToken";
 
 
 
@@ -22,9 +22,10 @@ const LoginModal = (
 
     const dispatch = useDispatch();
     const [message , setMessage] = useState("");
+    const JWT_EXPIRY_TIME = 1000 * 60 * 10;
 
 
-    const handleClickLogin = async (e) => {
+    const onSumitLogin = async (e) => {
         e.preventDefault();
         //유효성 검사
         if (userId === "") {
@@ -49,9 +50,6 @@ const LoginModal = (
                     userInfo , 
                     { timeout: 10000 }
                 );
-                const { accessToken } = response.data;
-                axios.defaults.headers.common["Authorization"] = 
-                `Bearer ${ accessToken }`;
 
                 if (response.data.isLogin === false) {
                     setMessage(response.data.messsage);
@@ -61,9 +59,10 @@ const LoginModal = (
                 if (response.data.isLogin === true) {
                     setMessage("");
                     setValueInit("login");
+                    onLoginSuccess(response);
                     alert(response.data.messsage);
                     dispatch(loginUser(response.data));
-                    setAccessToken(accessToken);
+                    //setAccessToken(accessToken);
                     closeModal();
                     return;
                 }
@@ -74,12 +73,29 @@ const LoginModal = (
         }
     }
 
+    const onSilentRefresh = () => {
+        axios.post('/silent-refresh', {})
+            .then(onLoginSuccess)
+    }
+
+
+    const onLoginSuccess = (response) => {
+        const { accessToken } = response.data;
+        // accessToken 설정
+        axios.defaults.headers.common['Authorization'] = 
+        `Bearer ${ accessToken }`;
+        console.log(accessToken)
+    
+        // accessToken 만료하기 1분 전에 로그인 연장
+        setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 50000);
+    }
+
     return (
         <>
         <div className = { styles.container }>
             <form
             className = { styles.form }
-            onSubmit = { handleClickLogin } >
+            onSubmit = { onSumitLogin } >
                 <div className = { styles.header} >
                     <FontAwesomeIcon
                     className = { styles.cancel }

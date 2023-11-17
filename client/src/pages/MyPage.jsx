@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faHeart , faFaceSmileBeam } from "@fortawesome/free-regular-svg-icons";
 import styles from "../components/MyPage/MyPage.module.css";
+import { selectUser } from "../store/slice/userSlice";
 
 
 const MyPage = () => {
 
-    const user = useSelector(state => state.user);
+    const { userName } = useSelector(selectUser);
 
     const listTitle = 
     [
@@ -49,7 +50,7 @@ const MyPage = () => {
                         </h1>
 
                         <h2 className = { styles.hello } > 
-                            { `${ user.name } 님!` }
+                            { `${ userName } 님!` }
                         </h2>
                     </div>
                 </div>

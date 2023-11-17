@@ -13,6 +13,7 @@ import ScrollTop from "./services/scrollTop";
 
 const BASE_URL = process.env.REACT_APP_PORT_NUMBER;
 
+//NOTE - axios 로 요청할때 마다 헤더에 accessToken 담아서 보낼 수 있도록 url 설정
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.withCredentials = true;
 

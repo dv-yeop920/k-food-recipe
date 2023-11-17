@@ -29,6 +29,7 @@ const store =  configureStore({
     }).concat(logger)
 });
 
+
 export default store;
 
 

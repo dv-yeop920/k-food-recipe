@@ -30,7 +30,7 @@ const CommentInput = (
                 <button
                 type = { userId === "" ? "button" : "submit" }
                 className = { button.submit } 
-                onClick = { authAndNavigate }>
+                onClick = { () => authAndNavigate() }>
                     등록
                 </button>
             </div>

@@ -3,10 +3,9 @@ import styles from "./MenuModal.module.css";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import { useSelector ,  useDispatch } from "react-redux";
-import { logoutUser } from "../../../store/slice/userSlice";
+import { logoutUser, selectUser } from "../../../store/slice/userSlice";
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
-
 
 
 
@@ -14,7 +13,7 @@ const MenuModal = ({ openModal, closeModal }) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
+    const { isLogin } = useSelector(selectUser);
     const { authAndNavigate } = useAuth();
 
 
@@ -45,7 +44,7 @@ const MenuModal = ({ openModal, closeModal }) => {
                 <li
                 className = { styles.menu }
                 onClick = { closeModal } >
-                    <NavLink 
+                    <NavLink
                     className = { styles.menuLink }
                     to = "/noticeBoard">
                         자유 게시판
@@ -65,7 +64,7 @@ const MenuModal = ({ openModal, closeModal }) => {
                 </li>
 
                 { 
-                    user.isLogin === true ? 
+                    isLogin === true ? 
                     null 
                     :
                     <li 
@@ -82,12 +81,12 @@ const MenuModal = ({ openModal, closeModal }) => {
                 <li 
                 className = { styles.menu }
                 onClick = { () => {
-                    user.isLogin === false && openModal("login");
-                    user.isLogin === true && handleClickLogout();
+                    isLogin === false && openModal("login");
+                    isLogin === true && handleClickLogout();
                     return;
                 }} >
                     <span className = { styles.menuLink } >
-                        { user.isLogin === true ? "로그아웃" : "로그인" }
+                        { isLogin === true ? "로그아웃" : "로그인" }
                     </span>
                 </li>
             </ul>
