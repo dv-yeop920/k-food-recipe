@@ -7,6 +7,8 @@ import getDate from "../../../utils/postDate";
 
 const Comment = (
     { 
+        userId,
+        commentUserId,
         commentId , 
         comment , 
         isEdit , 
@@ -111,16 +113,16 @@ const Comment = (
                             setUpdateComment(comment.content);
                             return;
                         }}>
-                            수정
+                            { userId === commentUserId ? "수정" : ""}
                         </span>
 
                         <span 
                         className = { styles.button }
                         onClick = { () => {
-                        onClickCommentDelete(commentId); 
+                        onClickCommentDelete(commentId);
                         return;
                         }} >
-                            삭제
+                            { userId === commentUserId ? "삭제" : ""}
                         </span>
                         </>)
                     }

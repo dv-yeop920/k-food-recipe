@@ -50,6 +50,8 @@ const LoginModal = (
                     { timeout: 10000 }
                 );
                 const { accessToken } = response.data;
+                axios.defaults.headers.common["Authorization"] = 
+                `Bearer ${ accessToken }`;
 
                 if (response.data.isLogin === false) {
                     setMessage(response.data.messsage);

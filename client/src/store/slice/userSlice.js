@@ -11,7 +11,6 @@ const userSlice = createSlice({
         id: "" ,
         name: "" ,
         email: "",
-        accessToken: ""
     },
 
     reducers: {

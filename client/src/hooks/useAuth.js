@@ -18,7 +18,9 @@ const useAuth = () => {
 
                 if (response.data.isAuth === true) {
                     dispatch(loginUser(response.data));
-                    navigate(route);
+                    if (route) {
+                        navigate(route);
+                    }
                     return;
                 }
 

@@ -1,9 +1,11 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 //env 파일 값을 읽을 수 있게 해주는 모듈
 require("dotenv").config();
 
 const PORT = process.env.PORT_NUMBER;
+const ORIGIN_PORT = process.env.ORIGIN_PORT;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 //유저 모델을 가져옴
@@ -21,6 +23,10 @@ const { Post } = require("./models/NoticeBoard.js");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: ORIGIN_PORT,
+    credentials: true
+}));
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const mongoose = require("mongoose");
@@ -130,6 +136,7 @@ app.post("/api/users/login", async (req , res) => {
                             id: user.id,
                             name: user.name,
                             email: user.email,
+                        //엑세스는 응답 값으로 전달
                             accessToken: accessToken
                         });
                     });
@@ -152,6 +159,7 @@ app.post("/api/users/login", async (req , res) => {
 app.get("/api/users/auth" , auth , (req , res) => {
     //이코드가 실행 되는것은 미들웨어인 auth가 성공적으로 실행 됐다는뜻
     //성공적으로 됐다면 유저 정보를 클라이언트로 보내줌 
+    console.log(req.user.accessToken)
     res.status(200)
     .json({
         _id: req.user._id,

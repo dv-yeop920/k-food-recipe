@@ -68,8 +68,10 @@ userSchema.methods.generateAccessToken = function(callBack)  {
     const user = this;
     //accessToken 생성
     try {
-        const accessToken = jwt.sign({ _id: user._id.toJSON() } , "accessToken", { expiresIn: "1h" });
-        console.log(accessToken)
+        const accessToken = jwt.sign(
+            { _id: user._id.toJSON() },
+            "accessToken", { expiresIn: "10m" }
+            );
         callBack(null, accessToken);
     }
     catch (error) {

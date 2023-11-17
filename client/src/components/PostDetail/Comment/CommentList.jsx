@@ -4,6 +4,7 @@ import axios from "axios";
 import Comment from "./Comment";
 import CommentInput from "./CommentInput";
 import styles from "./Comment.module.css";
+import useAuth from "../../../hooks/useAuth";
 
 
 
@@ -11,6 +12,7 @@ const CommentList = ({ post }) => {
 
     const userId = useSelector(user => user.user.id);
     const postId = post._id;
+    const { authAndNavigate } = useAuth();
 
     const [comment , setComment] = useState([]);
     const [commentContent , setCommentContent] = useState("");
@@ -170,6 +172,8 @@ const CommentList = ({ post }) => {
             <div className = "comment-container">
                 <div className = { styles.inputWrap } >
                     <CommentInput
+                    userId = { userId }
+                    authAndNavigate = { authAndNavigate }
                     commentContent = { commentContent }
                     setCommentContent = { setCommentContent }
                     onSubmitRegisterComment = { onSubmitRegisterComment } />
@@ -177,7 +181,10 @@ const CommentList = ({ post }) => {
                     {
                         comment &&
                         comment.map((comment) => (
-                            <Comment key = { comment._id }
+                            <Comment 
+                            key = { comment._id }
+                            userId = { userId }
+                            commentUserId = { comment.id }
                             commentId = { comment._id }
                             comment = { comment }
                             isEdit = { isEdit }

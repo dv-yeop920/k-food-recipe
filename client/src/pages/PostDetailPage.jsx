@@ -8,13 +8,14 @@ import getDate from "../utils/postDate";
 import Loading from "../components//Loading/Loading";
 import { deletePostPreviewImageToS3 } from "../utils/awsS3Setting";
 import styles from "../components/PostDetail/PostDetail.module.css";
+import { useSelector } from "react-redux";
 
 
 
 
 
 const PostsDetail = () => {
-
+    const user = useSelector(state => state.user);
     const navigate = useNavigate();
     //postList 에서 넘겨준 게시물의 고유 _id값
     const { id } = useParams();
@@ -145,13 +146,13 @@ const PostsDetail = () => {
                                     return;
                                 }
                             }} >
-                                수정
+                                { post.id === user.id ? "수정" : ""}
                             </span>
 
                             <span 
                             className = { styles.button }
                             onClick = { onClickDeletePost } >
-                                삭제
+                                { post.id === user.id ? "삭제" : ""}
                             </span>
                         </div>
                     </div>

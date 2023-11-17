@@ -3,6 +3,8 @@ import button from "../../../styles/Button.module.css";
 import styles from "./Comment.module.css";
 const CommentInput = (
     { 
+        userId,
+        authAndNavigate,
         commentContent , 
         setCommentContent , 
         onSubmitRegisterComment
@@ -26,8 +28,9 @@ const CommentInput = (
 
             <div className = { styles.buttonArea } >
                 <button
-                type = "submit"
-                className = { button.submit } >
+                type = { userId === "" ? "button" : "submit" }
+                className = { button.submit } 
+                onClick = { authAndNavigate }>
                     등록
                 </button>
             </div>

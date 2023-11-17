@@ -11,7 +11,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import store from "./store/store";
 import ScrollTop from "./services/scrollTop";
 
+const BASE_URL = process.env.REACT_APP_PORT_NUMBER;
 
+axios.defaults.baseURL = BASE_URL;
 axios.defaults.withCredentials = true;
 
 const persistor = persistStore(store);

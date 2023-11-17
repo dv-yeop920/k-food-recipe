@@ -72,8 +72,6 @@ const PostsUpdatePage = () => {
             }
             
             if (window.confirm("게시물 내용을 수정하시겠습니까?")) {
-                setIsLoading(true);
-
                 const updatePosts = {
                     _id: originalDetail._id,
                     title: originalDetail.title,
@@ -87,6 +85,8 @@ const PostsUpdatePage = () => {
                     updatePosts , 
                     { timeout: 10000 }
                 );
+
+                setIsLoading(true);
 
                 if (response.data.updateSuccess === false) {
                     alert(response.data.messsage);

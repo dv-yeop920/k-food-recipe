@@ -74,19 +74,17 @@ const PostList = (
                                         }
                                     </span>
                                 </div>
-
-                                <img 
-                                style = 
-                                {
-                                    post.image ? 
-                                    { height:"70px" , width: "90px" } 
-                                    : 
-                                    {"display": "none"}
-                                }
-                                alt = ""
-                                src = { post.image } 
-                                />
                             </NavLink>
+                            <img 
+                            style = 
+                            {
+                                post.image ? 
+                                { height:"70px" , width: "90px" } 
+                                : 
+                                {"display": "none"}
+                            }
+                            alt = ""
+                            src = { post.image } />
                         </li>
                         );
                     })
