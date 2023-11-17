@@ -128,11 +128,11 @@ app.post("/api/users/login", async (req , res) => {
                     }
 
                     // 리프레시토큰을 브라우저에 저장
-                        res.cookie("x_auth", user.token, cookieOptions)
+                        res.cookie("user", user.token, cookieOptions)
                         .status(200)
                         .json({
                             isLogin: true, 
-                            messsage: "안녕하세요!",
+                            messsage: `안녕하세요 ${ user.name }님!`,
                             userId: user.id,
                             userName: user.name,
                             userEmail: user.email,
@@ -159,7 +159,6 @@ app.post("/api/users/login", async (req , res) => {
 app.get("/api/users/auth" , auth , (req , res) => {
     //이코드가 실행 되는것은 미들웨어인 auth가 성공적으로 실행 됐다는뜻
     //성공적으로 됐다면 유저 정보를 클라이언트로 보내줌 
-    console.log(req.user.accessToken)
     res.status(200)
     .json({
         _id: req.user._id,
@@ -167,7 +166,7 @@ app.get("/api/users/auth" , auth , (req , res) => {
         userName: req.user.name,
         userEmail: req.user.email,
         isAuth: true,
-        accessToken: req.user.accessToken
+        accessToken: req.accessToken
         //어드민 유저 설정
         //isAdmin: req.user.role === 0 ? false : true,
         //role: req.user.role,

@@ -22,7 +22,7 @@ const LoginModal = (
 
     const dispatch = useDispatch();
     const [message , setMessage] = useState("");
-    const JWT_EXPIRY_TIME = 1000 * 60 * 10;
+    //const JWT_EXPIRY_TIME = 1000 * 60 * 10;
 
 
     const onSumitLogin = async (e) => {
@@ -73,21 +73,19 @@ const LoginModal = (
         }
     }
 
-    const onSilentRefresh = () => {
-        axios.post('/silent-refresh', {})
-            .then(onLoginSuccess)
-    }
+    //const onSilentRefresh = () => {
+    //    axios.post('/silent-refresh', {})
+    //        .then(onLoginSuccess)
+    //}
 
 
     const onLoginSuccess = (response) => {
         const { accessToken } = response.data;
         // accessToken 설정
-        axios.defaults.headers.common['Authorization'] = 
+        axios.defaults.headers.common["Authorization"] = 
         `Bearer ${ accessToken }`;
-        console.log(accessToken)
-    
         // accessToken 만료하기 1분 전에 로그인 연장
-        setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 50000);
+        //setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 50000);
     }
 
     return (

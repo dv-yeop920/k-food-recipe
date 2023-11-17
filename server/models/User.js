@@ -69,8 +69,8 @@ userSchema.methods.generateAccessToken = function(callBack)  {
     //accessToken 생성
     try {
         const accessToken = jwt.sign(
-            { _id: user._id.toJSON() },
-            "accessToken", { expiresIn: "10m" }
+            user._id.toJSON() ,
+            "accessToken",
             );
         callBack(null, accessToken);
     }
@@ -84,7 +84,9 @@ userSchema.methods.generateAccessToken = function(callBack)  {
 userSchema.methods.generateRefreshToken = function(callBack) {
     const user = this;
     //jwt로 토큰 생성하는 함수
-    const refreshToken = jwt.sign(user._id.toJSON() , "userToken");
+    const refreshToken = jwt.sign(
+        user._id.toJSON(), 
+        "refreshToken");
     user.token = refreshToken;
     user.save()
     .then((result)=>{
@@ -98,19 +100,19 @@ userSchema.methods.generateRefreshToken = function(callBack) {
 userSchema.statics.findByToken = function(token , callBack) {
     const user = this;
     //token 을 decode (복호화) 한다
-    jwt.verify(token , "userToken" , function(error , decode) {
+    jwt.verify(token , "accessToken" , function(error , decode) {
         //decode = user._id 
         //decode를 이용해서 유저를 찾은 다음 클라이언트에서 가져온 토큰과 db의 토큰이 일치하는지 비교
         user.findOne({
-            "_id": decode ,
-            "token": token })
+            "_id": decode
+            })
         .then((docs) => {
             callBack(null , docs);
         })
         .catch((error) => {
             return callBack(error);
         });
-    })
+    });
 }
 
 
