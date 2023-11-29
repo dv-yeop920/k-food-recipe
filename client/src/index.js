@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { persistStore} from "redux-persist";
+import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./store/store";
 import ScrollTop from "./services/scrollTop";
@@ -19,17 +19,19 @@ axios.defaults.withCredentials = true;
 
 const persistor = persistStore(store);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root")
+);
 root.render(
   <React.StrictMode>
-      <Provider store ={ store }>
-        <PersistGate loading ={ null } persistor ={ persistor }>
-          <BrowserRouter>
-              <ScrollTop/>
-                <App/>
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <ScrollTop />
+          <App />
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 

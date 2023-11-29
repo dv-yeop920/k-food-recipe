@@ -11,25 +11,32 @@ import ScrollUpButton from "./layout/ScrollUp/ScrollUpButton";
 import Navbar from "./layout/Navbar/Navbar";
 import ModalContainer from "./components/Modal/ModalContainer";
 
-
-
 function App() {
   return (
     <>
-    <Navbar/>
-    <ModalContainer/>
+      <Navbar />
+      <ModalContainer />
 
-    <Routes>
-      <Route path = "/" element = { <MainPage/> } />
-      <Route path = "/recipe" element = { <RecipePage/> } />
-      <Route path = "/noticeBoard" element = { <NoticeBoardPage/> } />
-      <Route path = "/myPage" element = { <MyPage/>} />
-      <Route path = "/writing" element = { <WritingPage/> } />
-      <Route path = "/postDetail/:id" element = { <PostDetailPage/> } />
-      <Route path = "/postUpdate/:id" element = { <PostUpdatePage/> } />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/recipe" element={<RecipePage />} />
+        <Route
+          path="/noticeBoard"
+          element={<NoticeBoardPage />}
+        />
+        <Route path="/myPage" element={<MyPage />} />
+        <Route path="/writing" element={<WritingPage />} />
+        <Route
+          path="/postDetail/:id"
+          element={<PostDetailPage />}
+        />
+        <Route
+          path="/postUpdate/:id"
+          element={<PostUpdatePage />}
+        />
+      </Routes>
 
-    <ScrollUpButton/>
+      <ScrollUpButton />
     </>
   );
 }

@@ -1,176 +1,189 @@
-import React ,{ useEffect, useState } from "react";
-import { useNavigate , useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import UpdateContent from "../components/Writing/UpdateContent";
 import axios from "axios";
 import Loading from "../components/Loading/Loading";
 import UpdateImageUploader from "../components/Writing/UpdateImageUploader";
-import 
-{ 
-    uploadPostPreviewImageToS3 , 
-    resizeFile , 
-    deletePostPreviewImageToS3 
-} 
-from "../utils/awsS3Setting";
+import {
+  uploadPostPreviewImageToS3,
+  resizeFile,
+  deletePostPreviewImageToS3,
+} from "../utils/awsS3Setting";
 import styles from "../components/Writing/Writing.module.css";
 import button from "../styles/Button.module.css";
 
-
-
 const PostsUpdatePage = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-    const { id } = useParams();
-    const navigate = useNavigate();
+  const [originalDetail, setOriginalDetail] = useState({});
+  const [editTitleValue, setEditTitleValue] = useState("");
+  const [editContentValue, setEditContentValue] =
+    useState(null);
+  const [
+    editPostPreviewImageFile,
+    setEditPostPreviewImageFile,
+  ] = useState(null);
+  const [
+    editPostPrevuewImageSrc,
+    setEditPostPrevuewImageSrc,
+  ] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const [originalDetail, setOriginalDetail] = useState({});
-    const [editTitleValue, setEditTitleValue] = useState("");
-    const [editContentValue, setEditContentValue] = useState(null);
-    const [editPostPreviewImageFile , setEditPostPreviewImageFile] = useState(null);
-    const [editPostPrevuewImageSrc, setEditPostPrevuewImageSrc] = useState(null);
-    const [isLoading , setIsLoading] = useState(false);
+  const getPost = async () => {
+    const postId = id;
 
+    try {
+      const response = await axios.get(
+        `/api/posts/getPost?id=${postId}`,
+        { timeout: 10000 }
+      );
 
-    const getPost = async () => {
-        const postId = id;
-
-        try {
-            const response =  
-            await axios.get(
-                `/api/posts/getPost?id=${postId}` , 
-                { timeout: 10000 }
-            );
-
-            setOriginalDetail(response.data.list);
-            setEditTitleValue(response.data.list.title);
-            setEditContentValue(response.data.list.content);
-        }
-        catch (error) {
-            console.log(error);
-        }
+      setOriginalDetail(response.data.list);
+      setEditTitleValue(response.data.list.title);
+      setEditContentValue(response.data.list.content);
+    } catch (error) {
+      console.log(error);
     }
+  };
 
+  const onSubmitEditPosts = async e => {
+    e.preventDefault();
 
-    const onSubmitEditPosts = async (e) => {
-        e.preventDefault();
+    let previewEditImageUrl;
 
-        let previewEditImageUrl;
+    try {
+      if (
+        editTitleValue === "" ||
+        editContentValue === null
+      ) {
+        alert("내용을 입력했는지 확인해 주세요!");
+        setIsLoading(false);
+        return;
+      }
 
-        try {
-            if (editTitleValue === "" || editContentValue === null) {
-                alert("내용을 입력했는지 확인해 주세요!");
-                setIsLoading(false);
-                return;
-            }
+      if (editPostPreviewImageFile === null) {
+        previewEditImageUrl = originalDetail.image;
+      }
 
-            if (editPostPreviewImageFile === null) {
-                previewEditImageUrl = originalDetail.image;
-            }
+      if (editPostPreviewImageFile !== null) {
+        previewEditImageUrl =
+          await uploadPostPreviewImageToS3(
+            editPostPreviewImageFile
+          );
+        await deletePostPreviewImageToS3(
+          originalDetail.image
+        );
+      }
 
-            if (editPostPreviewImageFile !== null) {
-                previewEditImageUrl = 
-                await uploadPostPreviewImageToS3(editPostPreviewImageFile);
-                await deletePostPreviewImageToS3(originalDetail.image);
-            }
-            
-            if (window.confirm("게시물 내용을 수정하시겠습니까?")) {
-                const updatePosts = {
-                    _id: originalDetail._id,
-                    title: originalDetail.title,
-                    content: originalDetail.content,
-                    image: previewEditImageUrl
-                }
+      if (
+        window.confirm("게시물 내용을 수정하시겠습니까?")
+      ) {
+        const updatePosts = {
+          _id: originalDetail._id,
+          title: originalDetail.title,
+          content: originalDetail.content,
+          image: previewEditImageUrl,
+        };
 
-                const response = 
-                await axios.put(
-                    "/api/posts/update" , 
-                    updatePosts , 
-                    { timeout: 10000 }
-                );
+        const response = await axios.put(
+          "/api/posts/update",
+          updatePosts,
+          { timeout: 10000 }
+        );
 
-                setIsLoading(true);
+        setIsLoading(true);
 
-                if (response.data.updateSuccess === false) {
-                    alert(response.data.messsage);
-                    return;
-                }
-                
-                if (response.data.updateSuccess === true) {
-                    navigate(-1 , {replace: true});
-                    alert(response.data.messsage);
-                    return;
-                }
-
-                setIsLoading(false);
-            }
+        if (response.data.updateSuccess === false) {
+          alert(response.data.messsage);
+          return;
         }
-        catch (error) {
-            console.log(error);
+
+        if (response.data.updateSuccess === true) {
+          navigate(-1, { replace: true });
+          alert(response.data.messsage);
+          return;
         }
+
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
     }
+  };
 
+  useEffect(() => {
+    getPost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    useEffect(() => {
-        getPost();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    } , []);
+  return (
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className={styles.editorContainer}>
+          <form
+            className="editor-form"
+            onSubmit={onSubmitEditPosts}
+          >
+            <div className={styles.contentContainer}>
+              <UpdateImageUploader
+                editPostPrevuewImageSrc={
+                  editPostPrevuewImageSrc
+                }
+                setEditPostPrevuewImageSrc={
+                  setEditPostPrevuewImageSrc
+                }
+                setEditPostPreviewImageFile={
+                  setEditPostPreviewImageFile
+                }
+                resizeFile={resizeFile}
+              />
 
-    return (
-        <>
-        {
-            isLoading ?
-            <Loading/>
-            :
-            <div className = { styles.editorContainer } >
-                <form 
-                className = "editor-form"
-                onSubmit = { onSubmitEditPosts }>
-
-                    <div className = { styles.contentContainer }>
-                        <UpdateImageUploader
-                        editPostPrevuewImageSrc = { editPostPrevuewImageSrc }
-                        setEditPostPrevuewImageSrc = { setEditPostPrevuewImageSrc } 
-                        setEditPostPreviewImageFile = { setEditPostPreviewImageFile }
-                        resizeFile = { resizeFile } />
-
-                        <UpdateContent 
-                        originalDetail = { originalDetail }
-                        setOriginalDetail = { setOriginalDetail } 
-                        editTitleValue = { editTitleValue }
-                        setEditTitleValue = { setEditTitleValue }
-                        editContentValue = { editContentValue }
-                        setEditContentValue = { setEditContentValue } 
-                        resizeFile = { resizeFile } />
-                    </div>
-                
-                    <div className = { styles.buttonArea } >
-                        <button
-                        className = { 
-                            `${ styles.writingButton }
-                            ${ button.cancle }`
-                        } 
-                        type = "button"
-                        onClick = { () => {
-                            if (window.confirm("게시글 수정을 취소 하시겠어요?")) {
-                                navigate(-1, { replace: true });
-                                return;
-                            }
-                        }}>
-                            취소
-                        </button>
-
-                        <button
-                        className = { 
-                            `${ styles.writingButton }
-                            ${ button.submit }`
-                        } 
-                        type = "submit" >
-                            수정
-                        </button>
-                    </div>
-                </form>
+              <UpdateContent
+                originalDetail={originalDetail}
+                setOriginalDetail={setOriginalDetail}
+                editTitleValue={editTitleValue}
+                setEditTitleValue={setEditTitleValue}
+                editContentValue={editContentValue}
+                setEditContentValue={setEditContentValue}
+                resizeFile={resizeFile}
+              />
             </div>
-        }
-        </>
-    );
+
+            <div className={styles.buttonArea}>
+              <button
+                className={`${styles.writingButton}
+                            ${button.cancle}`}
+                type="button"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      "게시글 수정을 취소 하시겠어요?"
+                    )
+                  ) {
+                    navigate(-1, { replace: true });
+                    return;
+                  }
+                }}
+              >
+                취소
+              </button>
+
+              <button
+                className={`${styles.writingButton}
+                            ${button.submit}`}
+                type="submit"
+              >
+                수정
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+    </>
+  );
 };
 
-export default  PostsUpdatePage;
+export default PostsUpdatePage;

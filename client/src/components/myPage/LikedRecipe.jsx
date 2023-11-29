@@ -1,10 +1,7 @@
 import React from "react";
 
 const LikedRecipe = () => {
-    return (
-        <>
-        </>
-    );
+  return <></>;
 };
 
 export default LikedRecipe;

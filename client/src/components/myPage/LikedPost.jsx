@@ -1,11 +1,7 @@
 import React from "react";
 
 const LikedPost = () => {
-    return (
-        <>
-            
-        </>
-    );
+  return <></>;
 };
 
 export default LikedPost;

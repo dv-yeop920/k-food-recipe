@@ -1,11 +1,7 @@
 import React from "react";
 
-
 const ReplyComment = () => {
-    return (
-        <>
-        </>
-    );
+  return <></>;
 };
 
 export default ReplyComment;

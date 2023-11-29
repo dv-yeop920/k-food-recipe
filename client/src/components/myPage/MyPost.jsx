@@ -1,11 +1,7 @@
 import React from "react";
 
 const MyPost = () => {
-    return (
-        <>
-            
-        </>
-    );
+  return <></>;
 };
 
 export default MyPost;

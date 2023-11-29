@@ -1,11 +1,7 @@
 import React from "react";
 
 const MyInfomation = () => {
-    return (
-        <>
-        
-        </>
-    );
+  return <></>;
 };
 
 export default MyInfomation;

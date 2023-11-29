@@ -3,7 +3,7 @@
 .main {
   position: fixed;
   background-color: var(--background-color);
-  top:0%;
+  top: 0%;
   left: 0%;
   height: 100%;
   width: 20%;
@@ -60,7 +60,7 @@
 }
 
 .title {
-  font-size:132%;
+  font-size: 132%;
   font-weight: 500;
   cursor: pointer;
 }

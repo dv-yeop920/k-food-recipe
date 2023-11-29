@@ -1,11 +1,7 @@
 import React from "react";
 
 const ViewedPost = () => {
-    return (
-        <>
-            
-        </>
-    );
+  return <></>;
 };
 
 export default ViewedPost;

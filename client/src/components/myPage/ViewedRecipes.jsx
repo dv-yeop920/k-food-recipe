@@ -1,11 +1,7 @@
 import React from "react";
 
 const ViewedRecipes = () => {
-    return (
-        <>
-            
-        </>
-    );
+  return <></>;
 };
 
 export default ViewedRecipes;

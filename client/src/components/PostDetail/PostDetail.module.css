@@ -1,6 +1,5 @@
 @import "../../styles/dark-mode.css";
 
-
 .detailContainer {
   position: absolute;
   top: 12.7%;
@@ -10,7 +9,7 @@
   background-color: var(--background-color);
 }
 
-.header  {
+.header {
   position: relative;
   padding: 40px 100px 30px 100px;
   border-bottom: 2px solid #ddd;
@@ -30,7 +29,7 @@
 }
 
 .id {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .title {
