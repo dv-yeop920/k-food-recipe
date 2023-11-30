@@ -15,9 +15,6 @@ const CommentList = ({ post }) => {
   const [comment, setComment] = useState([]);
   const [commentContent, setCommentContent] = useState("");
   const [updateComment, setUpdateComment] = useState("");
-  const [replyCommentContent, setReplyCommentContent] =
-    useState("");
-  const [isEdit, setIsEdit] = useState(false);
 
   const getComment = async () => {
     try {
@@ -76,7 +73,7 @@ const CommentList = ({ post }) => {
     }
   };
 
-  const onClickCommentDelete = async commentId => {
+  const onClickDeleteComment = async commentId => {
     const filteredId = comment.filter(comment => {
       return commentId === comment._id;
     });
@@ -111,14 +108,14 @@ const CommentList = ({ post }) => {
     }
   };
 
-  const onClickCommentEdit = async commentId => {
+  const onClickUpdateComment = async commentId => {
     const filteredId = comment.filter(comment => {
       return commentId === comment._id;
     });
 
     const updateCommentBody = {
       _id: filteredId[0],
-      content: updateComment,
+      content: updateComment[commentId],
     };
 
     try {
@@ -140,8 +137,6 @@ const CommentList = ({ post }) => {
           alert(response.data.messsage);
           return;
         }
-
-        setIsEdit(!isEdit);
       }
     } catch (error) {
       console.log(error);
@@ -180,17 +175,13 @@ const CommentList = ({ post }) => {
                   commentUserId={comment.id}
                   commentId={comment._id}
                   comment={comment}
-                  isEdit={isEdit}
-                  setIsEdit={setIsEdit}
                   updateComment={updateComment}
                   setUpdateComment={setUpdateComment}
-                  onClickCommentDelete={
-                    onClickCommentDelete
+                  onClickDeleteComment={
+                    onClickDeleteComment
                   }
-                  onClickCommentEdit={onClickCommentEdit}
-                  replyCommentContent={replyCommentContent}
-                  setReplyCommentContent={
-                    setReplyCommentContent
+                  onClickUpdateComment={
+                    onClickUpdateComment
                   }
                 />
               ))}

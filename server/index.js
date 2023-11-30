@@ -481,7 +481,11 @@ app.post(
 
       await Post.findOneAndUpdate(
         { _id: req.body.postId },
-        { $inc: { commentCount: -1 } }
+        {
+          $inc: {
+            commentCount: -1,
+          },
+        }
       ).exec();
 
       res.json({
