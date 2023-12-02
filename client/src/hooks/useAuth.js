@@ -17,16 +17,12 @@ const useAuth = () => {
         if (route) {
           navigate(route);
         }
-        return;
-      }
-
-      if (response.data.isAuth === false) {
-        alert(response.data.message);
-        dispatch(openModal("login"));
+        console.log(response.data.accessToken);
         return;
       }
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.error);
+      dispatch(openModal("login"));
     }
   };
 

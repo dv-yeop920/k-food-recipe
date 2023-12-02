@@ -45,18 +45,17 @@ const LoginModal = ({
         { timeout: 10000 }
       );
 
-      if (response.data.isLogin === false) {
+      if (!response.data.isLogin) {
         setMessage(response.data.messsage);
         return;
       }
 
-      if (response.data.isLogin === true) {
+      if (response.data.isLogin) {
         setMessage("");
         setValueInit("login");
-        onLoginSuccess(response);
+        getAccessToken(response);
         alert(response.data.messsage);
         dispatch(loginUser(response.data));
-        //setAccessToken(accessToken);
         closeModal();
         return;
       }
@@ -70,12 +69,13 @@ const LoginModal = ({
   //        .then(onLoginSuccess)
   //}
 
-  const onLoginSuccess = response => {
+  const getAccessToken = response => {
     const { accessToken } = response.data;
     // accessToken 설정
     axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${accessToken}`;
+    console.log(accessToken);
     // accessToken 만료하기 1분 전에 로그인 연장
     //setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 50000);
   };
@@ -94,9 +94,7 @@ const LoginModal = ({
               size="lg"
               onClick={closeModal}
             />
-
             <h2 className={styles.title}>로그인</h2>
-
             <div></div>
           </div>
 

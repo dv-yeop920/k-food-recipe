@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Comment.module.css";
 import getDate from "../../../utils/postDate";
+import useAuth from "../../../hooks/useAuth";
 
 const Comment = ({
   userId,
@@ -12,6 +13,7 @@ const Comment = ({
   onClickDeleteComment,
   onClickUpdateComment,
 }) => {
+  const { authAndNavigate } = useAuth();
   const [editId, setEditId] = useState("");
   const CREATED_AT = comment.createdAt;
 
@@ -62,6 +64,7 @@ const Comment = ({
           <span
             className={styles.button}
             onClick={() => {
+              authAndNavigate();
               onClickUpdateComment(commentId);
               setEditId("");
               return;
@@ -77,6 +80,7 @@ const Comment = ({
           <span
             className={styles.button}
             onClick={() => {
+              authAndNavigate();
               setEditId(commentId);
               onChangeUpdateComment(
                 commentId,
@@ -90,6 +94,7 @@ const Comment = ({
           <span
             className={styles.button}
             onClick={() => {
+              authAndNavigate();
               onClickDeleteComment(commentId);
               return;
             }}

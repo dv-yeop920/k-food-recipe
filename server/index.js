@@ -194,7 +194,7 @@ app.post("/api/users/logout", auth, async (req, res) => {
   )
     .then(docs => {
       if (docs) {
-        res.clearCookie("x_auth");
+        res.clearCookie("user");
         res.status(200).send({
           logoutSuccess: true,
           messsage: "로그아웃 되었습니다",

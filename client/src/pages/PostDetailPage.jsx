@@ -10,14 +10,17 @@ import { deletePostPreviewImageToS3 } from "../utils/awsS3Setting";
 import styles from "../components/PostDetail/PostDetail.module.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/slice/userSlice";
+import useAuth from "../hooks/useAuth";
 
 const PostsDetail = () => {
   const { userId } = useSelector(selectUser);
+  const { authAndNavigate } = useAuth();
   const navigate = useNavigate();
   //postList 에서 넘겨준 게시물의 고유 _id값
   const { id } = useParams();
   const [post, setPost] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const CREATE_AT = post.createdAt;
 
   const getPostDetail = async () => {
     const postId = id;
@@ -110,20 +113,11 @@ const PostsDetail = () => {
               <div className={styles.info}>
                 <span className="user-date">
                   {`
-                                    ${
-                                      getDate(
-                                        post.createdAt
-                                      ).year
-                                    }-${
-                    getDate(post.createdAt).month + 1
-                  }-${getDate(post.createdAt).date} 
-
-                                    ${
-                                      getDate(
-                                        post.createdAt
-                                      ).hours
-                                    }:${
-                    getDate(post.createdAt).minutes
+                    ${getDate(CREATE_AT).year}-${
+                    getDate(CREATE_AT).month + 1
+                  }-${getDate(CREATE_AT).date} 
+                    ${getDate(CREATE_AT).hours}:${
+                    getDate(CREATE_AT).minutes
                   }`}
                 </span>
               </div>
@@ -137,7 +131,7 @@ const PostsDetail = () => {
                         "게시글을 수정하시겠습니까?"
                       )
                     ) {
-                      navigate(`/postUpdate/${id}`);
+                      authAndNavigate(`/postUpdate/${id}`);
                       return;
                     }
                   }}
@@ -147,7 +141,11 @@ const PostsDetail = () => {
 
                 <span
                   className={styles.button}
-                  onClick={onClickDeletePost}
+                  onClick={() => {
+                    authAndNavigate().then(() => {
+                      onClickDeletePost();
+                    });
+                  }}
                 >
                   {post.id === userId ? "삭제" : ""}
                 </span>

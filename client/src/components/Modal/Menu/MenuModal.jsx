@@ -28,6 +28,9 @@ const MenuModal = ({ openModal, closeModal }) => {
           dispatch(logoutUser());
           closeModal();
           navigate("/");
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = ``;
           return;
         }
       }

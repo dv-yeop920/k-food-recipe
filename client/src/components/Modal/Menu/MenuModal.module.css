@@ -1,5 +1,3 @@
-@import "../../../styles/dark-mode.css";
-
 .menuContainer {
   position: absolute;
   width: 20%;
@@ -29,5 +27,5 @@
 .menuLink {
   display: block;
   padding: 12px 5px;
-  width: 100%; 
+  width: 100%;
 }

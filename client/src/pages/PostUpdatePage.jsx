@@ -11,6 +11,7 @@ import {
 } from "../utils/awsS3Setting";
 import styles from "../components/Writing/Writing.module.css";
 import button from "../styles/Button.module.css";
+import useAuth from "../hooks/useAuth";
 
 const PostsUpdatePage = () => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const PostsUpdatePage = () => {
     setEditPostPrevuewImageSrc,
   ] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { authAndNavigate } = useAuth();
 
   const getPost = async () => {
     const postId = id;
@@ -49,6 +51,7 @@ const PostsUpdatePage = () => {
 
   const onSubmitEditPosts = async e => {
     e.preventDefault();
+    authAndNavigate();
 
     let previewEditImageUrl;
 
@@ -158,6 +161,7 @@ const PostsUpdatePage = () => {
                             ${button.cancle}`}
                 type="button"
                 onClick={() => {
+                  authAndNavigate();
                   if (
                     window.confirm(
                       "게시글 수정을 취소 하시겠어요?"

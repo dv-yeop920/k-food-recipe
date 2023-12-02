@@ -105,7 +105,7 @@ userSchema.methods.generateRefreshToken = function (
     });
 };
 //토큰을 복호화하고 유저를 찾는 함수
-userSchema.statics.findByToken = function (
+userSchema.statics.findByAccessToken = function (
   token,
   callBack
 ) {
@@ -115,6 +115,33 @@ userSchema.statics.findByToken = function (
     token,
     "accessToken",
     function (error, decode) {
+      //decode = user._id
+      //decode를 이용해서 유저를 찾은 다음 클라이언트에서 가져온 토큰과 db의 토큰이 일치하는지 비교
+      user
+        .findOne({
+          _id: decode,
+        })
+        .then(docs => {
+          callBack(null, docs);
+        })
+        .catch(error => {
+          return callBack(error);
+        });
+    }
+  );
+};
+
+userSchema.statics.findByRefreshToken = function (
+  token,
+  callBack
+) {
+  const user = this;
+  //token 을 decode (복호화) 한다
+  jwt.verify(
+    token,
+    "refreshToken",
+    function (error, decode) {
+      console.log(decode);
       //decode = user._id
       //decode를 이용해서 유저를 찾은 다음 클라이언트에서 가져온 토큰과 db의 토큰이 일치하는지 비교
       user

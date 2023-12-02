@@ -1,5 +1,3 @@
-@import "../../../styles/dark-mode.css";
-
 @keyframes show {
   0% {
     transform: translateY(500px);
