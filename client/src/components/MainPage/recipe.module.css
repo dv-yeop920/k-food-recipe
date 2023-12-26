@@ -1,0 +1,33 @@
+.recipe_section {
+  padding-top: 7rem;
+}
+
+.recipe_list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(260px, 1fr)
+  );
+  gap: 1em;
+  padding: 1em;
+}
+
+.recipe_card {
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  transition: box-shadow 0.3s ease;
+}
+
+.recipe_card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.recipe_img {
+  width: 100%;
+  height: auto;
+}
+
+.recipe_title {
+  padding: 1em;
+  text-align: center;
+}

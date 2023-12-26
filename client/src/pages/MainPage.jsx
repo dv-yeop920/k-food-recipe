@@ -1,22 +1,39 @@
 import React from "react";
+import { recipeData } from "../services/recipeData.js";
+import styles from "../components/MainPage/recipe.module.css";
 
 const MainPage = () => {
+  const recipes = recipeData.COOKRCP01.row;
+
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          top: "30%",
-          left: "10%",
-          width: "80%",
-          fontSize: "45px",
-          fontWeight: "600",
-          textAlign: "center",
-        }}
+      <section
+        className={`inner-box ${styles.recipe_section}`}
       >
-        <h1>환영 합니다!</h1>
-        메인 페이지 입니다
-      </div>
+        <ul className={styles.recipe_list}>
+          {recipes.map((item, index) => {
+            return (
+              <li
+                key={index}
+                className={styles.recipe_card}
+              >
+                <figure>
+                  <img
+                    className={styles.recipe_img}
+                    src={item.ATT_FILE_NO_MAIN}
+                    alt={item.title}
+                  />
+                  <figcaption>
+                    <h4 className={styles.recipe_title}>
+                      {item.RCP_NM}
+                    </h4>
+                  </figcaption>
+                </figure>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </>
   );
 };

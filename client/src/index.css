@@ -17,3 +17,9 @@ body {
   color: var(--text-color);
   transition: all 0.2s ease-in-out;
 }
+
+.inner-box {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 7rem 0 5rem 0;
+}
