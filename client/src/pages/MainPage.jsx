@@ -1,6 +1,8 @@
 import React from "react";
 import { recipeData } from "../services/recipeData.js";
 import styles from "../components/MainPage/recipe.module.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const MainPage = () => {
   const recipes = recipeData.COOKRCP01.row;
@@ -17,9 +19,9 @@ const MainPage = () => {
                 key={index}
                 className={styles.recipe_card}
               >
-                <figure>
-                  <img
-                    className={styles.recipe_img}
+                <figure style={{ overflow: "hidden" }}>
+                  <LazyLoadImage
+                    className={`${styles.recipe_img} black-and-white`}
                     src={item.ATT_FILE_NO_MAIN}
                     alt={item.title}
                   />

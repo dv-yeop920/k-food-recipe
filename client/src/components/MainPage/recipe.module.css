@@ -8,23 +8,34 @@
     auto-fill,
     minmax(260px, 1fr)
   );
-  gap: 1em;
+  gap: 1.5em;
   padding: 1em;
 }
 
 .recipe_card {
-  border: 1px solid #eee;
-  box-shadow: 0 2px 3px #ccc;
-  transition: box-shadow 0.3s ease;
+  position: relative;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
 }
 
 .recipe_card:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: scale(1.01);
+  border-radius: 0;
+  .recipe_img {
+    border-radius: 0;
+    transform: scale(1.05);
+  }
 }
 
 .recipe_img {
+  overflow: hidden;
   width: 100%;
   height: auto;
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
 }
 
 .recipe_title {
