@@ -11,7 +11,7 @@ const NoticeBoardPage = () => {
     []
   );
   const [pageNumber, setPageNumber] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const POST_PER_PAGE = 5;
 

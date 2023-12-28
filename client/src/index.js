@@ -10,7 +10,6 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./store/store";
 import ScrollTop from "./services/scrollTop";
-import { SkeletonTheme } from "react-loading-skeleton";
 
 const BASE_URL = process.env.REACT_APP_PORT_NUMBER;
 
@@ -28,15 +27,10 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SkeletonTheme
-          baseColor="#313131"
-          highlightColor="#525252"
-        >
-          <BrowserRouter>
-            <ScrollTop />
-            <App />
-          </BrowserRouter>
-        </SkeletonTheme>
+        <BrowserRouter>
+          <ScrollTop />
+          <App />
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>
