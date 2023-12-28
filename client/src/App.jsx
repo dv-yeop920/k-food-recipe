@@ -3,13 +3,13 @@ import { Route, Routes } from "react-router";
 import MainPage from "./pages/MainPage";
 import NoticeBoardPage from "./pages/NoticeBoardPage";
 import MyPage from "./pages/MyPage";
-import RecipePage from "./pages/RecipePage";
 import WritingPage from "./pages/WritingPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import PostUpdatePage from "./pages/PostUpdatePage";
 import ScrollUpButton from "./layout/ScrollUp/ScrollUpButton";
 import Navbar from "./layout/Navbar/Navbar";
 import ModalContainer from "./components/Modal/ModalContainer";
+import RecipeDetailPage from "./pages/RecipeDetailPage";
 
 function App() {
   return (
@@ -19,7 +19,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/recipe" element={<RecipePage />} />
+        <Route
+          path="/recipe/:id"
+          element={<RecipeDetailPage />}
+        />
+
         <Route
           path="/noticeBoard"
           element={<NoticeBoardPage />}
