@@ -59,6 +59,9 @@
 
 .recipe_nav {
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 4.5rem;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -23px;
@@ -68,12 +71,23 @@
   top: 13%;
 }
 
+.backBox {
+  padding-right: 1rem;
+}
+
+.back {
+  border-radius: 50px;
+}
+
+.nextBox {
+  padding-left: 1rem;
+}
+
 .tab_box {
   position: relative;
-  max-width: 80rem;
-  z-index: 5;
   height: 100%;
-  margin: 0 auto;
+  z-index: 5;
+  max-width: 80%;
   display: flex;
   align-items: center;
   transition: all 0.2s ease-in-out;
@@ -87,7 +101,9 @@
 
 .tab_button {
   padding: 1.5rem 1.2rem;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
+  width: 5.68rem;
+  text-align: center;
   border: none;
   cursor: pointer;
   font-size: 1rem;

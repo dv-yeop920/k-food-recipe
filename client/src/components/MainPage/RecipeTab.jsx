@@ -12,6 +12,10 @@ const RecipeTab = () => {
   }, []);
   return (
     <nav className={styles.recipe_nav}>
+      <div className={styles.backBox}>
+        <button className={styles.back}>&lt;</button>
+      </div>
+
       <ul className={styles.tab_box}>
         {isLoading ? (
           <TabSkeleton />
@@ -40,22 +44,12 @@ const RecipeTab = () => {
         </li>
         <li>
           <button className={styles.tab_button}>
-            기타
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
             반찬
           </button>
         </li>
         <li>
           <button className={styles.tab_button}>
             후식
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            일품
           </button>
         </li>
         <li>
@@ -92,7 +86,25 @@ const RecipeTab = () => {
             파스타
           </button>
         </li>
+        <li>
+          <button className={styles.tab_button}>
+            파스타
+          </button>
+        </li>
+        <li>
+          <button className={styles.tab_button}>
+            파스타
+          </button>
+        </li>
+        <li>
+          <button className={styles.tab_button}>
+            파스타
+          </button>
+        </li>
       </ul>
+      <div className={styles.nextBox}>
+        <button className={styles.next}>&gt;</button>
+      </div>
     </nav>
   );
 };
