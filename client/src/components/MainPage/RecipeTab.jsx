@@ -1,9 +1,38 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Recipe.module.css";
-import TabSkeleton from "./TabSkeleton";
+import TabSkeleton from "./skeleton/TabSkeleton";
+import { Skeleton } from "@mui/material";
 
 const RecipeTab = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const tabList = [
+    "굽기",
+    "끓이기",
+    "찌기",
+    "튀기기",
+    "반찬",
+    "후식",
+    "국/찌개",
+    "볶기",
+    "밥",
+    "저염",
+    "고기",
+    "닭가슴살",
+    "파스타",
+  ];
+  const renderTabList = () => {
+    return tabList.map((item, index) => {
+      return isLoading ? (
+        <TabSkeleton />
+      ) : (
+        <li key={item + index}>
+          <button className={styles.tab_button}>
+            {item}
+          </button>
+        </li>
+      );
+    });
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -12,98 +41,35 @@ const RecipeTab = () => {
   }, []);
   return (
     <nav className={styles.recipe_nav}>
-      <div className={styles.backBox}>
-        <button className={styles.back}>&lt;</button>
-      </div>
+      <div className={styles.nav_box}>
+        <div className={styles.nav_column}>
+          <div className={styles.back_box}>
+            {isLoading ? (
+              <Skeleton
+                style={{ borderRadius: "50%" }}
+                width={30}
+                height={50}
+              />
+            ) : (
+              <button className={styles.back}>&lt;</button>
+            )}
+          </div>
 
-      <ul className={styles.tab_box}>
-        {isLoading ? (
-          <TabSkeleton />
-        ) : (
-          <li>
-            <button className={styles.tab_button}>
-              굽기
-            </button>
-          </li>
-        )}
-
-        <li>
-          <button className={styles.tab_button}>
-            끓이기
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            찌기
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            튀기기
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            반찬
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            후식
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            국/찌개
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            볶기
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>밥</button>
-        </li>
-
-        <li>
-          <button className={styles.tab_button}>
-            저염
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            고기
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            닭가슴살
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            파스타
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            파스타
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            파스타
-          </button>
-        </li>
-        <li>
-          <button className={styles.tab_button}>
-            파스타
-          </button>
-        </li>
-      </ul>
-      <div className={styles.nextBox}>
-        <button className={styles.next}>&gt;</button>
+          <ul className={styles.tab_box}>
+            {renderTabList()}
+          </ul>
+          <div className={styles.next_box}>
+            {isLoading ? (
+              <Skeleton
+                style={{ borderRadius: "50%" }}
+                width={30}
+                height={50}
+              />
+            ) : (
+              <button className={styles.next}>&gt;</button>
+            )}
+          </div>
+        </div>
       </div>
     </nav>
   );

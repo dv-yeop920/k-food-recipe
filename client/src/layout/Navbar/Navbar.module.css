@@ -6,14 +6,14 @@
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -23px;
   z-index: 20;
   background-color: var(--background-color);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .headerBox {
   position: relative;
   height: 100%;
   padding: 0 1rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .header_menu {
@@ -48,11 +48,31 @@
   cursor: pointer;
   border-radius: 25px;
   border: 1px solid #ddd;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.text {
+.recipeSearchInput {
+  text-align: center;
+  padding: 1rem 3.5em;
   font-size: 1rem;
+  color: var(--text-color);
+  background-color: var(--background-input-color);
+}
+
+.search_cancel {
+  margin-left: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: var(--text-color);
+}
+
+.search_cancel:hover {
+  transform: perspective(100px) translateZ(20px);
+}
+
+.search_icon {
+  color: var(--submit-background-color);
 }
 
 .recipeSearchLink:hover {
@@ -79,7 +99,7 @@
   border: 1px solid #ddd;
   background-color: var(--background-color);
   margin-left: 15px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .menuButton:hover {
@@ -92,7 +112,7 @@
   border: none;
   border-radius: 10px;
   background-color: var(--background-color);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
 

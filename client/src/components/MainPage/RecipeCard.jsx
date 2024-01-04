@@ -3,7 +3,7 @@ import { recipeData } from "../../services/recipeData.js";
 import styles from "./Recipe.module.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import MainSkeleton from "./MainSkeleton";
+import MainSkeleton from "./skeleton/MainSkeleton.jsx";
 
 const MenuCard = () => {
   const [isLoading, setIsLoading] = useState(true);

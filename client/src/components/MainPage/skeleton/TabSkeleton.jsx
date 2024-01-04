@@ -11,8 +11,8 @@ const TabSkeleton = () => {
           borderRadius: "15px",
           marginRight: "10px",
         }}
-        width={70}
-        height={30}
+        width={90}
+        height={60}
       />
     </div>
   );

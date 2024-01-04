@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,6 +6,7 @@ import {
   faBars,
   faGlobe,
   faSearch,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { openModal } from "../../store/slice/modalSlice";
@@ -18,6 +19,7 @@ import {
 const Navbar = () => {
   const dispatch = useDispatch();
   const isDark = useSelector(theme);
+  const [isSearchBar, setIsSearchBar] = useState(false);
 
   const darkMode = () => {
     const DOM_STYLE = document.documentElement.style;
@@ -75,19 +77,43 @@ const Navbar = () => {
             </NavLink>
 
             <div className={styles.recipeSearchArea}>
-              <NavLink
-                className={styles.recipeSearchLink}
-                to="/recipe"
-              >
-                <FontAwesomeIcon
-                  style={{ marginRight: "5px" }}
-                  icon={faSearch}
-                  size="1x"
-                />
-                <span className={styles.text}>
-                  여기를 눌러 레시피를 검색해 보세요!
-                </span>
-              </NavLink>
+              {isSearchBar && (
+                <>
+                  <label htmlFor="recipeSearchInput">
+                    <input
+                      type="search"
+                      maxLength={13}
+                      className={`${styles.recipeSearchLink} ${styles.recipeSearchInput}`}
+                      id="recipeSearchInput"
+                      autoFocus
+                    />
+                  </label>
+                  <FontAwesomeIcon
+                    className={styles.search_cancel}
+                    onClick={() => setIsSearchBar(false)}
+                    icon={faX}
+                    size="1x"
+                  />
+                </>
+              )}
+              {!isSearchBar && (
+                <div
+                  className={styles.recipeSearchLink}
+                  onClick={() => setIsSearchBar(true)}
+                >
+                  <FontAwesomeIcon
+                    className={styles.search_icon}
+                    style={{
+                      marginRight: "5px",
+                    }}
+                    icon={faSearch}
+                    size="1x"
+                  />
+                  <span style={{ fontSize: "1rem" }}>
+                    여기를 눌러 레시피를 검색해 보세요!
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className={styles.headerButtonArea}>
