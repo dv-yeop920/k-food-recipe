@@ -13,6 +13,7 @@ import styles from "../components/Writing/Writing.module.css";
 import button from "../styles/Button.module.css";
 import { selectUser } from "../store/slice/userSlice";
 import useAuth from "../hooks/useAuth";
+import toastMessage from "../utils/toast";
 
 const WritingPage = () => {
   const { userId } = useSelector(selectUser);
@@ -61,17 +62,16 @@ const WritingPage = () => {
 
       const response = await axios.post(
         "/api/posts/register",
-        post,
-        { timeout: 10000 }
+        post
       );
 
-      if (response.data.success === false) {
-        console.log(response.data.messsage);
+      if (!response.data.success) {
+        toastMessage(response.data.messsage);
       }
 
-      if (response.data.success === true) {
+      if (response.data.success) {
         navigate(-1, { replace: true });
-        alert(response.data.messsage);
+        toastMessage(response.data.messsage);
         return;
       }
 

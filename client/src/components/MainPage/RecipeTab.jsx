@@ -19,6 +19,8 @@ const RecipeTab = () => {
     "고기",
     "닭가슴살",
     "파스타",
+    "무침",
+    "국수",
   ];
   const renderTabList = () => {
     return tabList.map((item, index) => {

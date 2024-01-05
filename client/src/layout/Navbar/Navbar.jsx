@@ -8,7 +8,7 @@ import {
   faSearch,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { openModal } from "../../store/slice/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -72,9 +72,9 @@ const Navbar = () => {
       <header className={styles.header}>
         <div className={styles.headerBox}>
           <div className={styles.header_menu}>
-            <NavLink className={styles.title} to="/">
-              <h1>k-레시피</h1>
-            </NavLink>
+            <Link className={styles.title_area} to={"/"}>
+              <h1 className={styles.title}>k-레시피</h1>
+            </Link>
 
             <div className={styles.recipeSearchArea}>
               {isSearchBar && (

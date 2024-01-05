@@ -10,8 +10,8 @@ const TabSkeleton = () => {
         style={{
           borderRadius: "15px",
           marginRight: "10px",
+          width: "6rem",
         }}
-        width={90}
         height={60}
       />
     </div>

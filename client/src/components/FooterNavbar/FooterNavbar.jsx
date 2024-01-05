@@ -8,27 +8,29 @@ import {
   faHeart,
   faCommentDots,
 } from "@fortawesome/free-regular-svg-icons";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./FooterNavbar.module.css";
 
 const FooterNavbar = () => {
+  const navigate = useNavigate();
   return (
     <>
       <nav className={styles.container}>
         <ul className={styles.listArea}>
-          <li className="bar-list">
-            <NavLink to="/noticeBoard">
-              <FontAwesomeIcon
-                style={{ marginRight: "5px" }}
-                className={styles.icon}
-                icon={faBars}
-                size="lg"
-              />
+          <li
+            className="bar-list"
+            onClick={() => navigate(-1)}
+          >
+            <FontAwesomeIcon
+              style={{ marginRight: "5px" }}
+              className={styles.icon}
+              icon={faBars}
+              size="lg"
+            />
 
-              <span className={styles.icon}>
-                목록으로 가기
-              </span>
-            </NavLink>
+            <span className={styles.icon}>
+              목록으로 가기
+            </span>
           </li>
 
           <li className="bar-list">

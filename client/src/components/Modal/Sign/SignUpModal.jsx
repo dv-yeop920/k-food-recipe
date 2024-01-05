@@ -34,12 +34,12 @@ const SignUpModal = ({
         { timeout: 10000 }
       );
 
-      if (response.data.success === false) {
+      if (!response.data.success) {
         setMessage(response.data.messsage);
         return;
       }
 
-      if (response.data.success === true) {
+      if (response.data.success) {
         alert(response.data.messsage);
         setMessage("");
         setValueInit("signUp");

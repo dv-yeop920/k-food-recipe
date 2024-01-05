@@ -23,7 +23,6 @@ const useAuth = () => {
       }
     } catch (error) {
       toastMessage(error.response.data.error);
-
       dispatch(openModal("login"));
     }
   };

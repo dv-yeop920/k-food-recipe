@@ -11,6 +11,7 @@ import styles from "../components/PostDetail/PostDetail.module.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/slice/userSlice";
 import useAuth from "../hooks/useAuth";
+import toastMessage from "../utils/toast";
 
 const PostsDetail = () => {
   const { userId } = useSelector(selectUser);
@@ -27,8 +28,7 @@ const PostsDetail = () => {
 
     try {
       const response = await axios.get(
-        `/api/posts/getPost?id=${postId}`,
-        { timeout: 100000 }
+        `/api/posts/getPost?id=${postId}`
       );
 
       if (response) {
@@ -63,18 +63,17 @@ const PostsDetail = () => {
 
         const response = await axios.post(
           "/api/posts/delete",
-          postId,
-          { timeout: 10000 }
+          postId
         );
 
-        if (response.data.deleteSuccess === true) {
-          alert(response.data.messsage);
+        if (response.data.deleteSuccess) {
+          toastMessage(response.data.messsage);
           navigate(-1, { replace: true });
           return;
         }
 
-        if (response.data.deleteSuccess === false) {
-          alert(response.data.messsage);
+        if (!response.data.deleteSuccess) {
+          toastMessage(response.data.messsage);
           return;
         }
       }
@@ -92,9 +91,9 @@ const PostsDetail = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
+      {isLoading && <Loading />}
+
+      {!isLoading && (
         <div className={styles.detailContainer}>
           <div className={styles.header}>
             <div className={styles.headerTitle}>
@@ -113,10 +112,10 @@ const PostsDetail = () => {
               <div className={styles.info}>
                 <span className="user-date">
                   {`
-                    ${getDate(CREATE_AT).year}-${
+                  ${getDate(CREATE_AT).year}-${
                     getDate(CREATE_AT).month + 1
                   }-${getDate(CREATE_AT).date} 
-                    ${getDate(CREATE_AT).hours}:${
+                  ${getDate(CREATE_AT).hours}:${
                     getDate(CREATE_AT).minutes
                   }`}
                 </span>

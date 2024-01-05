@@ -6,6 +6,7 @@ import CommentInput from "./CommentInput";
 import styles from "./Comment.module.css";
 import useAuth from "../../../hooks/useAuth";
 import { selectUser } from "../../../store/slice/userSlice";
+import toastMessage from "../../../utils/toast";
 
 const CommentList = ({ post }) => {
   const { userId } = useSelector(selectUser);
@@ -19,8 +20,7 @@ const CommentList = ({ post }) => {
   const getComment = async () => {
     try {
       const response = await axios.get(
-        "/api/posts/comment/getComment",
-        { timeout: 10000 }
+        "/api/posts/comment/getComment"
       );
 
       const getComments = response.data.list;
@@ -54,18 +54,17 @@ const CommentList = ({ post }) => {
     try {
       const response = await axios.post(
         "/api/posts/comment/register",
-        commentBody,
-        { timeout: 10000 }
+        commentBody
       );
 
-      if (response.data.success === true) {
-        alert(response.data.messsage);
+      if (response.data.success) {
+        toastMessage(response.data.messsage);
         setCommentContent("");
         return;
       }
 
-      if (response.data.success === false) {
-        alert(response.data.messsage);
+      if (!response.data.success) {
+        toastMessage(response.data.messsage);
         return;
       }
     } catch (error) {
@@ -89,17 +88,16 @@ const CommentList = ({ post }) => {
       ) {
         const response = await axios.post(
           "/api/posts/comment/deleteComment",
-          deleteCommentBody,
-          { timeout: 10000 }
+          deleteCommentBody
         );
 
-        if (response.data.deleteSuccess === true) {
-          alert(response.data.messsage);
+        if (response.data.deleteSuccess) {
+          toastMessage(response.data.messsage);
           return;
         }
 
-        if (response.data.deleteSuccess === false) {
-          alert(response.data.messsage);
+        if (!response.data.deleteSuccess) {
+          toastMessage(response.data.messsage);
           return;
         }
       }
@@ -124,17 +122,16 @@ const CommentList = ({ post }) => {
       ) {
         const response = await axios.put(
           "/api/posts/comment/updateComment",
-          updateCommentBody,
-          { timeout: 10000 }
+          updateCommentBody
         );
 
-        if (response.data.deleteSuccess === true) {
-          alert(response.data.messsage);
+        if (response.data.deleteSuccess) {
+          toastMessage(response.data.messsage);
           return;
         }
 
-        if (response.data.deleteSuccess === false) {
-          alert(response.data.messsage);
+        if (!response.data.deleteSuccess) {
+          toastMessage(response.data.messsage);
           return;
         }
       }

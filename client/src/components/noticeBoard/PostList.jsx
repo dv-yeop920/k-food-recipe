@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./NoticeBoard.module.css";
 import getDate from "../../utils/postDate";
 import Pagination from "../PagiNation/Pagination";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PostList = ({
   postList,
@@ -31,7 +31,7 @@ const PostList = ({
             postList.map(post => {
               return (
                 <li className={styles.li} key={post._id}>
-                  <NavLink
+                  <Link
                     className={styles.navLink}
                     to={`/postDetail/${post._id}`}
                   >
@@ -66,7 +66,7 @@ const PostList = ({
                         }`}
                       </span>
                     </div>
-                  </NavLink>
+                  </Link>
                   <img
                     style={
                       post.image

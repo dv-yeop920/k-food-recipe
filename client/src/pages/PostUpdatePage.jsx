@@ -12,6 +12,7 @@ import {
 import styles from "../components/Writing/Writing.module.css";
 import button from "../styles/Button.module.css";
 import useAuth from "../hooks/useAuth";
+import toastMessage from "../utils/toast";
 
 const PostsUpdatePage = () => {
   const { id } = useParams();
@@ -37,8 +38,7 @@ const PostsUpdatePage = () => {
 
     try {
       const response = await axios.get(
-        `/api/posts/getPost?id=${postId}`,
-        { timeout: 10000 }
+        `/api/posts/getPost?id=${postId}`
       );
 
       setOriginalDetail(response.data.list);
@@ -91,20 +91,19 @@ const PostsUpdatePage = () => {
 
         const response = await axios.put(
           "/api/posts/update",
-          updatePosts,
-          { timeout: 10000 }
+          updatePosts
         );
 
         setIsLoading(true);
 
-        if (response.data.updateSuccess === false) {
-          alert(response.data.messsage);
+        if (!response.data.updateSuccess) {
+          toastMessage(response.data.messsage);
           return;
         }
 
-        if (response.data.updateSuccess === true) {
+        if (response.data.updateSuccess) {
           navigate(-1, { replace: true });
-          alert(response.data.messsage);
+          toastMessage(response.data.messsage);
           return;
         }
 
