@@ -10,11 +10,14 @@ import ScrollUpButton from "./layout/ScrollUp/ScrollUpButton";
 import Navbar from "./layout/Navbar/Navbar";
 import ModalContainer from "./components/Modal/ModalContainer";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <ModalContainer />
 
       <Routes>

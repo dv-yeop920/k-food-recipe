@@ -82,7 +82,7 @@ const Navbar = () => {
                   <label htmlFor="recipeSearchInput">
                     <input
                       type="search"
-                      maxLength={13}
+                      maxLength={12}
                       className={`${styles.recipeSearchLink} ${styles.recipeSearchInput}`}
                       id="recipeSearchInput"
                       autoFocus

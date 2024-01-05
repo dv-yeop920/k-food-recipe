@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { openModal } from "../store/slice/modalSlice";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../store/slice/userSlice";
+import toastMessage from "../utils/toast";
 
 const useAuth = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const useAuth = () => {
     try {
       const response = await axios.get("/api/users/auth");
 
-      if (response.data.isAuth === true) {
+      if (response.data.isAuth) {
         dispatch(loginUser(response.data));
         if (route) {
           navigate(route);
@@ -21,7 +22,8 @@ const useAuth = () => {
         return;
       }
     } catch (error) {
-      alert(error.response.data.error);
+      toastMessage(error.response.data.error);
+
       dispatch(openModal("login"));
     }
   };
