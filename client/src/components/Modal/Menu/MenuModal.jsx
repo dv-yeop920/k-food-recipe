@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./MenuModal.module.css";
 import { useNavigate } from "react-router";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   logoutUser,
@@ -9,6 +9,7 @@ import {
 } from "../../../store/slice/userSlice";
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
+import toastMessage from "../../../utils/toast";
 
 const MenuModal = ({ openModal, closeModal }) => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const MenuModal = ({ openModal, closeModal }) => {
         );
 
         if (response.status === 200) {
-          alert(response.data.messsage);
+          toastMessage(response.data.messsage);
           dispatch(logoutUser());
           closeModal();
           navigate("/");
@@ -44,12 +45,12 @@ const MenuModal = ({ openModal, closeModal }) => {
       <div className={styles.menuContainer}>
         <ul className="menu-area">
           <li className={styles.menu} onClick={closeModal}>
-            <NavLink
+            <Link
               className={styles.menuLink}
               to="/noticeBoard"
             >
               자유 게시판
-            </NavLink>
+            </Link>
           </li>
 
           <li

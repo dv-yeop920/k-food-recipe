@@ -5,7 +5,7 @@ import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
 import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
-import Loading from "../components//Loading/Loading";
+//import Loading from "../components//Loading/Loading";
 import { deletePostPreviewImageToS3 } from "../utils/awsS3Setting";
 import styles from "../components/PostDetail/PostDetail.module.css";
 import { useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const PostsDetail = () => {
   //postList 에서 넘겨준 게시물의 고유 _id값
   const { id } = useParams();
   const [post, setPost] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  //const [isLoading, setIsLoading] = useState(true);
   const CREATE_AT = post.createdAt;
 
   const getPostDetail = async () => {
@@ -42,7 +42,7 @@ const PostsDetail = () => {
         }
       }
 
-      setIsLoading(false);
+      //setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -91,78 +91,74 @@ const PostsDetail = () => {
 
   return (
     <>
-      {isLoading && <Loading />}
+      <div className={styles.detailContainer}>
+        <div className={styles.header}>
+          <div className={styles.headerTitle}>
+            <span>자유 게시판</span>
+          </div>
 
-      {!isLoading && (
-        <div className={styles.detailContainer}>
-          <div className={styles.header}>
-            <div className={styles.headerTitle}>
-              <span>자유 게시판</span>
+          <div className="post-title__area">
+            <h2 className={styles.title}>{post.title}</h2>
+          </div>
+
+          <div className="post-user__wrap">
+            <div className={styles.info}>
+              <span className={styles.id}>{post.id}</span>
             </div>
 
-            <div className="post-title__area">
-              <h2 className={styles.title}>{post.title}</h2>
-            </div>
-
-            <div className="post-user__wrap">
-              <div className={styles.info}>
-                <span className={styles.id}>{post.id}</span>
-              </div>
-
-              <div className={styles.info}>
-                <span className="user-date">
-                  {`
+            <div className={styles.info}>
+              <span className="user-date">
+                {`
                   ${getDate(CREATE_AT).year}-${
-                    getDate(CREATE_AT).month + 1
-                  }-${getDate(CREATE_AT).date} 
+                  getDate(CREATE_AT).month + 1
+                }-${getDate(CREATE_AT).date} 
                   ${getDate(CREATE_AT).hours}:${
-                    getDate(CREATE_AT).minutes
-                  }`}
-                </span>
-              </div>
+                  getDate(CREATE_AT).minutes
+                }`}
+              </span>
+            </div>
 
-              <div className={styles.info}>
-                <span
-                  className={styles.button}
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        "게시글을 수정하시겠습니까?"
-                      )
-                    ) {
-                      authAndNavigate(`/postUpdate/${id}`);
-                      return;
-                    }
-                  }}
-                >
-                  {post.id === userId ? "수정" : ""}
-                </span>
+            <div className={styles.info}>
+              <span
+                className={styles.button}
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      "게시글을 수정하시겠습니까?"
+                    )
+                  ) {
+                    authAndNavigate(`/postUpdate/${id}`);
+                    return;
+                  }
+                }}
+              >
+                {post.id === userId ? "수정" : ""}
+              </span>
 
-                <span
-                  className={styles.button}
-                  onClick={() => {
-                    authAndNavigate().then(() => {
-                      onClickDeletePost();
-                    });
-                  }}
-                >
-                  {post.id === userId ? "삭제" : ""}
-                </span>
-              </div>
+              <span
+                className={styles.button}
+                onClick={() => {
+                  authAndNavigate().then(() => {
+                    onClickDeletePost();
+                  });
+                }}
+              >
+                {post.id === userId ? "삭제" : ""}
+              </span>
             </div>
           </div>
-
-          <div className={styles.content}>
-            {Parser(String(post.content))}
-          </div>
-
-          <CommentList post={post} />
-
-          <div style={{ height: "40px" }}></div>
-
-          <FooterNavbar />
         </div>
-      )}
+
+        <div className={styles.content}>
+          {Parser(String(post.content))}
+        </div>
+
+        <CommentList post={post} />
+
+        <div style={{ height: "40px" }}></div>
+
+        <FooterNavbar />
+      </div>
     </>
   );
 };

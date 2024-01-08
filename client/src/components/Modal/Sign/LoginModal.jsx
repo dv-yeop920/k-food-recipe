@@ -6,6 +6,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../store/slice/userSlice";
 import axios from "axios";
+import toastMessage from "../../../utils/toast";
 //import { setAccessToken } from "../../../utils/accessToken";
 
 const LoginModal = ({
@@ -41,8 +42,7 @@ const LoginModal = ({
     try {
       const response = await axios.post(
         "/api/users/login",
-        userInfo,
-        { timeout: 10000 }
+        userInfo
       );
 
       if (!response.data.isLogin) {
@@ -54,7 +54,7 @@ const LoginModal = ({
         setMessage("");
         setValueInit("login");
         getAccessToken(response);
-        alert(response.data.messsage);
+        toastMessage(response.data.messsage);
         dispatch(loginUser(response.data));
         closeModal();
         return;

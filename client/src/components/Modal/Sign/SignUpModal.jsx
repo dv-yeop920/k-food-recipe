@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import styles from "./SignModal.module.css";
 import axios from "axios";
+import toastMessage from "../../../utils/toast";
 
 const SignUpModal = ({
   openModal,
@@ -30,8 +31,7 @@ const SignUpModal = ({
     try {
       const response = await axios.post(
         "/api/users/register",
-        userInfo,
-        { timeout: 10000 }
+        userInfo
       );
 
       if (!response.data.success) {
@@ -40,7 +40,7 @@ const SignUpModal = ({
       }
 
       if (response.data.success) {
-        alert(response.data.messsage);
+        toastMessage(response.data.messsage);
         setMessage("");
         setValueInit("signUp");
         openModal("login");

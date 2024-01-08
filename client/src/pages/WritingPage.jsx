@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import ImageUploader from "../components/Writing/ImageUploader";
 import Content from "../components/Writing/Content";
 import axios from "axios";
-import Loading from "../components/Loading/Loading";
+//import Loading from "../components/Loading/Loading";
 import {
   uploadPostPreviewImageToS3,
   resizeFile,
@@ -19,7 +19,7 @@ const WritingPage = () => {
   const { userId } = useSelector(selectUser);
   const navigate = useNavigate();
   const { authAndNavigate } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
+  //const [isLoading, setIsLoading] = useState(false);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -32,14 +32,14 @@ const WritingPage = () => {
   const onSubmitRegisterPost = async e => {
     e.preventDefault();
     authAndNavigate();
-    setIsLoading(true);
+    //setIsLoading(true);
 
     let previewImageUrl;
 
     try {
       if (title === "" || content === null) {
         alert("내용을 입력했는지 확인해 주세요!");
-        setIsLoading(false);
+        //setIsLoading(false);
         return;
       }
 
@@ -77,7 +77,7 @@ const WritingPage = () => {
 
       setPostPreviewImageFile(null);
       setPostPreviewImageSrc(null);
-      setIsLoading(false);
+      //setIsLoading(false);
     } catch (error) {
       console.log(error);
       throw error;
@@ -86,66 +86,62 @@ const WritingPage = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div className={styles.editorContainer}>
-          <form
-            className="editor-form"
-            onSubmit={onSubmitRegisterPost}
-          >
-            <div className={styles.contentContainer}>
-              <ImageUploader
-                setPostPreviewImageFile={
-                  setPostPreviewImageFile
-                }
-                resizeFile={resizeFile}
-                PostPreviewImageSrc={PostPreviewImageSrc}
-                setPostPreviewImageSrc={
-                  setPostPreviewImageSrc
-                }
-              />
+      <div className={styles.editorContainer}>
+        <form
+          className="editor-form"
+          onSubmit={onSubmitRegisterPost}
+        >
+          <div className={styles.contentContainer}>
+            <ImageUploader
+              setPostPreviewImageFile={
+                setPostPreviewImageFile
+              }
+              resizeFile={resizeFile}
+              PostPreviewImageSrc={PostPreviewImageSrc}
+              setPostPreviewImageSrc={
+                setPostPreviewImageSrc
+              }
+            />
 
-              <Content
-                quillRef={quillRef}
-                content={content}
-                setTitle={setTitle}
-                setContent={setContent}
-                resizeFile={resizeFile}
-              />
-            </div>
+            <Content
+              quillRef={quillRef}
+              content={content}
+              setTitle={setTitle}
+              setContent={setContent}
+              resizeFile={resizeFile}
+            />
+          </div>
 
-            <div className={styles.buttonArea}>
-              <button
-                className={`${styles.writingButton}
+          <div className={styles.buttonArea}>
+            <button
+              className={`${styles.writingButton}
                             ${button.cancle}`}
-                type="button"
-                onClick={() => {
-                  authAndNavigate();
-                  if (
-                    window.confirm(
-                      "게시글 작성을 취소 하시겠어요?"
-                    )
-                  ) {
-                    navigate(-1, { replace: true });
-                    return;
-                  }
-                }}
-              >
-                취소
-              </button>
+              type="button"
+              onClick={() => {
+                authAndNavigate();
+                if (
+                  window.confirm(
+                    "게시글 작성을 취소 하시겠어요?"
+                  )
+                ) {
+                  navigate(-1, { replace: true });
+                  return;
+                }
+              }}
+            >
+              취소
+            </button>
 
-              <button
-                className={`${styles.writingButton}
+            <button
+              className={`${styles.writingButton}
                             ${button.submit}`}
-                type="submit"
-              >
-                등록
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+              type="submit"
+            >
+              등록
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };
