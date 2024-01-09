@@ -1,49 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { recipeData } from "../../services/recipeData.js";
+import React from "react";
 import styles from "./Recipe.module.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import MainSkeleton from "./skeleton/MainSkeleton.jsx";
 
-const MenuCard = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const recipes = recipeData.COOKRCP01.row;
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
-
+const MenuCard = ({ recipe }) => {
   return (
-    <ul className={styles.recipe_list}>
-      {recipes.map((item, index) => {
-        return isLoading ? (
-          <MainSkeleton />
-        ) : (
-          <Link
-            key={item.RCP_SEQ + index}
-            to={`/recipe/${item.RCP_SEQ}`}
-          >
-            <li className={styles.recipe_card}>
-              <figure style={{ overflow: "hidden" }}>
-                <LazyLoadImage
-                  className={styles.recipe_img}
-                  src={item.ATT_FILE_NO_MAIN}
-                  alt={item.title}
-                />
+    <Link to={`/recipe/${recipe._id}`}>
+      <li className={styles.recipe_card}>
+        <figure style={{ overflow: "hidden" }}>
+          <LazyLoadImage
+            className={styles.recipe_img}
+            src={recipe.ATT_FILE_NO_MAIN}
+            alt={recipe.ATT_FILE_NO_MAIN}
+          />
 
-                <figcaption>
-                  <h4 className={styles.recipe_title}>
-                    {item.RCP_NM}
-                  </h4>
-                </figcaption>
-              </figure>
-            </li>
-          </Link>
-        );
-      })}
-    </ul>
+          <figcaption>
+            <h4 className={styles.recipe_title}>
+              {recipe.RCP_NM}
+            </h4>
+          </figcaption>
+        </figure>
+      </li>
+    </Link>
   );
 };
 

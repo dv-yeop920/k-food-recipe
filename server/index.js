@@ -17,6 +17,9 @@ const { Comment } = require("./models/Comment.js");
 //게시판
 const { Post } = require("./models/NoticeBoard.js");
 
+//레시피
+const { Recipe } = require("./models/Recipe.js");
+
 //클라이언트의 req 를 json 형태로 해석 하도록 도와줌
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -501,3 +504,42 @@ app.post(
     }
   }
 );
+
+const data = [];
+
+//Recipe.insertMany(data)
+//.then(() => console.log("데이터 삽입 성공"))
+//.catch(error => console.log(error));
+
+app.get("/api/recipeList", async (req, res) => {
+  try {
+    const recipes = await Recipe.find();
+
+    res.json({
+      recipes: recipes,
+    });
+  } catch (error) {
+    res.json({
+      messsage: "레시피를 불러오지 못했습니다",
+    });
+  }
+});
+
+app.get("/api/recipeList/recipe", async (req, res) => {
+  const recipeId = req.query.id;
+
+  try {
+    if (recipeId) {
+      const recipe = await Recipe.findOne({
+        _id: recipeId,
+      }).exec();
+      res.json({
+        recipe: recipe,
+      });
+    }
+  } catch (error) {
+    res.json({
+      messsage: "레시피를 불러오지 못했습니다",
+    });
+  }
+});
