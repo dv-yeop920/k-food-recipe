@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "../components/MainPage/Recipe.module.css";
 import RecipeCard from "../components/MainPage/RecipeCard";
 import RecipeTab from "../components/MainPage/RecipeTab";
@@ -6,27 +6,48 @@ import { tabList } from "../services/recipeData.js";
 import MainSkeleton from "../components/MainPage/skeleton/MainSkeleton.jsx";
 import { Skeleton } from "@mui/material";
 import axios from "axios";
+import {
+  useQuery,
+  //useMutation,
+  //useQueryClient,
+} from "@tanstack/react-query";
 
 const MainPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [recipes, setRecipes] = useState([]);
+  //const queryClient = useQueryClient();
 
   const getRecipeList = async () => {
     try {
       const response = await axios.get("/api/recipeList");
 
       if (response) {
-        setRecipes(response.data.recipes);
+        return response.data.recipes;
       }
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+  // Queries
+  const {
+    isLoading,
+    //error,
+    data: recipes,
+  } = useQuery({
+    queryKey: ["recipes"],
+    queryFn: getRecipeList,
+    staleTime: 1000 * 60 * 24,
+  });
 
-  useEffect(() => {
-    getRecipeList();
-  }, []);
+  // Mutations
+  /*const mutation = useMutation({
+    mutationFn: getRecipeList,
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({
+        queryKey: ["recipes"],
+      });
+    },
+  });*/
+
   return (
     <>
       <nav className={styles.recipe_nav}>

@@ -3,7 +3,7 @@ import React from "react";
 
 const MainSkeleton = () => {
   return (
-    <div>
+    <>
       <Skeleton
         style={{
           marginBottom: "10px",
@@ -21,7 +21,7 @@ const MainSkeleton = () => {
         variant="h4"
         height={40}
       />
-    </div>
+    </>
   );
 };
 

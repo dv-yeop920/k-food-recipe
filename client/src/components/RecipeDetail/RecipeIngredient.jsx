@@ -5,8 +5,8 @@ const RecipeIngredient = ({ recipe }) => {
   const renderIngredient = () => {
     return recipe.RCP_PARTS_DTLS.split(",").map(
       (ingredient, index) => (
-        <div>
-          <span className={styles.ingredient} key={index}>
+        <div key={ingredient + index}>
+          <span className={styles.ingredient}>
             {`⭐️ ${ingredient}`}
           </span>
           <br />

@@ -507,7 +507,7 @@ app.post(
 
 const data = [];
 
-//Recipe.insertMany(data)
+//Recipe.insertMany()
 //.then(() => console.log("데이터 삽입 성공"))
 //.catch(error => console.log(error));
 

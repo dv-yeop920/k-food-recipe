@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "./RecipeDetail.module.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const RecipeInfo = ({ recipe }) => {
   return (
     <div className={styles.header}>
-      <img
+      <LazyLoadImage
         className={styles.image}
         src={recipe.ATT_FILE_NO_MK}
         alt="음식 이미지"
-        width={550}
-        height={300}
+        height={350}
+        effect="blur"
       />
       <h1 className={styles.title}>{recipe.RCP_NM}</h1>
       <div className={styles.nutrition_info}>
