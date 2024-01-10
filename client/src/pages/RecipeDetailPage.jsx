@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styles from "../components/PostDetail/PostDetail.module.css";
+import styles from "../components/RecipeDetail/RecipeDetail.module.css";
 import axios from "axios";
+import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
+import RecipeMenual from "../components/RecipeDetail/RecipeMenual";
+import RecipeInfo from "../components/RecipeDetail/RecipeInfo";
+import RecipeIngredient from "../components/RecipeDetail/RecipeIngredient";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
@@ -23,27 +27,31 @@ const RecipeDetailPage = () => {
 
   useEffect(() => {
     getRecipeDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
-    <div className={styles.detailContainer}>
-      <div className={styles.header}>
-        <div className={styles.headerTitle}>
-          <span>자유 게시판</span>
-        </div>
+    <>
+      <section
+        className={`inner-box ${styles.container}`}
+        aria-label="레시피상세"
+      >
+        <RecipeInfo recipe={recipe} />
 
-        <div>
-          <h2 className={styles.title}>{recipe.RCP_NM}</h2>
-        </div>
+        <RecipeIngredient recipe={recipe} />
 
-        <div>
-          <div className={styles.info}>
-            <span className={styles.id}></span>
-          </div>
-        </div>
-      </div>
+        <RecipeMenual recipe={recipe} />
 
-      <div className={styles.content}></div>
-    </div>
+        <div className={styles.tip_area}>
+          <h2 className={styles.recipe_title}>📌 [Tip]</h2>
+          <span className={styles.tip}>
+            {recipe.RCP_NA_TIP}
+          </span>
+        </div>
+      </section>
+
+      <FooterNavbar />
+    </>
   );
 };
 

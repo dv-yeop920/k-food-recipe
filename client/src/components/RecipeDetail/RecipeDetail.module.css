@@ -1,0 +1,66 @@
+.container {
+  padding-top: 11rem;
+}
+
+.header {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.title {
+  font-size: 3rem;
+  border-bottom: 2px solid #ddd;
+}
+
+.nutrition_info {
+  padding: 3rem 0;
+}
+
+.info {
+  margin-right: 2rem;
+  font-size: 1.5rem;
+}
+
+.ingredient_area {
+  padding: 2.5rem 0;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.ingredient {
+  font-size: 1.5rem;
+  line-height: 4.5rem;
+}
+
+.content_area {
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.recipe_menual {
+  font-size: 1.5rem;
+  line-height: 4.5rem;
+  margin: 1rem 0;
+}
+
+.tip_area {
+  margin-top: 2rem;
+}
+
+.tip {
+  font-size: 1.5rem;
+  line-height: 4rem;
+}
+
+.image {
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}

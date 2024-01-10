@@ -11,7 +11,7 @@ const MenuCard = ({ recipe }) => {
           <LazyLoadImage
             className={styles.recipe_img}
             src={recipe.ATT_FILE_NO_MAIN}
-            alt={recipe.ATT_FILE_NO_MAIN}
+            alt="음식 이미지"
           />
 
           <figcaption>
