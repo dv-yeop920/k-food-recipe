@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import ImageUploader from "../components/Writing/ImageUploader";
 import Content from "../components/Writing/Content";
 import axios from "axios";
-//import Loading from "../components/Loading/Loading";
 import {
   uploadPostPreviewImageToS3,
   resizeFile,
@@ -19,7 +18,6 @@ const WritingPage = () => {
   const { userId } = useSelector(selectUser);
   const navigate = useNavigate();
   const { authAndNavigate } = useAuth();
-  //const [isLoading, setIsLoading] = useState(false);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -32,14 +30,12 @@ const WritingPage = () => {
   const onSubmitRegisterPost = async e => {
     e.preventDefault();
     authAndNavigate();
-    //setIsLoading(true);
 
     let previewImageUrl;
 
     try {
       if (title === "" || content === null) {
-        alert("내용을 입력했는지 확인해 주세요!");
-        //setIsLoading(false);
+        toastMessage("내용을 입력했는지 확인해 주세요!");
         return;
       }
 
@@ -77,7 +73,6 @@ const WritingPage = () => {
 
       setPostPreviewImageFile(null);
       setPostPreviewImageSrc(null);
-      //setIsLoading(false);
     } catch (error) {
       console.log(error);
       throw error;
@@ -114,8 +109,9 @@ const WritingPage = () => {
 
           <div className={styles.buttonArea}>
             <button
-              className={`${styles.writingButton}
-                            ${button.cancle}`}
+              className={`
+              ${styles.writingButton}
+              ${button.cancle}`}
               type="button"
               onClick={() => {
                 authAndNavigate();
@@ -133,8 +129,9 @@ const WritingPage = () => {
             </button>
 
             <button
-              className={`${styles.writingButton}
-                            ${button.submit}`}
+              className={`
+              ${styles.writingButton}
+              ${button.submit}`}
               type="submit"
             >
               등록

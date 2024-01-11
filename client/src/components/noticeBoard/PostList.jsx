@@ -27,7 +27,7 @@ const PostList = ({
             </div>
           </li>
 
-          {postList.length > 0 ? (
+          {postList.length > 0 &&
             postList.map(post => {
               return (
                 <li className={styles.li} key={post._id}>
@@ -78,8 +78,8 @@ const PostList = ({
                   />
                 </li>
               );
-            })
-          ) : (
+            })}
+          {postList.length === 0 && (
             <p
               style={{
                 padding: "70px",

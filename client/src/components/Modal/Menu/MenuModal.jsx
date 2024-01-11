@@ -66,7 +66,7 @@ const MenuModal = ({ openModal, closeModal }) => {
             </span>
           </li>
 
-          {isLogin === true ? null : (
+          {isLogin ? null : (
             <li
               className={styles.menu}
               onClick={() => {
@@ -82,13 +82,13 @@ const MenuModal = ({ openModal, closeModal }) => {
           <li
             className={styles.menu}
             onClick={() => {
-              isLogin === false && openModal("login");
-              isLogin === true && handleClickLogout();
+              !isLogin && openModal("login");
+              isLogin && handleClickLogout();
               return;
             }}
           >
             <span className={styles.menuLink}>
-              {isLogin === true ? "로그아웃" : "로그인"}
+              {isLogin ? "로그아웃" : "로그인"}
             </span>
           </li>
         </ul>

@@ -5,7 +5,6 @@ import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
 import Parser from "html-react-parser";
 import axios from "axios";
 import getDate from "../utils/postDate";
-//import Loading from "../components//Loading/Loading";
 import { deletePostPreviewImageToS3 } from "../utils/awsS3Setting";
 import styles from "../components/PostDetail/PostDetail.module.css";
 import { useSelector } from "react-redux";
@@ -20,7 +19,6 @@ const PostsDetail = () => {
   //postList 에서 넘겨준 게시물의 고유 _id값
   const { id } = useParams();
   const [post, setPost] = useState({});
-  //const [isLoading, setIsLoading] = useState(true);
   const CREATE_AT = post.createdAt;
 
   const getPostDetail = async () => {
@@ -41,8 +39,6 @@ const PostsDetail = () => {
           setPost(postData);
         }
       }
-
-      //setIsLoading(false);
     } catch (error) {
       console.log(error);
     }

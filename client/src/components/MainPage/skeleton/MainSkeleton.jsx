@@ -3,7 +3,7 @@ import React from "react";
 
 const MainSkeleton = () => {
   return (
-    <>
+    <div>
       <Skeleton
         style={{
           marginBottom: "10px",
@@ -11,7 +11,8 @@ const MainSkeleton = () => {
         }}
         animation="wave"
         variant="image"
-        height={300}
+        width={230}
+        height={250}
       />
       <Skeleton
         style={{
@@ -19,9 +20,10 @@ const MainSkeleton = () => {
         }}
         animation="wave"
         variant="h4"
+        width={230}
         height={40}
       />
-    </>
+    </div>
   );
 };
 

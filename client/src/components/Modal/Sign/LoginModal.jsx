@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../../store/slice/userSlice";
 import axios from "axios";
 import toastMessage from "../../../utils/toast";
-//import { setAccessToken } from "../../../utils/accessToken";
 
 const LoginModal = ({
   openModal,

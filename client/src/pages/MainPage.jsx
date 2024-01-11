@@ -3,7 +3,7 @@ import styles from "../components/MainPage/Recipe.module.css";
 import RecipeCard from "../components/MainPage/RecipeCard";
 import RecipeTab from "../components/MainPage/RecipeTab";
 import { tabList } from "../services/recipeData.js";
-import MainSkeleton from "../components/MainPage/skeleton/MainSkeleton.jsx";
+//import MainSkeleton from "../components/MainPage/skeleton/MainSkeleton.jsx";
 import { Skeleton } from "@mui/material";
 import axios from "axios";
 import {
@@ -17,7 +17,7 @@ const MainPage = () => {
 
   const getRecipeList = async () => {
     try {
-      const response = await axios.get("/api/recipeList");
+      const response = await axios.get(`/api/recipeList`);
 
       if (response) {
         return response.data.recipes;
@@ -113,9 +113,7 @@ const MainPage = () => {
           <ul className={styles.recipe_list}>
             {recipes &&
               recipes.map(recipe => {
-                return isLoading ? (
-                  <MainSkeleton />
-                ) : (
+                return (
                   <RecipeCard
                     key={recipe._id}
                     recipe={recipe}

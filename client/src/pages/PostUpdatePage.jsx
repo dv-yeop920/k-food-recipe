@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import UpdateContent from "../components/Writing/UpdateContent";
 import axios from "axios";
-//import Loading from "../components/Loading/Loading";
 import UpdateImageUploader from "../components/Writing/UpdateImageUploader";
 import {
   uploadPostPreviewImageToS3,
@@ -30,7 +29,7 @@ const PostsUpdatePage = () => {
     editPostPrevuewImageSrc,
     setEditPostPrevuewImageSrc,
   ] = useState(null);
-  //const [isLoading, setIsLoading] = useState(false);
+
   const { authAndNavigate } = useAuth();
 
   const getPost = async () => {
@@ -60,8 +59,7 @@ const PostsUpdatePage = () => {
         editTitleValue === "" ||
         editContentValue === null
       ) {
-        alert("내용을 입력했는지 확인해 주세요!");
-        //setIsLoading(false);
+        toastMessage("내용을 입력했는지 확인해 주세요!");
         return;
       }
 
@@ -82,7 +80,6 @@ const PostsUpdatePage = () => {
       if (
         window.confirm("게시물 내용을 수정하시겠습니까?")
       ) {
-        //setIsLoading(true);
         const updatePosts = {
           _id: originalDetail._id,
           title: originalDetail.title,
@@ -105,8 +102,6 @@ const PostsUpdatePage = () => {
           toastMessage(response.data.messsage);
           return;
         }
-
-        //setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -152,8 +147,9 @@ const PostsUpdatePage = () => {
 
           <div className={styles.buttonArea}>
             <button
-              className={`${styles.writingButton}
-                            ${button.cancle}`}
+              className={`
+              ${styles.writingButton}
+              ${button.cancle}`}
               type="button"
               onClick={() => {
                 authAndNavigate();
@@ -171,8 +167,9 @@ const PostsUpdatePage = () => {
             </button>
 
             <button
-              className={`${styles.writingButton}
-                            ${button.submit}`}
+              className={`
+              ${styles.writingButton}
+              ${button.submit}`}
               type="submit"
             >
               수정

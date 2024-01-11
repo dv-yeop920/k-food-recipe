@@ -52,6 +52,7 @@
 
 .recipe_title {
   padding: 1em;
+  font-size: 1.2rem;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;

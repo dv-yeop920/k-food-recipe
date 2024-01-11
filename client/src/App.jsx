@@ -12,6 +12,8 @@ import ModalContainer from "./components/Modal/ModalContainer";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { Suspense } from "react";
+import Loading from "./components/Loading/Loading";
 
 function App() {
   return (
@@ -20,27 +22,32 @@ function App() {
       <ToastContainer />
       <ModalContainer />
 
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route
-          path="/recipe/:id"
-          element={<RecipeDetailPage />}
-        />
-        <Route
-          path="/noticeBoard"
-          element={<NoticeBoardPage />}
-        />
-        <Route path="/myPage" element={<MyPage />} />
-        <Route path="/writing" element={<WritingPage />} />
-        <Route
-          path="/postDetail/:id"
-          element={<PostDetailPage />}
-        />
-        <Route
-          path="/postUpdate/:id"
-          element={<PostUpdatePage />}
-        />
-      </Routes>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route
+            path="/recipe/:id"
+            element={<RecipeDetailPage />}
+          />
+          <Route
+            path="/noticeBoard"
+            element={<NoticeBoardPage />}
+          />
+          <Route path="/myPage" element={<MyPage />} />
+          <Route
+            path="/writing"
+            element={<WritingPage />}
+          />
+          <Route
+            path="/postDetail/:id"
+            element={<PostDetailPage />}
+          />
+          <Route
+            path="/postUpdate/:id"
+            element={<PostUpdatePage />}
+          />
+        </Routes>
+      </Suspense>
 
       <ScrollUpButton />
     </>

@@ -22,7 +22,13 @@ const BASE_URL = process.env.REACT_APP_PORT_NUMBER;
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.withCredentials = true;
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
 const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(
