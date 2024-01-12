@@ -18,7 +18,7 @@ const FooterNavbar = () => {
       <nav className={styles.container}>
         <ul className={styles.listArea}>
           <li
-            className="bar-list"
+            className={styles.bar_list}
             onClick={() => navigate(-1)}
           >
             <FontAwesomeIcon
@@ -33,7 +33,7 @@ const FooterNavbar = () => {
             </span>
           </li>
 
-          <li className="bar-list">
+          <li className={styles.bar_list}>
             <FontAwesomeIcon
               style={{ color: "red" }}
               className={styles.icon}
@@ -42,7 +42,7 @@ const FooterNavbar = () => {
             />
           </li>
 
-          <li className="bar-list">
+          <li className={styles.bar_list}>
             <FontAwesomeIcon
               className={styles.icon}
               icon={faCommentDots}
@@ -50,7 +50,7 @@ const FooterNavbar = () => {
             />
           </li>
 
-          <li className="bar-list">
+          <li className={styles.bar_list}>
             <FontAwesomeIcon
               className={styles.icon}
               icon={faShareFromSquare}

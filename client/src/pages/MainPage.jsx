@@ -3,7 +3,7 @@ import styles from "../components/MainPage/Recipe.module.css";
 import RecipeCard from "../components/MainPage/RecipeCard";
 import RecipeTab from "../components/MainPage/RecipeTab";
 import { tabList } from "../services/recipeData.js";
-//import MainSkeleton from "../components/MainPage/skeleton/MainSkeleton.jsx";
+import MainSkeleton from "../components/MainPage/skeleton/MainSkeleton.jsx";
 import { Skeleton } from "@mui/material";
 import axios from "axios";
 import {
@@ -77,8 +77,8 @@ const MainPage = () => {
                     style={{
                       borderRadius: "15px",
                       marginRight: "10px",
-                      width: "6rem",
                     }}
+                    width={300}
                     height={60}
                   />
                 ) : (

@@ -8,7 +8,7 @@ const RecipeInfo = ({ recipe }) => {
     <div className={styles.header}>
       <LazyLoadImage
         className={styles.image}
-        src={recipe.ATT_FILE_NO_MK}
+        src={recipe.ATT_FILE_NO_MAIN}
         alt="음식 이미지"
         height={350}
         effect="blur"

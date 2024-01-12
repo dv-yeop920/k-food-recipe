@@ -34,14 +34,18 @@ const RecipeMenual = ({ recipe }) => {
         </>
       )}
 
-      <span className={styles.recipe_menual}>
-        {recipe.MANUAL03}
-      </span>
-      <img
-        className={styles.image}
-        src={recipe.MANUAL_IMG03}
-        alt="3번 순서"
-      />
+      {recipe.MANUAL03 && (
+        <>
+          <span className={styles.recipe_menual}>
+            {recipe.MANUAL03}
+          </span>
+          <img
+            className={styles.image}
+            src={recipe.MANUAL_IMG03}
+            alt="3번 순서"
+          />
+        </>
+      )}
 
       {recipe.MANUAL04 && (
         <>
@@ -55,6 +59,7 @@ const RecipeMenual = ({ recipe }) => {
           />
         </>
       )}
+
       {recipe.MANUAL05 && (
         <>
           <span className={styles.recipe_menual}>
@@ -67,6 +72,7 @@ const RecipeMenual = ({ recipe }) => {
           />
         </>
       )}
+
       {recipe.MANUAL06 && (
         <>
           <span className={styles.recipe_menual}>

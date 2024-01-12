@@ -58,6 +58,30 @@ const RecipeSchema = mongoose.Schema({
   MANUAL_IMG06: {
     type: String,
   },
+  MANUAL07: {
+    type: String,
+  },
+  MANUAL_IMG07: {
+    type: String,
+  },
+  MANUAL08: {
+    type: String,
+  },
+  MANUAL_IMG08: {
+    type: String,
+  },
+  MANUAL09: {
+    type: String,
+  },
+  MANUAL_IMG09: {
+    type: String,
+  },
+  MANUAL10: {
+    type: String,
+  },
+  MANUAL_IMG10: {
+    type: String,
+  },
   RCP_PAT2: {
     type: String,
   },
