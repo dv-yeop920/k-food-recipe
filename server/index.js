@@ -512,11 +512,17 @@ const data = [];
 //.catch(error => console.log(error));
 
 app.get("/api/recipeList", async (req, res) => {
+  const pageNumber = parseInt(req.query.pageNumber) - 1;
+
+  const postPerPage = 20;
+
   try {
-    const recipes = await Recipe.find();
+    const recipeList = await Recipe.find()
+      .skip(postPerPage * pageNumber - postPerPage)
+      .limit(postPerPage);
 
     res.json({
-      recipes: recipes,
+      recipeList: recipeList,
     });
   } catch (error) {
     res.json({
