@@ -514,7 +514,7 @@ const data = [];
 app.get("/api/recipeList", async (req, res) => {
   const pageNumber = parseInt(req.query.pageNumber) - 1;
 
-  const postPerPage = 20;
+  const postPerPage = 50;
 
   try {
     const recipeList = await Recipe.find()

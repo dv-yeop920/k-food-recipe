@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import Loading from "../components/Loading/Loading";
 import PostSearchInput from "../components/NoticeBoard/PostSearchInput";
 import PostList from "../components/NoticeBoard/PostList";
 
 const NoticeBoardPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const userPostSearchValue = useRef(null);
   const [postList, setPostList] = useState([]);
   const [totalPostLength, setTotalPostLength] = useState(
@@ -18,7 +20,7 @@ const NoticeBoardPage = () => {
     try {
       const response = await axios.get(
         `/api/posts/getPostList?pageNumber=${pageNumber}
-                &search=${userPostSearchValue.current.value}`
+        &search=${userPostSearchValue.current.value}`
       );
 
       if (response) {
@@ -31,6 +33,7 @@ const NoticeBoardPage = () => {
           setTotalPostLength(getTotalPostsLength);
         }
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -61,14 +64,17 @@ const NoticeBoardPage = () => {
           onSubmitGetFilteredPostList
         }
       />
-
-      <PostList
-        postList={postList}
-        postPerPage={POST_PER_PAGE}
-        totalPostLength={totalPostLength}
-        paginate={setPageNumber}
-        pageNumber={pageNumber}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <PostList
+          postList={postList}
+          postPerPage={POST_PER_PAGE}
+          totalPostLength={totalPostLength}
+          paginate={setPageNumber}
+          pageNumber={pageNumber}
+        />
+      )}
     </>
   );
 };

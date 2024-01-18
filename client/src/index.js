@@ -40,13 +40,13 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <ScrollTop />
+        <BrowserRouter>
+          <ScrollTop />
+          <QueryClientProvider client={queryClient}>
             <App />
             <ReactQueryDevtools initialIsOpen={true} />
-          </BrowserRouter>
-        </QueryClientProvider>
+          </QueryClientProvider>
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>

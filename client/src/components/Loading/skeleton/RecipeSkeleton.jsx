@@ -9,7 +9,7 @@ const MainSkeleton = () => {
       <TabSkeleton />
       <div className={`inner-box ${styles.recipe_section}`}>
         <div className={styles.recipe_list}>
-          {Array.from({ length: 40 }).map((_, index) => (
+          {Array.from({ length: 30 }).map((_, index) => (
             <div key={index}>
               <Skeleton
                 animation="wave"

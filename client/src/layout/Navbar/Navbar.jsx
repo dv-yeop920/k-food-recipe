@@ -8,7 +8,7 @@ import {
   faSearch,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { openModal } from "../../store/slice/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +20,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const isDark = useSelector(theme);
   const [isSearchBar, setIsSearchBar] = useState(false);
+  const [searchValue, setSearchValue] = useSearchParams();
 
   const darkMode = () => {
     const DOM_STYLE = document.documentElement.style;
@@ -86,6 +87,10 @@ const Navbar = () => {
                       className={`${styles.recipeSearchLink} ${styles.recipeSearchInput}`}
                       id="recipeSearchInput"
                       autoFocus
+                      onChange={e => {
+                        setSearchValue(e.target.value);
+                        console.log(searchValue);
+                      }}
                     />
                   </label>
                   <FontAwesomeIcon
