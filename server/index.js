@@ -512,8 +512,9 @@ const data = [];
 //.catch(error => console.log(error));
 
 app.get("/api/recipeList", async (req, res) => {
-  const pageNumber = parseInt(req.query.pageNumber) - 1;
+  const pageNumber = parseInt(req.query.cursor);
 
+  console.log(pageNumber);
   const postPerPage = 50;
 
   try {

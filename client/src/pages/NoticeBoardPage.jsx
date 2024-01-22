@@ -64,6 +64,7 @@ const NoticeBoardPage = () => {
           onSubmitGetFilteredPostList
         }
       />
+
       {isLoading ? (
         <Loading />
       ) : (

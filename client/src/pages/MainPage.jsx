@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import RecipeTab from "../components/MainPage/RecipeTab";
 import RecipeList from "../components/MainPage/RecipeList";
 
@@ -11,35 +16,55 @@ import {
 } from "@tanstack/react-query";
 
 const MainPage = ({ SearchRecipeValue }) => {
-  const [pageNumber, setPageNumber] = useState(1);
   const [tabValue, setTabValue] = useState("");
 
-  const getRecipeList = async () => {
+  const getRecipeList = async pageNumber => {
     try {
       const response = await axios.get(
-        `/api/recipeList?page=${pageNumber}
+        `/api/recipeList?cursor=${pageNumber}
         &search=${SearchRecipeValue}
         &tabFocus=${tabValue}`
       );
 
       if (response) {
-        return response.data.recipeList;
+        return response.data;
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   // Queries
-  const { data: recipeList } = useQuery({
+  /*const { data: recipeList } = useQuery({
     queryKey: ["recipeList"],
     queryFn: getRecipeList,
     staleTime: 1000 * 240,
+  });*/
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["recipeList", SearchRecipeValue, tabValue],
+    queryFn: ({ pageNumber = 1 }) =>
+      getRecipeList(pageNumber),
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.recipeList.length === 0) {
+        return false;
+      } else {
+        return pages.length + 1;
+      }
+    },
   });
 
   return (
     <>
       <RecipeTab />
-      <RecipeList recipeList={recipeList} />
+      {data?.pages?.map((group, i) => (
+        <RecipeList key={i} recipeList={group.recipeList} />
+      ))}
     </>
   );
 };
