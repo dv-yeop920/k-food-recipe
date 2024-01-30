@@ -12,14 +12,6 @@
   padding: 1rem;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .recipe_card {
   position: relative;
   box-shadow: rgba(100, 103, 106, 0.2) 0px 8px 24px;
@@ -28,7 +20,6 @@
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
-  animation: fadeIn 0.5s;
 }
 
 .recipe_img {
@@ -38,7 +29,6 @@
   border-radius: 20px;
   transition: all 0.3s ease-in-out;
   object-fit: cover;
-  animation: fadeIn 1.2s;
 }
 
 .recipe_card:hover {
@@ -150,8 +140,4 @@
   transform: perspective(300px) translateZ(10px);
   background-color: #cbd0d3;
   color: black;
-}
-
-.tab_button:active {
-  background-color: gray;
 }

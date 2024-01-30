@@ -2,10 +2,9 @@ import React from "react";
 import styles from "./Recipe.module.css";
 import { tabList } from "../../services/recipeData";
 
-const RecipeTab = ({ tabValue, setTabValue }) => {
-  const onClickTab = value => {
-    console.log("value", value);
-    setTabValue(value);
+const RecipeTab = ({ setTabValue }) => {
+  const onClickTab = tabName => {
+    setTabValue(tabName);
   };
 
   return (
@@ -17,18 +16,14 @@ const RecipeTab = ({ tabValue, setTabValue }) => {
           </div>
 
           <ul className={styles.tab_box}>
-            {tabList.map(item => {
+            {tabList.map(tabName => {
               return (
-                <li key={item}>
+                <li key={tabName}>
                   <button
-                    className={`${
-                      item === tabValue
-                        ? styles.tab_button_active
-                        : styles.tab_button
-                    }`}
-                    onClick={() => onClickTab(item)}
+                    className={styles.tab_button}
+                    onClick={() => onClickTab(tabName)}
                   >
-                    {item}
+                    {tabName}
                   </button>
                 </li>
               );

@@ -13,8 +13,8 @@ import RecipeDetailPage from "./pages/RecipeDetailPage";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Suspense } from "react";
-import RecipeSkeleton from "./components/Loading/skeleton/RecipeSkeleton";
 import DeferredComponent from "./components/Loading/DeferredComponent";
+import Loading from "./components/Loading/Loading";
 
 function App() {
   return (
@@ -22,44 +22,41 @@ function App() {
       <Navbar />
       <ToastContainer />
       <ModalContainer />
+      <Suspense
+        fallback={
+          <DeferredComponent>
+            <Loading />
+          </DeferredComponent>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<MainPage />} />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Suspense
-              fallback={
-                <DeferredComponent>
-                  <RecipeSkeleton />
-                </DeferredComponent>
-              }
-            >
-              <MainPage />
-            </Suspense>
-          }
-        />
+          <Route
+            path="/recipe/:id"
+            element={<RecipeDetailPage />}
+          />
 
-        <Route
-          path="/recipe/:id"
-          element={<RecipeDetailPage />}
-        />
+          <Route
+            path="/noticeBoard"
+            element={<NoticeBoardPage />}
+          />
 
-        <Route
-          path="/noticeBoard"
-          element={<NoticeBoardPage />}
-        />
-
-        <Route path="/myPage" element={<MyPage />} />
-        <Route path="/writing" element={<WritingPage />} />
-        <Route
-          path="/postDetail/:id"
-          element={<PostDetailPage />}
-        />
-        <Route
-          path="/postUpdate/:id"
-          element={<PostUpdatePage />}
-        />
-      </Routes>
+          <Route path="/myPage" element={<MyPage />} />
+          <Route
+            path="/writing"
+            element={<WritingPage />}
+          />
+          <Route
+            path="/postDetail/:id"
+            element={<PostDetailPage />}
+          />
+          <Route
+            path="/postUpdate/:id"
+            element={<PostUpdatePage />}
+          />
+        </Routes>
+      </Suspense>
 
       <ScrollUpButton />
     </>

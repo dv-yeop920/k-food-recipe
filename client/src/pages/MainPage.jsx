@@ -1,7 +1,6 @@
 import React, {
-  useCallback,
+  Suspense,
   useEffect,
-  useRef,
   useState,
 } from "react";
 import RecipeTab from "../components/MainPage/RecipeTab";
@@ -9,13 +8,15 @@ import RecipeList from "../components/MainPage/RecipeList";
 
 import axios from "axios";
 import {
-  useQuery,
   useInfiniteQuery,
   //useMutation,
-  //useQueryClient,
 } from "@tanstack/react-query";
+import RecipeSkeleton from "../components/Loading/skeleton/RecipeSkeleton";
+import ScrollToTop from "../services/scrollTop";
+import TabLoading from "../components/Loading/skeleton/TabSkeleton";
 
 const MainPage = ({ SearchRecipeValue }) => {
+  const [isTabLoading, setIsTabLoading] = useState(true);
   const [tabValue, setTabValue] = useState("전체");
 
   const getRecipeList = async pageNumber => {
@@ -34,18 +35,12 @@ const MainPage = ({ SearchRecipeValue }) => {
     }
   };
 
-  // Queries
-  /*const { data: recipeList } = useQuery({
-    queryKey: ["recipeList"],
-    queryFn: getRecipeList,
-    staleTime: 1000 * 240,
-  });*/
-
   const {
     data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
+    isLoading,
+    //fetchNextPage,
+    //hasNextPage,
+    //isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: ["recipeList", SearchRecipeValue, tabValue],
     queryFn: ({ pageNumber = 1 }) =>
@@ -57,16 +52,35 @@ const MainPage = ({ SearchRecipeValue }) => {
         return pages.length + 1;
       }
     },
+    suspense: false,
   });
+
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+    setIsTabLoading(false);
+  }, [isLoading]);
+
   return (
     <>
-      <RecipeTab
-        value={tabValue}
-        setTabValue={setTabValue}
-      />
-      {data?.pages?.map((group, i) => (
-        <RecipeList key={i} recipeList={group.recipeList} />
-      ))}
+      <ScrollToTop tabValue={tabValue} />
+
+      {isTabLoading ? (
+        <TabLoading />
+      ) : (
+        <RecipeTab setTabValue={setTabValue} />
+      )}
+
+      {isLoading && <RecipeSkeleton />}
+
+      {!isLoading &&
+        data?.pages?.map((group, i) => (
+          <RecipeList
+            key={i}
+            recipeList={group.recipeList}
+          />
+        ))}
     </>
   );
 };

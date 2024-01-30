@@ -1,12 +1,10 @@
 import { Skeleton } from "@mui/material";
 import React from "react";
-import TabSkeleton from "./TabSkeleton";
 import styles from "../../MainPage/Recipe.module.css";
 
 const MainSkeleton = () => {
   return (
     <>
-      <TabSkeleton />
       <div className={`inner-box ${styles.recipe_section}`}>
         <div className={styles.recipe_list}>
           {Array.from({ length: 30 }).map((_, index) => (
