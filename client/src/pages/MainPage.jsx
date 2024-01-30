@@ -16,7 +16,7 @@ import {
 } from "@tanstack/react-query";
 
 const MainPage = ({ SearchRecipeValue }) => {
-  const [tabValue, setTabValue] = useState("");
+  const [tabValue, setTabValue] = useState("전체");
 
   const getRecipeList = async pageNumber => {
     try {
@@ -58,10 +58,12 @@ const MainPage = ({ SearchRecipeValue }) => {
       }
     },
   });
-
   return (
     <>
-      <RecipeTab />
+      <RecipeTab
+        value={tabValue}
+        setTabValue={setTabValue}
+      />
       {data?.pages?.map((group, i) => (
         <RecipeList key={i} recipeList={group.recipeList} />
       ))}

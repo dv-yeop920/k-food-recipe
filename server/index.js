@@ -513,14 +513,30 @@ const data = [];
 
 app.get("/api/recipeList", async (req, res) => {
   const pageNumber = parseInt(req.query.cursor);
+  let recipeList;
 
-  console.log(pageNumber);
-  const postPerPage = 50;
+  const regexTabValue = new RegExp(
+    `.*${req.query.tabFocus}.*`
+  );
+
+  const postPerPage = 45;
 
   try {
-    const recipeList = await Recipe.find()
-      .skip(postPerPage * pageNumber - postPerPage)
-      .limit(postPerPage);
+    if (req.query.tabFocus === "전체") {
+      recipeList = await Recipe.find()
+        .skip(postPerPage * pageNumber - postPerPage)
+        .limit(postPerPage);
+    } else {
+      recipeList = await Recipe.find({
+        $or: [
+          { RCP_WAY2: regexTabValue },
+          { RCP_NM: regexTabValue },
+          { RCP_PAT2: regexTabValue },
+        ],
+      })
+        .skip(postPerPage * pageNumber - postPerPage)
+        .limit(postPerPage);
+    }
 
     res.json({
       recipeList: recipeList,
