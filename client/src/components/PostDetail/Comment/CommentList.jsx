@@ -149,7 +149,7 @@ const CommentList = ({ post }) => {
     <>
       <div className={styles.commentWrap}>
         <div className="comment-count">
-          <h3> {`댓글 ${post.commentCount}`} </h3>
+          <h3> {`댓글 ${post.commentCount}` || ""} </h3>
         </div>
 
         <div className="comment-container">

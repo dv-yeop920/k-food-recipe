@@ -13,14 +13,14 @@ const MainSkeleton = () => {
                 animation="wave"
                 variant="image"
                 style={{ marginBottom: "10px" }}
-                width={230}
+                width={290}
                 height={250}
               />
               <Skeleton
                 animation="wave"
                 variant="h4"
-                width={230}
-                height={30}
+                width={290}
+                height={60}
               />
             </div>
           ))}

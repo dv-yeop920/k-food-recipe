@@ -19,6 +19,17 @@ const MenuCard = ({ recipe }) => {
               {recipe.RCP_NM}
             </h4>
           </figcaption>
+          <div className={styles.tag_box}>
+            <span className={styles.recipe_tag}>
+              {recipe.HASH_TAG ? recipe.HASH_TAG : "음식"}
+            </span>
+            <span className={styles.recipe_tag}>
+              {recipe.RCP_WAY2}
+            </span>
+            <span className={styles.recipe_tag}>
+              {recipe.RCP_PAT2}
+            </span>
+          </div>
         </figure>
       </li>
     </Link>

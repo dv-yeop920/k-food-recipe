@@ -94,12 +94,16 @@ const PostsDetail = () => {
           </div>
 
           <div className="post-title__area">
-            <h2 className={styles.title}>{post.title}</h2>
+            <h2 className={styles.title}>
+              {post.title || ""}
+            </h2>
           </div>
 
           <div className="post-user__wrap">
             <div className={styles.info}>
-              <span className={styles.id}>{post.id}</span>
+              <span className={styles.id}>
+                {post.id || ""}
+              </span>
             </div>
 
             <div className={styles.info}>
@@ -110,7 +114,7 @@ const PostsDetail = () => {
                 }-${getDate(CREATE_AT).date} 
                   ${getDate(CREATE_AT).hours}:${
                   getDate(CREATE_AT).minutes
-                }`}
+                }` || ""}
               </span>
             </div>
 
@@ -146,7 +150,7 @@ const PostsDetail = () => {
         </div>
 
         <div className={styles.content}>
-          {Parser(String(post.content))}
+          {Parser(String(post.content)) || ""}
         </div>
 
         <CommentList post={post} />

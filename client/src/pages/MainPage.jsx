@@ -1,8 +1,4 @@
-import React, {
-  Suspense,
-  useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import RecipeTab from "../components/MainPage/RecipeTab";
 import RecipeList from "../components/MainPage/RecipeList";
 
@@ -45,11 +41,12 @@ const MainPage = ({ SearchRecipeValue }) => {
     queryKey: ["recipeList", SearchRecipeValue, tabValue],
     queryFn: ({ pageNumber = 1 }) =>
       getRecipeList(pageNumber),
-    getNextPageParam: (lastPage, pages) => {
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
       if (lastPage.recipeList.length === 0) {
         return false;
       } else {
-        return pages.length + 1;
+        return allPages.length + 1;
       }
     },
     suspense: false,

@@ -45,7 +45,7 @@ const RecipeDetailPage = () => {
         <div className={styles.tip_area}>
           <h2 className={styles.recipe_title}>📌 [Tip]</h2>
           <span className={styles.tip}>
-            {recipe.RCP_NA_TIP}
+            {recipe.RCP_NA_TIP || ""}
           </span>
         </div>
       </section>

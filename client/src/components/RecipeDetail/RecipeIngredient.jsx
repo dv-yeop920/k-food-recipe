@@ -7,7 +7,7 @@ const RecipeIngredient = ({ recipe }) => {
       (ingredient, index) => (
         <div key={ingredient + index}>
           <span className={styles.ingredient}>
-            {`⭐️ ${ingredient}`}
+            {`⭐️ ${ingredient}` || ""}
           </span>
           <br />
         </div>

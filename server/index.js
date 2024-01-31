@@ -265,12 +265,11 @@ app.get("/api/posts/getPostList", async (req, res) => {
     })
       .skip(pageNumber * postPerPage)
       .limit(postPerPage)
-      .sort({ createdAt: -1 })
-      .exec();
+      .sort({ createdAt: -1 });
 
     const totalPostLength = await Post.countDocuments({
       title: { $regex: RegexSearchValue, $options: "i" },
-    }).exec();
+    });
 
     const modifiedPosts = posts.map(post => {
       const parts = post.id.split("_");
@@ -513,18 +512,18 @@ const data = [];
 
 app.get("/api/recipeList", async (req, res) => {
   const pageNumber = parseInt(req.query.cursor);
+  const postPerPage = 28;
+
   let recipeList;
 
   const regexTabValue = new RegExp(
     `.*${req.query.tabFocus}.*`
   );
 
-  const postPerPage = 45;
-
   try {
     if (req.query.tabFocus === "전체") {
       recipeList = await Recipe.find()
-        .skip(postPerPage * pageNumber - postPerPage)
+        .skip(postPerPage * pageNumber)
         .limit(postPerPage);
     } else {
       recipeList = await Recipe.find({
@@ -532,6 +531,7 @@ app.get("/api/recipeList", async (req, res) => {
           { RCP_WAY2: regexTabValue },
           { RCP_NM: regexTabValue },
           { RCP_PAT2: regexTabValue },
+          { HASH_TAG: regexTabValue },
         ],
       })
         .skip(postPerPage * pageNumber - postPerPage)

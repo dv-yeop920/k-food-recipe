@@ -111,7 +111,7 @@ const Comment = ({
       <ul>
         <li className={styles.comment}>
           <div>
-            <span>{comment.id}</span>
+            <span>{comment.id || ""}</span>
           </div>
 
           {renderCommnet()}
@@ -124,7 +124,7 @@ const Comment = ({
                   getDate(CREATED_AT).month + 1
                 }-${getDate(CREATED_AT).date} ${
                   getDate(CREATED_AT).hours
-                }:${getDate(CREATED_AT).minutes}`}
+                }:${getDate(CREATED_AT).minutes}` || ""}
               </span>
 
               <span
@@ -138,7 +138,7 @@ const Comment = ({
               </span>
             </div>
 
-            <div>{renderCommentButton()}</div>
+            <div>{renderCommentButton() || ""}</div>
           </div>
         </li>
       </ul>

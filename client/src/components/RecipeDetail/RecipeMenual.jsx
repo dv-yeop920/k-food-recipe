@@ -8,7 +8,7 @@ const RecipeMenual = ({ recipe }) => {
         📌 [조리 순서]
       </h2>
 
-      {recipe.MANUAL01 && (
+      {recipe.MANUAL01 ? (
         <>
           <span className={styles.recipe_menual}>
             {recipe.MANUAL01}
@@ -19,9 +19,11 @@ const RecipeMenual = ({ recipe }) => {
             alt="1번 순서"
           />
         </>
+      ) : (
+        ""
       )}
 
-      {recipe.MANUAL02 && (
+      {recipe.MANUAL02 ? (
         <>
           <span className={styles.recipe_menual}>
             {recipe.MANUAL02}
@@ -32,9 +34,11 @@ const RecipeMenual = ({ recipe }) => {
             alt="2번 순서"
           />
         </>
+      ) : (
+        ""
       )}
 
-      {recipe.MANUAL03 && (
+      {recipe.MANUAL03 ? (
         <>
           <span className={styles.recipe_menual}>
             {recipe.MANUAL03}
@@ -45,9 +49,11 @@ const RecipeMenual = ({ recipe }) => {
             alt="3번 순서"
           />
         </>
+      ) : (
+        ""
       )}
 
-      {recipe.MANUAL04 && (
+      {recipe.MANUAL04 ? (
         <>
           <span className={styles.recipe_menual}>
             {recipe.MANUAL04}
@@ -58,9 +64,11 @@ const RecipeMenual = ({ recipe }) => {
             alt="4번 순서"
           />
         </>
+      ) : (
+        ""
       )}
 
-      {recipe.MANUAL05 && (
+      {recipe.MANUAL05 ? (
         <>
           <span className={styles.recipe_menual}>
             {recipe.MANUAL05}
@@ -71,9 +79,11 @@ const RecipeMenual = ({ recipe }) => {
             alt="5번 순서"
           />
         </>
+      ) : (
+        ""
       )}
 
-      {recipe.MANUAL06 && (
+      {recipe.MANUAL06 ? (
         <>
           <span className={styles.recipe_menual}>
             {recipe.MANUAL06}
@@ -84,6 +94,8 @@ const RecipeMenual = ({ recipe }) => {
             alt="6번 순서"
           />
         </>
+      ) : (
+        ""
       )}
     </div>
   );
