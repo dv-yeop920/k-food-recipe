@@ -154,6 +154,13 @@
 
 .tab_button:hover {
   transform: perspective(300px) translateZ(10px);
-  background-color: #cbd0d3;
-  color: black;
+  color: #fff;
+  background-color: #1abc9c;
+  border-radius: 5px;
+}
+
+.active {
+  color: #fff;
+  background-color: #1abc9c;
+  border-radius: 5px;
 }

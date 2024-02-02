@@ -2,11 +2,10 @@ import React from "react";
 import styles from "./Recipe.module.css";
 import { tabList } from "../../services/recipeData";
 
-const RecipeTab = ({ setTabValue }) => {
-  const onClickTab = tabName => {
-    setTabValue(tabName);
-  };
-
+const RecipeTab = ({
+  tabRecipeValue,
+  onClickTabButton,
+}) => {
   return (
     <nav className={styles.recipe_nav}>
       <div className={styles.nav_box}>
@@ -20,8 +19,13 @@ const RecipeTab = ({ setTabValue }) => {
               return (
                 <li key={tabName}>
                   <button
-                    className={styles.tab_button}
-                    onClick={() => onClickTab(tabName)}
+                    className={`${styles.tab_button} ${
+                      tabRecipeValue === tabName &&
+                      styles.active
+                    }`}
+                    onClick={() =>
+                      onClickTabButton(tabName)
+                    }
                   >
                     {tabName}
                   </button>

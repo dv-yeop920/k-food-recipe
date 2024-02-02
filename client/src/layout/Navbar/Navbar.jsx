@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,8 +19,18 @@ import {
 const Navbar = () => {
   const dispatch = useDispatch();
   const isDark = useSelector(theme);
+  const searchRef = useRef(null);
   const [isSearchBar, setIsSearchBar] = useState(false);
-  const [searchValue, setSearchValue] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabRecipeValue = searchParams.get("tabParams");
+
+  const onSubmitSearchParams = event => {
+    event.preventDefault();
+    setSearchParams({
+      search: searchRef.current.value,
+      tabParams: tabRecipeValue,
+    });
+  };
 
   const darkMode = () => {
     const DOM_STYLE = document.documentElement.style;
@@ -73,32 +83,35 @@ const Navbar = () => {
       <header className={styles.header}>
         <div className={styles.headerBox}>
           <div className={styles.header_menu}>
-            <Link className={styles.title_area} to={"/"}>
+            <Link
+              className={styles.title_area}
+              to={"/?tabParams=전체"}
+            >
               <h1 className={styles.title}>k-레시피</h1>
             </Link>
 
             <div className={styles.recipeSearchArea}>
               {isSearchBar && (
                 <>
-                  <label htmlFor="recipeSearchInput">
-                    <input
-                      type="search"
-                      maxLength={12}
-                      className={`${styles.recipeSearchLink} ${styles.recipeSearchInput}`}
-                      id="recipeSearchInput"
-                      autoFocus
-                      onChange={e => {
-                        setSearchValue(e.target.value);
-                        console.log(searchValue);
-                      }}
+                  <form onSubmit={onSubmitSearchParams}>
+                    <label htmlFor="recipeSearchInput">
+                      <input
+                        type="search"
+                        maxLength={12}
+                        className={`${styles.recipeSearchLink} ${styles.recipeSearchInput}`}
+                        id="recipeSearchInput"
+                        autoFocus
+                        ref={searchRef}
+                      />
+                    </label>
+                    <FontAwesomeIcon
+                      className={styles.search_cancel}
+                      onClick={() => setIsSearchBar(false)}
+                      icon={faX}
+                      size="1x"
                     />
-                  </label>
-                  <FontAwesomeIcon
-                    className={styles.search_cancel}
-                    onClick={() => setIsSearchBar(false)}
-                    icon={faX}
-                    size="1x"
-                  />
+                    <button type="submit">submit</button>
+                  </form>
                 </>
               )}
               {!isSearchBar && (

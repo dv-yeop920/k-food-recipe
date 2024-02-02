@@ -7,7 +7,7 @@ const DeferredComponent = ({ children }) => {
     // 200ms 지난 후 children Render
     const timeoutId = setTimeout(() => {
       setIsDeferred(true);
-    }, 200);
+    }, 100);
     return () => clearTimeout(timeoutId);
   }, []);
 

@@ -511,32 +511,72 @@ const data = [];
 //.catch(error => console.log(error));
 
 app.get("/api/recipeList", async (req, res) => {
-  const pageNumber = parseInt(req.query.cursor);
-  const postPerPage = 28;
-
   let recipeList;
 
+  let query = {};
+
+  const TAB_VALUE = req.query.tabValue.trim();
+
   const regexTabValue = new RegExp(
-    `.*${req.query.tabFocus}.*`
+    `.*${req.query.tabValue}.*`
   );
 
+  const searchValue = new RegExp(
+    `.*${req.query.search.trim()}.*`
+  );
+
+  const SEARCH_CONDITION = [regexTabValue, searchValue];
+
   try {
-    if (req.query.tabFocus === "전체") {
-      recipeList = await Recipe.find()
-        .skip(postPerPage * pageNumber)
-        .limit(postPerPage);
+    if (TAB_VALUE === "전체" || TAB_VALUE === "null") {
+      if (req.query.search.trim() !== "null") {
+        query.$or = [{ RCP_NM: searchValue }];
+      }
     } else {
-      recipeList = await Recipe.find({
-        $or: [
-          { RCP_WAY2: regexTabValue },
+      if (req.query.search.trim() !== "null") {
+        console.log(
+          "router.query.search",
+          req.query.search
+        );
+        query.$or = [
+          {
+            $and: [
+              { RCP_NM: regexTabValue },
+              { RCP_NM: searchValue },
+            ],
+          },
+          {
+            $and: [
+              { HASH_TAG: regexTabValue },
+              { HASH_TAG: searchValue },
+            ],
+          },
+          {
+            $and: [
+              { RCP_WAY2: regexTabValue },
+              { RCP_NM: searchValue },
+            ],
+          },
+          {
+            $and: [
+              { RCP_PAT2: regexTabValue },
+              { RCP_NM: searchValue },
+            ],
+          },
+        ];
+        console.log("query, ", query);
+      } else {
+        query.$or = [
           { RCP_NM: regexTabValue },
-          { RCP_PAT2: regexTabValue },
           { HASH_TAG: regexTabValue },
-        ],
-      })
-        .skip(postPerPage * pageNumber - postPerPage)
-        .limit(postPerPage);
+          { RCP_WAY2: regexTabValue },
+          { RCP_PAT2: regexTabValue },
+        ];
+      }
     }
+
+    recipeList = await Recipe.find(query);
+    console.log(recipeList.length);
 
     res.json({
       recipeList: recipeList,

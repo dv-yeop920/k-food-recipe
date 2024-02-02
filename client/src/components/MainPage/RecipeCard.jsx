@@ -14,7 +14,7 @@ const MenuCard = ({ recipe }) => {
             alt="음식 이미지"
           />
 
-          <figcaption>
+          <figcaption style={{ padding: "0 3rem" }}>
             <h4 className={styles.recipe_title}>
               {recipe.RCP_NM}
             </h4>
