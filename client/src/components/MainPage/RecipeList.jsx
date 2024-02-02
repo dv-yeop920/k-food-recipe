@@ -16,10 +16,7 @@ const RecipeList = ({ recipeList }) => {
       },
     });*/
   return (
-    <section
-      className={`inner-box ${styles.recipe_section}`}
-      aria-label="레시피 섹션"
-    >
+    <>
       <ul className={styles.recipe_list}>
         {recipeList &&
           recipeList.map(recipe => {
@@ -31,7 +28,7 @@ const RecipeList = ({ recipeList }) => {
             );
           })}
       </ul>
-    </section>
+    </>
   );
 };
 

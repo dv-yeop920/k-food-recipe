@@ -1,7 +1,3 @@
-.recipe_section {
-  padding-top: 12rem;
-}
-
 .recipe_list {
   display: grid;
   grid-template-columns: repeat(

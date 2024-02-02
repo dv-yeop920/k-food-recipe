@@ -247,7 +247,7 @@ app.get("/api/posts/getPostList", async (req, res) => {
 
   const postPerPage = 5;
 
-  const searchValue = req.query.search;
+  const searchValue = search;
 
   //NOTE - 정규식 검사 해서 검색어가 특수문자가 들어가 있어도 검색 되도록
   const RegexValue = text => {
@@ -511,25 +511,28 @@ const data = [];
 //.catch(error => console.log(error));
 
 app.get("/api/recipeList", async (req, res) => {
-  let recipeList;
+  const { search, tab, cursor = 1 } = req.query;
+  const limit = 8; // 한 페이지에 표시할 아이템 수
+  const skip = (cursor - 1) * limit; // 건너뛸 아이템 수
 
+  let recipeList;
   let query = {};
 
-  const TAB_VALUE = req.query.tab.trim();
+  const TAB_VALUE = tab.trim();
 
-  const regexTabValue = new RegExp(`.*${req.query.tab}.*`);
+  const regexTabValue = new RegExp(`.*${tab}.*`);
 
   const regexSearchValue = new RegExp(
-    `.*${req.query.search.trim()}.*`
+    `.*${search.trim()}.*`
   );
 
   try {
     if (TAB_VALUE === "전체" || TAB_VALUE === "null") {
-      if (req.query.search.trim() !== "null") {
+      if (search.trim() !== "null") {
         query.$or = [{ RCP_NM: regexSearchValue }];
       }
     } else {
-      if (req.query.search.trim() !== "null") {
+      if (search.trim() !== "null") {
         query.$or = [
           {
             $and: [
@@ -566,10 +569,13 @@ app.get("/api/recipeList", async (req, res) => {
       }
     }
 
-    recipeList = await Recipe.find(query);
+    recipeList = await Recipe.find(query)
+      .skip(skip)
+      .limit(limit);
 
     res.json({
       recipeList: recipeList,
+      cursor: cursor + 1,
     });
   } catch (error) {
     res.json({

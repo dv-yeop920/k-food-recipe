@@ -59,18 +59,36 @@
   align-items: center;
 }
 
+@keyframes showInput {
+  0% {
+    transform: translateY(-500px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .recipeSearchInput {
   border: none;
   font-weight: 600;
   cursor: pointer;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--text-color);
   text-align: center;
-  padding: 1rem 3em;
+  padding: 1rem 3rem;
   width: 100%;
   font-size: 1rem;
   color: var(--text-color);
   background-color: var(--background-input-color);
   transition: all 0.3s ease-in-out;
+  animation: showInput 0.2s ease-in-out;
 }
 
 .search_button {
@@ -85,6 +103,7 @@
   margin-left: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
   transition: all 0.3s ease-in-out;
+  animation: showInput 0.2s ease-in-out;
 }
 
 .cancle_button {
@@ -99,6 +118,7 @@
   margin-left: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
   transition: all 0.3s ease-in-out;
+  animation: showInput 0.2s ease-in-out;
 }
 
 .recipeSearchInput:focus {

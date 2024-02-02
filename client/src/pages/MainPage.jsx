@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import RecipeTab from "../components/MainPage/RecipeTab";
 import RecipeList from "../components/MainPage/RecipeList";
 import DeferredComponent from "../components/Loading/DeferredComponent";
@@ -11,6 +11,38 @@ import RecipeSkeleton from "../components/Loading/skeleton/RecipeSkeleton";
 import ScrollToTop from "../services/scrollTop";
 import TabLoading from "../components/Loading/skeleton/TabSkeleton";
 import { useSearchParams } from "react-router-dom";
+
+const InfiniteScrollObserver = ({
+  fetchNextPage,
+  canFetchMore,
+}) => {
+  const observerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && canFetchMore) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [fetchNextPage, canFetchMore]);
+
+  return (
+    <div ref={observerRef} style={{ height: "20px" }} />
+  );
+};
 
 const MainPage = () => {
   const [isTabLoading, setIsTabLoading] = useState(true);
@@ -26,10 +58,10 @@ const MainPage = () => {
     });
   };
 
-  const getRecipeList = async pageNumber => {
+  const getRecipeList = async pageParam => {
     try {
       const response = await axios.get(
-        `/api/recipeList?cursor=${pageNumber}
+        `/api/recipeList?cursor=${pageParam}
         &search=${searchParam}
         &tab=${tabParam}`
       );
@@ -45,17 +77,17 @@ const MainPage = () => {
   const {
     data,
     isLoading,
-    //fetchNextPage,
-    //hasNextPage,
+    fetchNextPage,
+    hasNextPage,
     //isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: ["recipeList", searchParam, tabParam],
-    queryFn: ({ pageNumber = 1 }) =>
-      getRecipeList(pageNumber),
+    queryFn: ({ pageParam = 1 }) =>
+      getRecipeList(pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.recipeList.length === 0) {
-        return false;
+        return;
       } else {
         return allPages.length + 1;
       }
@@ -90,14 +122,24 @@ const MainPage = () => {
           <RecipeSkeleton />
         </DeferredComponent>
       )}
+      <section
+        className="inner-box"
+        style={{ paddingTop: "12rem" }}
+        aria-label="레시피 섹션"
+      >
+        {!isLoading &&
+          data?.pages?.map((group, i) => (
+            <RecipeList
+              key={i}
+              recipeList={group.recipeList}
+            />
+          ))}
+      </section>
 
-      {!isLoading &&
-        data?.pages?.map((group, i) => (
-          <RecipeList
-            key={i}
-            recipeList={group.recipeList}
-          />
-        ))}
+      <InfiniteScrollObserver
+        fetchNextPage={fetchNextPage}
+        canFetchMore={hasNextPage}
+      />
     </>
   );
 };
