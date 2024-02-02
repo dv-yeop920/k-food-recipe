@@ -247,7 +247,7 @@ app.get("/api/posts/getPostList", async (req, res) => {
 
   const postPerPage = 5;
 
-  const searchValue = search;
+  const searchValue = req.query.search;
 
   //NOTE - 정규식 검사 해서 검색어가 특수문자가 들어가 있어도 검색 되도록
   const RegexValue = text => {
@@ -512,7 +512,7 @@ const data = [];
 
 app.get("/api/recipeList", async (req, res) => {
   const { search, tab, cursor = 1 } = req.query;
-  const limit = 8; // 한 페이지에 표시할 아이템 수
+  const limit = 40; // 한 페이지에 표시할 아이템 수
   const skip = (cursor - 1) * limit; // 건너뛸 아이템 수
 
   let recipeList;

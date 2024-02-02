@@ -54,7 +54,7 @@
   border-radius: 5px;
   font-size: 0.85rem;
   font-weight: bold;
-  background-color: #ddd;
+  background-color: var(--tag-background-color);
 }
 
 .recipe_tag:nth-child(2) {
@@ -151,12 +151,12 @@
 .tab_button:hover {
   transform: perspective(300px) translateZ(10px);
   color: #fff;
-  background-color: #1abc9c;
+  background-color: var(--title-color);
   border-radius: 5px;
 }
 
 .active {
   color: #fff;
-  background-color: #1abc9c;
+  background-color: var(--title-color);
   border-radius: 5px;
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import RecipeTab from "../components/MainPage/RecipeTab";
 import RecipeList from "../components/MainPage/RecipeList";
-import DeferredComponent from "../components/Loading/DeferredComponent";
 import axios from "axios";
 import {
   useInfiniteQuery,
@@ -11,6 +10,7 @@ import RecipeSkeleton from "../components/Loading/skeleton/RecipeSkeleton";
 import ScrollToTop from "../services/scrollTop";
 import TabLoading from "../components/Loading/skeleton/TabSkeleton";
 import { useSearchParams } from "react-router-dom";
+import ScrollLoading from "../components/Loading/ScrollLoading";
 
 const InfiniteScrollObserver = ({
   fetchNextPage,
@@ -96,11 +96,9 @@ const MainPage = () => {
   });
 
   useEffect(() => {
-    if (isLoading) {
-      return;
+    if (!isLoading) {
+      setIsTabLoading(false);
     }
-
-    setIsTabLoading(false);
   }, [isLoading]);
 
   return (
@@ -117,11 +115,7 @@ const MainPage = () => {
         />
       )}
 
-      {isLoading && (
-        <DeferredComponent>
-          <RecipeSkeleton />
-        </DeferredComponent>
-      )}
+      {isLoading && <RecipeSkeleton />}
       <section
         className="inner-box"
         style={{ paddingTop: "12rem" }}
@@ -140,6 +134,7 @@ const MainPage = () => {
         fetchNextPage={fetchNextPage}
         canFetchMore={hasNextPage}
       />
+      {hasNextPage && <ScrollLoading />}
     </>
   );
 };

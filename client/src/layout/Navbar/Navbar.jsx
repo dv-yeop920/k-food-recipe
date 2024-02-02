@@ -73,6 +73,10 @@ const Navbar = () => {
       "--input-background-color",
       isDark ? "#21282f" : "#fff"
     );
+    DOM_STYLE.setProperty(
+      "--tag-background-color",
+      isDark ? "#7f8c8d" : "#ddd"
+    );
   };
 
   useEffect(() => {
