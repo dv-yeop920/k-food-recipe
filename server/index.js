@@ -515,56 +515,47 @@ app.get("/api/recipeList", async (req, res) => {
 
   let query = {};
 
-  const TAB_VALUE = req.query.tabValue.trim();
+  const TAB_VALUE = req.query.tab.trim();
 
-  const regexTabValue = new RegExp(
-    `.*${req.query.tabValue}.*`
-  );
+  const regexTabValue = new RegExp(`.*${req.query.tab}.*`);
 
-  const searchValue = new RegExp(
+  const regexSearchValue = new RegExp(
     `.*${req.query.search.trim()}.*`
   );
-
-  const SEARCH_CONDITION = [regexTabValue, searchValue];
 
   try {
     if (TAB_VALUE === "전체" || TAB_VALUE === "null") {
       if (req.query.search.trim() !== "null") {
-        query.$or = [{ RCP_NM: searchValue }];
+        query.$or = [{ RCP_NM: regexSearchValue }];
       }
     } else {
       if (req.query.search.trim() !== "null") {
-        console.log(
-          "router.query.search",
-          req.query.search
-        );
         query.$or = [
           {
             $and: [
               { RCP_NM: regexTabValue },
-              { RCP_NM: searchValue },
+              { RCP_NM: regexSearchValue },
             ],
           },
           {
             $and: [
               { HASH_TAG: regexTabValue },
-              { HASH_TAG: searchValue },
+              { RCP_NM: regexSearchValue },
             ],
           },
           {
             $and: [
               { RCP_WAY2: regexTabValue },
-              { RCP_NM: searchValue },
+              { RCP_NM: regexSearchValue },
             ],
           },
           {
             $and: [
               { RCP_PAT2: regexTabValue },
-              { RCP_NM: searchValue },
+              { RCP_NM: regexSearchValue },
             ],
           },
         ];
-        console.log("query, ", query);
       } else {
         query.$or = [
           { RCP_NM: regexTabValue },
@@ -576,7 +567,6 @@ app.get("/api/recipeList", async (req, res) => {
     }
 
     recipeList = await Recipe.find(query);
-    console.log(recipeList.length);
 
     res.json({
       recipeList: recipeList,

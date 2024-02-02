@@ -15,13 +15,14 @@ import { useSearchParams } from "react-router-dom";
 const MainPage = () => {
   const [isTabLoading, setIsTabLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchRecipeValue = searchParams.get("search");
-  const tabRecipeValue = searchParams.get("tabParams");
+
+  const searchParam = searchParams.get("search");
+  const tabParam = searchParams.get("tab");
 
   const onClickTabButton = tabValue => {
     setSearchParams({
-      tabParams: tabValue,
-      search: searchRecipeValue,
+      tab: tabValue,
+      search: searchParam,
     });
   };
 
@@ -29,8 +30,8 @@ const MainPage = () => {
     try {
       const response = await axios.get(
         `/api/recipeList?cursor=${pageNumber}
-        &search=${searchRecipeValue}
-        &tabValue=${tabRecipeValue}`
+        &search=${searchParam}
+        &tab=${tabParam}`
       );
 
       if (response) {
@@ -48,11 +49,7 @@ const MainPage = () => {
     //hasNextPage,
     //isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: [
-      "recipeList",
-      searchRecipeValue,
-      tabRecipeValue || "null",
-    ],
+    queryKey: ["recipeList", searchParam, tabParam],
     queryFn: ({ pageNumber = 1 }) =>
       getRecipeList(pageNumber),
     initialPageParam: 1,
@@ -70,18 +67,20 @@ const MainPage = () => {
     if (isLoading) {
       return;
     }
+
     setIsTabLoading(false);
   }, [isLoading]);
 
   return (
     <>
-      <ScrollToTop tabValue={tabRecipeValue} />
+      <ScrollToTop tabParam={tabParam} />
 
       {isTabLoading ? (
         <TabLoading />
       ) : (
         <RecipeTab
-          tabRecipeValue={tabRecipeValue}
+          searchParams={searchParams}
+          tabParam={tabParam}
           onClickTabButton={onClickTabButton}
         />
       )}

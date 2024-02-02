@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Recipe.module.css";
 import { tabList } from "../../services/recipeData";
+import { useNavigate } from "react-router-dom";
 
 const RecipeTab = ({
-  tabRecipeValue,
+  searchParams,
+  tabParam,
   onClickTabButton,
 }) => {
+  const navigate = useNavigate();
+  const [tabRecipeValue, setTabRecipeValue] = useState("");
+
+  useEffect(() => {
+    if (tabParam && tabList.includes(tabParam)) {
+      setTabRecipeValue(tabParam);
+      searchParams.set("search", "null");
+      navigate(`?${searchParams.toString()}`, {
+        replace: true,
+      });
+    } else {
+      setTabRecipeValue(tabList[0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tabParam]);
+
   return (
     <nav className={styles.recipe_nav}>
       <div className={styles.nav_box}>
@@ -19,7 +37,8 @@ const RecipeTab = ({
               return (
                 <li key={tabName}>
                   <button
-                    className={`${styles.tab_button} ${
+                    className={`
+                    ${styles.tab_button} ${
                       tabRecipeValue === tabName &&
                       styles.active
                     }`}

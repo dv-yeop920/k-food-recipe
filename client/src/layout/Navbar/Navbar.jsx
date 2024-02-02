@@ -20,15 +20,18 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const isDark = useSelector(theme);
   const searchRef = useRef(null);
+
   const [isSearchBar, setIsSearchBar] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const tabRecipeValue = searchParams.get("tabParams");
+
+  const tabParam = searchParams.get("tab");
 
   const onSubmitSearchParams = event => {
     event.preventDefault();
+
     setSearchParams({
       search: searchRef.current.value,
-      tabParams: tabRecipeValue,
+      tab: tabParam,
     });
   };
 
@@ -78,15 +81,16 @@ const Navbar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDark]);
 
+  useEffect(() => {
+    setIsSearchBar(false);
+  }, [tabParam]);
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.headerBox}>
           <div className={styles.header_menu}>
-            <Link
-              className={styles.title_area}
-              to={"/?tabParams=전체"}
-            >
+            <Link className={styles.title_area} to={"/"}>
               <h1 className={styles.title}>k-레시피</h1>
             </Link>
 
@@ -98,19 +102,26 @@ const Navbar = () => {
                       <input
                         type="search"
                         maxLength={12}
-                        className={`${styles.recipeSearchLink} ${styles.recipeSearchInput}`}
+                        className={styles.recipeSearchInput}
                         id="recipeSearchInput"
                         autoFocus
                         ref={searchRef}
                       />
                     </label>
+
+                    <button
+                      type="submit"
+                      className={styles.search_button}
+                    >
+                      submit
+                    </button>
+
                     <FontAwesomeIcon
                       className={styles.search_cancel}
                       onClick={() => setIsSearchBar(false)}
                       icon={faX}
-                      size="1x"
+                      size="2x"
                     />
-                    <button type="submit">submit</button>
                   </form>
                 </>
               )}
