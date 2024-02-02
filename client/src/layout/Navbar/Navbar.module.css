@@ -52,45 +52,65 @@
   transition: all 0.3s ease-in-out;
 }
 
+.search_form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .recipeSearchInput {
-  padding: 1rem;
   border: none;
   font-weight: 600;
   cursor: pointer;
-  border-radius: 25px;
-  border: 1px solid #ddd;
-  transition: all 0.3s ease-in-out;
+  border-bottom: 2px solid black;
   text-align: center;
   padding: 1rem 3em;
+  width: 100%;
   font-size: 1rem;
   color: var(--text-color);
   background-color: var(--background-input-color);
-}
-
-.search_cancel {
-  margin-left: 0.5rem;
-  font-weight: 600;
-  cursor: pointer;
   transition: all 0.3s ease-in-out;
-  color: var(--text-color);
 }
 
 .search_button {
-  padding: 1rem 0.5rem;
+  padding: 1rem 0.7rem;
   border: none;
   color: white;
-  font-size: 17px;
   text-align: center;
   font-weight: 600;
   background-color: var(--submit-background-color);
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.search_cancel:hover {
-  transform: perspective(100px) translateZ(20px);
+.cancle_button {
+  padding: 1rem 0.7rem;
+  border: none;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  background-color: #bdc3c7;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
+  transition: all 0.3s ease-in-out;
+}
+
+.recipeSearchInput:focus {
+  border-bottom: 2px solid var(--submit-background-color);
+}
+
+.search_button:hover {
+  background-color: var(--submit-hover-background-color);
+}
+
+.cancle_button:hover {
+  background-color: #7f8c8d;
 }
 
 .search_icon {

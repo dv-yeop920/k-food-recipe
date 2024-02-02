@@ -6,7 +6,6 @@ import {
   faBars,
   faGlobe,
   faSearch,
-  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useSearchParams } from "react-router-dom";
 import { openModal } from "../../store/slice/modalSlice";
@@ -97,7 +96,10 @@ const Navbar = () => {
             <div className={styles.recipeSearchArea}>
               {isSearchBar && (
                 <>
-                  <form onSubmit={onSubmitSearchParams}>
+                  <form
+                    className={styles.search_form}
+                    onSubmit={onSubmitSearchParams}
+                  >
                     <label htmlFor="recipeSearchInput">
                       <input
                         type="search"
@@ -108,20 +110,22 @@ const Navbar = () => {
                         ref={searchRef}
                       />
                     </label>
-
                     <button
                       type="submit"
                       className={styles.search_button}
                     >
-                      submit
+                      검색
                     </button>
 
-                    <FontAwesomeIcon
-                      className={styles.search_cancel}
-                      onClick={() => setIsSearchBar(false)}
-                      icon={faX}
-                      size="2x"
-                    />
+                    <button
+                      type="button"
+                      className={styles.cancle_button}
+                      onClick={() => {
+                        setIsSearchBar(false);
+                      }}
+                    >
+                      취소
+                    </button>
                   </form>
                 </>
               )}
