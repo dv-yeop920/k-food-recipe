@@ -1,6 +1,7 @@
 import React from "react";
-import styles from "./Recipe.module.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import styles from "./Recipe.module.css";
 import { Link } from "react-router-dom";
 
 const MenuCard = ({ recipe }) => {
@@ -10,8 +11,12 @@ const MenuCard = ({ recipe }) => {
         <figure style={{ overflow: "hidden" }}>
           <LazyLoadImage
             className={styles.recipe_img}
+            style={{ transition: "all 0.3s ease-in-out" }}
             src={recipe.ATT_FILE_NO_MAIN}
+            width={298}
+            height={275}
             alt="음식 이미지"
+            effect="blur"
           />
 
           <figcaption style={{ padding: "0 3rem" }}>

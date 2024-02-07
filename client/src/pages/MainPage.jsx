@@ -1,49 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RecipeTab from "../components/MainPage/RecipeTab";
 import RecipeList from "../components/MainPage/RecipeList";
-import axios from "axios";
-import {
-  useInfiniteQuery,
-  //useMutation,
-} from "@tanstack/react-query";
 import RecipeSkeleton from "../components/Loading/skeleton/RecipeSkeleton";
 import ScrollToTop from "../services/scrollTop";
 import TabLoading from "../components/Loading/skeleton/TabSkeleton";
 import { useSearchParams } from "react-router-dom";
 import ScrollLoading from "../components/Loading/ScrollLoading";
 import DeferrendComponent from "../components/Loading/DeferredComponent";
-
-const InfiniteScrollObserver = ({
-  fetchNextPage,
-  canFetchMore,
-}) => {
-  const observerRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting && canFetchMore) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 }
-    );
-
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-
-    return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
-      }
-    };
-  }, [fetchNextPage, canFetchMore]);
-
-  return (
-    <div ref={observerRef} style={{ height: "20px" }} />
-  );
-};
+import InfiniteScrollObserver from "../components/InfiniteObserver/InfiniteScrollObserver";
+import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
 const MainPage = () => {
   const [isTabLoading, setIsTabLoading] = useState(true);
@@ -59,42 +24,13 @@ const MainPage = () => {
     });
   };
 
-  const getRecipeList = async pageParam => {
-    try {
-      const response = await axios.get(
-        `/api/recipeList?cursor=${pageParam}
-        &search=${searchParam}
-        &tab=${tabParam}`
-      );
-
-      if (response) {
-        return response.data;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const {
     data,
     isLoading,
     fetchNextPage,
     hasNextPage,
-    //isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["recipeList", searchParam, tabParam],
-    queryFn: ({ pageParam = 1 }) =>
-      getRecipeList(pageParam),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.recipeList.length === 0) {
-        return;
-      } else {
-        return allPages.length + 1;
-      }
-    },
-    suspense: false,
-  });
+    isFetchingNextPage,
+  } = useInfiniteScroll(searchParam, tabParam);
 
   useEffect(() => {
     if (!isLoading) {
@@ -123,6 +59,13 @@ const MainPage = () => {
           <RecipeSkeleton />
         </DeferrendComponent>
       )}
+
+      {isFetchingNextPage && (
+        <DeferrendComponent>
+          <RecipeSkeleton />
+        </DeferrendComponent>
+      )}
+
       <section
         className="inner-box"
         style={{ paddingTop: "12rem" }}

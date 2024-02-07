@@ -1,11 +1,13 @@
 import { Skeleton } from "@mui/material";
-import React, { Fragment } from "react";
 import styles from "../../MainPage/Recipe.module.css";
 
 const MainSkeleton = () => {
   return (
     <>
-      <div className={`inner-box ${styles.recipe_section}`}>
+      <div
+        className="inner-box"
+        style={{ paddingTop: "12rem" }}
+      >
         <div className={styles.recipe_list}>
           {Array.from({ length: 28 }).map((_, index) => (
             <div key={index}>
