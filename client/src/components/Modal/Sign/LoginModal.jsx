@@ -40,7 +40,7 @@ const LoginModal = ({
 
     try {
       const response = await axios.post(
-        "/api/users/login",
+        "/api/users/signIn",
         userInfo
       );
 

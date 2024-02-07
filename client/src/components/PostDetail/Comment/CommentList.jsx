@@ -20,7 +20,7 @@ const CommentList = ({ post }) => {
   const getComment = async () => {
     try {
       const response = await axios.get(
-        "/api/posts/comment/getComment"
+        "/api/posts/comment/getCommentList"
       );
 
       const getComments = response.data.list;
@@ -87,7 +87,7 @@ const CommentList = ({ post }) => {
         window.confirm("댓글을 정말 삭제 하시겠습니까?")
       ) {
         const response = await axios.post(
-          "/api/posts/comment/deleteComment",
+          "/api/posts/comment/delete",
           deleteCommentBody
         );
 
@@ -121,7 +121,7 @@ const CommentList = ({ post }) => {
         window.confirm("댓글을 정말 수정 하시겠습니까?")
       ) {
         const response = await axios.put(
-          "/api/posts/comment/updateComment",
+          "/api/posts/comment/update",
           updateCommentBody
         );
 

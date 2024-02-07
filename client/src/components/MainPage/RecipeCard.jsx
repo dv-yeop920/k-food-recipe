@@ -8,13 +8,17 @@ const MenuCard = ({ recipe }) => {
   return (
     <Link to={`/recipe/${recipe._id}`}>
       <li className={styles.recipe_card}>
-        <figure style={{ overflow: "hidden" }}>
+        <figure
+          style={{ width: "100%", overflow: "hidden" }}
+        >
           <LazyLoadImage
             className={styles.recipe_img}
-            style={{ transition: "all 0.3s ease-in-out" }}
+            style={{
+              transition: "all 0.3s ease-in-out",
+            }}
             src={recipe.ATT_FILE_NO_MAIN}
-            width={298}
-            height={275}
+            width={"100%"}
+            height={276}
             alt="음식 이미지"
             effect="blur"
           />

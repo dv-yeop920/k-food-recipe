@@ -30,7 +30,7 @@ const SignUpModal = ({
 
     try {
       const response = await axios.post(
-        "/api/users/register",
+        "/api/users/signUp",
         userInfo
       );
 

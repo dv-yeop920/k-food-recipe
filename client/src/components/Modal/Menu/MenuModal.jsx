@@ -21,7 +21,7 @@ const MenuModal = ({ openModal, closeModal }) => {
     try {
       if (window.confirm("로그아웃 하시겠습니까?")) {
         const response = await axios.post(
-          "/api/users/logout"
+          "/api/users/signOut"
         );
 
         if (response.status === 200) {

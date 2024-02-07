@@ -1,4 +1,4 @@
-const { User } = require("../models/User.js");
+const { User } = require("../models/user.model.js");
 
 const auth = (req, res, next) => {
   //인증처맇 하는 공간

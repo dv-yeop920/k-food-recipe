@@ -22,6 +22,7 @@ function App() {
       <Navbar />
       <ToastContainer />
       <ModalContainer />
+
       <Suspense
         fallback={
           <DeferredComponent>
