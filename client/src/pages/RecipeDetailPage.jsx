@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import styles from "../components/RecipeDetail/RecipeDetail.module.css";
 import axios from "axios";
 import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
 import RecipeMenual from "../components/RecipeDetail/RecipeMenual";
 import RecipeInfo from "../components/RecipeDetail/RecipeInfo";
 import RecipeIngredient from "../components/RecipeDetail/RecipeIngredient";
+import RecipeTip from "../components/RecipeDetail/RecipeTip";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
-  const [recipe, setRecipe] = useState({});
 
   const getRecipeDetail = async () => {
     try {
@@ -18,17 +19,19 @@ const RecipeDetailPage = () => {
       );
 
       if (response) {
-        setRecipe(response.data.recipe);
+        return response.data;
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    getRecipeDetail();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data } = useQuery({
+    queryKey: ["recipe"],
+    queryFn: getRecipeDetail,
+  });
+
+  const RECIPE_INFO = data.recipe;
 
   return (
     <>
@@ -36,18 +39,15 @@ const RecipeDetailPage = () => {
         className={`inner-box ${styles.container}`}
         aria-label="레시피상세"
       >
-        <RecipeInfo recipe={recipe} />
+        <RecipeInfo recipe={RECIPE_INFO} />
 
-        <RecipeIngredient recipe={recipe} />
+        <RecipeIngredient
+          recipeIngredient={RECIPE_INFO.RCP_PARTS_DTLS}
+        />
 
-        <RecipeMenual recipe={recipe} />
+        <RecipeMenual recipe={RECIPE_INFO} />
 
-        <div className={styles.tip_area}>
-          <h2 className={styles.recipe_title}>📌 [Tip]</h2>
-          <span className={styles.tip}>
-            {recipe.RCP_NA_TIP || ""}
-          </span>
-        </div>
+        <RecipeTip recipeTip={RECIPE_INFO.RCP_NA_TIP} />
       </section>
 
       <FooterNavbar />

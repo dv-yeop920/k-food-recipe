@@ -11,6 +11,7 @@ import ScrollToTop from "../services/scrollTop";
 import TabLoading from "../components/Loading/skeleton/TabSkeleton";
 import { useSearchParams } from "react-router-dom";
 import ScrollLoading from "../components/Loading/ScrollLoading";
+import DeferrendComponent from "../components/Loading/DeferredComponent";
 
 const InfiniteScrollObserver = ({
   fetchNextPage,
@@ -106,7 +107,9 @@ const MainPage = () => {
       <ScrollToTop tabParam={tabParam} />
 
       {isTabLoading ? (
-        <TabLoading />
+        <DeferrendComponent>
+          <TabLoading />
+        </DeferrendComponent>
       ) : (
         <RecipeTab
           searchParams={searchParams}
@@ -115,7 +118,11 @@ const MainPage = () => {
         />
       )}
 
-      {isLoading && <RecipeSkeleton />}
+      {isLoading && (
+        <DeferrendComponent>
+          <RecipeSkeleton />
+        </DeferrendComponent>
+      )}
       <section
         className="inner-box"
         style={{ paddingTop: "12rem" }}

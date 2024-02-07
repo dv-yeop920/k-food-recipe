@@ -504,7 +504,7 @@ app.post(
   }
 );
 
-const data = [];
+//const data = [];
 
 //Recipe.insertMany(data)
 //.then(() => console.log("데이터 삽입 성공"))
@@ -591,7 +591,8 @@ app.get("/api/recipeList/recipe", async (req, res) => {
     if (recipeId) {
       const recipe = await Recipe.findOne({
         _id: recipeId,
-      }).exec();
+      });
+
       res.json({
         recipe: recipe,
       });
