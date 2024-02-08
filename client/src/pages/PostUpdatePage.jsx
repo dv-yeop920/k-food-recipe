@@ -40,9 +40,13 @@ const PostsUpdatePage = () => {
         `/api/posts/getPost?id=${postId}`
       );
 
-      setOriginalDetail(response.data.list);
-      setEditTitleValue(response.data.list.title);
-      setEditContentValue(response.data.list.content);
+      if (response) {
+        const postDetail = response.data.list;
+
+        setOriginalDetail(postDetail);
+        setEditTitleValue(postDetail.title);
+        setEditContentValue(postDetail.content);
+      }
     } catch (error) {
       console.log(error);
     }

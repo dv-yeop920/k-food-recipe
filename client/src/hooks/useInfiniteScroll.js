@@ -9,19 +9,36 @@ const getRecipeList = async ({
   const response = await axios.get(
     `/api/recipeList?cursor=${pageParam}&search=${searchParam}&tab=${tabParam}`
   );
+
   return response.data;
 };
 
-const useInfiniteScroll = (searchParam, tabParam) => {
+const queryApiFunctions = {
+  recipeList: getRecipeList,
+};
+
+const useInfiniteScroll = (
+  keyName,
+  searchParam,
+  tabParam
+) => {
   return useInfiniteQuery({
-    queryKey: ["recipeList", searchParam, tabParam],
-    queryFn: ({ pageParam }) =>
-      getRecipeList({ pageParam, searchParam, tabParam }),
+    queryKey: [keyName, searchParam, tabParam],
+    queryFn: ({ pageParam }) => {
+      const queryFunc = queryApiFunctions[keyName];
+      return queryFunc({
+        pageParam,
+        searchParam,
+        tabParam,
+      });
+    },
+
     getNextPageParam: (lastPage, allPages) =>
       lastPage.recipeList.length
         ? allPages.length + 1
         : undefined,
     suspense: false,
+    staleTime: 1000 * 60 * 5,
   });
 };
 

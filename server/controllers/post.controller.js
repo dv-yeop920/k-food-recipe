@@ -1,4 +1,5 @@
 const { Post } = require("../models/notice-board.model");
+const { Comment } = require("../models/comment.model");
 
 exports.getPostList = async (req, res) => {
   const pageNumber = parseInt(req.query.pageNumber) - 1;
@@ -126,11 +127,11 @@ exports.deletePost = async (req, res) => {
   try {
     await Post.findOneAndDelete({
       _id: postId,
-    }).exec();
+    });
 
     await Comment.deleteMany({
       postId: postId,
-    }).exec();
+    });
 
     res.json({
       deleteSuccess: true,

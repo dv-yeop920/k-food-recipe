@@ -8,6 +8,7 @@ const ScrollLoading = () => {
   return (
     <div
       style={{
+        marginTop: "2rem",
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -16,7 +17,7 @@ const ScrollLoading = () => {
       <ClipLoader
         className="loadig-spinner"
         color={isDark ? "#3498db" : "#36d7b7"}
-        size={50}
+        size={40}
       />
     </div>
   );

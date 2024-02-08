@@ -24,13 +24,8 @@ const MainPage = () => {
     });
   };
 
-  const {
-    data,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteScroll(searchParam, tabParam);
+  const { data, isLoading, fetchNextPage, hasNextPage } =
+    useInfiniteScroll("recipeList", searchParam, tabParam);
 
   useEffect(() => {
     if (!isLoading) {
@@ -60,12 +55,6 @@ const MainPage = () => {
         </DeferrendComponent>
       )}
 
-      {isFetchingNextPage && (
-        <DeferrendComponent>
-          <RecipeSkeleton />
-        </DeferrendComponent>
-      )}
-
       <section
         className="inner-box"
         style={{ paddingTop: "12rem" }}
@@ -84,6 +73,7 @@ const MainPage = () => {
         fetchNextPage={fetchNextPage}
         canFetchMore={hasNextPage}
       />
+
       {hasNextPage && <ScrollLoading />}
     </>
   );

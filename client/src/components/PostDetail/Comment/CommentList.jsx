@@ -7,8 +7,11 @@ import styles from "./Comment.module.css";
 import useAuth from "../../../hooks/useAuth";
 import { selectUser } from "../../../store/slice/userSlice";
 import toastMessage from "../../../utils/toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CommentList = ({ post }) => {
+  const client = useQueryClient();
+
   const { userId } = useSelector(selectUser);
   const postId = post._id;
   const { authAndNavigate } = useAuth();
@@ -41,7 +44,7 @@ const CommentList = ({ post }) => {
     e.preventDefault();
 
     if (commentContent === "") {
-      alert("내용을 입력해 주세요!");
+      toastMessage("내용을 입력해 주세요!");
       return;
     }
 
@@ -58,6 +61,7 @@ const CommentList = ({ post }) => {
       );
 
       if (response.data.success) {
+        client.invalidateQueries(["list", postId]);
         toastMessage(response.data.messsage);
         setCommentContent("");
         return;
@@ -65,8 +69,11 @@ const CommentList = ({ post }) => {
 
       if (!response.data.success) {
         toastMessage(response.data.messsage);
+        setCommentContent("");
+        console.log(response.data.success);
         return;
       }
+      console.log(response.data.success);
     } catch (error) {
       console.log(error);
     }
@@ -92,6 +99,7 @@ const CommentList = ({ post }) => {
         );
 
         if (response.data.deleteSuccess) {
+          client.invalidateQueries(["list", postId]);
           toastMessage(response.data.messsage);
           return;
         }
@@ -126,6 +134,7 @@ const CommentList = ({ post }) => {
         );
 
         if (response.data.deleteSuccess) {
+          //client.invalidateQueries(["list", postId]);
           toastMessage(response.data.messsage);
           return;
         }

@@ -1,4 +1,5 @@
 const { Comment } = require("../models/comment.model");
+const { Post } = require("../models/notice-board.model");
 
 exports.getCommentList = async (req, res) => {
   try {

@@ -28,10 +28,8 @@ const NoticeBoardPage = () => {
         const getTotalPostsLength =
           response.data.totalPostLength;
 
-        if (getPosts) {
-          setPostList(getPosts);
-          setTotalPostLength(getTotalPostsLength);
-        }
+        setPostList(getPosts);
+        setTotalPostLength(getTotalPostsLength);
       }
 
       setIsLoading(false);

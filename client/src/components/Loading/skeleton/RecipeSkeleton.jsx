@@ -9,7 +9,7 @@ const MainSkeleton = () => {
         style={{ paddingTop: "12rem" }}
       >
         <div className={styles.recipe_list}>
-          {Array.from({ length: 28 }).map((_, index) => (
+          {Array.from({ length: 24 }).map((_, index) => (
             <div key={index}>
               <Skeleton
                 animation="wave"

@@ -110,9 +110,7 @@ const Comment = ({
     <>
       <ul>
         <li className={styles.comment}>
-          <div>
-            <span>{comment.id || ""}</span>
-          </div>
+          <h4>{comment.id || ""}</h4>
 
           {renderCommnet()}
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CommentList from "../components/PostDetail/Comment/CommentList";
 import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
@@ -11,38 +11,42 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../store/slice/userSlice";
 import useAuth from "../hooks/useAuth";
 import toastMessage from "../utils/toast";
+import {
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
 
 const PostsDetail = () => {
+  const navigate = useNavigate();
+
   const { userId } = useSelector(selectUser);
   const { authAndNavigate } = useAuth();
-  const navigate = useNavigate();
-  //postList 에서 넘겨준 게시물의 고유 _id값
   const { id } = useParams();
-  const [post, setPost] = useState({});
-  const CREATE_AT = post.createdAt;
 
   const getPostDetail = async () => {
-    const postId = id;
-
     try {
       const response = await axios.get(
-        `/api/posts/getPost?id=${postId}`
+        `/api/posts/getPost?id=${id}`
       );
 
       if (response) {
         const postData = response.data.list;
 
-        if (postData) {
-          const parts = postData.id.split("_");
-          const userId = parts[0];
-          postData.id = userId;
-          setPost(postData);
-        }
+        const parts = postData.id.split("_");
+        const userId = parts[0];
+        postData.id = userId;
+
+        return postData;
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  const { data: post } = useQuery({
+    queryKey: ["list"],
+    queryFn: getPostDetail,
+  });
 
   const onClickDeletePost = async () => {
     const postId = {
@@ -78,12 +82,18 @@ const PostsDetail = () => {
     }
   };
 
-  useEffect(() => {
+  const deleteMutation = useMutation({
+    mutationFn: onClickDeletePost,
+  });
+
+  const CREATE_AT = post.createdAt;
+
+  /*useEffect(() => {
     if (post) {
       getPostDetail();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [post]);
+  }, [post]);*/
 
   return (
     <>
@@ -139,7 +149,8 @@ const PostsDetail = () => {
                 className={styles.button}
                 onClick={() => {
                   authAndNavigate().then(() => {
-                    onClickDeletePost();
+                    deleteMutation.mutate();
+                    //onClickDeletePost();
                   });
                 }}
               >

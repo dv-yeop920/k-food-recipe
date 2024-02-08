@@ -19,19 +19,17 @@ const RecipeDetailPage = () => {
       );
 
       if (response) {
-        return response.data;
+        return response.data.recipe;
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const { data } = useQuery({
+  const { data: recipe } = useQuery({
     queryKey: ["recipe"],
     queryFn: getRecipeDetail,
   });
-
-  const RECIPE_INFO = data.recipe;
 
   return (
     <>
@@ -39,15 +37,15 @@ const RecipeDetailPage = () => {
         className={`inner-box ${styles.container}`}
         aria-label="레시피상세"
       >
-        <RecipeInfo recipe={RECIPE_INFO} />
+        <RecipeInfo recipe={recipe} />
 
         <RecipeIngredient
-          recipeIngredient={RECIPE_INFO.RCP_PARTS_DTLS}
+          recipeIngredient={recipe.RCP_PARTS_DTLS}
         />
 
-        <RecipeMenual recipe={RECIPE_INFO} />
+        <RecipeMenual recipe={recipe} />
 
-        <RecipeTip recipeTip={RECIPE_INFO.RCP_NA_TIP} />
+        <RecipeTip recipeTip={recipe.RCP_NA_TIP} />
       </section>
 
       <FooterNavbar />

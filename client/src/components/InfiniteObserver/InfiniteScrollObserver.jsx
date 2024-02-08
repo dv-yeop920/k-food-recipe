@@ -27,9 +27,7 @@ const InfiniteScrollObserver = ({
     };
   }, [fetchNextPage, canFetchMore]);
 
-  return (
-    <div ref={observerRef} style={{ height: "20px" }} />
-  );
+  return <div ref={observerRef} />;
 };
 
 export default InfiniteScrollObserver;

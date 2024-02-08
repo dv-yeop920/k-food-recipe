@@ -17,9 +17,9 @@ const useAuth = () => {
         dispatch(loginUser(response.data));
         if (route) {
           navigate(route);
+        } else {
+          return;
         }
-        console.log(response.data.accessToken);
-        return;
       }
     } catch (error) {
       toastMessage(error.response.data.error);
