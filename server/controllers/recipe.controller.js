@@ -1,7 +1,7 @@
 const { Recipe } = require("../models/recipe.model");
 
 exports.getRecipeList = async (req, res) => {
-  const { search, tab, cursor = 1 } = req.query;
+  const { cursor = 1, search, tab } = req.query;
   const limit = 24; // 한 페이지에 표시할 아이템 수
   const skip = (cursor - 1) * limit; // 건너뛸 아이템 수
 

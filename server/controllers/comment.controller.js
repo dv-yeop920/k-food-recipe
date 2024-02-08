@@ -2,8 +2,14 @@ const { Comment } = require("../models/comment.model");
 const { Post } = require("../models/notice-board.model");
 
 exports.getCommentList = async (req, res) => {
+  const { cursor = 1, postId } = req.query;
+  const limit = 6; // 한 페이지에 표시할 아이템 수
+  const skip = (cursor - 1) * limit; // 건너뛸 아이템 수
+
   try {
-    const comments = await Comment.find();
+    const comments = await Comment.find({ postId: postId })
+      .skip(skip)
+      .limit(limit);
 
     const modifiedComments = comments.map(comment => {
       const parts = comment.id.split("_");
@@ -15,12 +21,15 @@ exports.getCommentList = async (req, res) => {
       };
     });
 
+    console.log(modifiedComments);
+
     res.json({
-      list: modifiedComments,
+      commentList: modifiedComments,
+      cursor: cursor + 1,
     });
   } catch (error) {
     res.json({
-      messsage: "게시판 조회 실패했습니다",
+      messsage: "댓글 조회 실패했습니다",
     });
   }
 };

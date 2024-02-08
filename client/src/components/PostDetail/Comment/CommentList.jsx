@@ -8,6 +8,9 @@ import useAuth from "../../../hooks/useAuth";
 import { selectUser } from "../../../store/slice/userSlice";
 import toastMessage from "../../../utils/toast";
 import { useQueryClient } from "@tanstack/react-query";
+import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
+import InfiniteScrollObserver from "../../InfiniteObserver/InfiniteScrollObserver";
+import ScrollLoading from "../../Loading/ScrollLoading";
 
 const CommentList = ({ post }) => {
   const client = useQueryClient();
@@ -16,29 +19,11 @@ const CommentList = ({ post }) => {
   const postId = post._id;
   const { authAndNavigate } = useAuth();
 
-  const [comment, setComment] = useState([]);
   const [commentContent, setCommentContent] = useState("");
   const [updateComment, setUpdateComment] = useState("");
 
-  const getComment = async () => {
-    try {
-      const response = await axios.get(
-        "/api/posts/comment/getCommentList"
-      );
-
-      const getComments = response.data.list;
-
-      const commentForThisPost = getComments.filter(
-        comment => {
-          return comment.postId === postId;
-        }
-      );
-
-      setComment(commentForThisPost);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { data, isLoading, fetchNextPage, hasNextPage } =
+    useInfiniteScroll("commentList", "", postId);
 
   const onSubmitRegisterComment = async e => {
     e.preventDefault();
@@ -79,7 +64,7 @@ const CommentList = ({ post }) => {
     }
   };
 
-  const onClickDeleteComment = async commentId => {
+  /*const onClickDeleteComment = async commentId => {
     const filteredId = comment.filter(comment => {
       return commentId === comment._id;
     });
@@ -147,12 +132,7 @@ const CommentList = ({ post }) => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  useEffect(() => {
-    getComment();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [comment]);
+  };*/
 
   return (
     <>
@@ -173,24 +153,32 @@ const CommentList = ({ post }) => {
               }
             />
 
-            {comment &&
-              comment.map(comment => (
+            {data?.pages?.map(group =>
+              group.commentList.map(comment => (
                 <Comment
                   key={comment._id}
+                  comment={comment}
                   userId={userId}
                   commentUserId={comment.id}
                   commentId={comment._id}
-                  comment={comment}
                   updateComment={updateComment}
                   setUpdateComment={setUpdateComment}
-                  onClickDeleteComment={
-                    onClickDeleteComment
-                  }
-                  onClickUpdateComment={
-                    onClickUpdateComment
-                  }
+                  //onClickDeleteComment={
+                  //  onClickDeleteComment
+                  //}
+                  //onClickUpdateComment={
+                  //  onClickUpdateComment
+                  //}
                 />
-              ))}
+              ))
+            )}
+
+            <InfiniteScrollObserver
+              fetchNextPage={fetchNextPage}
+              canFetchMore={hasNextPage}
+            />
+
+            {hasNextPage && <ScrollLoading />}
           </div>
         </div>
       </div>

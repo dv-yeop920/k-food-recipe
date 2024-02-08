@@ -4,10 +4,10 @@ import getDate from "../../../utils/postDate";
 import useAuth from "../../../hooks/useAuth";
 
 const Comment = ({
+  comment,
   userId,
   commentUserId,
   commentId,
-  comment,
   updateComment,
   setUpdateComment,
   onClickDeleteComment,
