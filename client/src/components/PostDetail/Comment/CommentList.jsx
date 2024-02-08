@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Comment from "./Comment";
@@ -22,7 +22,7 @@ const CommentList = ({ post }) => {
   const [commentContent, setCommentContent] = useState("");
   const [updateComment, setUpdateComment] = useState("");
 
-  const { data, isLoading, fetchNextPage, hasNextPage } =
+  const { data, fetchNextPage, hasNextPage } =
     useInfiniteScroll("commentList", "", postId);
 
   const onSubmitRegisterComment = async e => {
@@ -55,10 +55,8 @@ const CommentList = ({ post }) => {
       if (!response.data.success) {
         toastMessage(response.data.messsage);
         setCommentContent("");
-        console.log(response.data.success);
         return;
       }
-      console.log(response.data.success);
     } catch (error) {
       console.log(error);
     }

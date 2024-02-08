@@ -1,11 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const getRecipeList = async ({
+const getRecipeList = async (
   pageParam = 1,
   searchParam,
-  tabParam,
-}) => {
+  tabParam
+) => {
   const response = await axios.get(
     `/api/recipeList?cursor=${pageParam}&search=${searchParam}&tab=${tabParam}`
   );
@@ -13,14 +13,14 @@ const getRecipeList = async ({
   return response.data;
 };
 
-const getCommentList = async ({
+const getCommentList = async (
   pageParam = 1,
   searchParam,
-  tabParam,
-}) => {
+  postId
+) => {
   try {
     const response = await axios.get(
-      `/api/posts/comment/getCommentList?cursor=${pageParam}&postId=${tabParam}`
+      `/api/posts/comment/getCommentList?cursor=${pageParam}&postId=${postId}`
     );
 
     return response.data;
@@ -34,6 +34,23 @@ const queryApiFunctions = {
   commentList: getCommentList,
 };
 
+const nextPageFunc = (keyName, lastPage, allPages) => {
+  switch (keyName) {
+    case "recipeList":
+      if (lastPage.recipeList.length) {
+        return allPages.length + 1;
+      }
+      break;
+    case "commentList":
+      if (lastPage.commentList.length) {
+        return allPages.length + 1;
+      }
+      break;
+    default:
+      return undefined;
+  }
+};
+
 const useInfiniteScroll = (
   keyName,
   searchParam,
@@ -44,26 +61,10 @@ const useInfiniteScroll = (
     queryFn: ({ pageParam }) => {
       const queryFunc = queryApiFunctions[keyName];
 
-      return queryFunc({
-        pageParam,
-        searchParam,
-        tabParam,
-      });
+      return queryFunc(pageParam, searchParam, tabParam);
     },
-    getNextPageParam: (lastPage, allPages) => {
-      if (
-        keyName === "recipeList" &&
-        lastPage.recipeList.length
-      ) {
-        return allPages.length + 1;
-      } else if (
-        keyName === "commentList" &&
-        lastPage.commentList.length
-      ) {
-        return allPages.length + 1;
-      }
-      return undefined;
-    },
+    getNextPageParam: (lastPage, allPages) =>
+      nextPageFunc(keyName, lastPage, allPages),
     suspense: false,
     staleTime: 1000 * 60 * 5,
   });
