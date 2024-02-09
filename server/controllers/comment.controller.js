@@ -3,8 +3,8 @@ const { Post } = require("../models/notice-board.model");
 
 exports.getCommentList = async (req, res) => {
   const { cursor = 1, postId } = req.query;
-  const limit = 6; // 한 페이지에 표시할 아이템 수
-  const skip = (cursor - 1) * limit; // 건너뛸 아이템 수
+  const limit = 6;
+  const skip = (cursor - 1) * limit;
 
   try {
     const comments = await Comment.find({ postId: postId })
@@ -20,8 +20,6 @@ exports.getCommentList = async (req, res) => {
         id: userId,
       };
     });
-
-    console.log(modifiedComments);
 
     res.json({
       commentList: modifiedComments,
@@ -56,7 +54,6 @@ exports.registerComment = async (req, res) => {
       messsage: "댓글이 등록 되었습니다",
     });
   } catch (error) {
-    console.log(error);
     res.json({
       success: false,
       messsage: "댓글 등록 실패했습니다",
@@ -80,8 +77,6 @@ exports.updateComment = async (req, res) => {
       messsage: "업데이트 되었습니다",
     });
   } catch (error) {
-    console.log(error);
-
     res.json({
       updateSuccess: false,
       messsage: "업데이트 실패했습니다",
@@ -93,7 +88,7 @@ exports.deleteComment = async (req, res) => {
   try {
     await Comment.findOneAndDelete({
       _id: req.body._id,
-    }).exec();
+    });
 
     await Post.findOneAndUpdate(
       { _id: req.body.postId },
@@ -109,7 +104,6 @@ exports.deleteComment = async (req, res) => {
       messsage: "삭제 되었습니다",
     });
   } catch (error) {
-    console.log(error);
     res.json({
       deleteSuccess: false,
       messsage: "삭제 실패했습니다",

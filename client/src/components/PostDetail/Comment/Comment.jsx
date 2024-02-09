@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import styles from "./Comment.module.css";
 import getDate from "../../../utils/postDate";
 import useAuth from "../../../hooks/useAuth";
+import useMutations from "../../../hooks/useMutation";
 
 const Comment = ({
   comment,
+  postId,
   userId,
-  commentUserId,
-  commentId,
   updateComment,
   setUpdateComment,
-  onClickDeleteComment,
-  onClickUpdateComment,
 }) => {
+  const { deleteMutation } = useMutations();
   const { authAndNavigate } = useAuth();
   const [editId, setEditId] = useState("");
-  const CREATED_AT = comment.createdAt;
+  const { _id, id, content, createdAt } = comment;
 
   const onChangeUpdateComment = (commentId, newContent) => {
     setUpdateComment(commentContent => ({
@@ -25,30 +24,25 @@ const Comment = ({
   };
 
   const renderCommnet = () => {
-    if (editId === commentId) {
+    if (editId === _id) {
       return (
         <textarea
           style={{ marginTop: "5px" }}
           className={styles.input}
-          value={updateComment[commentId]}
-          name={updateComment[commentId]}
+          value={updateComment[_id]}
+          name={updateComment[_id]}
           onChange={e => {
-            onChangeUpdateComment(
-              commentId,
-              e.target.value
-            );
+            onChangeUpdateComment(_id, e.target.value);
           }}
         ></textarea>
       );
     } else {
-      return (
-        <p className={styles.content}>{comment.content}</p>
-      );
+      return <p className={styles.content}>{content}</p>;
     }
   };
 
   const renderCommentButton = () => {
-    if (editId === commentId) {
+    if (editId === _id) {
       return (
         <>
           <span
@@ -65,7 +59,6 @@ const Comment = ({
             className={styles.button}
             onClick={() => {
               authAndNavigate();
-              onClickUpdateComment(commentId);
               setEditId("");
               return;
             }}
@@ -81,25 +74,22 @@ const Comment = ({
             className={styles.button}
             onClick={() => {
               authAndNavigate();
-              setEditId(commentId);
-              onChangeUpdateComment(
-                commentId,
-                comment.content
-              );
+              setEditId(_id);
+              onChangeUpdateComment(_id, content);
             }}
           >
-            {userId === commentUserId ? "수정" : ""}
+            {userId === id ? "수정" : ""}
           </span>
 
           <span
             className={styles.button}
             onClick={() => {
               authAndNavigate();
-              onClickDeleteComment(commentId);
+              deleteMutation.mutate({});
               return;
             }}
           >
-            {userId === commentUserId ? "삭제" : ""}
+            {userId === id ? "삭제" : ""}
           </span>
         </>
       );
@@ -110,7 +100,7 @@ const Comment = ({
     <>
       <ul>
         <li className={styles.comment}>
-          <h4>{comment.id || ""}</h4>
+          <h4>{id || ""}</h4>
 
           {renderCommnet()}
 
@@ -118,18 +108,18 @@ const Comment = ({
             <div>
               <span className={styles.text}>
                 {`
-                ${getDate(CREATED_AT).year}-${
-                  getDate(CREATED_AT).month + 1
-                }-${getDate(CREATED_AT).date} ${
-                  getDate(CREATED_AT).hours
-                }:${getDate(CREATED_AT).minutes}` || ""}
+                ${getDate(createdAt).year}-${
+                  getDate(createdAt).month + 1
+                }-${getDate(createdAt).date} ${
+                  getDate(createdAt).hours
+                }:${getDate(createdAt).minutes}` || ""}
               </span>
 
               <span
                 className={styles.text}
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  setEditId(commentId);
+                  setEditId(_id);
                 }}
               >
                 답글 쓰기

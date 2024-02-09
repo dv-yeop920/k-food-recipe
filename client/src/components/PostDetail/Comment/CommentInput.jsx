@@ -1,18 +1,21 @@
 import React from "react";
 import button from "../../../styles/Button.module.css";
 import styles from "./Comment.module.css";
-const CommentInput = ({
-  userId,
-  authAndNavigate,
-  commentContent,
-  setCommentContent,
-  onSubmitRegisterComment,
-}) => {
+import useMutations from "../../../hooks/useMutation";
+const CommentInput = ({ authAndNavigate, commentInfo }) => {
+  const { createMutation } = useMutations();
+
+  const { commentContent, userId, setCommentContent } =
+    commentInfo;
+
   return (
     <>
       <form
         className="commnet-textarea__form"
-        onSubmit={onSubmitRegisterComment}
+        onSubmit={e => {
+          commentInfo.e = e;
+          createMutation.mutate(commentInfo);
+        }}
       >
         <div className="comment-textarea__container">
           <textarea

@@ -52,9 +52,9 @@ const nextPageFunc = (keyName, lastPage, allPages) => {
 };
 
 const useInfiniteScroll = (
-  keyName,
-  searchParam,
-  tabParam
+  keyName = "",
+  searchParam = "",
+  tabParam = ""
 ) => {
   return useInfiniteQuery({
     queryKey: [keyName, searchParam, tabParam],

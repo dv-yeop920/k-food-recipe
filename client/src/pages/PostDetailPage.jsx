@@ -82,9 +82,9 @@ const PostsDetail = () => {
     }
   };
 
-  const deleteMutation = useMutation({
-    mutationFn: onClickDeletePost,
-  });
+  //const deleteMutation = useMutation({
+  //  mutationFn: onClickDeletePost,
+  //});
 
   const CREATE_AT = post.createdAt;
 
@@ -149,7 +149,7 @@ const PostsDetail = () => {
                 className={styles.button}
                 onClick={() => {
                   authAndNavigate().then(() => {
-                    deleteMutation.mutate();
+                    //deleteMutation.mutate();
                     //onClickDeletePost();
                   });
                 }}
