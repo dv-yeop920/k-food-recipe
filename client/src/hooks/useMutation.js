@@ -5,7 +5,7 @@ import {
 import {
   onSubmitRegisterComment,
   onClickDeleteComment,
-  //onClickUpdateComment,
+  onClickUpdateComment,
 } from "../services/comment.services";
 
 const useMutations = () => {
@@ -23,8 +23,8 @@ const useMutations = () => {
 
   // 게시글 삭제 뮤테이션
   const deleteMutation = useMutation({
-    mutationFn: () => {
-      return onClickDeleteComment();
+    mutationFn: params => {
+      return onClickDeleteComment(params);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("commentList");
@@ -32,13 +32,16 @@ const useMutations = () => {
   });
 
   // 게시글 수정 뮤테이션
-  /*const updateMutation = useMutation(onClickUpdateComment, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("posts");
+  const updateMutation = useMutation({
+    mutationFn: params => {
+      return onClickUpdateComment(params);
     },
-  });*/
+    onSuccess: () => {
+      queryClient.invalidateQueries("commentList");
+    },
+  });
 
-  return { createMutation, deleteMutation };
+  return { createMutation, deleteMutation, updateMutation };
 };
 
 export default useMutations;

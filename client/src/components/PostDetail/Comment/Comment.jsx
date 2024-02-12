@@ -6,15 +6,14 @@ import useMutations from "../../../hooks/useMutation";
 
 const Comment = ({
   comment,
-  postId,
   userId,
   updateComment,
   setUpdateComment,
 }) => {
-  const { deleteMutation } = useMutations();
+  const { deleteMutation, updateMutation } = useMutations();
   const { authAndNavigate } = useAuth();
   const [editId, setEditId] = useState("");
-  const { _id, id, content, createdAt } = comment;
+  const { _id, id, content, createdAt, postId } = comment;
 
   const onChangeUpdateComment = (commentId, newContent) => {
     setUpdateComment(commentContent => ({
@@ -24,7 +23,7 @@ const Comment = ({
   };
 
   const renderCommnet = () => {
-    if (editId === _id) {
+    if (editId) {
       return (
         <textarea
           style={{ marginTop: "5px" }}
@@ -42,7 +41,7 @@ const Comment = ({
   };
 
   const renderCommentButton = () => {
-    if (editId === _id) {
+    if (editId) {
       return (
         <>
           <span
@@ -60,6 +59,10 @@ const Comment = ({
             onClick={() => {
               authAndNavigate();
               setEditId("");
+              updateMutation.mutate({
+                _id,
+                content: updateComment[_id],
+              });
               return;
             }}
           >
@@ -85,7 +88,10 @@ const Comment = ({
             className={styles.button}
             onClick={() => {
               authAndNavigate();
-              deleteMutation.mutate({});
+              deleteMutation.mutate({
+                _id,
+                postId,
+              });
               return;
             }}
           >

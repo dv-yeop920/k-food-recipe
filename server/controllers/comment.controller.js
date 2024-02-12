@@ -42,17 +42,20 @@ exports.registerComment = async (req, res) => {
 
     const comment = new Comment(commentBody);
 
-    await comment.save();
+    const result = await comment.save();
 
     await Post.findOneAndUpdate(
       { _id: commentBody.postId },
       { $inc: { commentCount: 1 } }
     );
 
-    res.json({
-      success: true,
-      messsage: "댓글이 등록 되었습니다",
-    });
+    if (result !== null) {
+      res.json({
+        messsage: "댓글이 등록 되었습니다",
+      });
+    } else {
+      throw new Error("error");
+    }
   } catch (error) {
     res.json({
       success: false,
@@ -62,36 +65,42 @@ exports.registerComment = async (req, res) => {
 };
 
 exports.updateComment = async (req, res) => {
+  const { _id, content } = req.body;
+
   try {
-    await Comment.findOneAndUpdate(
-      { _id: req.body._id },
+    const result = await Comment.findOneAndUpdate(
+      { _id: _id },
       {
         $set: {
-          content: req.body.content,
+          content: content,
         },
       }
     );
 
-    res.json({
-      updateSuccess: true,
-      messsage: "업데이트 되었습니다",
-    });
+    if (result !== null) {
+      res.json({
+        messsage: "업데이트 되었습니다",
+      });
+    } else {
+      throw new Error("error");
+    }
   } catch (error) {
     res.json({
-      updateSuccess: false,
       messsage: "업데이트 실패했습니다",
     });
   }
 };
 
 exports.deleteComment = async (req, res) => {
+  const { _id, postId } = req.body;
+
   try {
-    await Comment.findOneAndDelete({
-      _id: req.body._id,
+    const result = await Comment.findOneAndDelete({
+      _id: _id,
     });
 
     await Post.findOneAndUpdate(
-      { _id: req.body.postId },
+      { _id: postId },
       {
         $inc: {
           commentCount: -1,
@@ -99,13 +108,15 @@ exports.deleteComment = async (req, res) => {
       }
     );
 
-    res.json({
-      deleteSuccess: true,
-      messsage: "삭제 되었습니다",
-    });
+    if (result !== null) {
+      res.json({
+        messsage: "삭제 되었습니다",
+      });
+    } else {
+      throw new Error("error");
+    }
   } catch (error) {
     res.json({
-      deleteSuccess: false,
       messsage: "삭제 실패했습니다",
     });
   }

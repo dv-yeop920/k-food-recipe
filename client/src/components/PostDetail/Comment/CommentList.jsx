@@ -17,7 +17,7 @@ const CommentList = ({ post }) => {
   const [commentContent, setCommentContent] = useState("");
   const [updateComment, setUpdateComment] = useState("");
 
-  const commentInfo = {
+  const commentInputInfo = {
     commentContent: commentContent,
     postId: postId,
     userId: userId,
@@ -38,7 +38,7 @@ const CommentList = ({ post }) => {
           <div className={styles.inputWrap}>
             <CommentInput
               authAndNavigate={authAndNavigate}
-              commentInfo={commentInfo}
+              commentInfo={commentInputInfo}
             />
 
             {data?.pages?.map(group =>
@@ -46,7 +46,6 @@ const CommentList = ({ post }) => {
                 <Comment
                   key={comment._id}
                   comment={comment}
-                  postId={postId}
                   userId={userId}
                   updateComment={updateComment}
                   setUpdateComment={setUpdateComment}

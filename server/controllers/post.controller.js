@@ -57,7 +57,7 @@ exports.getPost = async (req, res) => {
     if (postId) {
       const post = await Post.findOne({
         _id: postId,
-      }).exec();
+      });
 
       res.json({
         list: post,
