@@ -3,97 +3,29 @@ import { useParams, useNavigate } from "react-router-dom";
 import CommentList from "../components/PostDetail/Comment/CommentList";
 import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
 import Parser from "html-react-parser";
-import axios from "axios";
 import getDate from "../utils/postDate";
-import { deletePostPreviewImageToS3 } from "../utils/awsS3Setting";
 import styles from "../components/PostDetail/PostDetail.module.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/slice/userSlice";
 import useAuth from "../hooks/useAuth";
-import toastMessage from "../utils/toast";
-import {
-  useMutation,
-  useQuery,
-} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { getPostDetail } from "../services/post.services";
+import useMutations from "../hooks/useMutation";
 
 const PostsDetail = () => {
   const navigate = useNavigate();
-
-  const { userId } = useSelector(selectUser);
-  const { authAndNavigate } = useAuth();
   const { id } = useParams();
+  const { userId } = useSelector(selectUser);
 
-  const getPostDetail = async () => {
-    try {
-      const response = await axios.get(
-        `/api/posts/getPost?id=${id}`
-      );
-
-      if (response) {
-        const postData = response.data.list;
-
-        const parts = postData.id.split("_");
-        const userId = parts[0];
-        postData.id = userId;
-
-        return postData;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { authAndNavigate } = useAuth();
+  const { deleteMutation } = useMutations();
 
   const { data: post } = useQuery({
-    queryKey: ["list"],
-    queryFn: getPostDetail,
+    queryKey: ["post"],
+    queryFn: () => getPostDetail(id),
   });
 
-  const onClickDeletePost = async () => {
-    const postId = {
-      postId: id,
-    };
-
-    try {
-      if (
-        window.confirm("게시물을 정말 삭제하시겠습니까?")
-      ) {
-        if (post.image) {
-          await deletePostPreviewImageToS3(post.image);
-        }
-
-        const response = await axios.post(
-          "/api/posts/delete",
-          postId
-        );
-
-        if (response.data.deleteSuccess) {
-          toastMessage(response.data.messsage);
-          navigate(-1, { replace: true });
-          return;
-        }
-
-        if (!response.data.deleteSuccess) {
-          toastMessage(response.data.messsage);
-          return;
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //const deleteMutation = useMutation({
-  //  mutationFn: onClickDeletePost,
-  //});
-
-  const CREATE_AT = post.createdAt;
-
-  /*useEffect(() => {
-    if (post) {
-      getPostDetail();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [post]);*/
+  const { title, createdAt, content, image } = post;
 
   return (
     <>
@@ -104,27 +36,23 @@ const PostsDetail = () => {
           </div>
 
           <div className="post-title__area">
-            <h2 className={styles.title}>
-              {post.title || ""}
-            </h2>
+            <h2 className={styles.title}>{title || ""}</h2>
           </div>
 
           <div className="post-user__wrap">
             <div className={styles.info}>
-              <span className={styles.id}>
-                {post.id || ""}
-              </span>
+              <span className={styles.id}>{userId}</span>
             </div>
 
             <div className={styles.info}>
               <span className="user-date">
                 {`
-                  ${getDate(CREATE_AT).year}-${
-                  getDate(CREATE_AT).month + 1
-                }-${getDate(CREATE_AT).date} 
-                  ${getDate(CREATE_AT).hours}:${
-                  getDate(CREATE_AT).minutes
-                }` || ""}
+                  ${getDate(createdAt).year}-${
+                  getDate(createdAt).month + 1
+                }-${getDate(createdAt).date} 
+                  ${getDate(createdAt).hours}:${
+                  getDate(createdAt).minutes
+                }`}
               </span>
             </div>
 
@@ -134,7 +62,7 @@ const PostsDetail = () => {
                 onClick={() => {
                   if (
                     window.confirm(
-                      "게시글을 수정하시겠습니까?"
+                      "수정하러 이동하시겠습니까?"
                     )
                   ) {
                     authAndNavigate(`/postUpdate/${id}`);
@@ -148,9 +76,12 @@ const PostsDetail = () => {
               <span
                 className={styles.button}
                 onClick={() => {
-                  authAndNavigate().then(() => {
-                    //deleteMutation.mutate();
-                    //onClickDeletePost();
+                  authAndNavigate();
+                  deleteMutation.mutate({
+                    key: "post",
+                    id,
+                    image,
+                    navigate,
                   });
                 }}
               >
@@ -161,7 +92,7 @@ const PostsDetail = () => {
         </div>
 
         <div className={styles.content}>
-          {Parser(String(post.content)) || ""}
+          {Parser(String(content))}
         </div>
 
         <CommentList post={post} />

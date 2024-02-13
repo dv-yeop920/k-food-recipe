@@ -17,6 +17,7 @@ const Comment = ({ comment, userId }) => {
   };
 
   const commentProps = {
+    key: "comment",
     id: id,
     _id: _id,
     content: content,

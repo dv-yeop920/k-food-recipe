@@ -60,7 +60,7 @@ exports.getPost = async (req, res) => {
       });
 
       res.json({
-        list: post,
+        post: post,
       });
     }
   } catch (error) {
@@ -105,7 +105,7 @@ exports.updatePost = async (req, res) => {
           image: req.body.image,
         },
       }
-    ).exec();
+    );
 
     res.json({
       updateSuccess: true,
@@ -129,14 +129,17 @@ exports.deletePost = async (req, res) => {
       _id: postId,
     });
 
-    await Comment.deleteMany({
+    const result = await Comment.deleteMany({
       postId: postId,
     });
 
-    res.json({
-      deleteSuccess: true,
-      messsage: "삭제 되었습니다",
-    });
+    if (result !== null) {
+      res.json({
+        messsage: "삭제 되었습니다",
+      });
+    } else {
+      throw new Error("error");
+    }
   } catch (error) {
     res.json({
       deleteSuccess: false,

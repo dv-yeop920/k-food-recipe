@@ -7,6 +7,7 @@ const CommentButton = ({ commentProps }) => {
   const { deleteMutation, updateMutation } = useMutations();
   const { authAndNavigate } = useAuth();
   const {
+    key,
     id,
     _id,
     content,
@@ -36,6 +37,7 @@ const CommentButton = ({ commentProps }) => {
             onClick={() => {
               authAndNavigate();
               deleteMutation.mutate({
+                key,
                 _id,
                 postId,
               });
@@ -63,6 +65,7 @@ const CommentButton = ({ commentProps }) => {
               authAndNavigate();
               setEditId("");
               updateMutation.mutate({
+                key,
                 _id,
                 content: updateComment[_id],
               });

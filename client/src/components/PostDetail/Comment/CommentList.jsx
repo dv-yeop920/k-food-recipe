@@ -12,25 +12,25 @@ import ScrollLoading from "../../Loading/ScrollLoading";
 const CommentList = ({ post }) => {
   const { userId } = useSelector(selectUser);
   const { authAndNavigate } = useAuth();
-  const postId = post._id;
-
+  const { _id, commentCount } = post;
   const [commentContent, setCommentContent] = useState("");
 
   const commentInputInfo = {
-    commentContent: commentContent,
-    postId: postId,
-    userId: userId,
-    setCommentContent: setCommentContent,
+    key: "comment",
+    commentContent,
+    postId: _id,
+    userId,
+    setCommentContent,
   };
 
   const { data, fetchNextPage, hasNextPage } =
-    useInfiniteScroll("commentList", "", postId);
+    useInfiniteScroll("commentList", "", _id);
 
   return (
     <>
       <div className={styles.commentWrap}>
         <div className="comment-count">
-          <h3> {`댓글 ${post.commentCount}` || ""} </h3>
+          <h3> {`댓글 ${commentCount}`} </h3>
         </div>
 
         <div className="comment-container">
