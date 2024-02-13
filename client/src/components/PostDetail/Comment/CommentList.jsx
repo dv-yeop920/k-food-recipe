@@ -11,11 +11,10 @@ import ScrollLoading from "../../Loading/ScrollLoading";
 
 const CommentList = ({ post }) => {
   const { userId } = useSelector(selectUser);
-  const postId = post._id;
   const { authAndNavigate } = useAuth();
+  const postId = post._id;
 
   const [commentContent, setCommentContent] = useState("");
-  const [updateComment, setUpdateComment] = useState("");
 
   const commentInputInfo = {
     commentContent: commentContent,
@@ -40,26 +39,24 @@ const CommentList = ({ post }) => {
               authAndNavigate={authAndNavigate}
               commentInfo={commentInputInfo}
             />
-
-            {data?.pages?.map(group =>
-              group.commentList.map(comment => (
-                <Comment
-                  key={comment._id}
-                  comment={comment}
-                  userId={userId}
-                  updateComment={updateComment}
-                  setUpdateComment={setUpdateComment}
-                />
-              ))
-            )}
-
-            <InfiniteScrollObserver
-              fetchNextPage={fetchNextPage}
-              canFetchMore={hasNextPage}
-            />
-
-            {hasNextPage && <ScrollLoading />}
           </div>
+
+          {data?.pages?.map(group =>
+            group.commentList.map(comment => (
+              <Comment
+                key={comment._id}
+                comment={comment}
+                userId={userId}
+              />
+            ))
+          )}
+
+          <InfiniteScrollObserver
+            fetchNextPage={fetchNextPage}
+            canFetchMore={hasNextPage}
+          />
+
+          {hasNextPage && <ScrollLoading />}
         </div>
       </div>
     </>
