@@ -1,13 +1,10 @@
-import {
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   onSubmitRegisterComment,
   onClickDeleteComment,
   onClickUpdateComment,
 } from "../services/comment.services";
-import { onClickDeletePost } from "../services/post.services";
+import { onClickDeletePost, onSubmitEditPost } from "../services/post.services";
 
 const useMutations = () => {
   const queryClient = useQueryClient();
@@ -43,6 +40,7 @@ const useMutations = () => {
   const updateMutation = useMutation({
     mutationFn: params => {
       if (params.key === "post") {
+        return onSubmitEditPost(params);
       } else if (params.key === "comment") {
         return onClickUpdateComment(params);
       }

@@ -9,18 +9,14 @@ const Pagination = ({
 }) => {
   const pageNumbers = [];
   const PAGE_NUMBER_LIMIT = 5;
-  const totalPage = Math.ceil(
-    totalPostLength / postPerPage
-  );
+  const totalPage = Math.ceil(totalPostLength / postPerPage);
 
   for (let i = 0; i <= totalPage; i++) {
     pageNumbers.push(i);
   }
 
   //NOTE - 페이지 블록 번호
-  const pageBlockArea = Math.ceil(
-    pageNumber / PAGE_NUMBER_LIMIT
-  );
+  const pageBlockArea = Math.ceil(pageNumber / PAGE_NUMBER_LIMIT);
   //NOTE - 페이지 블록 마다 보여줄 페이지 번호 개수
   const start = (pageBlockArea - 1) * PAGE_NUMBER_LIMIT + 1;
   const end = pageBlockArea * PAGE_NUMBER_LIMIT + 1;
@@ -62,9 +58,7 @@ const Pagination = ({
                   }}
                   disabled={pageNumber === number}
                 >
-                  <span className="page-number">
-                    {number}
-                  </span>
+                  <span className="page-number">{number}</span>
                 </li>
               );
             })}

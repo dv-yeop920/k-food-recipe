@@ -3,10 +3,8 @@ import { useState } from "react";
 const useInput = initialState => {
   const [userName, setName] = useState(initialState);
   const [userId, setUserId] = useState(initialState);
-  const [userPassword, setUserPassword] =
-    useState(initialState);
-  const [checkPassword, setCheckPassword] =
-    useState(initialState);
+  const [userPassword, setUserPassword] = useState(initialState);
+  const [checkPassword, setCheckPassword] = useState(initialState);
   const [userEmail, setUserEmail] = useState(initialState);
 
   const onChangeValue = e => {

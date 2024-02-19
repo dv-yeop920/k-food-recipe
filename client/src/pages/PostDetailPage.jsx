@@ -47,12 +47,11 @@ const PostsDetail = () => {
             <div className={styles.info}>
               <span className="user-date">
                 {`
-                  ${getDate(createdAt).year}-${
-                  getDate(createdAt).month + 1
-                }-${getDate(createdAt).date} 
-                  ${getDate(createdAt).hours}:${
-                  getDate(createdAt).minutes
-                }`}
+                  ${getDate(createdAt).year}-
+                  ${getDate(createdAt).month + 1}-
+                  ${getDate(createdAt).date} 
+                  ${getDate(createdAt).hours}:
+                  ${getDate(createdAt).minutes}`}
               </span>
             </div>
 
@@ -60,11 +59,7 @@ const PostsDetail = () => {
               <span
                 className={styles.button}
                 onClick={() => {
-                  if (
-                    window.confirm(
-                      "수정하러 이동하시겠습니까?"
-                    )
-                  ) {
+                  if (window.confirm("수정하러 이동하시겠습니까?")) {
                     authAndNavigate(`/postUpdate/${id}`);
                     return;
                   }
@@ -91,9 +86,7 @@ const PostsDetail = () => {
           </div>
         </div>
 
-        <div className={styles.content}>
-          {Parser(String(content))}
-        </div>
+        <div className={styles.content}>{Parser(String(content))}</div>
 
         <CommentList post={post} />
 
