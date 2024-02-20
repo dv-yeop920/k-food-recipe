@@ -4,15 +4,17 @@ import "react-quill/dist/quill.snow.css";
 import styles from "./Writing.module.css";
 import { formats, toolbarOptions, imageHandler } from "../../utils/quillEditor";
 
-const UpdateContent = ({
-  originalDetail,
-  setOriginalDetail,
-  editTitleValue,
-  setEditTitleValue,
-  editContentValue,
-  setEditContentValue,
-  resizeFile,
-}) => {
+const UpdateContent = ({ contentProps }) => {
+  const {
+    originalDetail,
+    setOriginalDetail,
+    editTitleValue,
+    setEditTitleValue,
+    editContentValue,
+    setEditContentValue,
+    resizeFile,
+  } = contentProps;
+
   const updateQuillRef = useRef(null);
 
   const modules = useMemo(() => {
@@ -27,7 +29,7 @@ const UpdateContent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handelChangeTitle = e => {
+  const onChangeTitle = e => {
     setEditTitleValue(e.target.value);
 
     return setOriginalDetail({
@@ -36,7 +38,7 @@ const UpdateContent = ({
     });
   };
 
-  const handleChangeContent = e => {
+  const onChangeContent = e => {
     setEditContentValue(e);
 
     return setOriginalDetail({
@@ -55,7 +57,7 @@ const UpdateContent = ({
             value={editTitleValue}
             name={editTitleValue}
             maxLength="20"
-            onChange={handelChangeTitle}
+            onChange={onChangeTitle}
           />
         </div>
 
@@ -67,7 +69,7 @@ const UpdateContent = ({
             value={editContentValue}
             modules={modules}
             formats={formats}
-            onChange={handleChangeContent}
+            onChange={onChangeContent}
           />
         </div>
       </div>

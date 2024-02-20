@@ -45,13 +45,11 @@ const PostsDetail = () => {
             </div>
 
             <div className={styles.info}>
-              <span className="user-date">
+              <span className={styles.date}>
                 {`
-                  ${getDate(createdAt).year}-
-                  ${getDate(createdAt).month + 1}-
-                  ${getDate(createdAt).date} 
-                  ${getDate(createdAt).hours}:
-                  ${getDate(createdAt).minutes}`}
+                  ${getDate(createdAt).year}-${getDate(createdAt).month + 1}-${
+                  getDate(createdAt).date
+                } ${getDate(createdAt).hours}:${getDate(createdAt).minutes}`}
               </span>
             </div>
 

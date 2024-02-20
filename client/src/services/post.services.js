@@ -5,6 +5,19 @@ import {
   uploadPostPreviewImageToS3,
 } from "../utils/awsS3Setting";
 
+export const getPostList = async pageNumber => {
+  try {
+    const response = await axios.get(
+      `/api/posts/getPostList?pageNumber=${pageNumber}
+      `
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getPostDetail = async id => {
   try {
     const response = await axios.get(`/api/posts/getPost?id=${id}`);

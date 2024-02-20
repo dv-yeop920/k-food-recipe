@@ -15,7 +15,7 @@ exports.getPostList = async (req, res) => {
   const RegexSearchValue = RegexValue(searchValue);
 
   try {
-    const posts = await Post.find({
+    const postList = await Post.find({
       title: {
         $regex: RegexSearchValue,
         $options: "i",
@@ -29,7 +29,7 @@ exports.getPostList = async (req, res) => {
       title: { $regex: RegexSearchValue, $options: "i" },
     });
 
-    const modifiedPosts = posts.map(post => {
+    const modifiedPosts = postList.map(post => {
       const parts = post.id.split("_");
       const userId = parts[0];
 
@@ -41,7 +41,7 @@ exports.getPostList = async (req, res) => {
 
     res.json({
       totalPostLength: totalPostLength,
-      list: modifiedPosts,
+      postList: modifiedPosts,
     });
   } catch (error) {
     res.json({

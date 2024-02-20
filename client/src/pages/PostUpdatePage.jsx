@@ -30,6 +30,23 @@ const PostsUpdatePage = () => {
   const { authAndNavigate } = useAuth();
   const { updateMutation } = useMutations();
 
+  const uploaderProps = {
+    editPostPrevuewImageSrc,
+    setEditPostPrevuewImageSrc,
+    setEditPostPreviewImageFile,
+    resizeFile,
+  };
+
+  const contentProps = {
+    originalDetail,
+    setOriginalDetail,
+    editTitleValue,
+    setEditTitleValue,
+    editContentValue,
+    setEditContentValue,
+    resizeFile,
+  };
+
   const postParams = {
     key: "post",
     editTitleValue,
@@ -40,64 +57,47 @@ const PostsUpdatePage = () => {
   };
 
   return (
-    <>
-      <main className={styles.editorContainer}>
-        <form
-          className="editor-form"
-          onSubmit={e => {
-            authAndNavigate();
-            postParams.e = e;
-            updateMutation.mutate(postParams);
-          }}
-        >
-          <section className={styles.contentContainer}>
-            <UpdateImageUploader
-              editPostPrevuewImageSrc={editPostPrevuewImageSrc}
-              setEditPostPrevuewImageSrc={setEditPostPrevuewImageSrc}
-              setEditPostPreviewImageFile={setEditPostPreviewImageFile}
-              resizeFile={resizeFile}
-            />
+    <main className={styles.editorContainer}>
+      <form
+        className="editor-form"
+        onSubmit={e => {
+          authAndNavigate();
+          postParams.e = e;
+          updateMutation.mutate(postParams);
+        }}
+      >
+        <section className={styles.contentContainer}>
+          <UpdateImageUploader uploaderProps={uploaderProps} />
+          <UpdateContent contentProps={contentProps} />
+        </section>
 
-            <UpdateContent
-              originalDetail={originalDetail}
-              setOriginalDetail={setOriginalDetail}
-              editTitleValue={editTitleValue}
-              setEditTitleValue={setEditTitleValue}
-              editContentValue={editContentValue}
-              setEditContentValue={setEditContentValue}
-              resizeFile={resizeFile}
-            />
-          </section>
-
-          <section className={styles.buttonArea}>
-            <button
-              className={`
+        <section className={styles.buttonArea}>
+          <button
+            className={`
               ${styles.writingButton}
               ${button.cancle}`}
-              type="button"
-              onClick={() => {
-                authAndNavigate();
-                if (window.confirm("게시글 수정을 취소 하시겠어요?")) {
-                  navigate(-1, { replace: true });
-                  return;
-                }
-              }}
-            >
-              취소
-            </button>
+            type="button"
+            onClick={() => {
+              authAndNavigate();
+              if (window.confirm("게시글 수정을 취소 하시겠어요?")) {
+                navigate(-1, { replace: true });
+              }
+            }}
+          >
+            취소
+          </button>
 
-            <button
-              className={`
+          <button
+            className={`
               ${styles.writingButton}
               ${button.submit}`}
-              type="submit"
-            >
-              수정
-            </button>
-          </section>
-        </form>
-      </main>
-    </>
+            type="submit"
+          >
+            수정
+          </button>
+        </section>
+      </form>
+    </main>
   );
 };
 

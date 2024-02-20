@@ -24,7 +24,7 @@ const Pagination = ({
 
   return (
     <>
-      <div className={styles.container}>
+      <footer className={styles.container}>
         <nav>
           <ul className={styles.ul}>
             <button
@@ -84,7 +84,7 @@ const Pagination = ({
             </button>
           </ul>
         </nav>
-      </div>
+      </footer>
     </>
   );
 };

@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Writing.module.css";
 
-const UpdateImageUploader = ({
-  editPostPrevuewImageSrc,
-  setEditPostPrevuewImageSrc,
-  setEditPostPreviewImageFile,
-  resizeFile,
-}) => {
+const UpdateImageUploader = ({ uploaderProps }) => {
+  const {
+    editPostPrevuewImageSrc,
+    setEditPostPrevuewImageSrc,
+    setEditPostPreviewImageFile,
+    resizeFile,
+  } = uploaderProps;
+
   const fileInput = React.useRef(null);
 
   const onClickShowImageFile = () => {
@@ -47,18 +49,10 @@ const UpdateImageUploader = ({
           onChange={onChangeUpload}
         />
 
-        <FontAwesomeIcon
-          className={styles.camera}
-          icon={faCamera}
-          size="5x"
-        />
+        <FontAwesomeIcon className={styles.camera} icon={faCamera} size="5x" />
 
         <div className={styles.imgWrapper}>
-          <img
-            className={styles.image}
-            src={editPostPrevuewImageSrc}
-            alt=""
-          />
+          <img className={styles.image} src={editPostPrevuewImageSrc} alt="" />
         </div>
       </div>
     </>

@@ -8,9 +8,7 @@ const NoticeBoardPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const userPostSearchValue = useRef(null);
   const [postList, setPostList] = useState([]);
-  const [totalPostLength, setTotalPostLength] = useState(
-    []
-  );
+  const [totalPostLength, setTotalPostLength] = useState([]);
 
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -24,9 +22,8 @@ const NoticeBoardPage = () => {
       );
 
       if (response) {
-        const getPosts = response.data.list;
-        const getTotalPostsLength =
-          response.data.totalPostLength;
+        const getPosts = response.data.postList;
+        const getTotalPostsLength = response.data.totalPostLength;
 
         setPostList(getPosts);
         setTotalPostLength(getTotalPostsLength);
@@ -59,22 +56,16 @@ const NoticeBoardPage = () => {
     <>
       <PostSearchInput
         userPostSearchValue={userPostSearchValue}
-        onSubmitGetFilteredPostList={
-          onSubmitGetFilteredPostList
-        }
+        onSubmitGetFilteredPostList={onSubmitGetFilteredPostList}
       />
 
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <PostList
-          postList={postList}
-          postPerPage={POST_PER_PAGE}
-          totalPostLength={totalPostLength}
-          paginate={setPageNumber}
-          pageNumber={pageNumber}
-        />
-      )}
+      <PostList
+        postList={postList}
+        postPerPage={POST_PER_PAGE}
+        totalPostLength={totalPostLength}
+        paginate={setPageNumber}
+        pageNumber={pageNumber}
+      />
     </>
   );
 };
