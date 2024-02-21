@@ -1,5 +1,4 @@
 import React from "react";
-import PostSearchInput from "../components/NoticeBoard/PostSearchInput";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPostList } from "../services/post.services";
@@ -7,8 +6,12 @@ import Post from "../components/NoticeBoard/Post";
 import styles from "../components/NoticeBoard/NoticeBoard.module.css";
 import Pagenate from "../components/PagiNation/Pagenate";
 import ScrollToTop from "../utils/scrollTop";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import useAuth from "../hooks/useAuth";
 
 const PostPage = () => {
+  const { authAndNavigate } = useAuth("");
   const [searchParams, setSearchParams] = useSearchParams();
   const searchParam = searchParams.get("search");
   const pageParam = searchParams.get("page");
@@ -28,11 +31,17 @@ const PostPage = () => {
   return (
     <main>
       <ScrollToTop tabParam={pageParam} />
-      <section className={styles.searchContainer} aria-label="게시물 검색 섹션">
-        <PostSearchInput setSearchParams={setSearchParams} />
-      </section>
 
       <section className={styles.boardContainer} aria-label="게시물 섹션">
+        <FontAwesomeIcon
+          className={styles.icon}
+          icon={faPenToSquare}
+          size="2x"
+          onClick={() => {
+            authAndNavigate("/writing");
+            return;
+          }}
+        />
         <li className={styles.li}>
           <div>
             <h3 style={{ color: "rgb(200, 50, 100)" }}>[공지]</h3>

@@ -34,52 +34,50 @@ const MenuModal = ({ openModal, closeModal }) => {
   };
 
   return (
-    <>
-      <div className={styles.menuContainer}>
-        <ul className="menu-area">
-          <li className={styles.menu} onClick={closeModal}>
-            <Link className={styles.menuLink} to="/postList">
-              자유 게시판
-            </Link>
-          </li>
+    <div className={styles.menuContainer}>
+      <ul className="menu-area">
+        <li className={styles.menu} onClick={closeModal}>
+          <Link className={styles.menuLink} to="/postList">
+            자유 게시판
+          </Link>
+        </li>
 
-          <li
-            style={{ borderBottom: "1px solid #ddd" }}
-            className={styles.menu}
-            onClick={() => {
-              authAndNavigate("/mypage");
-              closeModal();
-            }}
-          >
-            <span className={styles.menuLink}>마이 페이지</span>
-          </li>
+        <li
+          style={{ borderBottom: "1px solid #ddd" }}
+          className={styles.menu}
+          onClick={() => {
+            authAndNavigate("/mypage");
+            closeModal();
+          }}
+        >
+          <span className={styles.menuLink}>마이 페이지</span>
+        </li>
 
-          {isLogin ? null : (
-            <li
-              className={styles.menu}
-              onClick={() => {
-                openModal("signup");
-              }}
-            >
-              <span className={styles.menuLink}>회원 가입</span>
-            </li>
-          )}
-
+        {isLogin ? null : (
           <li
             className={styles.menu}
             onClick={() => {
-              !isLogin && openModal("login");
-              isLogin && handleClickLogout();
-              return;
+              openModal("signup");
             }}
           >
-            <span className={styles.menuLink}>
-              {isLogin ? "로그아웃" : "로그인"}
-            </span>
+            <span className={styles.menuLink}>회원 가입</span>
           </li>
-        </ul>
-      </div>
-    </>
+        )}
+
+        <li
+          className={styles.menu}
+          onClick={() => {
+            !isLogin && openModal("login");
+            isLogin && handleClickLogout();
+            return;
+          }}
+        >
+          <span className={styles.menuLink}>
+            {isLogin ? "로그아웃" : "로그인"}
+          </span>
+        </li>
+      </ul>
+    </div>
   );
 };
 

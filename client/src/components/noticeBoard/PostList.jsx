@@ -17,7 +17,6 @@ const PostList = ({
         <li className={styles.li}>
           <div>
             <h3 style={{ color: "rgb(200, 50, 100)" }}>[공지]</h3>
-
             <h3 className={styles.title}>게시판 이용 수칙</h3>
           </div>
         </li>

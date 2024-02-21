@@ -1,5 +1,5 @@
 .menuContainer {
-  position: absolute;
+  position: fixed;
   width: 20%;
   background-color: var(--background-color);
   border: 1px solid rgb(186, 185, 185);

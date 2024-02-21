@@ -10,11 +10,14 @@ import SignUpModal from "./Sign/SignUpModal";
 import MenuModal from "./Menu/MenuModal";
 import useInput from "../../hooks/useInput";
 import styles from "./Sign/SignModal.module.css";
+import { useSearchParams } from "react-router-dom";
+import SearchModal from "./Search/SearchModal";
 
 const ModalContainer = () => {
   const dispatch = useDispatch();
   const modalRef = useRef(null);
   const { type, isOpen } = useSelector(selectModal);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [
     userName,
@@ -27,13 +30,13 @@ const ModalContainer = () => {
   ] = useInput("");
 
   useEffect(() => {
-    if (isOpen) {
+    if (type === "login" || type === "signup") {
       document.body.style.overflow = "hidden";
     }
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isOpen]);
+  }, [type]);
 
   if (!isOpen) {
     return null;
@@ -87,13 +90,21 @@ const ModalContainer = () => {
             closeModal={handleCloseModal}
           />
         );
+      case "search":
+        return (
+          <SearchModal
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+            closeModal={handleCloseModal}
+          />
+        );
       default:
         return null;
     }
   };
 
   return (
-    <div
+    <main
       className={
         (type === "signup") | (type === "login")
           ? styles.signModal
@@ -103,7 +114,7 @@ const ModalContainer = () => {
       onClick={handleClickOutside}
     >
       {renderModal()}
-    </div>
+    </main>
   );
 };
 

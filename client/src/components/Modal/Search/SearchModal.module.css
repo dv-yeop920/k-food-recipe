@@ -1,0 +1,50 @@
+@import "../../../styles/dark-mode.css";
+
+@keyframes showInput {
+  0% {
+    transform: translateY(-500px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.searchContainer {
+  padding: 5rem 5rem 3rem 5rem;
+  background-color: var(--background-color);
+  border-radius: 0 0 25px 25px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  transition: all 0.3s ease-in-out;
+  animation: showInput 0.2s ease-in-out;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  text-align: center;
+  margin-right: 7px;
+  width: 50%;
+  border: none;
+  border-bottom: 2px solid var(--text-color);
+  background-color: var(--input-background-color);
+  color: var(--text-color);
+  border-radius: 7px 7px 0px 0px;
+  padding: 11px;
+  font-size: 19px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.input:hover {
+  border-bottom: 2px solid var(--submit-background-color);
+}
+
+.input:focus {
+  border-bottom: 2px solid var(--submit-background-color);
+}

@@ -1,40 +1,5 @@
 @import "../../styles/dark-mode.css";
 
-.searchContainer {
-  position: absolute;
-  top: 21%;
-  left: 25%;
-  width: 50%;
-}
-
-.form {
-  display: flex;
-  align-items: center;
-}
-
-.input {
-  text-align: center;
-  width: 75%;
-  margin-right: 7px;
-  border: none;
-  border-bottom: 2px solid var(--text-color);
-  background-color: var(--input-background-color);
-  color: var(--text-color);
-  border-radius: 7px 7px 0px 0px;
-  padding: 11px;
-  font-size: 19px;
-  font-weight: 600;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.input:hover {
-  border-bottom: 2px solid var(--submit-background-color);
-}
-.input:focus {
-  border-bottom: 2px solid var(--submit-background-color);
-}
-
 .icon {
   margin-left: 10px;
   cursor: pointer;
@@ -47,10 +12,7 @@
 }
 
 .boardContainer {
-  position: absolute;
-  top: 35%;
-  left: 6%;
-  width: 88%;
+  padding: 9rem 5rem 0rem 5rem;
 }
 
 .li {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,7 +7,7 @@ import {
   faGlobe,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { openModal } from "../../store/slice/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme, theme } from "../../store/slice/themeSlice";
@@ -15,21 +15,6 @@ import { toggleTheme, theme } from "../../store/slice/themeSlice";
 const Navbar = () => {
   const dispatch = useDispatch();
   const isDark = useSelector(theme);
-  const searchRef = useRef(null);
-
-  const [isSearchBar, setIsSearchBar] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const tabParam = searchParams.get("tab");
-
-  const onSubmitSearchParams = e => {
-    e.preventDefault();
-
-    setSearchParams({
-      search: searchRef.current.value,
-      tab: tabParam,
-    });
-  };
 
   const darkMode = () => {
     const DOM_STYLE = document.documentElement.style;
@@ -70,10 +55,6 @@ const Navbar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDark]);
 
-  useEffect(() => {
-    setIsSearchBar(false);
-  }, [tabParam]);
-
   return (
     <>
       <header className={styles.header}>
@@ -84,56 +65,24 @@ const Navbar = () => {
             </Link>
 
             <div className={styles.recipeSearchArea}>
-              {isSearchBar && (
-                <>
-                  <form
-                    className={styles.search_form}
-                    onSubmit={onSubmitSearchParams}
-                  >
-                    <label htmlFor="recipeSearchInput">
-                      <input
-                        type="search"
-                        maxLength={12}
-                        className={styles.recipeSearchInput}
-                        id="recipeSearchInput"
-                        autoFocus
-                        ref={searchRef}
-                      />
-                    </label>
-                    <button type="submit" className={styles.search_button}>
-                      검색
-                    </button>
-
-                    <button
-                      type="button"
-                      className={styles.cancle_button}
-                      onClick={() => {
-                        setIsSearchBar(false);
-                      }}
-                    >
-                      취소
-                    </button>
-                  </form>
-                </>
-              )}
-              {!isSearchBar && (
-                <div
-                  className={styles.recipeSearchLink}
-                  onClick={() => setIsSearchBar(true)}
-                >
-                  <FontAwesomeIcon
-                    className={styles.search_icon}
-                    style={{
-                      marginRight: "5px",
-                    }}
-                    icon={faSearch}
-                    size="1x"
-                  />
-                  <span style={{ fontSize: "1rem" }}>
-                    여기를 눌러 레시피를 검색해 보세요!
-                  </span>
-                </div>
-              )}
+              <div
+                className={styles.recipeSearchLink}
+                onClick={() => {
+                  dispatch(openModal("search"));
+                }}
+              >
+                <FontAwesomeIcon
+                  className={styles.search_icon}
+                  style={{
+                    marginRight: "5px",
+                  }}
+                  icon={faSearch}
+                  size="1x"
+                />
+                <span style={{ fontSize: "1rem" }}>
+                  여기를 눌러 원하는 것을 검색해 보세요!
+                </span>
+              </div>
             </div>
 
             <div className={styles.headerButtonArea}>
