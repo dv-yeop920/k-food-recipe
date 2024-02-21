@@ -23,6 +23,7 @@ const PostsDetail = () => {
   const { data: post } = useQuery({
     queryKey: ["post"],
     queryFn: () => getPostDetail(id),
+    staleTime: 1000 * 60 * 5,
   });
 
   const { title, createdAt, content, image } = post;

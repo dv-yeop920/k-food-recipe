@@ -1,4 +1,4 @@
-import { uploadContentImageToS3 } from "./awsS3Setting";
+import { uploadContentImageToS3, resizeFile } from "./awsS3Setting";
 
 export const formats = [
   "image",
@@ -33,7 +33,7 @@ export const toolbarOptions = [
   [{ background: [] }],
 ];
 
-export const imageHandler = async (resizeFile, updateQuillRef) => {
+export const imageHandler = async quillRef => {
   const input = document.createElement("input");
 
   input.setAttribute("type", "file");
@@ -50,7 +50,7 @@ export const imageHandler = async (resizeFile, updateQuillRef) => {
       //곧바로 업로드 된 이미지 url을 가져오기
       //useRef를 사용해 에디터에 접근한 후
       //에디터의 현재 커서 위치에 이미지 삽입
-      const editor = updateQuillRef.current.getEditor();
+      const editor = quillRef.current.getEditor();
       const range = editor.getSelection();
       // 가져온 위치에 이미지를 삽입한다
       editor.insertEmbed(range.index, "image", imageUrl);

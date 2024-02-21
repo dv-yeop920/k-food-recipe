@@ -4,7 +4,11 @@ import {
   onClickDeleteComment,
   onClickUpdateComment,
 } from "../services/comment.services";
-import { onClickDeletePost, onSubmitEditPost } from "../services/post.services";
+import {
+  onClickDeletePost,
+  onSubmitEditPost,
+  onSubmitRegisterPost,
+} from "../services/post.services";
 
 const useMutations = () => {
   const queryClient = useQueryClient();
@@ -13,6 +17,7 @@ const useMutations = () => {
   const createMutation = useMutation({
     mutationFn: params => {
       if (params.key === "post") {
+        return onSubmitRegisterPost(params);
       } else if (params.key === "comment") {
         return onSubmitRegisterComment(params);
       }

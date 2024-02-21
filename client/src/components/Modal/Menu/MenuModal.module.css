@@ -7,6 +7,7 @@
   top: 10.5%;
   right: 5%;
   border-radius: 17px;
+  overflow: hidden;
   padding: 15px 0px;
   box-shadow: rgb(198, 197, 197) -1px 2px 30px -25px;
 }

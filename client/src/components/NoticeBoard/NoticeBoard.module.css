@@ -15,6 +15,13 @@
   padding: 9rem 5rem 0rem 5rem;
 }
 
+.write_button_box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 .li {
   list-style: none;
   padding: 0px 30px;

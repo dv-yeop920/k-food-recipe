@@ -6,9 +6,8 @@ import Post from "../components/NoticeBoard/Post";
 import styles from "../components/NoticeBoard/NoticeBoard.module.css";
 import Pagenate from "../components/PagiNation/Pagenate";
 import ScrollToTop from "../utils/scrollTop";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../hooks/useAuth";
+import button from "../styles/Button.module.css";
 
 const PostPage = () => {
   const { authAndNavigate } = useAuth("");
@@ -26,6 +25,8 @@ const PostPage = () => {
   const { data } = useQuery({
     queryKey: ["postList", searchParam, pageParam],
     queryFn: () => getPostList(searchParam, pageParam),
+    staleTime: 1000 * 60 * 5,
+    keepPreviousData: true,
   });
 
   return (
@@ -33,15 +34,16 @@ const PostPage = () => {
       <ScrollToTop tabParam={pageParam} />
 
       <section className={styles.boardContainer} aria-label="게시물 섹션">
-        <FontAwesomeIcon
-          className={styles.icon}
-          icon={faPenToSquare}
-          size="2x"
-          onClick={() => {
-            authAndNavigate("/writing");
-            return;
-          }}
-        />
+        <div className={styles.write_button_box}>
+          <button
+            className={button.submit}
+            onClick={() => {
+              authAndNavigate("/writing");
+            }}
+          >
+            글쓰기
+          </button>
+        </div>
         <li className={styles.li}>
           <div>
             <h3 style={{ color: "rgb(200, 50, 100)" }}>[공지]</h3>

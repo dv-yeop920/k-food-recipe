@@ -35,6 +35,54 @@ export const getPostDetail = async id => {
   }
 };
 
+export const onSubmitRegisterPost = async params => {
+  const {
+    e,
+    userId,
+    titleRef,
+    quillRef,
+    postPreviewImageFile,
+    setPostPreviewImageFile,
+    setPostPreviewImageSrc,
+    navigate,
+  } = params;
+  e.preventDefault();
+
+  let previewImageUrl;
+
+  try {
+    if (titleRef.current.value === "" || quillRef.current.value === "") {
+      toastMessage("내용을 입력했는지 확인해 주세요!");
+      return;
+    }
+
+    if (postPreviewImageFile === null) {
+      previewImageUrl = null;
+    } else {
+      previewImageUrl = await uploadPostPreviewImageToS3(postPreviewImageFile);
+    }
+
+    const post = {
+      id: userId,
+      title: titleRef.current.value,
+      content: quillRef.current.value,
+      image: previewImageUrl,
+    };
+
+    const response = await axios.post("/api/posts/register", post);
+
+    toastMessage(response.data.messsage);
+
+    navigate(-1, { replace: true });
+
+    setPostPreviewImageFile(null);
+    setPostPreviewImageSrc(null);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export const onClickDeletePost = async params => {
   const { id, image, navigate } = params;
 
@@ -65,7 +113,7 @@ export const onSubmitEditPost = async params => {
     e,
     editTitleValue,
     editContentValue,
-    editPostPreviewImageFile,
+    postPreviewImageFile,
     originalDetail,
     navigate,
   } = params;
@@ -76,18 +124,16 @@ export const onSubmitEditPost = async params => {
   let previewEditImageUrl;
 
   try {
-    if (editTitleValue === "" || editContentValue === null) {
+    if (editTitleValue === "" || editContentValue === "") {
       toastMessage("내용을 입력했는지 확인해 주세요!");
       return;
     }
 
-    if (editPostPreviewImageFile === null) {
+    if (postPreviewImageFile === null) {
       previewEditImageUrl = originalDetail.image;
-    }
-
-    if (editPostPreviewImageFile !== null) {
+    } else {
       previewEditImageUrl = await uploadPostPreviewImageToS3(
-        editPostPreviewImageFile
+        postPreviewImageFile
       );
       //TODO - 삭제 되도록 수정 해야함
       //await deletePostPreviewImageToS3(originalDetail.image);

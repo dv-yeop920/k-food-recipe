@@ -1,8 +1,9 @@
-import React, { useRef, useMemo } from "react";
+import React, { useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styles from "./Writing.module.css";
-import { formats, toolbarOptions, imageHandler } from "../../utils/quillEditor";
+import { formats } from "../../utils/quillEditor";
+import useQuill from "../../hooks/useQuill";
 
 const UpdateContent = ({ contentProps }) => {
   const {
@@ -12,22 +13,10 @@ const UpdateContent = ({ contentProps }) => {
     setEditTitleValue,
     editContentValue,
     setEditContentValue,
-    resizeFile,
   } = contentProps;
 
   const updateQuillRef = useRef(null);
-
-  const modules = useMemo(() => {
-    return {
-      toolbar: {
-        container: toolbarOptions,
-        handlers: {
-          image: () => imageHandler(resizeFile, updateQuillRef),
-        },
-      },
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { modules } = useQuill(updateQuillRef);
 
   const onChangeTitle = e => {
     setEditTitleValue(e.target.value);

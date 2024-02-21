@@ -2,67 +2,48 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Writing.module.css";
+import {
+  onClickShowImageFile,
+  onChangeUpload,
+} from "../../utils/imageUploader";
 
-const ImageUploader = ({
-  setPostPreviewImageFile,
-  resizeFile,
-  PostPreviewImageSrc,
-  setPostPreviewImageSrc,
-}) => {
+const ImageUploader = ({ uploaderProps }) => {
   const fileInput = React.useRef(null);
 
-  const onClickShowImageFile = () => {
-    fileInput.current.click();
-  };
+  const {
+    postPreviewImageSrc,
+    setPostPreviewImageSrc,
+    setPostPreviewImageFile,
+  } = uploaderProps;
 
-  const onChangeUpload = async e => {
-    const file = e.target.files[0];
-    const compressedFile = await resizeFile(file);
-
-    setPostPreviewImageFile(compressedFile);
-
-    const reader = new FileReader();
-
-    reader.readAsDataURL(compressedFile);
-
-    return new Promise(resolve => {
-      reader.onload = () => {
-        setPostPreviewImageSrc(reader.result || null);
-        resolve();
-      };
-    });
+  const uploaderParams = {
+    setPostPreviewImageFile,
+    setPostPreviewImageSrc,
   };
 
   return (
-    <>
-      <div
-        className={styles.imageUploadContainer}
-        onClick={onClickShowImageFile}
-      >
-        <input
-          className="image-file-uploader"
-          accept="image/*"
-          type="file"
-          ref={fileInput}
-          style={{ display: "none" }}
-          onChange={onChangeUpload}
-        />
+    <div
+      className={styles.imageUploadContainer}
+      onClick={() => onClickShowImageFile(fileInput)}
+    >
+      <input
+        className="image-file-uploader"
+        accept="image/*"
+        type="file"
+        ref={fileInput}
+        style={{ display: "none" }}
+        onChange={e => {
+          uploaderParams.e = e;
+          onChangeUpload(uploaderParams);
+        }}
+      />
 
-        <FontAwesomeIcon
-          className={styles.camera}
-          icon={faCamera}
-          size="5x"
-        />
+      <FontAwesomeIcon className={styles.camera} icon={faCamera} size="5x" />
 
-        <div className={styles.imgWrapper}>
-          <img
-            className={styles.image}
-            src={PostPreviewImageSrc}
-            alt=""
-          />
-        </div>
+      <div className={styles.imgWrapper}>
+        <img className={styles.image} src={postPreviewImageSrc} alt="" />
       </div>
-    </>
+    </div>
   );
 };
 

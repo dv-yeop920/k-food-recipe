@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import UpdateContent from "../components/Writing/UpdateContent";
 import UpdateImageUploader from "../components/Writing/UpdateImageUploader";
-import { resizeFile } from "../utils/awsS3Setting";
 import styles from "../components/Writing/Writing.module.css";
-import button from "../styles/Button.module.css";
 import useAuth from "../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { getPostDetail } from "../services/post.services";
 import useMutations from "../hooks/useMutation";
+import WritingButton from "../components/Writing/WritingButton";
 
 const PostsUpdatePage = () => {
   const { id } = useParams();
@@ -23,18 +22,16 @@ const PostsUpdatePage = () => {
   const [originalDetail, setOriginalDetail] = useState(post);
   const [editTitleValue, setEditTitleValue] = useState(post.title);
   const [editContentValue, setEditContentValue] = useState(post.content);
-  const [editPostPreviewImageFile, setEditPostPreviewImageFile] =
-    useState(null);
-  const [editPostPrevuewImageSrc, setEditPostPrevuewImageSrc] = useState(null);
+  const [postPreviewImageFile, setPostPreviewImageFile] = useState(null);
+  const [postPreviewImageSrc, setPostPreviewImageSrc] = useState(post.image);
 
   const { authAndNavigate } = useAuth();
   const { updateMutation } = useMutations();
 
   const uploaderProps = {
-    editPostPrevuewImageSrc,
-    setEditPostPrevuewImageSrc,
-    setEditPostPreviewImageFile,
-    resizeFile,
+    postPreviewImageSrc,
+    setPostPreviewImageSrc,
+    setPostPreviewImageFile,
   };
 
   const contentProps = {
@@ -44,14 +41,13 @@ const PostsUpdatePage = () => {
     setEditTitleValue,
     editContentValue,
     setEditContentValue,
-    resizeFile,
   };
 
   const postParams = {
     key: "post",
     editTitleValue,
     editContentValue,
-    editPostPreviewImageFile,
+    postPreviewImageFile,
     originalDetail,
     navigate,
   };
@@ -66,35 +62,16 @@ const PostsUpdatePage = () => {
           updateMutation.mutate(postParams);
         }}
       >
-        <section className={styles.contentContainer}>
+        <section
+          className={styles.contentContainer}
+          aria-label="게시글 에디터 섹션"
+        >
           <UpdateImageUploader uploaderProps={uploaderProps} />
           <UpdateContent contentProps={contentProps} />
         </section>
 
-        <section className={styles.buttonArea}>
-          <button
-            className={`
-              ${styles.writingButton}
-              ${button.cancle}`}
-            type="button"
-            onClick={() => {
-              authAndNavigate();
-              if (window.confirm("게시글 수정을 취소 하시겠어요?")) {
-                navigate(-1, { replace: true });
-              }
-            }}
-          >
-            취소
-          </button>
-
-          <button
-            className={`
-              ${styles.writingButton}
-              ${button.submit}`}
-            type="submit"
-          >
-            수정
-          </button>
+        <section className={styles.buttonArea} aria-label="버튼 섹션">
+          <WritingButton buttonValue={"수정"} />
         </section>
       </form>
     </main>
