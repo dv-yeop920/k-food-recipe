@@ -21,13 +21,12 @@ export const getPostDetail = async id => {
   try {
     const response = await axios.get(`/api/posts/getPost?id=${id}`);
 
-    if (response) {
-      const postData = response.data.post;
+    const postData = response?.data?.post;
 
-      const parts = postData.id.split("_");
+    if (postData !== null) {
+      const parts = postData?.id.split("_");
       const userId = parts[0];
       postData.id = userId;
-
       return postData;
     }
   } catch (error) {

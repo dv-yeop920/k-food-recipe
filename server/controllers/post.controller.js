@@ -66,11 +66,11 @@ exports.getPost = async (req, res) => {
   const postId = req.query.id;
 
   try {
-    if (postId) {
-      const post = await Post.findOne({
-        _id: postId,
-      });
+    const post = await Post.findOne({
+      _id: postId,
+    });
 
+    if (post) {
       res.json({
         post: post,
       });
