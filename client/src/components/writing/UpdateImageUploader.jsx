@@ -17,6 +17,7 @@ const UpdateImageUploader = ({ uploaderProps }) => {
   } = uploaderProps;
 
   const updateUploaderParams = {
+    fileInput,
     setPostPreviewImageSrc,
     setPostPreviewImageFile,
   };
@@ -32,8 +33,7 @@ const UpdateImageUploader = ({ uploaderProps }) => {
         type="file"
         ref={fileInput}
         style={{ display: "none" }}
-        onChange={e => {
-          updateUploaderParams.e = e;
+        onChange={() => {
           onChangeUpload(updateUploaderParams);
         }}
       />

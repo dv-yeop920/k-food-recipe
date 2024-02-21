@@ -17,6 +17,7 @@ const ImageUploader = ({ uploaderProps }) => {
   } = uploaderProps;
 
   const uploaderParams = {
+    fileInput,
     setPostPreviewImageFile,
     setPostPreviewImageSrc,
   };
@@ -30,19 +31,16 @@ const ImageUploader = ({ uploaderProps }) => {
         className="image-file-uploader"
         accept="image/*"
         type="file"
-        ref={fileInput}
         style={{ display: "none" }}
-        onChange={e => {
-          uploaderParams.e = e;
+        ref={fileInput}
+        onChange={() => {
           onChangeUpload(uploaderParams);
         }}
       />
-
-      <FontAwesomeIcon className={styles.camera} icon={faCamera} size="5x" />
-
       <div className={styles.imgWrapper}>
         <img className={styles.image} src={postPreviewImageSrc} alt="" />
       </div>
+      <FontAwesomeIcon className={styles.camera} icon={faCamera} size="5x" />
     </div>
   );
 };

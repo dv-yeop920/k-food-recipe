@@ -3,8 +3,7 @@ import Resizer from "react-image-file-resizer";
 
 const REGION = process.env.REACT_APP_REGION;
 const ACCESS_KEY_ID = process.env.REACT_APP_ACCESS_KEY_ID;
-const SECRET_ACCESS_KEY_ID =
-  process.env.REACT_APP_SECRET_ACCESS_KEY_ID;
+const SECRET_ACCESS_KEY_ID = process.env.REACT_APP_SECRET_ACCESS_KEY_ID;
 const S3_BUCKET = "dv-yeop-imagebucket";
 
 AWS.config.update({
@@ -25,10 +24,7 @@ export const uploadPostPreviewImageToS3 = async file => {
 
   try {
     const result = await s3.upload(params).promise();
-    console.log(
-      "Image uploaded successfully:",
-      result.Location
-    );
+    console.log("Image uploaded successfully:", result.Location);
 
     return result.Location; // 업로드된 이미지의 URL 반환
   } catch (error) {
@@ -38,16 +34,15 @@ export const uploadPostPreviewImageToS3 = async file => {
   }
 };
 
-export const deletePostPreviewImageToS3 =
-  async postImageUrl => {
-    const imageUrl = postImageUrl.split("/").pop();
+export const deletePostPreviewImageToS3 = async postImageUrl => {
+  const imageUrl = postImageUrl.split("/").pop();
 
-    return await s3
-      .deleteObject({
-        Key: `image/${imageUrl}`,
-      })
-      .promise();
-  };
+  return await s3
+    .deleteObject({
+      Key: `image/${imageUrl}`,
+    })
+    .promise();
+};
 
 export const uploadContentImageToS3 = async file => {
   const params = {
@@ -57,10 +52,7 @@ export const uploadContentImageToS3 = async file => {
 
   try {
     const result = await s3.upload(params).promise();
-    console.log(
-      "Image uploaded successfully:",
-      result.Location
-    );
+    console.log("Image uploaded successfully:", result.Location);
 
     return result.Location; // 업로드된 이미지의 URL 반환
   } catch (error) {
@@ -70,23 +62,22 @@ export const uploadContentImageToS3 = async file => {
   }
 };
 
-export const deleteContentImageToS3 =
-  async postImageUrl => {
-    const imageUrl = postImageUrl.split("/").pop();
+export const deleteContentImageToS3 = async postImageUrl => {
+  const imageUrl = postImageUrl.split("/").pop();
 
-    return await s3
-      .deleteObject({
-        Key: `contentImage/${imageUrl}`,
-      })
-      .promise();
-  };
+  return await s3
+    .deleteObject({
+      Key: `contentImage/${imageUrl}`,
+    })
+    .promise();
+};
 
-export const resizeFile = file =>
-  new Promise(resolve => {
+export const resizeFile = async file =>
+  await new Promise(resolve => {
     Resizer.imageFileResizer(
       file,
-      450,
-      450,
+      400,
+      400,
       "JPEG",
       100,
       0,

@@ -5,20 +5,24 @@ export const onClickShowImageFile = fileInput => {
 };
 
 export const onChangeUpload = async params => {
-  const { e, setPostPreviewImageFile, setPostPreviewImageSrc } = params;
-  const file = e.target.files[0];
-  const compressedFile = await resizeFile(file);
+  const { fileInput, setPostPreviewImageFile, setPostPreviewImageSrc } = params;
 
-  setPostPreviewImageFile(compressedFile);
+  const file = fileInput.current.files[0];
+  if (file !== undefined) {
+    const compressedFile = await resizeFile(file);
 
-  const reader = new FileReader();
+    setPostPreviewImageFile(compressedFile);
 
-  reader.readAsDataURL(compressedFile);
+    const reader = new FileReader();
 
-  return new Promise(resolve => {
-    reader.onload = () => {
-      setPostPreviewImageSrc(reader.result || null);
-      resolve();
-    };
-  });
+    reader.readAsDataURL(compressedFile);
+    return new Promise(resolve => {
+      reader.onload = () => {
+        setPostPreviewImageSrc(reader.result);
+        resolve();
+      };
+    });
+  } else {
+    return;
+  }
 };
