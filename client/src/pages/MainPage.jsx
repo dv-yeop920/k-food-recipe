@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import RecipeTab from "../components/MainPage/RecipeTab";
 import RecipeList from "../components/MainPage/RecipeList";
 import RecipeSkeleton from "../components/Loading/skeleton/RecipeSkeleton";
-import ScrollToTop from "../services/scrollTop";
+import ScrollToTop from "../utils/scrollTop";
 import TabLoading from "../components/Loading/skeleton/TabSkeleton";
 import { useSearchParams } from "react-router-dom";
 import ScrollLoading from "../components/Loading/ScrollLoading";
@@ -24,8 +24,11 @@ const MainPage = () => {
     });
   };
 
-  const { data, isLoading, fetchNextPage, hasNextPage } =
-    useInfiniteScroll("recipeList", searchParam, tabParam);
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteScroll(
+    "recipeList",
+    searchParam,
+    tabParam
+  );
 
   useEffect(() => {
     if (!isLoading) {
@@ -62,10 +65,7 @@ const MainPage = () => {
       >
         {!isLoading &&
           data?.pages?.map((group, i) => (
-            <RecipeList
-              key={i}
-              recipeList={group.recipeList}
-            />
+            <RecipeList key={i} recipeList={group.recipeList} />
           ))}
       </section>
 

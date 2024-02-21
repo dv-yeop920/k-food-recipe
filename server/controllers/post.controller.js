@@ -2,7 +2,7 @@ const { Post } = require("../models/notice-board.model");
 const { Comment } = require("../models/comment.model");
 
 exports.getPostList = async (req, res) => {
-  const pageNumber = parseInt(req.query.pageNumber) - 1;
+  const pageNumber = parseInt(req.query.page) - 1;
   const postPerPage = 5;
 
   const searchValue = req.query.search;
@@ -14,20 +14,32 @@ exports.getPostList = async (req, res) => {
 
   const RegexSearchValue = RegexValue(searchValue);
 
-  try {
-    const postList = await Post.find({
-      title: {
-        $regex: RegexSearchValue,
-        $options: "i",
-      },
-    })
-      .skip(pageNumber * postPerPage)
-      .limit(postPerPage)
-      .sort({ createdAt: -1 });
+  let postList;
+  let totalPostLength;
 
-    const totalPostLength = await Post.countDocuments({
-      title: { $regex: RegexSearchValue, $options: "i" },
-    });
+  try {
+    if (searchValue === "null") {
+      postList = await Post.find()
+        .skip(pageNumber * postPerPage)
+        .limit(postPerPage)
+        .sort({ createdAt: -1 });
+
+      totalPostLength = await Post.countDocuments();
+    } else {
+      postList = await Post.find({
+        title: {
+          $regex: RegexSearchValue,
+          $options: "i",
+        },
+      })
+        .skip(pageNumber * postPerPage)
+        .limit(postPerPage)
+        .sort({ createdAt: -1 });
+
+      totalPostLength = await Post.countDocuments({
+        title: { $regex: RegexSearchValue, $options: "i" },
+      });
+    }
 
     const modifiedPosts = postList.map(post => {
       const parts = post.id.split("_");

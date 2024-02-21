@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Loading from "../components/Loading/Loading";
 import PostSearchInput from "../components/NoticeBoard/PostSearchInput";
 import PostList from "../components/NoticeBoard/PostList";
 
@@ -29,7 +28,7 @@ const NoticeBoardPage = () => {
         setTotalPostLength(getTotalPostsLength);
       }
 
-      setIsLoading(false);
+      //setIsLoading(false);
     } catch (error) {
       console.log(error);
     }

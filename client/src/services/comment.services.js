@@ -1,14 +1,20 @@
 import axios from "axios";
 import toastMessage from "../utils/toast";
 
+export const getCommentList = async (pageParam = 1, searchParam, postId) => {
+  try {
+    const response = await axios.get(
+      `/api/posts/comment/getCommentList?cursor=${pageParam}&postId=${postId}`
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const onSubmitRegisterComment = async params => {
-  const {
-    e,
-    commentContent,
-    postId,
-    userId,
-    setCommentContent,
-  } = params;
+  const { e, commentContent, postId, userId, setCommentContent } = params;
 
   e.preventDefault();
 
@@ -37,16 +43,11 @@ export const onSubmitRegisterComment = async params => {
 };
 
 export const onClickDeleteComment = async params => {
-  const question = window.confirm(
-    "댓글을 정말 삭제 하시겠습니까?"
-  );
+  const question = window.confirm("댓글을 정말 삭제 하시겠습니까?");
 
   try {
     if (question) {
-      const response = await axios.post(
-        "/api/posts/comment/delete",
-        params
-      );
+      const response = await axios.post("/api/posts/comment/delete", params);
 
       toastMessage(response.data.messsage);
     }
@@ -56,16 +57,11 @@ export const onClickDeleteComment = async params => {
 };
 
 export const onClickUpdateComment = async params => {
-  const question = window.confirm(
-    "댓글을 정말 수정 하시겠습니까?"
-  );
+  const question = window.confirm("댓글을 정말 수정 하시겠습니까?");
 
   try {
     if (question) {
-      const response = await axios.put(
-        "/api/posts/comment/update",
-        params
-      );
+      const response = await axios.put("/api/posts/comment/update", params);
 
       toastMessage(response.data.messsage);
     }

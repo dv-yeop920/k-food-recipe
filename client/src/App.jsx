@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
 import MainPage from "./pages/MainPage";
-import NoticeBoardPage from "./pages/NoticeBoardPage";
 import MyPage from "./pages/MyPage";
 import WritingPage from "./pages/WritingPage";
 import PostDetailPage from "./pages/PostDetailPage";
@@ -15,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import { Suspense } from "react";
 import DeferredComponent from "./components/Loading/DeferredComponent";
 import Loading from "./components/Loading/Loading";
+import PostListPage from "./pages/PostListPage";
 
 function App() {
   return (
@@ -32,30 +32,12 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<MainPage />} />
-
-          <Route
-            path="/recipe/:id"
-            element={<RecipeDetailPage />}
-          />
-
-          <Route
-            path="/noticeBoard"
-            element={<NoticeBoardPage />}
-          />
-
+          <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+          <Route path="/postList" element={<PostListPage />} />
           <Route path="/myPage" element={<MyPage />} />
-          <Route
-            path="/writing"
-            element={<WritingPage />}
-          />
-          <Route
-            path="/postDetail/:id"
-            element={<PostDetailPage />}
-          />
-          <Route
-            path="/postUpdate/:id"
-            element={<PostUpdatePage />}
-          />
+          <Route path="/writing" element={<WritingPage />} />
+          <Route path="/postDetail/:id" element={<PostDetailPage />} />
+          <Route path="/postUpdate/:id" element={<PostUpdatePage />} />
         </Routes>
       </Suspense>
 

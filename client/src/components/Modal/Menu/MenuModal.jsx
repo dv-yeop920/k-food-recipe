@@ -3,10 +3,7 @@ import styles from "./MenuModal.module.css";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  logoutUser,
-  selectUser,
-} from "../../../store/slice/userSlice";
+import { logoutUser, selectUser } from "../../../store/slice/userSlice";
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import toastMessage from "../../../utils/toast";
@@ -20,18 +17,14 @@ const MenuModal = ({ openModal, closeModal }) => {
   const handleClickLogout = async () => {
     try {
       if (window.confirm("로그아웃 하시겠습니까?")) {
-        const response = await axios.post(
-          "/api/users/signOut"
-        );
+        const response = await axios.post("/api/users/signOut");
 
         if (response.status === 200) {
           toastMessage(response.data.messsage);
           dispatch(logoutUser());
           closeModal();
           navigate("/");
-          axios.defaults.headers.common[
-            "Authorization"
-          ] = ``;
+          axios.defaults.headers.common["Authorization"] = ``;
           return;
         }
       }
@@ -45,10 +38,7 @@ const MenuModal = ({ openModal, closeModal }) => {
       <div className={styles.menuContainer}>
         <ul className="menu-area">
           <li className={styles.menu} onClick={closeModal}>
-            <Link
-              className={styles.menuLink}
-              to="/noticeBoard"
-            >
+            <Link className={styles.menuLink} to="/postList">
               자유 게시판
             </Link>
           </li>
@@ -61,9 +51,7 @@ const MenuModal = ({ openModal, closeModal }) => {
               closeModal();
             }}
           >
-            <span className={styles.menuLink}>
-              마이 페이지
-            </span>
+            <span className={styles.menuLink}>마이 페이지</span>
           </li>
 
           {isLogin ? null : (
@@ -73,9 +61,7 @@ const MenuModal = ({ openModal, closeModal }) => {
                 openModal("signup");
               }}
             >
-              <span className={styles.menuLink}>
-                회원 가입
-              </span>
+              <span className={styles.menuLink}>회원 가입</span>
             </li>
           )}
 

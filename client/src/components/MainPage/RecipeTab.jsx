@@ -3,11 +3,7 @@ import styles from "./Recipe.module.css";
 import { tabList } from "../../services/recipeData";
 import { useNavigate } from "react-router-dom";
 
-const RecipeTab = ({
-  searchParams,
-  tabParam,
-  onClickTabButton,
-}) => {
+const RecipeTab = ({ searchParams, tabParam, onClickTabButton }) => {
   const navigate = useNavigate();
   const [tabRecipeValue, setTabRecipeValue] = useState("");
 
@@ -39,12 +35,9 @@ const RecipeTab = ({
                   <button
                     className={`
                     ${styles.tab_button} ${
-                      tabRecipeValue === tabName &&
-                      styles.active
+                      tabRecipeValue === tabName && styles.active
                     }`}
-                    onClick={() =>
-                      onClickTabButton(tabName)
-                    }
+                    onClick={() => onClickTabButton(tabName)}
                   >
                     {tabName}
                   </button>

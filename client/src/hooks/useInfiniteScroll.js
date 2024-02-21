@@ -1,33 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import axios from "axios";
-
-const getRecipeList = async (
-  pageParam = 1,
-  searchParam,
-  tabParam
-) => {
-  const response = await axios.get(
-    `/api/recipeList?cursor=${pageParam}&search=${searchParam}&tab=${tabParam}`
-  );
-
-  return response.data;
-};
-
-const getCommentList = async (
-  pageParam = 1,
-  searchParam,
-  postId
-) => {
-  try {
-    const response = await axios.get(
-      `/api/posts/comment/getCommentList?cursor=${pageParam}&postId=${postId}`
-    );
-
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { getCommentList } from "../services/comment.services";
+import { getRecipeList } from "../services/recipe.services";
 
 const queryApiFunctions = {
   recipeList: getRecipeList,
@@ -51,11 +24,7 @@ const nextPageFunc = (keyName, lastPage, allPages) => {
   }
 };
 
-const useInfiniteScroll = (
-  keyName = "",
-  searchParam = "",
-  tabParam = ""
-) => {
+const useInfiniteScroll = (keyName = "", searchParam = "", tabParam = "") => {
   return useInfiniteQuery({
     queryKey: [keyName, searchParam, tabParam],
     queryFn: ({ pageParam }) => {

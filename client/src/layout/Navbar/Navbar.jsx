@@ -10,10 +10,7 @@ import {
 import { Link, useSearchParams } from "react-router-dom";
 import { openModal } from "../../store/slice/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  toggleTheme,
-  theme,
-} from "../../store/slice/themeSlice";
+import { toggleTheme, theme } from "../../store/slice/themeSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -25,8 +22,8 @@ const Navbar = () => {
 
   const tabParam = searchParams.get("tab");
 
-  const onSubmitSearchParams = event => {
-    event.preventDefault();
+  const onSubmitSearchParams = e => {
+    e.preventDefault();
 
     setSearchParams({
       search: searchRef.current.value,
@@ -37,14 +34,8 @@ const Navbar = () => {
   const darkMode = () => {
     const DOM_STYLE = document.documentElement.style;
 
-    DOM_STYLE.setProperty(
-      "--text-color",
-      isDark ? "#fff" : "#333"
-    );
-    DOM_STYLE.setProperty(
-      "--background-color",
-      isDark ? "#1d242a" : "#fff"
-    );
+    DOM_STYLE.setProperty("--text-color", isDark ? "#fff" : "#333");
+    DOM_STYLE.setProperty("--background-color", isDark ? "#1d242a" : "#fff");
     DOM_STYLE.setProperty(
       "--box-shadow",
       isDark
@@ -53,18 +44,13 @@ const Navbar = () => {
     );
     DOM_STYLE.setProperty(
       "--border",
-      isDark
-        ? "0.5px solid #fff"
-        : "0.5px solid rgba(0, 0, 0, 0.2)"
+      isDark ? "0.5px solid #fff" : "0.5px solid rgba(0, 0, 0, 0.2)"
     );
     DOM_STYLE.setProperty(
       "--submit-background-color",
       isDark ? "#3498db" : "#1abc9c"
     );
-    DOM_STYLE.setProperty(
-      "--title-color",
-      isDark ? "#3498db" : "#1abc9c"
-    );
+    DOM_STYLE.setProperty("--title-color", isDark ? "#3498db" : "#1abc9c");
     DOM_STYLE.setProperty(
       "--submit-hover-background-color",
       isDark ? "#286791" : "#2980b9"
@@ -114,10 +100,7 @@ const Navbar = () => {
                         ref={searchRef}
                       />
                     </label>
-                    <button
-                      type="submit"
-                      className={styles.search_button}
-                    >
+                    <button type="submit" className={styles.search_button}>
                       검색
                     </button>
 
@@ -160,9 +143,7 @@ const Navbar = () => {
                   dispatch(toggleTheme());
                 }}
               >
-                <span className={styles.moon}>
-                  {isDark ? "☀️" : "🌙"}
-                </span>
+                <span className={styles.moon}>{isDark ? "☀️" : "🌙"}</span>
               </button>
 
               <button className={styles.iconButton}>
