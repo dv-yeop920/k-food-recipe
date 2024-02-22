@@ -10,14 +10,13 @@ const WritingButton = ({ buttonValue }) => {
     <>
       <button
         className={`
-              ${styles.writingButton}
+              ${styles.writing_button}
               ${button.cancle}`}
         style={{ marginRight: "0.5rem" }}
         type="button"
         onClick={() => {
           if (window.confirm("게시글 작성을 취소 하시겠어요?")) {
             navigate(-1, { replace: true });
-            return;
           }
         }}
       >
@@ -26,7 +25,7 @@ const WritingButton = ({ buttonValue }) => {
 
       <button
         className={`
-              ${styles.writingButton}
+              ${styles.writing_button}
               ${button.submit}`}
         type="submit"
       >

@@ -7,15 +7,9 @@ code {
     monospace;
 }
 
-body.darkMode {
-  --background-color: #333;
-  --text-color: #fff;
-}
-
 body {
   background-color: var(--background-color);
-  color: var(--text-color);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .inner-box {

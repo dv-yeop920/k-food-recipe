@@ -19,8 +19,8 @@ const Navbar = () => {
   const darkMode = () => {
     const DOM_STYLE = document.documentElement.style;
 
-    DOM_STYLE.setProperty("--text-color", isDark ? "#fff" : "#333");
-    DOM_STYLE.setProperty("--background-color", isDark ? "#1d242a" : "#fff");
+    DOM_STYLE.setProperty("--text-color", isDark ? "#d2d9dd" : "#333");
+    DOM_STYLE.setProperty("--background-color", isDark ? "#1e2327" : "#fff");
     DOM_STYLE.setProperty(
       "--box-shadow",
       isDark

@@ -48,6 +48,8 @@ const WritingPage = () => {
           if (window.confirm("게시글을 등록 하시겠습니까?")) {
             writingParams.e = e;
             createMutation.mutate(writingParams);
+          } else {
+            e.preventDefault();
           }
         }}
       >

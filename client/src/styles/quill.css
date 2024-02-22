@@ -2,10 +2,12 @@
   width: 100%;
   background-color: var(--input-background-color);
 }
-.content .ql-toolbar {
+.content,
+.ql-toolbar {
   background-color: var(--input-background-color);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  transition: all 0.2s ease-in-out;
 }
 
 .content .ql-container {
@@ -13,4 +15,9 @@
   font-size: 17px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.ql-snow span {
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
 }

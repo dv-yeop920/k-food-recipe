@@ -3,6 +3,7 @@
   top: 20%;
   left: 5%;
   width: 90%;
+  transition: all 0.2s ease-in-out;
 }
 
 .contentContainer {
@@ -35,7 +36,6 @@
 .camera {
   width: 50%;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 }
 
 .imgWrapper {
@@ -76,7 +76,6 @@
   margin-top: 3%;
 }
 
-.writingButton {
+.writing_button {
   flex: 0.3;
-  box-sizing: border-box;
 }

@@ -5,6 +5,7 @@ import button from "../../../styles/Button.module.css";
 const SearchInputModal = ({ searchParams, setSearchParams, closeModal }) => {
   const searchRef = useRef(null);
   const tabParams = searchParams.get("tab");
+
   const onSubmitSearchParams = e => {
     e.preventDefault();
 

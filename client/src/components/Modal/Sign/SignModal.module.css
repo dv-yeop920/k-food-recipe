@@ -57,6 +57,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 45px;
+  color: var(--text-color);
 }
 
 .cancel {
@@ -111,6 +112,7 @@
   opacity: 0.5;
   font-weight: 500;
   font-size: 14px;
+  color: var(--text-color);
 }
 
 .navigate {
@@ -118,4 +120,5 @@
   font-size: 15px;
   font-weight: 650;
   cursor: pointer;
+  color: var(--text-color);
 }

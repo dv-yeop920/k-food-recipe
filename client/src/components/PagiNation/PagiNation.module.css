@@ -62,7 +62,8 @@
   border-radius: 48%;
   width: 1.9rem;
   margin: 0.4rem;
-  transition: all 0.3s ease-in-out;
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
   &:hover {
     cursor: pointer;
     color: white;
@@ -92,7 +93,7 @@
   color: var(--text-color);
   font-size: 1.2rem;
   font-weight: 600;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
   &:hover {
     background-color: var(--submit-background-color);
     color: white;

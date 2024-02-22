@@ -6,13 +6,13 @@
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -23px;
   z-index: 20;
   background-color: var(--background-color);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .headerBox {
   position: relative;
   height: 100%;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .header_menu {
@@ -23,7 +23,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-background);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .title_area {
@@ -49,7 +49,8 @@
   cursor: pointer;
   border-radius: 25px;
   border: 1px solid #ddd;
-  transition: all 0.3s ease-in-out;
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .search_icon {
@@ -80,7 +81,7 @@
   border: 1px solid #ddd;
   background-color: var(--background-color);
   margin-left: 15px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .menuButton:hover {
@@ -93,7 +94,7 @@
   border: none;
   border-radius: 10px;
   background-color: var(--background-color);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 

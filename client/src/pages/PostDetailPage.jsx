@@ -14,7 +14,7 @@ import useMutations from "../hooks/useMutation";
 
 const PostsDetail = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const postId = useParams().id;
   const { userId } = useSelector(selectUser);
 
   const { authAndNavigate } = useAuth();
@@ -22,10 +22,10 @@ const PostsDetail = () => {
 
   const { data: post } = useQuery({
     queryKey: ["post"],
-    queryFn: () => getPostDetail(id),
+    queryFn: () => getPostDetail(postId),
   });
 
-  const { title, createdAt, content, image } = post;
+  const { id, title, createdAt, content, image } = post;
 
   return (
     <>
@@ -41,7 +41,7 @@ const PostsDetail = () => {
 
           <div className="post-user__wrap">
             <div className={styles.info}>
-              <span className={styles.id}>{userId}</span>
+              <span className={styles.id}>{id}</span>
             </div>
 
             <div className={styles.info}>
@@ -58,12 +58,12 @@ const PostsDetail = () => {
                 className={styles.button}
                 onClick={() => {
                   if (window.confirm("수정하러 이동하시겠습니까?")) {
-                    authAndNavigate(`/postUpdate/${id}`);
+                    authAndNavigate(`/postUpdate/${postId}`);
                     return;
                   }
                 }}
               >
-                {post.id === userId ? "수정" : ""}
+                {id === userId ? "수정" : ""}
               </span>
 
               <span
@@ -72,13 +72,13 @@ const PostsDetail = () => {
                   authAndNavigate();
                   deleteMutation.mutate({
                     key: "post",
-                    id,
+                    postId,
                     image,
                     navigate,
                   });
                 }}
               >
-                {post.id === userId ? "삭제" : ""}
+                {id === userId ? "삭제" : ""}
               </span>
             </div>
           </div>

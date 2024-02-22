@@ -1,5 +1,6 @@
 .container {
   padding-top: 11rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .header {
@@ -9,6 +10,8 @@
   align-items: center;
   justify-content: center;
   border-bottom: 2px solid #ddd;
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .title {
@@ -29,6 +32,8 @@
   padding: 2.5rem 0;
   text-align: center;
   border-bottom: 2px solid #ddd;
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .ingredient {
@@ -43,6 +48,8 @@
   align-items: center;
   justify-content: center;
   border-bottom: 2px solid #ddd;
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .recipe_menual {
@@ -54,6 +61,8 @@
 .tip_area {
   margin-top: 2rem;
   padding-bottom: 3rem;
+  color: var(--text-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .tip {

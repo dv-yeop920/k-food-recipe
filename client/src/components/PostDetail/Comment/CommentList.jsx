@@ -23,43 +23,40 @@ const CommentList = ({ post }) => {
     setCommentContent,
   };
 
-  const { data, fetchNextPage, hasNextPage } =
-    useInfiniteScroll("commentList", "", _id);
+  const { data, fetchNextPage, hasNextPage } = useInfiniteScroll(
+    "commentList",
+    "",
+    _id
+  );
 
   return (
-    <>
-      <div className={styles.commentWrap}>
-        <div className="comment-count">
-          <h3> {`댓글 ${commentCount}`} </h3>
-        </div>
-
-        <div className="comment-container">
-          <div className={styles.inputWrap}>
-            <CommentInput
-              authAndNavigate={authAndNavigate}
-              commentInfo={commentInputInfo}
-            />
-          </div>
-
-          {data?.pages?.map(group =>
-            group.commentList.map(comment => (
-              <Comment
-                key={comment._id}
-                comment={comment}
-                userId={userId}
-              />
-            ))
-          )}
-
-          <InfiniteScrollObserver
-            fetchNextPage={fetchNextPage}
-            canFetchMore={hasNextPage}
-          />
-
-          {hasNextPage && <ScrollLoading />}
-        </div>
+    <main className={styles.commentWrap}>
+      <div className="comment-count">
+        <h3> {`댓글 ${commentCount}`} </h3>
       </div>
-    </>
+
+      <div className="comment-container">
+        <div className={styles.inputWrap}>
+          <CommentInput
+            authAndNavigate={authAndNavigate}
+            commentInfo={commentInputInfo}
+          />
+        </div>
+
+        {data?.pages?.map(group =>
+          group.commentList.map(comment => (
+            <Comment key={comment._id} comment={comment} userId={userId} />
+          ))
+        )}
+
+        <InfiniteScrollObserver
+          fetchNextPage={fetchNextPage}
+          canFetchMore={hasNextPage}
+        />
+
+        {hasNextPage && <ScrollLoading />}
+      </div>
+    </main>
   );
 };
 

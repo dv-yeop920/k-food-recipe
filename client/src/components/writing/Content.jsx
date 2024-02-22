@@ -22,9 +22,9 @@ const Content = ({ titleRef, quillRef }) => {
 
       <div className="writing-container__column">
         <ReactQuill
-          className="content"
           placeholder="레시피를 공유해 주세요!"
           theme="snow"
+          className="content"
           ref={quillRef}
           formats={formats}
           modules={modules}
