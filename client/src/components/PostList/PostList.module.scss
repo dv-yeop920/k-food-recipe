@@ -1,0 +1,40 @@
+.boardContainer {
+  padding: 9rem 5rem 0rem 5rem;
+
+  .write_button_box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .li {
+    list-style: none;
+    padding: 0px 30px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    border: var(--border);
+    color: var(--text-color);
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: perspective(500px) translateZ(5px);
+    }
+    .navLink {
+      width: 100%;
+      padding: 30px 0px;
+      .title {
+        margin-bottom: 20px;
+      }
+      .content {
+        font-size: 14px;
+        color: #888;
+        margin-right: 10px;
+      }
+    }
+  }
+}

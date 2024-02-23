@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Recipe.module.css";
+import styles from "./Recipe.module.scss";
 import { tabList } from "../../services/recipeData";
 import { useNavigate } from "react-router-dom";
 

@@ -53,9 +53,9 @@ const PostsUpdatePage = () => {
   };
 
   return (
-    <main className={styles.editorContainer}>
+    <main className="back-ground">
       <form
-        className="editor-form"
+        className={styles.editorContainer}
         onSubmit={e => {
           authAndNavigate();
           postParams.e = e;

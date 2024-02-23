@@ -37,7 +37,7 @@ const MainPage = () => {
   }, [isLoading]);
 
   return (
-    <>
+    <main className="back-ground">
       <ScrollToTop tabParam={tabParam} />
 
       {isTabLoading ? (
@@ -75,7 +75,7 @@ const MainPage = () => {
       />
 
       {hasNextPage && <ScrollLoading />}
-    </>
+    </main>
   );
 };
 

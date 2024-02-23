@@ -2,12 +2,12 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPostList } from "../services/post.services";
-import Post from "../components/NoticeBoard/Post";
-import styles from "../components/NoticeBoard/NoticeBoard.module.css";
+import Post from "../components/PostList/Post";
+import styles from "../components/PostList/PostList.module.scss";
 import Pagenate from "../components/PagiNation/Pagenate";
 import ScrollToTop from "../utils/scrollTop";
 import useAuth from "../hooks/useAuth";
-import button from "../styles/Button.module.css";
+import button from "../styles/Button.module.scss";
 
 const PostPage = () => {
   const { authAndNavigate } = useAuth("");
@@ -30,7 +30,7 @@ const PostPage = () => {
   });
 
   return (
-    <main>
+    <main className="back-ground">
       <ScrollToTop tabParam={pageParam} />
 
       <section className={styles.boardContainer} aria-label="게시물 섹션">
@@ -44,6 +44,7 @@ const PostPage = () => {
             글쓰기
           </button>
         </div>
+
         <li className={styles.li}>
           <div>
             <h3 style={{ color: "rgb(200, 50, 100)" }}>[공지]</h3>

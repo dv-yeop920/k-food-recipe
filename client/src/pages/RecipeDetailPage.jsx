@@ -18,7 +18,7 @@ const RecipeDetailPage = () => {
   });
 
   return (
-    <>
+    <main className="back-ground">
       <section
         className={`inner-box ${styles.container}`}
         aria-label="레시피상세"
@@ -33,7 +33,7 @@ const RecipeDetailPage = () => {
       </section>
 
       <FooterNavbar />
-    </>
+    </main>
   );
 };
 

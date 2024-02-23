@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./NoticeBoard.module.css";
+import styles from "./PostList.module.scss";
 import { Link } from "react-router-dom";
 import getDate from "../../utils/postDate";
 

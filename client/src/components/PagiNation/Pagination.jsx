@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PagiNation.module.css";
+import styles from "./PagiNation.module.scss";
 
 const Pagination = ({
   postPerPage, //NOTE - 페이지당 게시물 개수

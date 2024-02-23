@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./SignModal.module.css";
-import btn from "../../../styles/Button.module.css";
+import styles from "./SignModal.module.scss";
+import btn from "../../../styles/Button.module.scss";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../store/slice/userSlice";
@@ -39,10 +39,7 @@ const LoginModal = ({
     };
 
     try {
-      const response = await axios.post(
-        "/api/users/signIn",
-        userInfo
-      );
+      const response = await axios.post("/api/users/signIn", userInfo);
 
       if (!response.data.isLogin) {
         setMessage(response.data.messsage);
@@ -71,83 +68,65 @@ const LoginModal = ({
   const getAccessToken = response => {
     const { accessToken } = response.data;
     // accessToken 설정
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${accessToken}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     console.log(accessToken);
     // accessToken 만료하기 1분 전에 로그인 연장
     //setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 50000);
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <form
-          className={styles.form}
-          onSubmit={onSumitLogin}
-        >
-          <div className={styles.header}>
-            <FontAwesomeIcon
-              className={styles.cancel}
-              icon={faX}
-              size="lg"
-              onClick={closeModal}
-            />
-            <h2 className={styles.title}>로그인</h2>
-            <div></div>
-          </div>
-
-          <input
-            id="user-form-id"
-            className={styles.input}
-            type="text"
-            placeholder="아이디"
-            maxLength="12"
-            onChange={onChangeValue}
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={onSumitLogin}>
+        <div className={styles.header}>
+          <FontAwesomeIcon
+            className={styles.cancel}
+            icon={faX}
+            size="lg"
+            onClick={closeModal}
           />
+          <h2 className={styles.title}>로그인</h2>
+          <div></div>
+        </div>
 
-          <input
-            id="user-form-pw"
-            className={styles.input}
-            type="password"
-            placeholder="비밀 번호"
-            maxLength="15"
-            onChange={onChangeValue}
-          />
+        <input
+          id="user-form-id"
+          className={styles.input}
+          type="text"
+          placeholder="아이디"
+          maxLength="12"
+          onChange={onChangeValue}
+        />
 
-          <span className={styles.message}>{message}</span>
+        <input
+          id="user-form-pw"
+          className={styles.input}
+          type="password"
+          placeholder="비밀 번호"
+          maxLength="15"
+          onChange={onChangeValue}
+        />
 
-          <div className="user-form__button-box">
-            <button
-              className={btn.signButton}
-              type="submit"
-            >
-              로그인
-            </button>
+        <span className={styles.message}>{message}</span>
 
-            <button
-              className={btn.signButton}
-              type="submit"
-            >
-              카카오 로그인
-            </button>
-          </div>
+        <div className={styles.button_box}>
+          <button className={btn.signButton} type="submit">
+            로그인
+          </button>
 
-          <div className={styles.questionBox}>
-            <span className={styles.question}>
-              계정이 없으신가요?&nbsp;
-            </span>
+          <button className={btn.signButton} type="submit">
+            카카오 로그인
+          </button>
+        </div>
 
-            <span
-              className={styles.navigate}
-              onClick={() => openModal("signup")}
-            >
-              회원가입
-            </span>
-          </div>
-        </form>
-      </div>
-    </>
+        <div className={styles.questionBox}>
+          <span className={styles.question}>계정이 없으신가요?&nbsp;</span>
+
+          <span className={styles.navigate} onClick={() => openModal("signup")}>
+            회원가입
+          </span>
+        </div>
+      </form>
+    </div>
   );
 };
 

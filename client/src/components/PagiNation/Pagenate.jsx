@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./PagiNation.module.css";
+import styles from "./PagiNation.module.scss";
 
 const Pagination = ({
   onClickPageNumber,
@@ -63,6 +63,7 @@ const Pagination = ({
             &lt;
           </button>
         </div>
+
         <ul className={styles.ul}>
           {newPageNumberss.map(number => {
             return (
@@ -81,6 +82,7 @@ const Pagination = ({
             );
           })}
         </ul>
+
         <div className={styles.next_button_box}>
           <button
             className={styles.next}

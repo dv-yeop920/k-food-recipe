@@ -9,7 +9,7 @@ import LoginModal from "./Sign/LoginModal";
 import SignUpModal from "./Sign/SignUpModal";
 import MenuModal from "./Menu/MenuModal";
 import useInput from "../../hooks/useInput";
-import styles from "./Sign/SignModal.module.css";
+import styles from "./Sign/SignModal.module.scss";
 import { useSearchParams } from "react-router-dom";
 import SearchModal from "./Search/SearchModal";
 

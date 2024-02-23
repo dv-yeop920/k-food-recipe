@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Comment from "./Comment";
 import CommentInput from "./CommentInput";
-import styles from "./Comment.module.css";
+import styles from "./Comment.module.scss";
 import useAuth from "../../../hooks/useAuth";
 import { selectUser } from "../../../store/slice/userSlice";
 import useInfiniteScroll from "../../../hooks/useInfiniteScroll";

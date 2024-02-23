@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: var(--background-color);
 }
 
 code {
@@ -7,13 +8,13 @@ code {
     monospace;
 }
 
-body {
-  background-color: var(--background-color);
-  transition: all 0.2s ease-in-out;
-}
-
 .inner-box {
   width: 90%;
   margin: 0 auto;
   padding: 7rem 0 1.5rem 0;
+}
+
+.back-ground {
+  background-color: var(--background-color);
+  transition: all 0.2s ease-in-out;
 }

@@ -1,0 +1,91 @@
+@mixin buttonBox {
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+@mixin buttonStyles {
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem;
+  margin-left: 0.5rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: var(--submit-background-color);
+    color: white;
+    cursor: pointer;
+    transform: translateY(-2px);
+  }
+  &[disabled] {
+    opacity: 0.5;
+    cursor: default;
+  }
+  &[disabled]:hover {
+    background-color: #ccc;
+  }
+}
+
+.container {
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+
+  .pagination_nav {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .back_button_box {
+      left: 0;
+      @include buttonBox;
+      .back {
+        @include buttonStyles;
+      }
+    }
+
+    .next_button_box {
+      right: 0;
+      @include buttonBox;
+      .next {
+        @include buttonStyles;
+      }
+    }
+  }
+
+  .ul {
+    padding: 1rem 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+    .page_number {
+      font-size: 1.4rem;
+      font-weight: 600;
+      padding: 0.8rem 0.5rem;
+      border-radius: 48%;
+      width: 1.9rem;
+      margin: 0.4rem;
+      color: var(--text-color);
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        color: white;
+        background-color: var(--submit-background-color);
+        transform: translateY(-2px);
+      }
+      &[disabled] {
+        color: white;
+        background-color: var(--submit-background-color);
+        cursor: default;
+      }
+    }
+  }
+}

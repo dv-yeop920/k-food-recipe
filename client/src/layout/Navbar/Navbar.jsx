@@ -56,76 +56,74 @@ const Navbar = () => {
   }, [isDark]);
 
   return (
-    <>
-      <header className={styles.header}>
-        <div className={styles.headerBox}>
-          <div className={styles.header_menu}>
-            <Link className={styles.title_area} to={"/"}>
-              <h1 className={styles.title}>k-레시피</h1>
-            </Link>
+    <header className={styles.header}>
+      <div className={styles.headerBox}>
+        <div className={styles.header_menu}>
+          <Link className={styles.title_area} to={"/"}>
+            <h1 className={styles.title}>k-레시피</h1>
+          </Link>
 
-            <div className={styles.recipeSearchArea}>
-              <div
-                className={styles.recipeSearchLink}
-                onClick={() => {
-                  dispatch(openModal("search"));
+          <div className={styles.recipeSearchArea}>
+            <div
+              className={styles.recipeSearchLink}
+              onClick={() => {
+                dispatch(openModal("search"));
+              }}
+            >
+              <FontAwesomeIcon
+                className={styles.search_icon}
+                style={{
+                  marginRight: "5px",
                 }}
-              >
-                <FontAwesomeIcon
-                  className={styles.search_icon}
-                  style={{
-                    marginRight: "5px",
-                  }}
-                  icon={faSearch}
-                  size="1x"
-                />
-                <span style={{ fontSize: "1rem" }}>
-                  여기를 눌러 원하는 것을 검색해 보세요!
-                </span>
-              </div>
-            </div>
-
-            <div className={styles.headerButtonArea}>
-              <button
-                className={styles.iconButton}
-                onClick={() => {
-                  dispatch(toggleTheme());
-                }}
-              >
-                <span className={styles.moon}>{isDark ? "☀️" : "🌙"}</span>
-              </button>
-
-              <button className={styles.iconButton}>
-                <FontAwesomeIcon
-                  className={styles.icon}
-                  icon={faGlobe}
-                  size="lg"
-                />
-              </button>
-
-              <button
-                className={styles.menuButton}
-                onClick={() => {
-                  dispatch(openModal("menu"));
-                }}
-              >
-                <FontAwesomeIcon
-                  className={styles.icon}
-                  icon={faBars}
-                  size="1x"
-                />
-
-                <FontAwesomeIcon
-                  className={styles.icon}
-                  icon={faUser}
-                  size="1x"
-                />
-              </button>
+                icon={faSearch}
+                size="1x"
+              />
+              <span style={{ fontSize: "1rem" }}>
+                여기를 눌러 원하는 것을 검색해 보세요!
+              </span>
             </div>
           </div>
+
+          <div className={styles.headerButtonArea}>
+            <button
+              className={styles.iconButton}
+              onClick={() => {
+                dispatch(toggleTheme());
+              }}
+            >
+              <span className={styles.moon}>{isDark ? "☀️" : "🌙"}</span>
+            </button>
+
+            <button className={styles.iconButton}>
+              <FontAwesomeIcon
+                className={styles.icon}
+                icon={faGlobe}
+                size="lg"
+              />
+            </button>
+
+            <button
+              className={styles.menuButton}
+              onClick={() => {
+                dispatch(openModal("menu"));
+              }}
+            >
+              <FontAwesomeIcon
+                className={styles.icon}
+                icon={faBars}
+                size="1x"
+              />
+
+              <FontAwesomeIcon
+                className={styles.icon}
+                icon={faUser}
+                size="1x"
+              />
+            </button>
+          </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 };
 

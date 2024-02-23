@@ -1,15 +1,9 @@
 import React from "react";
-import styles from "./Comment.module.css";
+import styles from "./Comment.module.scss";
 
 const CommentContent = ({ commentProps }) => {
-  const {
-    id,
-    _id,
-    content,
-    editId,
-    updateComment,
-    onChangeUpdateComment,
-  } = commentProps;
+  const { id, _id, content, editId, updateComment, onChangeUpdateComment } =
+    commentProps;
   return (
     <>
       <h4>{id}</h4>

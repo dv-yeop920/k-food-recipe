@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import styles from "./SearchModal.module.css";
-import button from "../../../styles/Button.module.css";
+import styles from "./SearchModal.module.scss";
+import button from "../../../styles/Button.module.scss";
 
 const SearchInputModal = ({ searchParams, setSearchParams, closeModal }) => {
   const searchRef = useRef(null);

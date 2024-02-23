@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./MenuModal.module.css";
+import styles from "./MenuModal.module.scss";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

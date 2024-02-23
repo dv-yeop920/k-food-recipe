@@ -1,6 +1,6 @@
 import React from "react";
 import { Skeleton } from "@mui/material";
-import styles from "../../MainPage/Recipe.module.css";
+import styles from "../../MainPage/Recipe.module.scss";
 
 const TabSkeleton = () => {
   return (

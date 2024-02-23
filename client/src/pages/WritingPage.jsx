@@ -40,9 +40,9 @@ const WritingPage = () => {
   };
 
   return (
-    <main className={styles.editorContainer}>
+    <main className={styles.back}>
       <form
-        className="editor-form"
+        className={styles.editorContainer}
         onSubmit={e => {
           authAndNavigate();
           if (window.confirm("게시글을 등록 하시겠습니까?")) {
