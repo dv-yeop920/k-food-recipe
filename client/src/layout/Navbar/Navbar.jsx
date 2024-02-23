@@ -17,37 +17,11 @@ const Navbar = () => {
   const isDark = useSelector(theme);
 
   const darkMode = () => {
-    const DOM_STYLE = document.documentElement.style;
+    const DOM_EL = document.documentElement;
 
-    DOM_STYLE.setProperty("--text-color", isDark ? "#d2d9dd" : "#333");
-    DOM_STYLE.setProperty("--background-color", isDark ? "#1e2327" : "#fff");
-    DOM_STYLE.setProperty(
-      "--box-shadow",
-      isDark
-        ? "rgb(198, 197, 197) -1px 2px 30px -25px"
-        : "#00000059 0px 1px 20px"
-    );
-    DOM_STYLE.setProperty(
-      "--border",
-      isDark ? "0.5px solid #fff" : "0.5px solid rgba(0, 0, 0, 0.2)"
-    );
-    DOM_STYLE.setProperty(
-      "--submit-background-color",
-      isDark ? "#3498db" : "#1abc9c"
-    );
-    DOM_STYLE.setProperty("--title-color", isDark ? "#3498db" : "#1abc9c");
-    DOM_STYLE.setProperty(
-      "--submit-hover-background-color",
-      isDark ? "#286791" : "#2980b9"
-    );
-    DOM_STYLE.setProperty(
-      "--input-background-color",
-      isDark ? "#21282f" : "#fff"
-    );
-    DOM_STYLE.setProperty(
-      "--tag-background-color",
-      isDark ? "#7f8c8d" : "#ddd"
-    );
+    isDark
+      ? DOM_EL.setAttribute("data-theme", "dark")
+      : DOM_EL.setAttribute("data-theme", "light");
   };
 
   useEffect(() => {

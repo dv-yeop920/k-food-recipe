@@ -1,11 +1,39 @@
-:root {
-  --background-color: #fff;
-  --text-color: #333;
-  --border: 0.5px solid rgba(0, 0, 0, 0.2);
-  --box-shadow: box-shadow: #00000059 0px 5px 15px;
-  --submit-background-color: #1abc9c;
-  --title-color: #1abc9c;
-  --submit-hover-background-color: #16a085;
-  --input-background-color: #fff;
-  --tag-background-color:#ddd;
+$text-color: #333;
+$text-color-dark: #d2d9dd;
+$background-color: #fff;
+$background-color-dark: #1e2327;
+$border: 0.5px solid rgba(0, 0, 0, 0.2);
+$border-dark: 0.5px solid #fff;
+$box-shadow: #00000059 0px 5px 15px;
+$box-shadow-dark: rgb(198, 197, 197) -1px 2px 30px -25px;
+$main-color: #1abc9c;
+$main-color-dark: #3498db;
+$hover-main-color: #16a085;
+$hover-main-color-dark: #286791;
+$input-background-color-dark: #21282f;
+$tag-background-color: #ddd;
+$tag-background-color-dark: #7f8c8d;
+
+html[data-theme="light"] {
+  --text-color: #{$text-color};
+  --background-color: #{$background-color};
+  --border: #{$border};
+  --box-shadow: #{$box-shadow};
+  --submit-background-color: #{$main-color};
+  --submit-hover-background-color: #{$hover-main-color};
+  --title-color: #{$main-color};
+  --input-background-color: #{$background-color};
+  --tag-background-color: #{$tag-background-color};
+}
+
+html[data-theme="dark"] {
+  --text-color: #{$text-color-dark};
+  --background-color: #{$background-color-dark};
+  --border: #{$border-dark};
+  --box-shadow: #{$box-shadow-dark};
+  --submit-background-color: #{$main-color-dark};
+  --submit-hover-background-color: #{$hover-main-color-dark};
+  --title-color: #{$main-color-dark};
+  --input-background-color: #{$background-color-dark};
+  --tag-background-color: #{$tag-background-color-dark};
 }
