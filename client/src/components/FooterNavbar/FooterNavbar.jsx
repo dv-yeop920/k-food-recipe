@@ -1,15 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faShareFromSquare,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faHeart,
-  faCommentDots,
-} from "@fortawesome/free-regular-svg-icons";
+import { faBars, faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faCommentDots } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
-import styles from "./FooterNavbar.module.css";
+import styles from "./FooterNavbar.module.scss";
 
 const FooterNavbar = () => {
   const navigate = useNavigate();
@@ -17,10 +11,7 @@ const FooterNavbar = () => {
     <>
       <nav className={styles.container}>
         <ul className={styles.listArea}>
-          <li
-            className={styles.bar_list}
-            onClick={() => navigate(-1)}
-          >
+          <li className={styles.bar_list} onClick={() => navigate(-1)}>
             <FontAwesomeIcon
               style={{ marginRight: "5px" }}
               className={styles.icon}
@@ -28,9 +19,7 @@ const FooterNavbar = () => {
               size="lg"
             />
 
-            <span className={styles.icon}>
-              목록으로 가기
-            </span>
+            <span className={styles.icon}>목록으로 가기</span>
           </li>
 
           <li className={styles.bar_list}>

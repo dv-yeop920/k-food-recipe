@@ -12,6 +12,9 @@
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
   transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: var(--submit-hover-background-color);
+  }
 }
 
 .submit {
@@ -26,6 +29,9 @@
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -4px;
   transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: var(--submit-hover-background-color);
+  }
 }
 
 .cancle {
@@ -40,16 +46,7 @@
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -15px;
   transition: all 0.2s ease-in-out;
-}
-
-.signButton:hover {
-  background-color: var(--submit-hover-background-color);
-}
-
-.submit:hover {
-  background-color: var(--submit-hover-background-color);
-}
-
-.cancle:hover {
-  background-color: #7f8c8d;
+  &:hover {
+    background-color: #7f8c8d;
+  }
 }

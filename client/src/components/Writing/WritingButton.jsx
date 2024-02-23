@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./Writing.module.css";
-import button from "../../styles/Button.module.css";
+import styles from "./Writing.module.scss";
+import button from "../../styles/Button.module.scss";
 
 const WritingButton = ({ buttonValue }) => {
   const navigate = useNavigate();

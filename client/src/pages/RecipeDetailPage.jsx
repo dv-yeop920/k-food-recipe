@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import styles from "../components/RecipeDetail/RecipeDetail.module.css";
+import styles from "../components/RecipeDetail/RecipeDetail.module.scss";
 import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
 import RecipeMenual from "../components/RecipeDetail/RecipeMenual";
 import RecipeInfo from "../components/RecipeDetail/RecipeInfo";

@@ -33,11 +33,9 @@ const RecipeTab = ({ searchParams, tabParam, onClickTabButton }) => {
               return (
                 <li key={tabName}>
                   <button
-                    className={`
-                    ${styles.tab_button} ${
-                      tabRecipeValue === tabName && styles.active
-                    }`}
+                    className={styles.tab_button}
                     onClick={() => onClickTabButton(tabName)}
+                    disabled={tabRecipeValue === tabName}
                   >
                     {tabName}
                   </button>

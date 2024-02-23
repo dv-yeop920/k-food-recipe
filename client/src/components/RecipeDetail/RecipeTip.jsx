@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./RecipeDetail.module.css";
+import styles from "./RecipeDetail.module.scss";
 
 const RecipeTip = ({ recipeTip }) => {
   return (
@@ -7,9 +7,7 @@ const RecipeTip = ({ recipeTip }) => {
       {recipeTip && (
         <>
           <h2 className={styles.recipe_title}>📌 [Tip]</h2>
-          <span className={styles.tip}>
-            {recipeTip || ""}
-          </span>
+          <span className={styles.tip}>{recipeTip || ""}</span>
         </>
       )}
     </footer>

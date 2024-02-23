@@ -22,10 +22,7 @@
   }
   &[disabled] {
     opacity: 0.5;
-    cursor: default;
-  }
-  &[disabled]:hover {
-    background-color: #ccc;
+    pointer-events: none;
   }
 }
 

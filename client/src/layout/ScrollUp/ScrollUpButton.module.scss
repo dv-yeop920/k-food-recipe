@@ -26,12 +26,10 @@
   padding-left: 6px;
   transition: all 0.2s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.2) -4px 9px 25px -10px;
-}
-
-.scroll:hover {
-  transform: perspective(500px) translateZ(20px);
-}
-
-.scroll:focus {
-  animation: bounce 0.3s ease-in-out;
+  &:hover {
+    transform: perspective(500px) translateZ(20px);
+  }
+  &:focus {
+    animation: bounce 0.3s ease-in-out;
+  }
 }

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ImageUploader from "../components/Writing/ImageUploader";
 import Content from "../components/Writing/Content";
-import styles from "../components/Writing/Writing.module.css";
+import styles from "../components/Writing/Writing.module.scss";
 import { selectUser } from "../store/slice/userSlice";
 import useAuth from "../hooks/useAuth";
 import useMutations from "../hooks/useMutation";
@@ -40,7 +40,7 @@ const WritingPage = () => {
   };
 
   return (
-    <main className={styles.back}>
+    <main>
       <form
         className={styles.editorContainer}
         onSubmit={e => {

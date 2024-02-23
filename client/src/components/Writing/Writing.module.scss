@@ -1,0 +1,76 @@
+.editorContainer {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  width: 90%;
+
+  .contentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .imageUploadContainer {
+      position: relative;
+      background-color: var(--input-background-color);
+      border-radius: 20px;
+      width: 20%;
+      height: 25.8em;
+      margin-right: 2%;
+      box-sizing: border-box;
+      box-shadow: #00000059 0px 1px 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+        transform: perspective(100px) translateZ(5px);
+      }
+      .imgWrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        .image {
+          width: 100%;
+          height: 100%;
+          border-radius: 20px;
+        }
+      }
+      .camera {
+        width: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .writingContainer {
+    box-sizing: border-box;
+    width: 80%;
+
+    .title {
+      width: 97.3%;
+      background-color: var(--input-background-color);
+      color: var(--text-color);
+      padding: 10px 0px 10px 20px;
+      font-size: 16px;
+      border: 1px solid rgb(203, 203, 203);
+      margin-bottom: 10px;
+      border-radius: 10px;
+      box-sizing: content-box;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  .buttonArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+
+    .writing_button {
+      flex: 0.3;
+    }
+  }
+}

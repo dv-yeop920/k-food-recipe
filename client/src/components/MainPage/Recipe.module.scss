@@ -139,14 +139,14 @@
             background-color: var(--title-color);
             border-radius: 5px;
           }
+          &[disabled] {
+            color: #fff;
+            background-color: var(--title-color);
+            border-radius: 5px;
+            pointer-events: none;
+          }
         }
       }
     }
   }
-}
-
-.active {
-  color: #fff;
-  background-color: var(--title-color);
-  border-radius: 5px;
 }
