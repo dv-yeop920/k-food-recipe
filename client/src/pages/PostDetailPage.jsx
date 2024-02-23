@@ -1,16 +1,15 @@
-import React from "react";
+import styles from "components/PostDetail/PostDetail.module.scss";
 import { useParams, useNavigate } from "react-router-dom";
-import CommentList from "../components/PostDetail/Comment/CommentList";
-import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
-import Parser from "html-react-parser";
-import getDate from "../utils/postDate";
-import styles from "../components/PostDetail/PostDetail.module.scss";
 import { useSelector } from "react-redux";
-import { selectUser } from "../store/slice/userSlice";
-import useAuth from "../hooks/useAuth";
+import { selectUser } from "store/slice/userSlice";
 import { useQuery } from "@tanstack/react-query";
-import { getPostDetail } from "../services/post.services";
-import useMutations from "../hooks/useMutation";
+import { getPostDetail } from "services/post.services";
+import useAuth from "hooks/useAuth";
+import useMutations from "hooks/useMutation";
+import getDate from "utils/postDate";
+import Parser from "html-react-parser";
+import CommentList from "components/PostDetail/Comment/CommentList";
+import FooterNavbar from "components/FooterNavbar/FooterNavbar";
 
 const PostsDetail = () => {
   const navigate = useNavigate();

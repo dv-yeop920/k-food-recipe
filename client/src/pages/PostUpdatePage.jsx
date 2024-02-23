@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import UpdateContent from "../components/Writing/UpdateContent";
-import UpdateImageUploader from "../components/Writing/UpdateImageUploader";
-import styles from "../components/Writing/Writing.module.scss";
-import useAuth from "../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import { getPostDetail } from "../services/post.services";
-import useMutations from "../hooks/useMutation";
-import WritingButton from "../components/Writing/WritingButton";
+import { getPostDetail } from "services/post.services";
+import useMutations from "hooks/useMutation";
+import useAuth from "hooks/useAuth";
+import UpdateContent from "components/Writing/UpdateContent";
+import UpdateImageUploader from "components/Writing/UpdateImageUploader";
+import styles from "components/Writing/Writing.module.scss";
+import WritingButton from "components/Writing/WritingButton";
 
 const PostsUpdatePage = () => {
   const { id } = useParams();

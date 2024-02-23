@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import RecipeTab from "../components/MainPage/RecipeTab";
-import RecipeList from "../components/MainPage/RecipeList";
-import RecipeSkeleton from "../components/Loading/skeleton/RecipeSkeleton";
-import ScrollToTop from "../utils/scrollTop";
-import TabLoading from "../components/Loading/skeleton/TabSkeleton";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import ScrollLoading from "../components/Loading/ScrollLoading";
-import DeferrendComponent from "../components/Loading/DeferredComponent";
-import InfiniteScrollObserver from "../components/InfiniteObserver/InfiniteScrollObserver";
-import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import DeferrendComponent from "components/Loading/DeferredComponent";
+import TabLoading from "components/Loading/skeleton/TabSkeleton";
+import ScrollLoading from "components/Loading/ScrollLoading";
+import RecipeSkeleton from "components/Loading/skeleton/RecipeSkeleton";
+import RecipeTab from "components/MainPage/RecipeTab";
+import RecipeList from "components/MainPage/RecipeList";
+import InfiniteScrollObserver from "components/InfiniteObserver/InfiniteScrollObserver";
+import useInfiniteScroll from "hooks/useInfiniteScroll";
+import ScrollToTop from "utils/scrollTop";
 
 const MainPage = () => {
   const [isTabLoading, setIsTabLoading] = useState(true);

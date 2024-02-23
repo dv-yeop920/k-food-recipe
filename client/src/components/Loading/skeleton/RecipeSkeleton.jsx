@@ -1,5 +1,5 @@
+import styles from "components/MainPage/Recipe.module.scss";
 import { Skeleton } from "@mui/material";
-import styles from "../../MainPage/Recipe.module.scss";
 
 const MainSkeleton = () => {
   return (

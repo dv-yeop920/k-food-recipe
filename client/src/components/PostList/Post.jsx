@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "./PostList.module.scss";
 import { Link } from "react-router-dom";
-import getDate from "../../utils/postDate";
+import getDate from "utils/postDate";
 
 const Post = ({ post }) => {
   const { _id, title, id, commentCount, viewCount, createdAt, image } = post;

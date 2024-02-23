@@ -1,13 +1,13 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
+import styles from "components/Writing/Writing.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ImageUploader from "../components/Writing/ImageUploader";
-import Content from "../components/Writing/Content";
-import styles from "../components/Writing/Writing.module.scss";
-import { selectUser } from "../store/slice/userSlice";
-import useAuth from "../hooks/useAuth";
-import useMutations from "../hooks/useMutation";
-import WritingButton from "../components/Writing/WritingButton";
+import { selectUser } from "store/slice/userSlice";
+import useAuth from "hooks/useAuth";
+import useMutations from "hooks/useMutation";
+import ImageUploader from "components/Writing/ImageUploader";
+import Content from "components/Writing/Content";
+import WritingButton from "components/Writing/WritingButton";
 
 const WritingPage = () => {
   const [postPreviewImageFile, setPostPreviewImageFile] = useState(null);

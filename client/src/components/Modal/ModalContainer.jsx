@@ -1,16 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import styles from "./Sign/SignModal.module.scss";
+import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  closeModal,
-  openModal,
-  selectModal,
-} from "../../store/slice/modalSlice";
+import { closeModal, openModal, selectModal } from "store/slice/modalSlice";
+import useInput from "hooks/useInput";
 import LoginModal from "./Sign/LoginModal";
 import SignUpModal from "./Sign/SignUpModal";
 import MenuModal from "./Menu/MenuModal";
-import useInput from "../../hooks/useInput";
-import styles from "./Sign/SignModal.module.scss";
-import { useSearchParams } from "react-router-dom";
 import SearchModal from "./Search/SearchModal";
 
 const ModalContainer = () => {

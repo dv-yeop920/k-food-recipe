@@ -1,5 +1,5 @@
 import axios from "axios";
-import toastMessage from "../utils/toast";
+import toastMessage from "utils/toast";
 
 export const getCommentList = async (pageParam = 1, searchParam, postId) => {
   try {

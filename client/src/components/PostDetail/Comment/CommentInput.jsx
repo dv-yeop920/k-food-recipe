@@ -1,7 +1,7 @@
-import React from "react";
-import button from "../../../styles/Button.module.scss";
 import styles from "./Comment.module.scss";
-import useMutations from "../../../hooks/useMutation";
+import button from "styles/Button.module.scss";
+import useMutations from "hooks/useMutation";
+
 const CommentInput = ({ authAndNavigate, commentInfo }) => {
   const { createMutation } = useMutations();
 

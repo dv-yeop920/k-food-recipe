@@ -1,9 +1,8 @@
-import React from "react";
+import styles from "./Writing.module.scss";
+import useQuill from "hooks/useQuill";
+import { formats } from "utils/quillEditor";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import styles from "./Writing.module.scss";
-import { formats } from "../../utils/quillEditor";
-import useQuill from "../../hooks/useQuill";
 
 const Content = ({ titleRef, quillRef }) => {
   const { modules } = useQuill(quillRef);

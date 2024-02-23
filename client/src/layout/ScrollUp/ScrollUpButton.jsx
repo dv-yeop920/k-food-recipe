@@ -1,6 +1,6 @@
+import styles from "./ScrollUpButton.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpLong } from "@fortawesome/free-solid-svg-icons";
-import styles from "./ScrollUpButton.module.scss";
 
 const ScrollUpButton = () => {
   const handleClickScroll = () => {

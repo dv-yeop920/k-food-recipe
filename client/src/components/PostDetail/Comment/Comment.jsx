@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./Comment.module.scss";
 import CommentContent from "./CommentContent";
 import CommentButton from "./CommentButton";

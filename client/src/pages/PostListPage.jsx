@@ -1,13 +1,13 @@
-import React from "react";
+import button from "styles/Button.module.scss";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPostList } from "../services/post.services";
-import Post from "../components/PostList/Post";
-import styles from "../components/PostList/PostList.module.scss";
-import Pagenate from "../components/PagiNation/Pagenate";
-import ScrollToTop from "../utils/scrollTop";
-import useAuth from "../hooks/useAuth";
-import button from "../styles/Button.module.scss";
+import ScrollToTop from "utils/scrollTop";
+import useAuth from "hooks/useAuth";
+import Post from "components/PostList/Post";
+import styles from "components/PostList/PostList.module.scss";
+import Pagenate from "components/PagiNation/Pagenate";
+import NotFound from "components/NotFound/NotFound";
 
 const PostPage = () => {
   const { authAndNavigate } = useAuth("");
@@ -56,18 +56,7 @@ const PostPage = () => {
           return <Post key={post._id} post={post} />;
         })}
 
-        {data?.postList?.length === 0 && (
-          <p
-            style={{
-              padding: "70px",
-              textAlign: "center",
-              fontSize: "35px",
-              fontWeight: "600",
-            }}
-          >
-            검색 결과가 없습니다!
-          </p>
-        )}
+        {data?.postList?.length === 0 && <NotFound />}
 
         {data?.postList?.length > 0 && (
           <Pagenate

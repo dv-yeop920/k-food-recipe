@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { openModal } from "../store/slice/modalSlice";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../store/slice/userSlice";
-import toastMessage from "../utils/toast";
+import { openModal } from "store/slice/modalSlice";
+import { loginUser } from "store/slice/userSlice";
+import toastMessage from "utils/toast";
 
 const useAuth = () => {
   const navigate = useNavigate();

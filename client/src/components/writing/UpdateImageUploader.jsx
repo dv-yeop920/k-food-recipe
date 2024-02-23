@@ -1,11 +1,8 @@
 import React from "react";
+import styles from "./Writing.module.scss";
+import { onClickShowImageFile, onChangeUpload } from "utils/imageUploader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import styles from "./Writing.module.scss";
-import {
-  onClickShowImageFile,
-  onChangeUpload,
-} from "../../utils/imageUploader";
 
 const UpdateImageUploader = ({ uploaderProps }) => {
   const fileInput = React.useRef(null);

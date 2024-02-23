@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Recipe.module.scss";
-import { tabList } from "../../services/recipeData";
 import { useNavigate } from "react-router-dom";
+import { tabList } from "utils/recipeData";
 
 const RecipeTab = ({ searchParams, tabParam, onClickTabButton }) => {
   const navigate = useNavigate();

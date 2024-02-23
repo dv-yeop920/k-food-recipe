@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import styles from "./Comment.module.scss";
 import { useSelector } from "react-redux";
+import { selectUser } from "store/slice/userSlice";
+import useAuth from "hooks/useAuth";
+import useInfiniteScroll from "hooks/useInfiniteScroll";
+import InfiniteScrollObserver from "components/InfiniteObserver/InfiniteScrollObserver";
 import Comment from "./Comment";
 import CommentInput from "./CommentInput";
-import styles from "./Comment.module.scss";
-import useAuth from "../../../hooks/useAuth";
-import { selectUser } from "../../../store/slice/userSlice";
-import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
-import InfiniteScrollObserver from "../../InfiniteObserver/InfiniteScrollObserver";
-import ScrollLoading from "../../Loading/ScrollLoading";
+import ScrollLoading from "components/Loading/ScrollLoading";
 
 const CommentList = ({ post }) => {
   const { userId } = useSelector(selectUser);

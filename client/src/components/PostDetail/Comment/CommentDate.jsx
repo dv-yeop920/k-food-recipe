@@ -1,6 +1,5 @@
-import React from "react";
 import styles from "./Comment.module.scss";
-import getDate from "../../../utils/postDate";
+import getDate from "utils/postDate";
 
 const CommentDate = ({ createdAt }) => {
   return (

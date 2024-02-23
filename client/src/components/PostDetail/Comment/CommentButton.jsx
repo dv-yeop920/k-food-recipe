@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "./Comment.module.scss";
-import useAuth from "../../../hooks/useAuth";
-import useMutations from "../../../hooks/useMutation";
+import useAuth from "hooks/useAuth";
+import useMutations from "hooks/useMutation";
 
 const CommentButton = ({ commentProps }) => {
   const { deleteMutation, updateMutation } = useMutations();

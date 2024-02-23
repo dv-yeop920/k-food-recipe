@@ -1,5 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./Navbar.module.scss";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "store/slice/modalSlice";
+import { toggleTheme, theme } from "store/slice/themeSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -7,10 +11,6 @@ import {
   faGlobe,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import { openModal } from "../../store/slice/modalSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme, theme } from "../../store/slice/themeSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();

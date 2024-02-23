@@ -1,9 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-const InfiniteScrollObserver = ({
-  fetchNextPage,
-  canFetchMore,
-}) => {
+const InfiniteScrollObserver = ({ fetchNextPage, canFetchMore }) => {
   const observerRef = useRef(null);
 
   useEffect(() => {

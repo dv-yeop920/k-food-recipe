@@ -1,20 +1,20 @@
+import { Suspense } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router";
-import MainPage from "./pages/MainPage";
-import MyPage from "./pages/MyPage";
-import WritingPage from "./pages/WritingPage";
-import PostDetailPage from "./pages/PostDetailPage";
-import PostUpdatePage from "./pages/PostUpdatePage";
-import ScrollUpButton from "./layout/ScrollUp/ScrollUpButton";
-import Navbar from "./layout/Navbar/Navbar";
-import ModalContainer from "./components/Modal/ModalContainer";
-import RecipeDetailPage from "./pages/RecipeDetailPage";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { Suspense } from "react";
-import DeferredComponent from "./components/Loading/DeferredComponent";
-import Loading from "./components/Loading/Loading";
-import PostListPage from "./pages/PostListPage";
+import { Route, Routes } from "react-router";
+import Navbar from "layout/Navbar/Navbar";
+import ScrollUpButton from "layout/ScrollUp/ScrollUpButton";
+import MainPage from "pages/MainPage";
+import MyPage from "pages/MyPage";
+import WritingPage from "pages/WritingPage";
+import PostDetailPage from "pages/PostDetailPage";
+import PostUpdatePage from "pages/PostUpdatePage";
+import PostListPage from "pages/PostListPage";
+import RecipeDetailPage from "pages/RecipeDetailPage";
+import ModalContainer from "components/Modal/ModalContainer";
+import DeferredComponent from "components/Loading/DeferredComponent";
+import Loading from "components/Loading/Loading";
 
 function App() {
   return (

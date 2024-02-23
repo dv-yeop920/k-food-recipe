@@ -3,12 +3,12 @@ import {
   onSubmitRegisterComment,
   onClickDeleteComment,
   onClickUpdateComment,
-} from "../services/comment.services";
+} from "services/comment.services";
 import {
   onClickDeletePost,
   onSubmitEditPost,
   onSubmitRegisterPost,
-} from "../services/post.services";
+} from "services/post.services";
 
 const useMutations = () => {
   const queryClient = useQueryClient();

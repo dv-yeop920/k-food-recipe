@@ -1,8 +1,7 @@
-import React from "react";
-import { BounceLoader } from "react-spinners";
 import styles from "./Loading.module.scss";
+import { theme } from "store/slice/themeSlice";
+import { BounceLoader } from "react-spinners";
 import { useSelector } from "react-redux";
-import { theme } from "../../store/slice/themeSlice";
 
 const Loading = () => {
   const isDark = useSelector(theme);

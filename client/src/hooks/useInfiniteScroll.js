@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getCommentList } from "../services/comment.services";
-import { getRecipeList } from "../services/recipe.services";
+import { getCommentList } from "services/comment.services";
+import { getRecipeList } from "services/recipe.services";
 
 const queryApiFunctions = {
   recipeList: getRecipeList,

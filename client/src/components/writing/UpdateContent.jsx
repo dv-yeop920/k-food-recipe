@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
+import styles from "./Writing.module.scss";
+import { formats } from "utils/quillEditor";
+import useQuill from "hooks/useQuill";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import styles from "./Writing.module.scss";
-import { formats } from "../../utils/quillEditor";
-import useQuill from "../../hooks/useQuill";
 
 const UpdateContent = ({ contentProps }) => {
   const {

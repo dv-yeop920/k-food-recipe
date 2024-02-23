@@ -1,13 +1,12 @@
-import React from "react";
+import styles from "../components/RecipeDetail/RecipeDetail.module.scss";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import styles from "../components/RecipeDetail/RecipeDetail.module.scss";
-import FooterNavbar from "../components/FooterNavbar/FooterNavbar";
-import RecipeMenual from "../components/RecipeDetail/RecipeMenual";
-import RecipeInfo from "../components/RecipeDetail/RecipeInfo";
-import RecipeIngredient from "../components/RecipeDetail/RecipeIngredient";
-import RecipeTip from "../components/RecipeDetail/RecipeTip";
-import { getRecipeDetail } from "../services/recipe.services";
+import { getRecipeDetail } from "services/recipe.services";
+import FooterNavbar from "components/FooterNavbar/FooterNavbar";
+import RecipeMenual from "components/RecipeDetail/RecipeMenual";
+import RecipeInfo from "components/RecipeDetail/RecipeInfo";
+import RecipeIngredient from "components/RecipeDetail/RecipeIngredient";
+import RecipeTip from "components/RecipeDetail/RecipeTip";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();

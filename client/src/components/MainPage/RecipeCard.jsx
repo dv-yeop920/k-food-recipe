@@ -1,10 +1,9 @@
-import React from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import styles from "./Recipe.module.scss";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
-const MenuCard = ({ recipe }) => {
+const RecipeCard = ({ recipe }) => {
   return (
     <Link to={`/recipe/${recipe._id}`}>
       <li className={styles.recipe_card}>
@@ -37,4 +36,4 @@ const MenuCard = ({ recipe }) => {
   );
 };
 
-export default MenuCard;
+export default RecipeCard;

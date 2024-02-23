@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./MenuModal.module.scss";
+import axios from "axios";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser, selectUser } from "../../../store/slice/userSlice";
-import axios from "axios";
-import useAuth from "../../../hooks/useAuth";
-import toastMessage from "../../../utils/toast";
+import { logoutUser, selectUser } from "store/slice/userSlice";
+import useAuth from "hooks/useAuth";
+import toastMessage from "utils/toast";
 
 const MenuModal = ({ openModal, closeModal }) => {
   const navigate = useNavigate();

@@ -1,7 +1,6 @@
-import React from "react";
+import { theme } from "store/slice/themeSlice";
 import { ClipLoader } from "react-spinners";
 import { useSelector } from "react-redux";
-import { theme } from "../../store/slice/themeSlice";
 
 const ScrollLoading = () => {
   const isDark = useSelector(theme);

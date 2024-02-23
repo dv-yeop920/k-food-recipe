@@ -1,6 +1,6 @@
-import React from "react";
 import styles from "./Recipe.module.scss";
 import RecipeCard from "./RecipeCard";
+import NotFound from "components/NotFound/NotFound";
 
 const RecipeList = ({ recipeList }) => {
   return (
@@ -11,6 +11,7 @@ const RecipeList = ({ recipeList }) => {
             return <RecipeCard key={recipe._id} recipe={recipe} />;
           })}
       </ul>
+      {recipeList.length === 0 && <NotFound />}
     </>
   );
 };

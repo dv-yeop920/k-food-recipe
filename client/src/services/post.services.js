@@ -1,9 +1,9 @@
 import axios from "axios";
-import toastMessage from "../utils/toast";
+import toastMessage from "utils/toast";
 import {
   deletePostPreviewImageToS3,
   uploadPostPreviewImageToS3,
-} from "../utils/awsS3Setting";
+} from "utils/awsS3Setting";
 
 export const getPostList = async (searchParam, pageParam) => {
   try {

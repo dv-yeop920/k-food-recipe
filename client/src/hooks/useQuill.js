@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { imageHandler, toolbarOptions } from "../utils/quillEditor";
+import { imageHandler, toolbarOptions } from "utils/quillEditor";
 
 const useQuill = quillRef => {
   const modules = useMemo(() => {
