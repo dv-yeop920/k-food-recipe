@@ -8,10 +8,14 @@ const RecipeList = ({ recipeList }) => {
       <ul className={styles.recipe_list}>
         {recipeList &&
           recipeList.map(recipe => {
-            return <RecipeCard key={recipe._id} recipe={recipe} />;
+            if (recipe) {
+              return <RecipeCard key={recipe._id} recipe={recipe} />;
+            } else {
+              return <NotFound />;
+            }
           })}
       </ul>
-      {recipeList.length === 0 && <NotFound />}
+      {}
     </>
   );
 };

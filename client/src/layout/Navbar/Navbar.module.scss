@@ -36,6 +36,8 @@
         flex: 1;
 
         .recipeSearchLink {
+          display: flex;
+          align-items: center;
           padding: 1rem;
           border: none;
           font-weight: 600;

@@ -52,7 +52,7 @@ const Navbar = () => {
                 icon={faSearch}
                 size="1x"
               />
-              <span style={{ fontSize: "1rem" }}>
+              <span style={{ fontSize: "0.95rem", textWrap: "noWrap" }}>
                 여기를 눌러 원하는 것을 검색해 보세요!
               </span>
             </div>

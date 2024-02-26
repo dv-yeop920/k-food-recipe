@@ -23,12 +23,11 @@ export const getPostDetail = async id => {
 
     const postData = response?.data?.post;
 
-    if (postData !== null) {
-      const parts = postData?.id.split("_");
-      const userId = parts[0];
-      postData.id = userId;
-      return postData;
-    }
+    const parts = postData?.id.split("_");
+    const userId = parts[0];
+    postData.id = userId;
+
+    return postData;
   } catch (error) {
     console.log(error);
   }
@@ -71,8 +70,7 @@ export const onSubmitRegisterPost = async params => {
     const response = await axios.post("/api/posts/register", post);
 
     toastMessage(response.data.messsage);
-
-    navigate(-1, { replace: true });
+    navigate("/postList");
 
     setPostPreviewImageFile(null);
     setPostPreviewImageSrc(null);
@@ -85,22 +83,19 @@ export const onSubmitRegisterPost = async params => {
 export const onClickDeletePost = async params => {
   const { id, image, navigate } = params;
 
+  const question = window.confirm("게시물을 정말 삭제하시겠습니까?");
   const postId = {
     postId: id,
   };
-
-  const question = window.confirm("게시물을 정말 삭제하시겠습니까?");
-
   try {
     if (question) {
       if (image) {
         await deletePostPreviewImageToS3(image);
       }
-
       const response = await axios.post("/api/posts/delete", postId);
 
       toastMessage(response.data.messsage);
-      navigate(-1, { replace: true });
+      navigate("/postList");
     }
   } catch (error) {
     console.log(error);
@@ -131,11 +126,10 @@ export const onSubmitEditPost = async params => {
     if (postPreviewImageFile === null) {
       previewEditImageUrl = originalDetail.image;
     } else {
+      await deletePostPreviewImageToS3(originalDetail.image);
       previewEditImageUrl = await uploadPostPreviewImageToS3(
         postPreviewImageFile
       );
-      //TODO - 삭제 되도록 수정 해야함
-      //await deletePostPreviewImageToS3(originalDetail.image);
     }
 
     if (question) {

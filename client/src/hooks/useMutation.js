@@ -22,8 +22,13 @@ const useMutations = () => {
         return onSubmitRegisterComment(params);
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries("commentList", "post");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["commentList"],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["postList"],
+      });
     },
   });
 
@@ -36,8 +41,13 @@ const useMutations = () => {
         return onClickDeleteComment(params);
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries("commentList", "post");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["commentList"],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["postList"],
+      });
     },
   });
 
@@ -50,8 +60,13 @@ const useMutations = () => {
         return onClickUpdateComment(params);
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries("commentList", "post");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["commentList"],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["postList"],
+      });
     },
   });
 

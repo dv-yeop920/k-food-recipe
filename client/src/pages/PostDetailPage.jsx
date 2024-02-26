@@ -13,18 +13,18 @@ import FooterNavbar from "components/FooterNavbar/FooterNavbar";
 
 const PostsDetail = () => {
   const navigate = useNavigate();
-  const postId = useParams().id;
+  const { id } = useParams();
   const { userId } = useSelector(selectUser);
 
   const { authAndNavigate } = useAuth();
   const { deleteMutation } = useMutations();
 
   const { data: post } = useQuery({
-    queryKey: ["post"],
-    queryFn: () => getPostDetail(postId),
+    queryKey: ["postList"],
+    queryFn: () => getPostDetail(id),
   });
 
-  const { id, title, createdAt, content, image } = post;
+  const { title, createdAt, content, image } = post;
 
   return (
     <main className={styles.detailContainer}>
@@ -39,7 +39,7 @@ const PostsDetail = () => {
 
         <div className="post-user__wrap">
           <div className={styles.info}>
-            <span className={styles.id}>{id}</span>
+            <span className={styles.id}>{post.id}</span>
           </div>
 
           <div className={styles.info}>
@@ -56,12 +56,12 @@ const PostsDetail = () => {
               className={styles.button}
               onClick={() => {
                 if (window.confirm("수정하러 이동하시겠습니까?")) {
-                  authAndNavigate(`/postUpdate/${postId}`);
+                  authAndNavigate(`/postUpdate/${id}`);
                   return;
                 }
               }}
             >
-              {id === userId ? "수정" : ""}
+              {post.id === userId ? "수정" : ""}
             </span>
 
             <span
@@ -70,13 +70,13 @@ const PostsDetail = () => {
                 authAndNavigate();
                 deleteMutation.mutate({
                   key: "post",
-                  postId,
+                  id,
                   image,
                   navigate,
                 });
               }}
             >
-              {id === userId ? "삭제" : ""}
+              {post.id === userId ? "삭제" : ""}
             </span>
           </div>
         </div>

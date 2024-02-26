@@ -1,6 +1,6 @@
 import button from "styles/Button.module.scss";
 import { useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getPostList } from "../services/post.services";
 import ScrollToTop from "utils/scrollTop";
 import useAuth from "hooks/useAuth";
@@ -26,7 +26,8 @@ const PostPage = () => {
     queryKey: ["postList", searchParam, pageParam],
     queryFn: () => getPostList(searchParam, pageParam),
     staleTime: 1000 * 60 * 5,
-    keepPreviousData: true,
+    cacheTime: 1000 * 60 * 5,
+    placeholderData: keepPreviousData,
   });
 
   return (
@@ -44,19 +45,20 @@ const PostPage = () => {
             글쓰기
           </button>
         </div>
+        <ul className="board">
+          <li className={styles.li}>
+            <div>
+              <h3 style={{ color: "rgb(200, 50, 100)" }}>[공지]</h3>
+              <h3 className={styles.title}>게시판 이용 수칙</h3>
+            </div>
+          </li>
 
-        <li className={styles.li}>
-          <div>
-            <h3 style={{ color: "rgb(200, 50, 100)" }}>[공지]</h3>
-            <h3 className={styles.title}>게시판 이용 수칙</h3>
-          </div>
-        </li>
+          {data?.postList?.map(post => {
+            return <Post key={post._id} post={post} />;
+          })}
 
-        {data?.postList?.map(post => {
-          return <Post key={post._id} post={post} />;
-        })}
-
-        {data?.postList?.length === 0 && <NotFound />}
+          {data?.postList?.length === 0 && <NotFound />}
+        </ul>
 
         {data?.postList?.length > 0 && (
           <Pagenate

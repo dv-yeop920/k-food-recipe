@@ -20,7 +20,7 @@ const nextPageFunc = (keyName, lastPage, allPages) => {
       }
       break;
     default:
-      return undefined;
+      return null;
   }
 };
 
@@ -35,7 +35,6 @@ const useInfiniteScroll = (keyName = "", searchParam = "", tabParam = "") => {
     getNextPageParam: (lastPage, allPages) =>
       nextPageFunc(keyName, lastPage, allPages),
     suspense: false,
-    staleTime: 1000 * 60 * 5,
   });
 };
 
