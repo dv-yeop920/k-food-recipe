@@ -24,10 +24,10 @@ const useMutations = () => {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["commentList"],
+        queryKey: ["postList"],
       });
       await queryClient.invalidateQueries({
-        queryKey: ["postList"],
+        queryKey: ["commentList"],
       });
     },
   });
@@ -43,10 +43,10 @@ const useMutations = () => {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["commentList"],
+        queryKey: ["postList"],
       });
       await queryClient.invalidateQueries({
-        queryKey: ["postList"],
+        queryKey: ["commentList"],
       });
     },
   });
@@ -62,10 +62,10 @@ const useMutations = () => {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["commentList"],
+        queryKey: ["postList"],
       });
       await queryClient.invalidateQueries({
-        queryKey: ["postList"],
+        queryKey: ["commentList"],
       });
     },
   });

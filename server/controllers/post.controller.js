@@ -64,7 +64,6 @@ exports.getPostList = async (req, res) => {
 
 exports.getPost = async (req, res) => {
   const postId = req.query.id;
-  console.log(postId);
 
   try {
     const post = await Post.findOne({

@@ -4,7 +4,11 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  keepPreviousData,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -23,6 +27,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       suspense: true,
+      placeholderData: keepPreviousData,
     },
   },
 });

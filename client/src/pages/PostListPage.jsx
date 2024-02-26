@@ -1,6 +1,6 @@
 import button from "styles/Button.module.scss";
 import { useSearchParams } from "react-router-dom";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getPostList } from "../services/post.services";
 import ScrollToTop from "utils/scrollTop";
 import useAuth from "hooks/useAuth";
@@ -26,8 +26,6 @@ const PostPage = () => {
     queryKey: ["postList", searchParam, pageParam],
     queryFn: () => getPostList(searchParam, pageParam),
     staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 5,
-    placeholderData: keepPreviousData,
   });
 
   return (

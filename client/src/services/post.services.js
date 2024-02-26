@@ -111,6 +111,9 @@ export const onSubmitEditPost = async params => {
     originalDetail,
     navigate,
   } = params;
+
+  const { _id, title, content, image } = originalDetail;
+
   e.preventDefault();
 
   const question = window.confirm("게시물 내용을 수정하시겠습니까?");
@@ -123,20 +126,20 @@ export const onSubmitEditPost = async params => {
       return;
     }
 
-    if (postPreviewImageFile === null) {
-      previewEditImageUrl = originalDetail.image;
-    } else {
-      await deletePostPreviewImageToS3(originalDetail.image);
+    if (image) {
+      await deletePostPreviewImageToS3(image);
       previewEditImageUrl = await uploadPostPreviewImageToS3(
         postPreviewImageFile
       );
+    } else if (!image) {
+      previewEditImageUrl = null;
     }
 
     if (question) {
       const updatePosts = {
-        _id: originalDetail._id,
-        title: originalDetail.title,
-        content: originalDetail.content,
+        _id,
+        title,
+        content,
         image: previewEditImageUrl,
       };
 

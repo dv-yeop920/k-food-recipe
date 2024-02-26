@@ -14,9 +14,8 @@ const PostsUpdatePage = () => {
   const navigate = useNavigate();
 
   const { data: post } = useQuery({
-    queryKey: ["post"],
+    queryKey: ["postList"],
     queryFn: () => getPostDetail(id),
-    staleTime: 1000 * 60 * 5,
   });
 
   const [originalDetail, setOriginalDetail] = useState(post);
