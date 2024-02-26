@@ -72,8 +72,8 @@ export const deleteContentImageToS3 = async postImageUrl => {
     .promise();
 };
 
-export const resizeFile = async file =>
-  await new Promise(resolve => {
+export const resizeFile = async file => {
+  const resizedFile = await new Promise(resolve => {
     Resizer.imageFileResizer(
       file,
       400,
@@ -87,3 +87,14 @@ export const resizeFile = async file =>
       "file"
     );
   });
+
+  // 고유한 파일 이름 생성 (예: 현재 시간을 기반으로 함)
+  const uniqueFileName = `resized_${Date.now()}.jpeg`;
+
+  // Blob을 이용하여 새로운 파일 객체 생성
+  const newFile = new File([resizedFile], uniqueFileName, {
+    type: "image/jpeg",
+  });
+
+  return newFile;
+};

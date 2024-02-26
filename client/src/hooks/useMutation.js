@@ -15,6 +15,7 @@ const useMutations = () => {
 
   // 게시글 생성 뮤테이션
   const createMutation = useMutation({
+    mutationKey: ["commentList", "postList"],
     mutationFn: params => {
       if (params.key === "post") {
         return onSubmitRegisterPost(params);
@@ -24,16 +25,18 @@ const useMutations = () => {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["postList"],
-      });
-      await queryClient.invalidateQueries({
         queryKey: ["commentList"],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["postList"],
       });
     },
   });
 
   // 게시글 삭제 뮤테이션
   const deleteMutation = useMutation({
+    mutationKey: ["commentList", "postList"],
     mutationFn: params => {
       if (params.key === "post") {
         return onClickDeletePost(params);
@@ -43,16 +46,18 @@ const useMutations = () => {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["postList"],
-      });
-      await queryClient.invalidateQueries({
         queryKey: ["commentList"],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["postList"],
       });
     },
   });
 
   // 게시글 수정 뮤테이션
   const updateMutation = useMutation({
+    mutationKey: ["commentList", "postList"],
     mutationFn: params => {
       if (params.key === "post") {
         return onSubmitEditPost(params);
@@ -62,10 +67,11 @@ const useMutations = () => {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["postList"],
-      });
-      await queryClient.invalidateQueries({
         queryKey: ["commentList"],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["postList"],
       });
     },
   });

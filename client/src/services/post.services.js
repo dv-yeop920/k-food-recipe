@@ -34,16 +34,9 @@ export const getPostDetail = async id => {
 };
 
 export const onSubmitRegisterPost = async params => {
-  const {
-    e,
-    userId,
-    titleRef,
-    quillRef,
-    postPreviewImageFile,
-    setPostPreviewImageFile,
-    setPostPreviewImageSrc,
-    navigate,
-  } = params;
+  const { e, userId, titleRef, quillRef, postPreviewImageFile, navigate } =
+    params;
+
   e.preventDefault();
 
   let previewImageUrl;
@@ -71,9 +64,6 @@ export const onSubmitRegisterPost = async params => {
 
     toastMessage(response.data.messsage);
     navigate("/postList");
-
-    setPostPreviewImageFile(null);
-    setPostPreviewImageSrc(null);
   } catch (error) {
     console.log(error);
     throw error;
@@ -84,9 +74,11 @@ export const onClickDeletePost = async params => {
   const { id, image, navigate } = params;
 
   const question = window.confirm("게시물을 정말 삭제하시겠습니까?");
+
   const postId = {
     postId: id,
   };
+
   try {
     if (question) {
       if (image) {
