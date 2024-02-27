@@ -10,9 +10,9 @@ const CommentInput = ({ authAndNavigate, commentInfo }) => {
   return (
     <form
       className="commnet-textarea__form"
-      onSubmit={e => {
+      onSubmit={async e => {
         commentInfo.e = e;
-        createMutation.mutate(commentInfo);
+        await createMutation.mutateAsync(commentInfo);
       }}
     >
       <div className="comment-textarea__container">

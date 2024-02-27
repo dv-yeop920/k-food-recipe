@@ -71,7 +71,7 @@ export const onSubmitRegisterPost = async params => {
 };
 
 export const onClickDeletePost = async params => {
-  const { id, image, navigate } = params;
+  const { id, image } = params;
 
   const question = window.confirm("게시물을 정말 삭제하시겠습니까?");
 
@@ -87,7 +87,6 @@ export const onClickDeletePost = async params => {
       const response = await axios.post("/api/posts/delete", postId);
 
       toastMessage(response.data.messsage);
-      navigate("/postList");
     }
   } catch (error) {
     console.log(error);

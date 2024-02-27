@@ -37,32 +37,30 @@ const UpdateContent = ({ contentProps }) => {
   };
 
   return (
-    <>
-      <div className={styles.writingContainer}>
-        <div className="writing-container__column">
-          <input
-            className={styles.title}
-            type="text"
-            value={editTitleValue}
-            name={editTitleValue}
-            maxLength="20"
-            onChange={onChangeTitle}
-          />
-        </div>
-
-        <div className="writing-container__column">
-          <ReactQuill
-            className="content"
-            ref={updateQuillRef}
-            theme="snow"
-            value={editContentValue}
-            modules={modules}
-            formats={formats}
-            onChange={onChangeContent}
-          />
-        </div>
+    <div className={styles.writingContainer}>
+      <div className="writing-container__column">
+        <input
+          className={styles.title}
+          type="text"
+          value={editTitleValue}
+          name={editTitleValue}
+          maxLength="20"
+          onChange={onChangeTitle}
+        />
       </div>
-    </>
+
+      <div className="writing-container__column">
+        <ReactQuill
+          className="content"
+          ref={updateQuillRef}
+          theme="snow"
+          value={editContentValue}
+          modules={modules}
+          formats={formats}
+          onChange={onChangeContent}
+        />
+      </div>
+    </div>
   );
 };
 

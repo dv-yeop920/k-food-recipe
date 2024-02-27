@@ -55,10 +55,10 @@ const PostsUpdatePage = () => {
     <main className="back-ground">
       <form
         className={styles.editorContainer}
-        onSubmit={e => {
+        onSubmit={async e => {
           authAndNavigate();
           postParams.e = e;
-          updateMutation.mutate(postParams);
+          await updateMutation.mutateAsync(postParams);
         }}
       >
         <section

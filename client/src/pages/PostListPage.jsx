@@ -1,3 +1,4 @@
+import styles from "components/PostList/PostList.module.scss";
 import button from "styles/Button.module.scss";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -5,7 +6,6 @@ import { getPostList } from "../services/post.services";
 import ScrollToTop from "utils/scrollTop";
 import useAuth from "hooks/useAuth";
 import Post from "components/PostList/Post";
-import styles from "components/PostList/PostList.module.scss";
 import Pagenate from "components/PagiNation/Pagenate";
 import NotFound from "components/NotFound/NotFound";
 
@@ -25,7 +25,7 @@ const PostPage = () => {
   const { data } = useQuery({
     queryKey: ["postList", searchParam, pageParam],
     queryFn: () => getPostList(searchParam, pageParam),
-    staleTime: 1000 * 60 * 5,
+    staleTime: Infinity,
   });
 
   return (

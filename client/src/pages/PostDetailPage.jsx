@@ -68,12 +68,13 @@ const PostsDetail = () => {
               className={styles.button}
               onClick={() => {
                 authAndNavigate();
-                deleteMutation.mutate({
+                deleteMutation.mutateAsync({
                   key: "post",
                   id,
                   image,
                   navigate,
                 });
+                navigate("/postList");
               }}
             >
               {post.id === userId ? "삭제" : ""}

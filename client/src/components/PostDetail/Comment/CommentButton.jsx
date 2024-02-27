@@ -33,9 +33,9 @@ const CommentButton = ({ commentProps }) => {
           </span>
           <span
             className={styles.button}
-            onClick={() => {
+            onClick={async () => {
               authAndNavigate();
-              deleteMutation.mutate({
+              await deleteMutation.mutateAsync({
                 key,
                 _id,
                 postId,
@@ -60,10 +60,10 @@ const CommentButton = ({ commentProps }) => {
 
           <span
             className={styles.button}
-            onClick={() => {
+            onClick={async () => {
               authAndNavigate();
               setEditId("");
-              updateMutation.mutate({
+              await updateMutation.mutateAsync({
                 key,
                 _id,
                 content: updateComment[_id],

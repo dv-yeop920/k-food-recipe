@@ -28,6 +28,7 @@ const queryClient = new QueryClient({
     queries: {
       suspense: true,
       placeholderData: keepPreviousData,
+      refetchOnWindowFocus: false,
     },
   },
 });

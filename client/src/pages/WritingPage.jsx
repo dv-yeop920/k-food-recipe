@@ -43,11 +43,11 @@ const WritingPage = () => {
     <main>
       <form
         className={styles.editorContainer}
-        onSubmit={e => {
+        onSubmit={async e => {
           authAndNavigate();
           if (window.confirm("게시글을 등록 하시겠습니까?")) {
             writingParams.e = e;
-            createMutation.mutate(writingParams);
+            await createMutation.mutateAsync(writingParams);
           } else {
             e.preventDefault();
           }

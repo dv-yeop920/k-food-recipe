@@ -32,6 +32,7 @@ const useMutations = () => {
         queryKey: ["postList"],
       });
     },
+    retry: 3,
   });
 
   // 게시글 삭제 뮤테이션
@@ -53,6 +54,7 @@ const useMutations = () => {
         queryKey: ["postList"],
       });
     },
+    retry: 3,
   });
 
   // 게시글 수정 뮤테이션
@@ -74,6 +76,7 @@ const useMutations = () => {
         queryKey: ["postList"],
       });
     },
+    retry: 3,
   });
 
   return { createMutation, deleteMutation, updateMutation };

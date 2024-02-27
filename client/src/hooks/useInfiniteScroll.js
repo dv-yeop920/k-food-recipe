@@ -35,7 +35,7 @@ const useInfiniteScroll = (keyName = "", searchParam = "", tabParam = "") => {
     getNextPageParam: (lastPage, allPages) =>
       nextPageFunc(keyName, lastPage, allPages),
     suspense: false,
-    staleTime: 1000 * 60 * 20,
+    staleTime: Infinity,
   });
 };
 
