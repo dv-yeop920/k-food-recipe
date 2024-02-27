@@ -5,7 +5,7 @@ exports.signUp = async (req, res) => {
   const user = new User(req.body);
   //정보를 db에 보내준다. 이때 , 성공하거나 에러가 나면 메세지를 json 형식으로 보내준다.
   //mongoDB 메서드, user모델에 저장
-  //mongoose 6버전 부터는 save 에 콜백함수를 지원하지 않아 아래와 같이 코드 작성
+  //mongoose 6버전 부터는 save 에 콜백함수를 지원하지 않아 아래와 같이 코드 작성한다
 
   await User.find({
     $or: [{ id: user.id }, { email: user.email }],
@@ -38,8 +38,7 @@ exports.signUp = async (req, res) => {
           console.log(docs);
           return res.json({
             success: false,
-            messsage:
-              "입력한 값이 틀리지 않았는지 다시 확인해 주세요",
+            messsage: "입력한 값이 틀리지 않았는지 다시 확인해 주세요",
             error,
           });
         });
@@ -57,64 +56,55 @@ exports.signIn = async (req, res) => {
         });
       }
       //비번 비교
-      docs.comparePassword(
-        req.body.password,
-        (error, isMatch) => {
-          const currentTime = new Date();
-          const oneHourInMilliseconds = 1000 * 60 * 100;
-          const expirationTime = new Date(
-            currentTime.getTime() + oneHourInMilliseconds
-          );
+      docs.comparePassword(req.body.password, (error, isMatch) => {
+        const currentTime = new Date();
+        const oneHourInMilliseconds = 1000 * 60 * 100;
+        const expirationTime = new Date(
+          currentTime.getTime() + oneHourInMilliseconds
+        );
 
-          // Password가 일치하다면 리프레시 , 엑세스 토큰 생성
-          if (isMatch) {
-            docs.generateRefreshToken((err, user) => {
+        // Password가 일치하다면 리프레시 , 엑세스 토큰 생성
+        if (isMatch) {
+          docs.generateRefreshToken((err, user) => {
+            if (err) {
+              res.status(400).send(error);
+            }
+
+            docs.generateAccessToken((err, accessToken) => {
               if (err) {
                 res.status(400).send(error);
               }
 
-              docs.generateAccessToken(
-                (err, accessToken) => {
-                  if (err) {
-                    res.status(400).send(error);
-                  }
+              const cookieOptions = {
+                domain: "localhost",
+                path: "/",
+                expires: expirationTime,
+                httpOnly: true,
+                sameSite: "strict",
+              };
 
-                  const cookieOptions = {
-                    domain: "localhost",
-                    path: "/",
-                    expires: expirationTime,
-                    httpOnly: true,
-                    sameSite: "strict",
-                  };
-
-                  // 리프레시토큰을 브라우저에 저장
-                  res
-                    .cookie(
-                      "user",
-                      user.token,
-                      cookieOptions
-                    )
-                    .status(200)
-                    .json({
-                      isLogin: true,
-                      messsage: `안녕하세요 ${user.name}님!`,
-                      userId: user.id,
-                      userName: user.name,
-                      userEmail: user.email,
-                      //엑세스는 응답 값으로 전달
-                      accessToken: accessToken,
-                    });
-                }
-              );
+              // 리프레시토큰을 브라우저에 저장
+              res
+                .cookie("user", user.token, cookieOptions)
+                .status(200)
+                .json({
+                  isLogin: true,
+                  messsage: `안녕하세요 ${user.name}님!`,
+                  userId: user.id,
+                  userName: user.name,
+                  userEmail: user.email,
+                  //엑세스는 응답 값으로 전달
+                  accessToken: accessToken,
+                });
             });
-          } else {
-            return res.json({
-              isLogin: false,
-              messsage: "비밀번호가 틀렸습니다.",
-            });
-          }
+          });
+        } else {
+          return res.json({
+            isLogin: false,
+            messsage: "비밀번호가 틀렸습니다.",
+          });
         }
-      );
+      });
     })
     .catch(error => {
       return res.status(400).send(error);
@@ -123,10 +113,7 @@ exports.signIn = async (req, res) => {
 
 exports.signOut = async (req, res) => {
   //db에서 정보를 찾아서 업데이트 시켜서 토큰을 삭제 한다
-  await User.findOneAndUpdate(
-    { _id: req.user._id },
-    { token: "" }
-  )
+  await User.findOneAndUpdate({ _id: req.user._id }, { token: "" })
     .then(docs => {
       if (docs) {
         res.clearCookie("user");
