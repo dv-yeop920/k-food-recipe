@@ -88,7 +88,7 @@ export const resizeFile = async file => {
     );
   });
 
-  // 고유한 파일 이름 생성 (예: 현재 시간을 기반으로 함)
+  // 고유한 파일 이름 생성 (예: 현재 시간을 기반으로 함
   const uniqueFileName = `resized_${Date.now()}.jpeg`;
 
   // Blob을 이용하여 새로운 파일 객체 생성
