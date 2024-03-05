@@ -12,12 +12,15 @@ const useLazyLoadImage = () => {
   const isDark = useSelector(theme);
 
   const className = key => {
-    if (key === "recipe_main") {
-      return main.image;
-    } else if (key === "recipe_detail") {
-      return detail.image;
-    } else if (key === "post_detail") {
-      return post.image;
+    switch (key) {
+      case "recipe_main":
+        return main.image;
+      case "recipe_detail":
+        return detail.image;
+      case "post_detail":
+        return post.image;
+      default:
+        return detail.image;
     }
   };
 
