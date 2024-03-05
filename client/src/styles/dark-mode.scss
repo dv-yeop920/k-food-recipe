@@ -11,8 +11,8 @@ $main-color-dark: #3498db;
 $hover-main-color: #16a085;
 $hover-main-color-dark: #286791;
 $input-background-color-dark: #21282f;
-$tag-background-color: #ddd;
-$tag-background-color-dark: #7f8c8d;
+$tag-background-color: #f39c12;
+$tag-background-color-dark: #d35400;
 
 html[data-theme="light"] {
   --text-color: #{$text-color};
@@ -23,7 +23,10 @@ html[data-theme="light"] {
   --submit-hover-background-color: #{$hover-main-color};
   --title-color: #{$main-color};
   --input-background-color: #{$background-color};
-  --tag-background-color: #{$tag-background-color};
+  --tag-background-color: #{$main-color};
+  --tag-background-color2: #{$tag-background-color};
+  --tag-background-color3: #{$main-color-dark};
+  --tag-color: #{$background-color};
 }
 
 html[data-theme="dark"] {
@@ -35,5 +38,8 @@ html[data-theme="dark"] {
   --submit-hover-background-color: #{$hover-main-color-dark};
   --title-color: #{$main-color-dark};
   --input-background-color: #{$background-color-dark};
-  --tag-background-color: #{$tag-background-color-dark};
+  --tag-background-color: #{$hover-main-color};
+  --tag-background-color2: #{$tag-background-color-dark};
+  --tag-background-color3: #{$hover-main-color-dark};
+  --tag-color: #{$text-color-dark};
 }

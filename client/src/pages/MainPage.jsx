@@ -64,9 +64,9 @@ const MainPage = () => {
         aria-label="레시피 섹션"
       >
         {!isLoading &&
-          data?.pages?.map((group, i) => (
-            <RecipeList key={i} recipeList={group.recipeList} />
-          ))}
+          data?.pages?.map((group, i) => {
+            return <RecipeList key={i} recipeList={group.recipeList} />;
+          })}
       </section>
 
       <InfiniteScrollObserver

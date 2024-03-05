@@ -1,18 +1,24 @@
 import styles from "./RecipeDetail.module.scss";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-lazy-load-image-component/src/effects/black-and-white.css";
+import useLazyLoadImage from "hooks/useLazyLoadImage";
 
 const RecipeInfo = ({ recipe }) => {
+  const { lazyLoadImage } = useLazyLoadImage();
+
+  const lazyLoadParams = {
+    key: "recipe_detail",
+    image: recipe.ATT_FILE_NO_MAIN,
+    width: 430,
+    height: 320,
+    order: "메인 이미지",
+  };
+
   return (
     <div className={styles.header}>
-      <LazyLoadImage
-        className={styles.image}
-        src={recipe.ATT_FILE_NO_MAIN}
-        alt="음식 이미지"
-        height={350}
-        effect="blur"
-      />
+      {lazyLoadImage(lazyLoadParams)}
+
       <h1 className={styles.title}>{recipe.RCP_NM || ""}</h1>
+
       <div className={styles.nutrition_info}>
         <span className={styles.info}>
           {`열량 ${recipe.INFO_ENG || ""} kcal`}

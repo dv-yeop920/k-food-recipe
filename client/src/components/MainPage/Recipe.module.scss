@@ -18,7 +18,7 @@
     &:hover {
       border-radius: 0;
     }
-    .recipe_img {
+    .image {
       &:hover {
         transform: scale(1.05);
       }
@@ -44,8 +44,10 @@
         border-radius: 5px;
         font-size: 0.85rem;
         font-weight: bold;
-        background-color: var(--tag-background-color);
-        color: var(--text-color);
+        max-width: 4rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         transition: all 0.2s ease-in-out;
 
         &:nth-child(2) {

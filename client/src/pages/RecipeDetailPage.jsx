@@ -1,4 +1,4 @@
-import styles from "../components/RecipeDetail/RecipeDetail.module.scss";
+import styles from "components/RecipeDetail/RecipeDetail.module.scss";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getRecipeDetail } from "services/recipe.services";

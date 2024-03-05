@@ -1,9 +1,20 @@
 import styles from "./PostList.module.scss";
 import { Link } from "react-router-dom";
 import getDate from "utils/postDate";
+import useLazyLoadImage from "hooks/useLazyLoadImage";
 
 const Post = ({ post }) => {
   const { _id, title, id, commentCount, viewCount, createdAt, image } = post;
+
+  const { lazyLoadImage } = useLazyLoadImage();
+
+  const lazyLoadParams = {
+    key: "post_detail",
+    image,
+    width: 120,
+    height: 100,
+    order: "게시물 이미지",
+  };
 
   return (
     <li className={styles.li}>
@@ -24,11 +35,7 @@ const Post = ({ post }) => {
         </div>
       </Link>
 
-      <img
-        style={image ? { height: "70px", width: "90px" } : { display: "none" }}
-        alt=""
-        src={image}
-      />
+      {image && lazyLoadImage(lazyLoadParams)}
     </li>
   );
 };

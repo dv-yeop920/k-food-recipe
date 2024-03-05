@@ -1,94 +1,54 @@
 import styles from "./RecipeDetail.module.scss";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-lazy-load-image-component/src/effects/black-and-white.css";
+import useLazyLoadImage from "hooks/useLazyLoadImage";
 
 const RecipeMenual = ({ recipe }) => {
+  const { lazyLoadImage } = useLazyLoadImage();
+
   return (
     <div className={styles.content_area}>
       <h2 className={styles.recipe_title}>📌 [조리 순서]</h2>
 
-      {recipe.MANUAL01 ? (
+      {recipe.MANUAL01 && (
         <>
           <span className={styles.recipe_menual}>{recipe.MANUAL01}</span>
-          <LazyLoadImage
-            className={styles.image}
-            src={recipe.MANUAL_IMG01}
-            alt="1번 순서"
-            effect="blur"
-          />
+          {lazyLoadImage("", recipe.MANUAL_IMG01, "1번 순서")}
         </>
-      ) : (
-        ""
       )}
 
-      {recipe.MANUAL02 ? (
+      {recipe.MANUAL02 && (
         <>
           <span className={styles.recipe_menual}>{recipe.MANUAL02}</span>
-          <LazyLoadImage
-            className={styles.image}
-            src={recipe.MANUAL_IMG02}
-            alt="2번 순서"
-            effect="blur"
-          />
+          {lazyLoadImage("", recipe.MANUAL_IMG02, "2번 순서")}
         </>
-      ) : (
-        ""
       )}
 
-      {recipe.MANUAL03 ? (
+      {recipe.MANUAL03 && (
         <>
           <span className={styles.recipe_menual}>{recipe.MANUAL03}</span>
-          <LazyLoadImage
-            className={styles.image}
-            src={recipe.MANUAL_IMG03}
-            alt="3번 순서"
-            effect="blur"
-          />
+          {lazyLoadImage("", recipe.MANUAL_IMG03, "3번 순서")}
         </>
-      ) : (
-        ""
       )}
 
-      {recipe.MANUAL04 ? (
+      {recipe.MANUAL04 && (
         <>
           <span className={styles.recipe_menual}>{recipe.MANUAL04}</span>
-          <LazyLoadImage
-            className={styles.image}
-            src={recipe.MANUAL_IMG04}
-            alt="4번 순서"
-            effect="blur"
-          />
+          {lazyLoadImage("", recipe.MANUAL_IMG04, "4번 순서")}
         </>
-      ) : (
-        ""
       )}
 
-      {recipe.MANUAL05 ? (
+      {recipe.MANUAL05 && (
         <>
           <span className={styles.recipe_menual}>{recipe.MANUAL05}</span>
-          <LazyLoadImage
-            className={styles.image}
-            src={recipe.MANUAL_IMG05}
-            alt="5번 순서"
-            effect="blur"
-          />
+          {lazyLoadImage("", recipe.MANUAL_IMG05, "5번 순서")}
         </>
-      ) : (
-        ""
       )}
 
-      {recipe.MANUAL06 ? (
+      {recipe.MANUAL06 && (
         <>
           <span className={styles.recipe_menual}>{recipe.MANUAL06}</span>
-          <LazyLoadImage
-            className={styles.image}
-            src={recipe.MANUAL_IMG06}
-            alt="6번 순서"
-            effect="blur"
-          />
+          {lazyLoadImage("", recipe.MANUAL_IMG06, "6번 순서")}
         </>
-      ) : (
-        ""
       )}
     </div>
   );
