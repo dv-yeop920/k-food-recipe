@@ -27,67 +27,69 @@ const PostsDetail = () => {
   const { title, createdAt, content, image } = post;
 
   return (
-    <main className={styles.detailContainer}>
-      <div className={styles.header}>
-        <div className={styles.headerTitle}>
-          <span>자유 게시판</span>
-        </div>
-
-        <div className="post-title__area">
-          <h2 className={styles.title}>{title || ""}</h2>
-        </div>
-
-        <div className="post-user__wrap">
-          <div className={styles.info}>
-            <span className={styles.id}>{post.id}</span>
+    <main className="back-ground">
+      <section className={`${styles.detail_container} inner-box`}>
+        <div className={styles.header}>
+          <div className={styles.headerTitle}>
+            <span>자유 게시판</span>
           </div>
 
-          <div className={styles.info}>
-            <span className={styles.date}>
-              {`
+          <div className="post-title__area">
+            <h2 className={styles.title}>{title || ""}</h2>
+          </div>
+
+          <div className="post-user__wrap">
+            <div className={styles.info}>
+              <span className={styles.id}>{post.id}</span>
+            </div>
+
+            <div className={styles.info}>
+              <span className={styles.date}>
+                {`
                   ${getDate(createdAt).year}-${getDate(createdAt).month + 1}-${
-                getDate(createdAt).date
-              } ${getDate(createdAt).hours}:${getDate(createdAt).minutes}`}
-            </span>
-          </div>
+                  getDate(createdAt).date
+                } ${getDate(createdAt).hours}:${getDate(createdAt).minutes}`}
+              </span>
+            </div>
 
-          <div className={styles.info}>
-            <span
-              className={styles.button}
-              onClick={() => {
-                if (window.confirm("수정하러 이동하시겠습니까?")) {
-                  authAndNavigate(`/postUpdate/${id}`);
-                  return;
-                }
-              }}
-            >
-              {post.id === userId ? "수정" : ""}
-            </span>
+            <div className={styles.info}>
+              <span
+                className={styles.button}
+                onClick={() => {
+                  if (window.confirm("수정하러 이동하시겠습니까?")) {
+                    authAndNavigate(`/postUpdate/${id}`);
+                    return;
+                  }
+                }}
+              >
+                {post.id === userId ? "수정" : ""}
+              </span>
 
-            <span
-              className={styles.button}
-              onClick={() => {
-                authAndNavigate();
-                deleteMutation.mutateAsync({
-                  key: "post",
-                  id,
-                  image,
-                  navigate,
-                });
-                navigate("/postList");
-              }}
-            >
-              {post.id === userId ? "삭제" : ""}
-            </span>
+              <span
+                className={styles.button}
+                onClick={() => {
+                  authAndNavigate();
+                  deleteMutation.mutateAsync({
+                    key: "post",
+                    id,
+                    image,
+                    navigate,
+                  });
+                  navigate("/postList");
+                }}
+              >
+                {post.id === userId ? "삭제" : ""}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={styles.content}>{Parser(String(content))}</div>
+        <div className={styles.content}>{Parser(String(content))}</div>
 
-      <CommentList post={post} />
+        <CommentList post={post} />
 
-      <div style={{ height: "40px" }}></div>
+        <div style={{ height: "40px" }}></div>
+      </section>
 
       <FooterNavbar />
     </main>

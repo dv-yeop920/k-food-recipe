@@ -15,7 +15,7 @@ const CommentInput = ({ authAndNavigate, commentInfo }) => {
         await createMutation.mutateAsync(commentInfo);
       }}
     >
-      <div className="comment-textarea__container">
+      <div className={styles.input_box}>
         <textarea
           className={styles.input}
           placeholder="댓글을 달아 보세요!"

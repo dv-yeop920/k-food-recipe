@@ -1,6 +1,4 @@
-const {
-  createProxyMiddleware,
-} = require("http-proxy-middleware");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const PORT = process.env.REACT_APP_PORT_NUMBER;
 

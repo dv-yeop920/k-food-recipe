@@ -35,7 +35,7 @@ const MenuModal = ({ openModal, closeModal }) => {
 
   return (
     <div className={styles.menuContainer}>
-      <ul className="menu-area">
+      <ul className={styles.menu_area}>
         <li className={styles.menu} onClick={closeModal}>
           <Link className={styles.menuLink} to="/postList">
             자유 게시판

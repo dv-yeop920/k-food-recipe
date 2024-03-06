@@ -1,49 +1,50 @@
 .commentWrap {
-  padding: 15px 100px;
-
   .inputWrap {
-    margin: 10px 0px;
+    margin: 1rem 0;
+
+    .input_box {
+      padding-right: 4.08rem;
+    }
 
     .buttonArea {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      width: 98.5%;
     }
   }
 
   .input {
     outline-style: none;
+    width: 100%;
     resize: none;
     border: var(--border);
     border-radius: 20px;
     background-color: var(--input-background-color);
     color: var(--text-color);
-    font-size: 17px;
-    padding: 30px;
-    left: 10%;
-    width: 95%;
+    font-size: 1.2rem;
+    padding: 2rem;
     height: 5em;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     font-family: Arial, Helvetica, sans-serif;
     overflow-x: auto;
     cursor: pointer;
   }
 
   .comment {
-    padding: 20px 5px;
+    padding: 1.4rem 0.3rem;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
+    margin-bottom: 0.6rem;
+    color: var(--text-color);
     .content {
-      font-size: 19px;
+      font-size: 1.23rem;
       line-height: 1.6;
-      margin: 28px 1px;
+      margin: 2rem 0.1rem;
       white-space: pre-wrap;
     }
 
     .text {
       color: #888;
-      margin-right: 8px;
+      margin-right: 0.5rem;
     }
 
     .buttons {
@@ -53,9 +54,11 @@
 
       .button {
         color: #888;
-        margin-right: 8px;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
+        &:nth-child(1) {
+          margin-right: 0.5rem;
+        }
         &:hover {
           border-bottom: 1px solid #888;
         }

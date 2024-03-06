@@ -32,7 +32,7 @@ const CommentList = ({ post }) => {
   return (
     <main className={styles.commentWrap}>
       <div className="comment-count">
-        <h3> {`댓글 ${commentCount}`} </h3>
+        <h3 style={{ color: "var(--text-color)" }}>{`댓글 ${commentCount}`}</h3>
       </div>
 
       <div className="comment-container">

@@ -5,18 +5,20 @@ const CommentContent = ({ commentProps }) => {
     commentProps;
   return (
     <>
-      <h4>{id}</h4>
+      <h4 style={{ fontWeight: "bold" }}>{id}</h4>
 
       {editId ? (
-        <textarea
-          style={{ marginTop: "5px" }}
-          className={styles.input}
-          value={updateComment[_id]}
-          name={updateComment[_id]}
-          onChange={e => {
-            onChangeUpdateComment(_id, e.target.value);
-          }}
-        ></textarea>
+        <div style={{ paddingRight: " 4.08rem" }}>
+          <textarea
+            style={{ marginTop: "0.5rem" }}
+            className={styles.input}
+            value={updateComment[_id]}
+            name={updateComment[_id]}
+            onChange={e => {
+              onChangeUpdateComment(_id, e.target.value);
+            }}
+          ></textarea>
+        </div>
       ) : (
         <p className={styles.content}>{content}</p>
       )}

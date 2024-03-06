@@ -45,9 +45,7 @@ const Pagination = ({
           <button
             className={styles.back}
             type="button"
-            onClick={() => {
-              onClickPageNumber(1);
-            }}
+            onClick={() => onClickPageNumber(1)}
             disabled={pageNumber === 1}
           >
             &lt;&lt;
@@ -55,9 +53,7 @@ const Pagination = ({
 
           <button
             className={styles.back}
-            onClick={() => {
-              onClickPageNumber(pageNumber - 1);
-            }}
+            onClick={() => onClickPageNumber(pageNumber - 1)}
             disabled={pageNumber === 1}
           >
             &lt;
@@ -86,9 +82,7 @@ const Pagination = ({
         <div className={styles.next_button_box}>
           <button
             className={styles.next}
-            onClick={() => {
-              onClickPageNumber(pageNumber + 1);
-            }}
+            onClick={() => onClickPageNumber(pageNumber + 1)}
             disabled={pageNumber === totalPage}
           >
             &gt;
@@ -96,9 +90,7 @@ const Pagination = ({
 
           <button
             className={styles.next}
-            onClick={() => {
-              onClickPageNumber(totalPage);
-            }}
+            onClick={() => onClickPageNumber(totalPage)}
             disabled={pageNumber === totalPage}
           >
             &gt;&gt;

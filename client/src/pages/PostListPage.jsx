@@ -2,7 +2,7 @@ import styles from "components/PostList/PostList.module.scss";
 import button from "styles/Button.module.scss";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getPostList } from "../services/post.services";
+import { getPostList } from "services/post.services";
 import ScrollToTop from "utils/scrollTop";
 import useAuth from "hooks/useAuth";
 import Post from "components/PostList/Post";
@@ -32,7 +32,10 @@ const PostPage = () => {
     <main className="back-ground">
       <ScrollToTop tabParam={pageParam} />
 
-      <section className={styles.boardContainer} aria-label="게시물 섹션">
+      <section
+        className={`${styles.board_container} inner-box`}
+        aria-label="게시물 섹션"
+      >
         <div className={styles.write_button_box}>
           <button
             className={button.submit}
@@ -43,14 +46,7 @@ const PostPage = () => {
             글쓰기
           </button>
         </div>
-        <ul className="board">
-          <li className={styles.li}>
-            <div>
-              <h3 style={{ color: "rgb(200, 50, 100)" }}>[공지]</h3>
-              <h3 className={styles.title}>게시판 이용 수칙</h3>
-            </div>
-          </li>
-
+        <ul className={styles.ul}>
           {data?.postList?.map(post => {
             return <Post key={post._id} post={post} />;
           })}
