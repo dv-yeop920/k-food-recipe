@@ -8,6 +8,7 @@ import useMutations from "hooks/useMutation";
 import ImageUploader from "components/Writing/ImageUploader";
 import Content from "components/Writing/Content";
 import WritingButton from "components/Writing/WritingButton";
+import WritingHeader from "components/Writing/WritingHeader";
 
 const WritingPage = () => {
   const [postPreviewImageFile, setPostPreviewImageFile] = useState(null);
@@ -40,31 +41,31 @@ const WritingPage = () => {
   };
 
   return (
-    <main>
-      <form
-        className={styles.editorContainer}
-        onSubmit={async e => {
-          authAndNavigate();
-          if (window.confirm("게시글을 등록 하시겠습니까?")) {
-            writingParams.e = e;
-            await createMutation.mutateAsync(writingParams);
-          } else {
-            e.preventDefault();
-          }
-        }}
-      >
-        <section
-          className={styles.contentContainer}
-          aria-label="게시글 에디터 섹션"
+    <main className="back-ground">
+      <section className="inner-box" aria-label="글작성 페이지 섹션">
+        <WritingHeader />
+        <form
+          className={`${styles.editorContainer} `}
+          onSubmit={async e => {
+            authAndNavigate();
+            if (window.confirm("게시글을 등록 하시겠습니까?")) {
+              writingParams.e = e;
+              await createMutation.mutateAsync(writingParams);
+            } else {
+              e.preventDefault();
+            }
+          }}
         >
-          <ImageUploader uploaderProps={uploaderProps} />
-          <Content titleRef={titleRef} quillRef={quillRef} />
-        </section>
+          <div className={styles.contentContainer}>
+            <ImageUploader uploaderProps={uploaderProps} />
+            <Content titleRef={titleRef} quillRef={quillRef} />
+          </div>
 
-        <section className={styles.buttonArea} aria-label="버튼 섹션">
-          <WritingButton buttonValue={"등록"} />
-        </section>
-      </form>
+          <div className={styles.buttonArea}>
+            <WritingButton buttonValue={"등록"} />
+          </div>
+        </form>
+      </section>
     </main>
   );
 };

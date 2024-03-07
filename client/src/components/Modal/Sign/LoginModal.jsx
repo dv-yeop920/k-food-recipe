@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./SignModal.module.scss";
-import btn from "../../../styles/Button.module.scss";
+import btn from "styles/Button.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../../store/slice/userSlice";
+import { loginUser } from "store/slice/userSlice";
 import axios from "axios";
-import toastMessage from "../../../utils/toast";
+import toastMessage from "utils/toast";
 
 const LoginModal = ({
   openModal,

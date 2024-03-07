@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import btn from "../../../styles/Button.module.scss";
+import { useState } from "react";
+import btn from "styles/Button.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import styles from "./SignModal.module.scss";
 import axios from "axios";
-import toastMessage from "../../../utils/toast";
+import toastMessage from "utils/toast";
 
 const SignUpModal = ({
   openModal,

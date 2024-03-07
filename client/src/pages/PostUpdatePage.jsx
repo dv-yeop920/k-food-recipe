@@ -1,3 +1,4 @@
+import styles from "components/Writing/Writing.module.scss";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -6,7 +7,6 @@ import useMutations from "hooks/useMutation";
 import useAuth from "hooks/useAuth";
 import UpdateContent from "components/Writing/UpdateContent";
 import UpdateImageUploader from "components/Writing/UpdateImageUploader";
-import styles from "components/Writing/Writing.module.scss";
 import WritingButton from "components/Writing/WritingButton";
 
 const PostsUpdatePage = () => {
@@ -52,7 +52,7 @@ const PostsUpdatePage = () => {
   };
 
   return (
-    <main className="back-ground">
+    <main className="back-ground inner-box">
       <form
         className={styles.editorContainer}
         onSubmit={async e => {

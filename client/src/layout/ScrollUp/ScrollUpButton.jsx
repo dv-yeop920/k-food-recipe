@@ -6,15 +6,14 @@ const ScrollUpButton = () => {
   const handleClickScroll = () => {
     window.scrollTo({
       top: 0,
+      behavior: "smooth",
     });
   };
 
   return (
-    <>
-      <button className={styles.scroll} onClick={handleClickScroll}>
-        <FontAwesomeIcon icon={faUpLong} size="2x" />
-      </button>
-    </>
+    <button className={styles.scroll} onClick={handleClickScroll}>
+      <FontAwesomeIcon icon={faUpLong} size="2x" />
+    </button>
   );
 };
 

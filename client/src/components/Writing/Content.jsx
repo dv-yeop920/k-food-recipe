@@ -9,7 +9,10 @@ const Content = ({ titleRef, quillRef }) => {
 
   return (
     <div className={styles.writingContainer}>
-      <div className="writing-container__column">
+      <div
+        className="writing-container__column"
+        style={{ paddingRight: "1.4rem" }}
+      >
         <input
           className={styles.title}
           type="text"

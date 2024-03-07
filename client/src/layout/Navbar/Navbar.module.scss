@@ -22,8 +22,8 @@
       background-color: var(--color-background);
 
       .title_area {
-        flex: 1;
         .title {
+          width: 10rem;
           color: var(--title-color);
           cursor: pointer;
         }
@@ -33,7 +33,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex: 1;
 
         .recipeSearchLink {
           display: flex;
@@ -62,7 +61,6 @@
         justify-content: flex-end;
         align-items: center;
         box-sizing: border-box;
-        flex: 1;
 
         .iconButton {
           margin-right: 4px;

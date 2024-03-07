@@ -27,27 +27,24 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  z-index: 50;
+  z-index: 55;
   background: rgba(0, 0, 0, 0);
 }
 
 .container {
   background-color: var(--background-color);
-  position: fixed;
-  top: 7%;
-  left: 33%;
-  width: 33%;
+  width: 33rem;
+  margin: auto;
+  margin-top: 3rem;
   box-shadow: var(--box-shadow);
-  border-radius: 8px;
+  border-radius: 10px;
   z-index: 10;
   animation: show 0.4s ease-in-out;
 
   .form {
     display: flex;
     flex-direction: column;
-    margin: 0px 30px;
-    padding-top: 10px;
-    padding-bottom: 30px;
+    padding: 1rem 2rem 2rem 2rem;
     box-sizing: content-box;
   }
 
@@ -55,7 +52,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 45px;
+    margin-bottom: 2rem;
     color: var(--text-color);
 
     .cancel {
@@ -63,7 +60,7 @@
     }
 
     .title {
-      font-size: 33px;
+      font-size: 2.1rem;
       font-weight: 600;
     }
   }
@@ -71,12 +68,12 @@
   .input {
     background-color: var(--input-background-color);
     color: var(--text-color);
-    font-size: 17px;
+    font-size: 1.1rem;
     border: none;
     border-radius: 7px 7px 0px 0px;
     padding: 10px 0px 10px 10px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 1.3rem;
     border-bottom: 2px solid var(--text-color);
     transition: all 0.2s ease-in-out;
     &:hover {
@@ -90,6 +87,7 @@
   .message {
     color: rgb(224, 4, 4);
     font-weight: 500;
+    margin-bottom: 0.5rem;
   }
 
   .button_box {
@@ -99,7 +97,7 @@
   }
 
   .questionBox {
-    margin-top: 30px;
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -107,14 +105,14 @@
     .question {
       opacity: 0.5;
       font-weight: 500;
-      font-size: 14px;
+      font-size: 0.85rem;
       color: var(--text-color);
     }
   }
 
   .navigate {
     opacity: 1;
-    font-size: 15px;
+    font-size: 0.95rem;
     font-weight: 650;
     cursor: pointer;
     color: var(--text-color);
