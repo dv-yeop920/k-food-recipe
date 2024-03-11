@@ -12,20 +12,22 @@ k-food-recipe는 우리나라 식재료로 만든 1000여가지의 다양한 요
 
 ## 목차
 
-1. [기술 및 개발 환경](#기술-및-개발-환경)
-2. [폴더 구조](#폴더-구조)
-3. [주요 기능](#주요-기능)
-   </br>
+1. [기술 및 개발 환경](#🛠️-기술-및-개발-환경)
+2. [폴더 구조](#🗂️-폴더-구조)
+3. [주요 기능](#🖥️-주요-기능)
+4. [아키텍처](#🗺️-아키텍처)
+
+</br>
 
 ## 🛠️ 기술 및 개발 환경
 
 #### ✔️ 사용 기술
 
 <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"/> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
-
 <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white"/> <img src="https://img.shields.io/badge/Redux Toolkit-764ABC?style=for-the-badge&logo=Redux&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/AWS S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white"/> <img src="https://img.shields.io/badge/Html-E34F26?style=for-the-badge&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white"/>
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/>
+<img src="https://img.shields.io/badge/AWS S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white"/>
+<img src="https://img.shields.io/badge/Html-E34F26?style=for-the-badge&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white"/>
 
 #### ✔️ 배포 및 환경
 
@@ -33,6 +35,9 @@ k-food-recipe는 우리나라 식재료로 만든 1000여가지의 다양한 요
 
 <br>
 
+## 🗺️ 아키텍처
+
+![architcture](https://github.com/dv-yeop920/k-food-recipe-FE/assets/104065347/cf5c1d6e-fc16-43b4-89fa-8265b025afab)
 <br>
 
 ## 🗂️ 폴더 구조
