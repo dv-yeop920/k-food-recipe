@@ -1,70 +1,250 @@
-# Getting Started with Create React App
+# K-food-recipe
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 소개
 
-## Available Scripts
+```
+k-food-recipe는 우리나라 식재료로 만든 1000여가지의 다양한 요리 레시피들을 검색할 수 있고 게시판으로 유저들이 레시피를 공유할 수 있는 서비스입니다.
+```
 
-In the project directory, you can run:
+🔗 배포링크 : https://k-food-recipe-fe.vercel.app/
 
-### `npm start`
+</br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 목차
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. [기술 및 개발 환경](#기술-및-개발-환경)
+2. [폴더 구조](#폴더-구조)
+3. [주요 기능](#주요-기능)
+   </br>
 
-### `npm test`
+## 🛠️ 기술 및 개발 환경
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### ✔️ 사용 기술
 
-### `npm run build`
+<img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"/> 
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/> 
+</br> 
+<img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white"/> <img src="https://img.shields.io/badge/Redux Toolkit-764ABC?style=for-the-badge&logo=Redux&logoColor=white"/> 
+</br> 
+ <img src="https://img.shields.io/badge/AWS S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white"/>
+ </br> 
+  <img src="https://img.shields.io/badge/Html-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+ <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white"/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### ✔️ 배포 및 환경
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
+ <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"/>
+ <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white"/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `npm run eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🗂️ 폴더 구조
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<details>
+<summary>📁</summary>
+<div>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+📦src
+ ┣ 📂asset
+ ┃ ┣ 📜placeholder-src-dark.png
+ ┃ ┗ 📜placeholder-src-light.png
+ ┣ 📂components
+ ┃ ┣ 📂FooterNavbar
+ ┃ ┃ ┣ 📜FooterNavbar.jsx
+ ┃ ┃ ┗ 📜FooterNavbar.module.scss
+ ┃ ┣ 📂InfiniteObserver
+ ┃ ┃ ┗ 📜InfiniteScrollObserver.jsx
+ ┃ ┣ 📂Loading
+ ┃ ┃ ┣ 📂skeleton
+ ┃ ┃ ┃ ┣ 📜RecipeSkeleton.jsx
+ ┃ ┃ ┃ ┗ 📜TabSkeleton.jsx
+ ┃ ┃ ┣ 📜DeferredComponent.jsx
+ ┃ ┃ ┣ 📜Loading.jsx
+ ┃ ┃ ┣ 📜Loading.module.scss
+ ┃ ┃ ┗ 📜ScrollLoading.jsx
+ ┃ ┣ 📂MainPage
+ ┃ ┃ ┣ 📜Recipe.module.scss
+ ┃ ┃ ┣ 📜RecipeCard.jsx
+ ┃ ┃ ┣ 📜RecipeList.jsx
+ ┃ ┃ ┗ 📜RecipeTab.jsx
+ ┃ ┣ 📂Modal
+ ┃ ┃ ┣ 📂Menu
+ ┃ ┃ ┃ ┣ 📜MenuModal.jsx
+ ┃ ┃ ┃ ┗ 📜MenuModal.module.scss
+ ┃ ┃ ┣ 📂Search
+ ┃ ┃ ┃ ┣ 📜SearchModal.jsx
+ ┃ ┃ ┃ ┗ 📜SearchModal.module.scss
+ ┃ ┃ ┣ 📂Sign
+ ┃ ┃ ┃ ┣ 📜LoginModal.jsx
+ ┃ ┃ ┃ ┣ 📜SignModal.module.scss
+ ┃ ┃ ┃ ┗ 📜SignUpModal.jsx
+ ┃ ┃ ┣ 📜.DS_Store
+ ┃ ┃ ┗ 📜ModalContainer.jsx
+ ┃ ┣ 📂MyPage
+ ┃ ┃ ┣ 📜LikedPost.jsx
+ ┃ ┃ ┣ 📜LikedRecipe.jsx
+ ┃ ┃ ┣ 📜MyInfomation.jsx
+ ┃ ┃ ┣ 📜MyPage.module.css
+ ┃ ┃ ┣ 📜MyPost.jsx
+ ┃ ┃ ┣ 📜ViewedPost.jsx
+ ┃ ┃ ┗ 📜ViewedRecipes.jsx
+ ┃ ┣ 📂NotFound
+ ┃ ┃ ┗ 📜NotFound.jsx
+ ┃ ┣ 📂PagiNation
+ ┃ ┃ ┣ 📜Pagenate.jsx
+ ┃ ┃ ┣ 📜PagiNation.module.scss
+ ┃ ┃ ┗ 📜Pagination.jsx
+ ┃ ┣ 📂PostDetail
+ ┃ ┃ ┣ 📂Comment
+ ┃ ┃ ┃ ┣ 📜Comment.jsx
+ ┃ ┃ ┃ ┣ 📜Comment.module.scss
+ ┃ ┃ ┃ ┣ 📜CommentButton.jsx
+ ┃ ┃ ┃ ┣ 📜CommentContent.jsx
+ ┃ ┃ ┃ ┣ 📜CommentDate.jsx
+ ┃ ┃ ┃ ┣ 📜CommentInput.jsx
+ ┃ ┃ ┃ ┗ 📜CommentList.jsx
+ ┃ ┃ ┣ 📜.DS_Store
+ ┃ ┃ ┗ 📜PostDetail.module.scss
+ ┃ ┣ 📂PostList
+ ┃ ┃ ┣ 📜.DS_Store
+ ┃ ┃ ┣ 📜Post.jsx
+ ┃ ┃ ┣ 📜PostList.jsx
+ ┃ ┃ ┗ 📜PostList.module.scss
+ ┃ ┣ 📂RecipeDetail
+ ┃ ┃ ┣ 📜RecipeDetail.module.scss
+ ┃ ┃ ┣ 📜RecipeInfo.jsx
+ ┃ ┃ ┣ 📜RecipeIngredient.jsx
+ ┃ ┃ ┣ 📜RecipeMenual.jsx
+ ┃ ┃ ┗ 📜RecipeTip.jsx
+ ┃ ┣ 📂Writing
+ ┃ ┃ ┣ 📜Content.jsx
+ ┃ ┃ ┣ 📜ImageUploader.jsx
+ ┃ ┃ ┣ 📜UpdateContent.jsx
+ ┃ ┃ ┣ 📜UpdateImageUploader.jsx
+ ┃ ┃ ┣ 📜Writing.module.scss
+ ┃ ┃ ┣ 📜WritingButton.jsx
+ ┃ ┃ ┗ 📜WritingHeader.jsx
+ ┃ ┗ 📜.DS_Store
+ ┣ 📂hooks
+ ┃ ┣ 📜useAuth.js
+ ┃ ┣ 📜useInfiniteScroll.js
+ ┃ ┣ 📜useInput.js
+ ┃ ┣ 📜useLazyLoadImage.js
+ ┃ ┣ 📜useMutation.js
+ ┃ ┗ 📜useQuill.js
+ ┣ 📂layout
+ ┃ ┣ 📂Navbar
+ ┃ ┃ ┣ 📜Navbar.jsx
+ ┃ ┃ ┗ 📜Navbar.module.scss
+ ┃ ┣ 📂ScrollUp
+ ┃ ┃ ┣ 📜ScrollUpButton.jsx
+ ┃ ┃ ┗ 📜ScrollUpButton.module.scss
+ ┃ ┗ 📜.DS_Store
+ ┣ 📂pages
+ ┃ ┣ 📜MainPage.jsx
+ ┃ ┣ 📜MyPage.jsx
+ ┃ ┣ 📜NoticeBoardPage.jsx
+ ┃ ┣ 📜PostDetailPage.jsx
+ ┃ ┣ 📜PostListPage.jsx
+ ┃ ┣ 📜PostUpdatePage.jsx
+ ┃ ┣ 📜RecipeDetailPage.jsx
+ ┃ ┗ 📜WritingPage.jsx
+ ┣ 📂services
+ ┃ ┣ 📜comment.services.js
+ ┃ ┣ 📜post.services.js
+ ┃ ┗ 📜recipe.services.js
+ ┣ 📂store
+ ┃ ┣ 📂slice
+ ┃ ┃ ┣ 📜modalSlice.js
+ ┃ ┃ ┣ 📜themeSlice.js
+ ┃ ┃ ┗ 📜userSlice.js
+ ┃ ┣ 📜.DS_Store
+ ┃ ┗ 📜store.js
+ ┣ 📂styles
+ ┃ ┣ 📜Button.module.scss
+ ┃ ┣ 📜dark-mode.scss
+ ┃ ┣ 📜quill.scss
+ ┃ ┗ 📜reset.scss
+ ┣ 📂utils
+ ┃ ┣ 📜awsS3Setting.js
+ ┃ ┣ 📜imageUploader.js
+ ┃ ┣ 📜postDate.js
+ ┃ ┣ 📜quillEditor.js
+ ┃ ┣ 📜recipeData.js
+ ┃ ┣ 📜scrollTop.js
+ ┃ ┗ 📜toast.js
+ ┣ 📜.DS_Store
+ ┣ 📜App.css
+ ┣ 📜App.jsx
+ ┣ 📜index.js
+ ┣ 📜index.scss
+ ┣ 📜setupProxy.js
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+</div>
+</details>
 
-## Learn More
+- `asset` : 이미지 파일
+- `pages` : 페이지 컴포넌트
+- `components` : 페이지에 대한 컴포넌트
+- `hooks` : 커스텀 훅
+- `layout` : 레이아웃
+- `services` : api요청 로직
+- `store` : redux 상태관리
+- `styles` : 재사용 스타일
+- `utils` : 재사용 로직
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🖥️ 주요 기능
 
-### Code Splitting
+### ⭐️ 공통
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- 다크모드
+- 로그인, 회원가입, 메뉴, 검색 모달
+- lazyLoading으로 이미지 최적화
+- 무한스크롤
+- toast 알림
 
-### Analyzing the Bundle Size
+### 📃 메인 페이지
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- 전체 레시피 조회 (무한스크롤)
+- 카테고리별 레시피 조회 (탭)
+- 레시피 검색
+- 클릭시 레시피 상세 페이지 이동
 
-### Making a Progressive Web App
+### 🫕 레시피 상세 페이지
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- 레시피 상세 정보 조회
 
-### Advanced Configuration
+### 👩‍👩‍👧‍👦 레시피 공유 게시판 페이지
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- 게시물 전체 조회
+- 게시물 검색
+- 게시판 페이지네이션
+- 클릭시 게시판 상세 페이지 이동
+- 글작성 페이지 이동
 
-### Deployment
+### 📜 게시물 상세 페이지
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- 게시물 상세 정보 조회
+- 게시물 수정 페이지로 이동
+- 게시물 삭제
+- 댓글 CRUD (무한스크롤)
 
-### `npm run build` fails to minify
+### 📝 게시물 작성&수정 페이지
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 미리 보기 이미지 업로드 (AWS S3)
+- react-quill 에디터를 사용한 이미지포함 게시글 작성 (AWS S3)
+
+### 🔒 로그인 / 회원가입
+
+- 로그인
+- 회원가입
+- 유효성 검사
+- JWT 토큰 인증
+  <br>
