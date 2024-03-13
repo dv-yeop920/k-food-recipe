@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 8rem;
-  padding: 1rem;
+  padding: 1rem 0;
   color: var(--text-color);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -19,8 +19,8 @@
 }
 
 .editorContainer {
-  margin: auto;
-  padding: 1.5rem 1rem;
+  margin: 0 auto;
+  padding: 1.5rem 0;
 
   .contentContainer {
     display: flex;
