@@ -1,8 +1,8 @@
 .recipe_list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(234px, 1fr));
-  gap: 1.5em;
-
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 2rem;
+  padding-top: 2.5rem;
   .recipe_card {
     position: relative;
     padding-bottom: 1rem;
